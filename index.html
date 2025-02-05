@@ -468,16 +468,22 @@
           <div class="info-box">
             <i class="bx bx-envelope"></i>
             <h3>Email Me</h3>
-            <p>hadrianevarula@gmail.com</p>
+            <p id="email-address">hadrianevarula@gmail.com</p>
+            <button id="copy-email-btn" class="btn" style="border: none; background: transparent; cursor: pointer;">
+              <i class="bx bx-copy"></i> <!-- Copy icon -->
+            </button>
           </div>
-        </div>
+        </div>        
         <div class="col-md-6 mt-4 d-flex align-items-stretch">
           <div class="info-box">
             <i class="bx bx-phone-call"></i>
             <h3>Call Me</h3>
-            <p>+63 994 325 4337</p>
+            <p id="phone-number">+63 994 325 4337</p>
+            <button id="copy-btn" class="btn" style="border: none; background: transparent; cursor: pointer;">
+              <i class="bx bx-copy"></i> <!-- Copy icon -->
+            </button>
           </div>
-        </div>
+        </div>        
       </div>
 
       <form id="contact-form" action="/forms/contact.php" method="post" role="form" class="php-email-form mt-4">
@@ -520,4 +526,25 @@
 
 </body>
 
+<script>
+  document.getElementById('copy-btn').addEventListener('click', function() {
+  const phoneNumber = document.getElementById('phone-number').innerText; // Get the phone number text
+  navigator.clipboard.writeText(phoneNumber).then(function() {
+    alert('Phone number copied to clipboard!');
+  }).catch(function(error) {
+    console.error('Could not copy text: ', error);
+  });
+});
+
+document.getElementById('copy-email-btn').addEventListener('click', function() {
+  const emailAddress = document.getElementById('email-address').innerText; // Get the email address text
+  navigator.clipboard.writeText(emailAddress).then(function() {
+    alert('Email address copied to clipboard!');
+  }).catch(function(error) {
+    console.error('Could not copy text: ', error);
+  });
+});
+
+
+</script>
 </html>
