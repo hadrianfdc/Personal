@@ -8,7 +8,7 @@
     autoGreetDelay: 1000,
     // Gemini API Configuration
     gemini: {
-      apiKey: 'AIzaSyC_19EvV1-BlxsqXYCD7BzHqqe1BIamlVE', 
+      apiKey: 'REPLACE_WITH_YOUR_NEW_API_KEY', // This will be replaced by GitHub Actions with the secret
       models: [
         'gemini-2.5-flash',
         'gemini-2.5-flash-lite',
@@ -44,7 +44,9 @@
       "company": "Forty Degrees Celsius Inc.",
       "period": "Jan 2024 – Present",
       "responsibilities": [
+        "Maintained and enhanced a large-scale legacy PHP codebase (10+ years) for the NativeCamp platform",
         "Engineered CI/CD system automating multi-module unit tests, reducing QA time by 90%",
+        "Authored and maintained unit tests covering 200+ NativeCamp controllers, significantly improving code reliability and test coverage",
         "Implemented GitHub-triggered job queueing and commit status updates",
         "Collaborated with AI specialists to implement RAG workflows for automated unit test generation",
         "Built scalable REST APIs for production use"
