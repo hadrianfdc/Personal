@@ -16,138 +16,93 @@
 
   // Knowledge Base - Embedded directly to avoid CORS issues
   const KNOWLEDGE_BASE = {
-    "about": {
-      "name": "Hadrian F. Evarula",
-      "title": "Full Stack Developer | Back-End Development Specialist",
-      "location": "Cebu City, Philippines",
-      "email": "hadrian.evarula.dev@gmail.com",
-      "phone": "(+63) 995-821-6093",
-      "linkedin": "linkedin.com/in/hadrian-evarula",
-      "github": "github.com/HadrianDeveloper"
+  "about": {
+    "name": "Hadriane Varula",
+    "title": "Backend / Fullstack Developer",
+    "location": "Cebu City, Philippines",
+    "email": "hadrianevarula@gmail.com",
+    "phone": "+63 994-325-4337"
+  },
+  "professional_summary": "Backend / Fullstack Developer with hands-on experience in ASP.NET MVC, C#, PHP, and SQL databases. Skilled in REST APIs, CI/CD, unit testing, and performance optimization. Delivered enterprise applications with clean architecture and maintainable code.",
+  "technical_skills": {
+    "programming_languages": ["PHP", "C#", "Node.js", "SQL"],
+    "frameworks_libraries": ["ASP.NET MVC", "ASP.NET Core", "Laravel", "CakePHP"],
+    "databases": ["MySQL", "SQL Server", "MongoDB"],
+    "devops_tools": ["CI/CD", "GitHub Actions", "Cron Jobs", "Webhooks", "Docker", "Ngrok"],
+    "testing": ["Codeception", "Unit Testing Automation"],
+    "architecture": ["MVC Architecture", "LINQ"]
+  },
+  "work_experience": [
+    {
+      "position": "Backend PHP Developer",
+      "company": "Forty Degrees Celsius Inc.",
+      "period": "Jan 2024 – Present",
+      "responsibilities": [
+        "Engineered CI/CD system automating multi-module unit tests, reducing QA time by 90%",
+        "Implemented GitHub-triggered job queueing and commit status updates",
+        "Collaborated with AI specialists to implement RAG workflows for automated unit test generation",
+        "Built scalable REST APIs for production use"
+      ],
+      "tech_stack": ["PHP 8", "CakePHP", "MySQL", "GitHub Actions", "Codeception"]
     },
-    "professional_summary": "Detail-oriented and adaptable Full Stack Developer with expertise in Back-End Development. Proven ability to deliver robust applications using ASP.NET, JavaScript, PHP, and SQL. Passionate about clean code architecture, system optimization, and implementing efficient data management solutions. Eager to contribute to development-focused teams and drive impactful solutions for complex business challenges.",
-    "technical_skills": {
-      "programming_languages": {
-        "expert": ["C#", "PHP", "JavaScript", "SQL"],
-        "proficient": ["TypeScript", "Python", "SASS"]
-      },
-      "frameworks_libraries": [
-        "ASP.NET", ".NET MAUI", "Blazor", "Entity Framework",
-        "Node.js", "Express.js",
-        "Laravel", "jQuery", "Bootstrap"
+    {
+      "position": "Fullstack .NET Developer",
+      "company": "Prince Retail Group",
+      "period": "Jan 2022 – Dec 2022",
+      "responsibilities": [
+        "Sole developer of enterprise Asset Management System tracking IT assets nationwide",
+        "Designed ASP.NET MVC system with normalized SQL Server database schemas",
+        "Implemented role-based access control (RBAC) with user roles, profiles, and module-level permissions",
+        "Developed CRUD modules for assets, users, departments, and device assignments",
+        "Automated asset lifecycle rules (ownership transfer for devices older than 4 years)"
       ],
-      "tools_platforms": [
-        "VS Code", "Visual Studio", "Git", "GitHub", "GitLab",
-        "MAMP", "Docker", "Postman", "Jira",
-        "Firebase", "Power Automate",
-        "Figma", "DBeaver"
-      ],
-      "databases": ["MySQL", "PostgreSQL", "MSSQL"]
-    },
-    "work_experience": [
-      {
-        "position": "Software Engineer I",
-        "company": "Navitaire, an Amadeus company",
-        "period": "October 2024 – Present",
-        "responsibilities": [
-          "Develops and maintains mission-critical airline reservation software",
-          "Implements secure data access layers using Dapper and Entity Framework for high-availability .NET Core systems",
-          "Engineers precise SQL Server logic to ensure data consistency under strict regulatory standards",
-          "Leads frontend architecture using Blazor and Razor, creating accessible interfaces for global airline clients",
-          "Enforces code integrity through Git-based workflows, rigorous reviews, and Agile-driven collaboration using Jira"
-        ]
-      },
-      {
-        "position": "Software Developer Intern",
-        "company": "Questronix Corporation",
-        "period": "April 2024 – July 2024",
-        "responsibilities": [
-          "Developed secure, scalable backend services with ASP.NET, Dapper, and C# under MVC architecture",
-          "Designed API workflows, optimizing data exchange and frontend-backend communication efficiency",
-          "Deployed data integrity protocols via stored procedures and complex SQL Server queries",
-          "Led code review sessions with senior developers using GitLab CI/CD pipelines"
-        ]
-      },
-      {
-        "position": "Digital Marketing Associate",
-        "company": "Manulife Philippines",
-        "period": "December 2021 – February 2022",
-        "responsibilities": [
-          "Provided administrative support, including document processing and sales reporting",
-          "Maintained applicant and policy databases using Microsoft Office tools",
-          "Implemented tracking systems to improve department efficiency and reporting"
-        ]
-      }
-    ],
-    "education": {
-      "degree": "Bachelor of Science in Computer Science",
-      "institution": "STI College - Ortigas-Cainta",
-      "period": "2020 – 2024",
-      "achievements": [
-        "Academic Excellence (Dean's Lister)",
-        "Graduated with Distinction (Best in Thesis / Capstone Project)"
-      ]
-    },
-    "key_projects": [
-      {
-        "name": "VeriSafe: Document Forgery Detection System",
-        "type": "Capstone Project",
-        "description": "AI-powered document verification system using MobileNetV2 CNN architecture",
-        "technologies": ["Python", "TensorFlow", "Keras", "Flask", "JavaScript", "HTML", "CSS"],
-        "features": ["Model training", "API deployment", "Real-time document authentication"]
-      },
-      {
-        "name": "VitalFlow Health and Wellness App",
-        "description": "Cross-platform health tracking app using .NET MAUI and SQLite",
-        "technologies": [".NET MAUI", "SQLite"],
-        "features": ["Caloric intake tracking", "Exercise management", "Personalized health summaries"]
-      },
-      {
-        "name": "LostLink: Lost and Found Platform",
-        "description": "Full-stack lost item management platform using Laravel, MySQL, and PHP",
-        "technologies": ["Laravel", "MySQL", "PHP"],
-        "features": ["Geo-mapping", "AI-based image matching", "Real-time notifications"]
-      },
-      {
-        "name": "Reelify: Movie Discovery App",
-        "description": "Modern movie browsing app using ASP.NET Core MVC and external APIs",
-        "technologies": ["ASP.NET Core MVC", "External APIs"],
-        "features": ["Dynamic search", "Responsive design", "User authentication"]
-      },
-      {
-        "name": "PetPal: Pet Adoption Platform",
-        "description": "Pet adoption platform with Razor Pages, Entity Framework Core, PostgreSQL",
-        "technologies": ["Razor Pages", "Entity Framework Core", "PostgreSQL"],
-        "features": ["Role-based access", "Admin dashboard", "JWT authentication"]
-      }
-    ],
-    "certifications": [
-      "Microsoft Certified: Azure Fundamentals (AZ-900)",
-      "Completed courses: HTML, CSS, JavaScript, C#, Python (DataCamp)"
-    ],
-    "response_guidelines": {
-      "general": [
-        "Be concise but informative (keep responses under 150 words)",
-        "Be friendly, professional, and enthusiastic about Hadrian's capabilities",
-        "Highlight relevant skills and experience based on the question"
-      ],
-      "contact_handling": [
-        "If asked about contact, provide email (hadrian.evarula.dev@gmail.com) or direct to the contact section",
-        "If asked about availability for work, mention Hadrian is currently employed but open to discussing opportunities"
-      ],
-      "content_restrictions": [
-        "If asked something unrelated to Hadrian or professional topics, politely redirect the conversation",
-        "Use HTML formatting sparingly when helpful (like <strong> for emphasis)",
-        "Do not use markdown formatting, use HTML instead"
-      ],
-      "project_discussion": [
-        "When discussing projects, emphasize the technologies used and the problems solved"
-      ],
-      "personality": [
-        "Remember: You represent Hadrian's professional portfolio. Be helpful, accurate, and engaging!"
-      ]
+      "tech_stack": ["C#", "ASP.NET MVC", "Razor", "SQL Server", "Entity Framework", "Bootstrap"]
     }
-  };
+  ],
+  "education": [
+    {
+      "degree": "Certificate in Computer Technology",
+      "institution": "University of San Carlos",
+      "period": "2021 – 2023"
+    },
+    {
+      "degree": "Fullstack Web Development Training",
+      "institution": "Passerelles Numeriques Philippines",
+      "period": "2021 – 2023"
+    }
+  ],
+  "key_projects": [
+    {
+      "name": "Asset Management System",
+      "description": "Tracks laptops, desktops, printers, servers, and peripherals across nationwide stores with automated asset lifecycle rules",
+      "technologies": ["C#", "ASP.NET MVC", "SQL Server", "Entity Framework", "Bootstrap"],
+      "features": ["RBAC", "CRUD modules", "Lifecycle automation", "Nationwide deployment"]
+    }
+  ],
+  "response_guidelines": {
+    "general": [
+      "Be concise and informative (under 150 words)",
+      "Highlight skills and experience relevant to the question",
+      "Be professional, helpful, and enthusiastic about Hadriane's expertise"
+    ],
+    "contact_handling": [
+      "Provide email (hadrianevarula@gmail.com) or phone when asked",
+      "Mention current employment if asked about availability, but indicate openness to opportunities"
+    ],
+    "content_restrictions": [
+      "Redirect unrelated questions politely",
+      "Avoid markdown; HTML tags may be used for emphasis",
+      "Focus only on professional or technical topics"
+    ],
+    "project_discussion": [
+      "Emphasize technologies used and problems solved in project descriptions"
+    ],
+    "personality": [
+      "Represent Hadriane's professional portfolio accurately, helpfully, and engagingly"
+    ]
+  }
+};
+
 
   // State Management
   const state = {
