@@ -11,32 +11,51 @@
   // Intent Recognition & Response System
   const INTENTS = {
     about: {
-      keywords: ['who is hadrian', 'tell me about hadrian', 'about hadrian', 'who are you', 'introduce hadrian', 'whos hadrian', 'hadrian info', 'describe hadrian', 'about yourself', 'tell me about yourself', 'tell me about him', 'about him', 'more about him', 'info about him'],
+      keywords: ['who is hadrian', 'tell me about hadrian', 'about hadrian', 'introduce hadrian', 'whos hadrian', 'hadrian info', 'describe hadrian', 'tell me about him', 'about him', 'more about him', 'info about him'],
       responses: [
-        "Hadrian Evarula is a <strong>backend-focused full-stack developer</strong> from Cebu City, Philippines, specializing in enterprise system architecture and automated deployment pipelines.<br><br>✨ <strong>Key highlights:</strong><br>• 🎓 Computer Technology degree (2021-2023)<br>• 💼 Backend/Fullstack Developer (2024-Present)<br>• 🚀 Expert in ASP.NET Core, Laravel, CakePHP<br>• 🔧 Strong DevOps & CI/CD experience<br>• 📊 Enterprise database design specialist<br><br>Hadrian builds mission-critical applications with clean, maintainable code and scalable infrastructure!"
+        "Hey! Hadrian's this awesome backend-focused full-stack developer from Cebu City, Philippines. He's all about enterprise system architecture and automated deployments. Here's the scoop:<br><br>✨ <strong>Quick facts:</strong><br>• 🎓 Got his Computer Technology degree in 2023<br>• 💼 Backend/Fullstack Developer since 2024<br>• 🚀 Expert in ASP.NET Core, Laravel, CakePHP<br>• 🔧 Loves DevOps and CI/CD<br>• 📊 Database design wizard<br><br>He builds rock-solid, scalable apps that businesses can rely on!"
       ],
       quickActions: ['View skills', 'See experience', 'What services offered?']
+    },
+
+    assistant: {
+      keywords: ['who are you', 'what are you', 'tell me about you', 'about you', 'who created you', 'who made you', 'about yourself', 'tell me about yourself'],
+      responses: [
+            "I am an AI Assistant created by Hadrian to help visitors learn about his expertise in backend development, enterprise system architecture, and available services. I'm here to answer questions about Hadrian's background, skills, experience, and how to get in touch with him!",
+            "Hello! I'm an AI Assistant designed by Hadrian to provide information about his work, projects, and professional skills. Ask me anything about Hadrian’s experience or services.",
+            "I was created by Hadrian to assist you in learning more about his web development and software engineering experience. I can share details about his skills, projects, and services.",
+            "I’m an AI Assistant built by Hadrian to answer questions about his professional journey, including backend development, .NET projects, and other services he offers.",
+            "Hi! I’m here to give you insights into Hadrian’s background, technical expertise, and professional experience. Think of me as a guide to his work and services.",
+            "I’m an AI Assistant developed by Hadrian to help you discover his skills, experience, and the services he provides. Ask me anything you want to know about his professional journey.",
+            "Hello! I was created to help you explore Hadrian’s career, his projects, and the technologies he works with. I can provide details on his skills and services anytime you want.",
+            "Hi there! I’m an AI Assistant built by Hadrian to guide you through his professional experience, backend development work, and software engineering projects.",
+            "I’m here to help you learn about Hadrian’s expertise, from backend systems to .NET software engineering. Feel free to ask me any questions about his skills or services.",
+            "Hey! I was designed by Hadrian to provide clear and helpful information about his professional background, development experience, and the services he offers.",
+            "Greetings! I am an AI Assistant created to answer questions about Hadrian’s work, technical skills, and experience. Let me guide you through his professional journey.",
+            "Hello! I’m here to provide insights into Hadrian’s projects, professional achievements, and the technologies he uses. Ask me anything about his skills or services."
+        ],
+      quickActions: ['Who is Hadrian?', 'What services offered?', 'Contact Hadrian']
     },
     
     greeting: {
         keywords: [
-            'hi', 'hello', 'hey', 'greetings', 'good morning', 'good afternoon', 'good evening', 'morning', 'afternoon', 'evening',
+            'hi', 'hello', 'greetings', 'good morning', 'good afternoon', 'good evening', 'morning', 'afternoon', 'evening',
             'sup', 'yo', 'howdy', 'hiya', 'hiya there', 'yo yo', 'what’s up', 'what’s good',
             'kamusta', 'kamusta ka', 'kumusta', 'kumusta ka', 'hiya bro', 'hiya sis', 'hello po', 
             'musta', 'hey there', 'gud morn', 'gud aft', 'gud eve', 'ay', 'hi po', 'oy', 'hi hi'
         ],
 
        responses: [
-            "Hello! I'm here to help you learn more about Hadrian's background and expertise. What would you like to know?",
-            "Hi there! Feel free to ask me about Hadrian's skills, experience, or services.",
-            "Hey! I'd be happy to tell you about Hadrian's work in backend development and system architecture.",
-            "Greetings! You can ask me anything about Hadrian’s professional journey, projects, or technical skills.",
-            "Hi! Curious about Hadrian's experience or the technologies he works with? Just ask!",
-            "Hello! I can provide details on Hadrian’s web development projects, coding experience, and services.",
-            "Hey there! Interested in Hadrian's programming background or work history? I'm here to help.",
-            "Hi! I can walk you through Hadrian’s expertise in backend development and .NET software engineering.",
-            "Hello! Feel free to inquire about Hadrian’s professional skills, years of experience, and services offered.",
-            "Hey! Want to know more about Hadrian’s projects, technical stack, or professional achievements? Just ask!"
+            "Hey there! I'm here to chat about Hadrian's background and skills. What's on your mind?",
+            "Hi! Feel free to ask me anything about Hadrian's experience, tech stack, or services.",
+            "Hey! I'd love to tell you about Hadrian's work in backend development and system architecture.",
+            "Greetings! Shoot me any questions about Hadrian's professional journey, projects, or skills.",
+            "Hi! Curious about Hadrian's experience or the tools he uses? Just ask away!",
+            "Hello! I can fill you in on Hadrian's web development projects, coding background, and services.",
+            "Hey there! Want to know about Hadrian's programming skills or work history? I'm all ears.",
+            "Hi! Let me walk you through Hadrian's expertise in backend development and .NET engineering.",
+            "Hello! Feel free to ask about Hadrian's skills, years of experience, or what he offers.",
+            "Hey! Want the scoop on Hadrian's projects, technical stack, or achievements? Fire away!"
         ],
         quickActions: ['Who is Hadrian?', 'What services offered?', 'Show experience']
     },
@@ -44,7 +63,16 @@
     skills: {
       keywords: ['skill', 'technology', 'tech stack', 'programming', 'languages', 'framework', 'what can', 'proficient', 'expertise', 'technologies', 'tools', 'know', 'capabilities', 'technical skills', 'good at'],
       responses: [
-        "Hadrian specializes in <strong>backend development</strong> with strong expertise in:<br><br>🛠️ <strong>Technologies:</strong><br>• ASP.NET Core, ASP.NET MVC, C#<br>• PHP frameworks (Laravel, CakePHP)<br>• Database systems (SQL Server, MySQL, MongoDB)<br>• RESTful API design and implementation<br>• CI/CD pipelines with GitHub Actions<br>• Clean architecture and RBAC implementation<br><br>Would you like to know more about any specific technology?"
+        "Oh man, Hadrian's got some serious backend chops! He's killer with:<br><br>🛠️ <strong>His tech toolkit:</strong><br>• ASP.NET Core, ASP.NET MVC, C#<br>• PHP frameworks like Laravel and CakePHP<br>• Databases: SQL Server, MySQL, MongoDB<br>• REST API design and building<br>• CI/CD pipelines using GitHub Actions<br>• Clean architecture and RBAC systems<br><br>Want me to dive deeper into any of these?",
+        "Hadrian's tech stack is rock solid! His top proficiencies include:<br><br>💻 <strong>Backend Technologies:</strong><br>• C# and ASP.NET ecosystem<br>• PHP with Laravel and CakePHP<br>• Database management (SQL Server, MySQL, MongoDB)<br>• API development and RESTful services<br>• DevOps and CI/CD automation<br><br>He's got enterprise-level experience across the board!",
+        "When it comes to tech, Hadrian's a pro! Here's what he's most proficient in:<br><br>🚀 <strong>Core Skills:</strong><br>• ASP.NET Core and MVC frameworks<br>• Laravel and CakePHP for PHP development<br>• SQL Server, MySQL, and MongoDB databases<br>• REST API architecture and implementation<br>• GitHub Actions for CI/CD<br>• Clean code and scalable architectures<br><br>Impressive, right?",
+        "Hadrian's technical expertise shines in these areas:<br><br>🛠️ <strong>Primary Technologies:</strong><br>• C# development with .NET frameworks<br>• PHP backend with Laravel/CakePHP<br>• Multi-database systems (SQL, NoSQL)<br>• API design and microservices<br>• DevOps automation and pipelines<br>• Enterprise security and RBAC<br><br>He's built production systems with all of these!",
+        "Let me break down Hadrian's top technical proficiencies:<br><br>💪 <strong>Expert Level:</strong><br>• ASP.NET Core, ASP.NET MVC, C#<br>• Laravel, CakePHP, PHP development<br>• SQL Server, MySQL, MongoDB<br>• RESTful API development<br>• CI/CD with GitHub Actions<br>• Clean architecture patterns<br><br>He's got hands-on experience delivering real enterprise solutions.",
+        "Hadrian's most proficient technologies include:<br><br>⚡ <strong>Backend Powerhouse:</strong><br>• .NET ecosystem (C#, ASP.NET Core/MVC)<br>• PHP frameworks (Laravel, CakePHP)<br>• Database technologies (SQL Server, MySQL, MongoDB)<br>• API development and integration<br>• DevOps and automation tools<br>• Security and authentication systems<br><br>He's worked on mission-critical applications using these techs.",
+        "Here's Hadrian's technical sweet spot:<br><br>🎯 <strong>Core Proficiencies:</strong><br>• ASP.NET Core and C# development<br>• PHP with Laravel and CakePHP<br>• Enterprise databases (SQL Server, MySQL)<br>• REST API design and implementation<br>• CI/CD pipeline automation<br>• RBAC and security frameworks<br><br>He's delivered production-ready systems with these technologies!",
+        "Hadrian's technical toolkit is comprehensive! His strongest areas are:<br><br>🔧 <strong>Expert Technologies:</strong><br>• C# and ASP.NET frameworks<br>• Laravel and CakePHP for PHP<br>• SQL Server, MySQL, MongoDB databases<br>• API architecture and development<br>• DevOps automation (GitHub Actions)<br>• Clean code and scalable design<br><br>He's got proven experience building enterprise applications.",
+        "When it comes to proficiency, Hadrian excels in:<br><br>🚀 <strong>Technical Expertise:</strong><br>• ASP.NET Core, MVC, and C#<br>• PHP development with Laravel/CakePHP<br>• Database management (SQL, NoSQL)<br>• RESTful API development<br>• CI/CD automation and DevOps<br>• Enterprise security solutions<br><br>He's successfully delivered multiple projects using these technologies.",
+        "Hadrian's most proficient technologies span:<br><br>💻 <strong>Full Stack Backend:</strong><br>• .NET platform (C#, ASP.NET)<br>• PHP ecosystem (Laravel, CakePHP)<br>• Database systems (SQL Server, MySQL, MongoDB)<br>• API development and integration<br>• DevOps and CI/CD pipelines<br>• Security and authentication<br><br>He's got the skills to tackle complex enterprise challenges!"
       ],
       quickActions: ['Backend expertise', 'Database skills', 'DevOps experience']
     },
@@ -52,7 +80,7 @@
     experience: {
       keywords: ['experience', 'work', 'job', 'career', 'professional', 'background', 'history', 'worked', 'employment', 'previous work', 'work history', 'jobs', 'positions'],
       responses: [
-        "Here's Hadrian's professional experience:<br><br>🚀 <strong>Backend/Fullstack Developer (2024 - Present)</strong><br>   • Building enterprise-level applications with CakePHP<br>   • Implementing production-ready APIs<br>   • Maintaining CI/CD pipelines<br><br>💼 <strong>Software Engineer (2023)</strong><br>   • Sole developer of an enterprise Asset Management System using ASP.NET MVC and SQL Server<br>   • Achieved 90% reduction in manual QA time through CI/CD automation<br><br>🏆 <strong>Key Achievements:</strong><br>   • RBAC implementation<br>   • Normalized database design<br>   • Collaboration with AI engineers on automated testing"
+        "Let me tell you about Hadrian's work journey! Here's what he's been up to:<br><br>🚀 <strong>Backend/Fullstack Developer (2024 - Present)</strong><br>   • Building enterprise-level apps with CakePHP<br>   • Creating solid production APIs<br>   • Managing CI/CD pipelines<br><br>💼 <strong>Software Engineer (2023)</strong><br>   • Went solo on an enterprise Asset Management System using ASP.NET MVC and SQL Server<br>   • Crushed it by automating QA and cutting manual testing time by 90%<br><br>🏆 <strong>Cool achievements:</strong><br>   • Set up RBAC (Role-Based Access Control)<br>   • Designed normalized databases<br>   • Collaborated with AI engineers on automated testing"
       ],
       quickActions: ['View resume', 'See services', 'Contact info']
     },
@@ -60,7 +88,7 @@
     services: {
       keywords: ['service', 'offer', 'provide', 'help with', 'consulting', 'hire', 'freelance', 'work with', 'can you do', 'what do you offer', 'available for', 'do you provide'],
       responses: [
-        "Hadrian offers <strong>premium enterprise services</strong>:<br><br>🏗️ <strong>Enterprise Backend Solutions</strong><br>🔌 <strong>REST API Architecture</strong><br>🗄️ <strong>Data Architecture & Performance Engineering</strong><br>⚙️ <strong>DevOps & CI/CD Pipeline Setup</strong><br>🔄 <strong>Legacy System Modernization</strong><br>🎯 <strong>Strategic Technology Advisory</strong><br><br>All services focus on <em>scalability, maintainability, and long-term business value</em>."
+        "Hadrian's got some killer enterprise services lined up! Check these out:<br><br>🏗️ <strong>Enterprise Backend Solutions</strong><br>🔌 <strong>REST API Architecture</strong><br>🗄️ <strong>Data Architecture & Performance Tuning</strong><br>⚙️ <strong>DevOps & CI/CD Setup</strong><br>🔄 <strong>Legacy System Modernization</strong><br>🎯 <strong>Strategic Tech Consulting</strong><br><br>Everything's focused on making stuff <em>scalable, maintainable, and valuable</em> for your business long-term."
       ],
       quickActions: ['Backend solutions', 'API development', 'Contact Hadrian']
     },
@@ -89,10 +117,27 @@
       quickActions: ['Backend expertise', 'View services', 'See experience']
     },
 
+    challenging_project: {
+      keywords: ['challenging', 'difficult', 'hardest', 'toughest', 'most challenging', 'biggest challenge', 'complex project', 'challenging project'],
+      responses: [
+        "Hadrian's most challenging project was definitely the Enterprise Asset Management System! He built it solo using ASP.NET MVC and SQL Server, implementing a complete RBAC system from scratch. The toughest part was handling complex business logic and ensuring data integrity across multiple modules.",
+        "The Asset Management System stands out as Hadrian's biggest challenge. Working alone on this enterprise-level application, he had to design everything from database architecture to user interfaces. The RBAC implementation and automated testing setup were particularly demanding!",
+        "Hadrian's toughest project was the comprehensive Asset Management System. As the sole developer, he tackled everything from backend APIs to frontend interfaces. The real challenge was integrating complex workflows and ensuring the system could handle enterprise-scale operations.",
+        "The Enterprise Asset Management project was Hadrian's most challenging undertaking. He developed it entirely by himself, implementing advanced features like role-based access control and automated CI/CD pipelines. The complexity of managing multiple user roles and permissions was intense!",
+        "Hadrian's hardest project to date was the Asset Management System. Building it solo meant handling every aspect - from database design to deployment automation. The biggest hurdles were creating a robust RBAC system and reducing QA time by 90% through smart automation.",
+        "The Asset Management System represents Hadrian's most challenging work. As the only developer, he designed and built a full enterprise solution with ASP.NET MVC. The toughest challenges included implementing complex security features and optimizing performance for large-scale use.",
+        "Hadrian's most difficult project was the comprehensive Enterprise Asset Management System. Working independently, he created a production-ready application with advanced RBAC and automated testing. The complexity of enterprise requirements and tight deadlines made it particularly challenging.",
+        "The Asset Management project was Hadrian's biggest technical challenge. He developed it solo, implementing everything from REST APIs to CI/CD automation. The most demanding aspects were handling complex business rules and ensuring system reliability under enterprise workloads.",
+        "Hadrian's toughest accomplishment was the Enterprise Asset Management System. As the sole developer, he built a complete solution with ASP.NET MVC and SQL Server. The challenges included designing scalable architecture and implementing automated testing that cut QA time dramatically.",
+        "The Asset Management System stands as Hadrian's most challenging project. Working alone on this enterprise application, he mastered complex requirements including RBAC implementation, database optimization, and CI/CD automation. The learning curve was steep but incredibly rewarding!"
+      ],
+      quickActions: ['View experience', 'See skills', 'Contact Hadrian']
+    },
+
     contact: {
       keywords: ['contact', 'reach', 'email', 'phone', 'message', 'hire', 'available', 'get in touch', 'how to contact', 'reach out', 'talk to', 'speak with', 'connect with'],
       responses: [
-        "You can reach Hadrian at:<br><br>📧 <strong>Email:</strong> hadrianevarula@gmail.com<br>📱 <strong>Phone:</strong> +63 994 325 4337<br>📍 <strong>Location:</strong> Cebu City, Philippines<br><br>You can also scroll to the <strong>Contact section</strong> below to send a message directly!"
+        "Want to chat with Hadrian? Here's how to reach him:<br><br>📧 <strong>Email:</strong> hadrianevarula@gmail.com<br>📱 <strong>Phone:</strong> +63 994 325 4337<br>📍 <strong>Based in:</strong> Cebu City, Philippines<br><br>Or just scroll down and hit up the contact form - super easy!"
       ],
       quickActions: ['Go to contact form', 'View LinkedIn', 'Download resume']
     },
@@ -106,7 +151,7 @@
     },
 
     location: {
-      keywords: ['location', 'where', 'based', 'from', 'live', 'philippines', 'cebu', 'where is hadrian', 'where from', 'city'],
+      keywords: ['location', 'based', 'from', 'live', 'philippines', 'cebu', 'where is hadrian based', 'based in', 'where from', 'city'],
       responses: [
         "Hadrian is based in Cebu City, Philippines, and is available for remote collaboration with teams worldwide."
       ],
@@ -114,9 +159,18 @@
     },
 
     education: {
-      keywords: ['education', 'degree', 'university', 'college', 'school', 'studied', 'graduate', 'academic'],
+      keywords: ['education', 'degree', 'university', 'college', 'school', 'studied', 'graduate', 'academic', 'study', 'where did hadrian study', 'educational background', 'qualifications', 'alma mater'],
       responses: [
-        "Hadrian's educational background:\n\n🎓 Certificate in Computer Technology (2021-2023)\nUniversity of San Carlos - Talamban Campus\nSoftware Engineering focus\n\n🎓 STEM (Science, Technology, Engineering, Mathematics)\nArgao National High School (2018-2020)\n\nStrong foundation in software engineering principles and practices!"
+        "Hadrian's educational background:\n\n🎓 Certificate in Computer Technology (2021-2023)\nUniversity of San Carlos - Talamban Campus\nSoftware Engineering focus\n\n🎓 STEM (Science, Technology, Engineering, Mathematics)\nArgao National High School (2018-2020)\n\nStrong foundation in software engineering principles and practices!",
+        "Hadrian studied at the University of San Carlos - Talamban Campus, where he earned a Certificate in Computer Technology from 2021-2023 with a focus on software engineering. Before that, he completed STEM studies at Argao National High School from 2018-2020.",
+        "For his education, Hadrian attended Argao National High School for STEM (2018-2020), then pursued Computer Technology at University of San Carlos - Talamban Campus (2021-2023). His studies emphasized software engineering and programming fundamentals.",
+        "Hadrian's academic journey includes STEM education at Argao National High School (2018-2020) and a Certificate in Computer Technology from University of San Carlos - Talamban Campus (2021-2023), where he specialized in software engineering principles.",
+        "Hadrian graduated with a Certificate in Computer Technology from University of San Carlos - Talamban Campus in 2023, focusing on software engineering. His earlier education was in STEM at Argao National High School from 2018-2020.",
+        "Education-wise, Hadrian completed his secondary education in STEM at Argao National High School (2018-2020), then earned a Computer Technology certificate from University of San Carlos - Talamban Campus (2021-2023) with software engineering specialization.",
+        "Hadrian's formal education consists of STEM studies at Argao National High School (2018-2020) and a Certificate in Computer Technology from University of San Carlos - Talamban Campus (2021-2023), emphasizing software engineering and development practices.",
+        "Hadrian attended Argao National High School for STEM education from 2018-2020, then pursued higher education in Computer Technology at University of San Carlos - Talamban Campus from 2021-2023, focusing on software engineering fundamentals.",
+        "For his education, Hadrian studied STEM at Argao National High School (2018-2020) and earned a Certificate in Computer Technology from University of San Carlos - Talamban Campus (2021-2023), with a strong emphasis on software engineering principles.",
+        "Hadrian's academic background includes completing STEM curriculum at Argao National High School (2018-2020) and obtaining a Computer Technology certificate from University of San Carlos - Talamban Campus (2021-2023), specializing in software engineering concepts and practices."
       ],
       quickActions: ['View skills', 'See experience', 'Technical expertise']
     },
@@ -127,6 +181,23 @@
         "Hadrian is 23 years old (born March 28, 2002) and brings youthful energy combined with professional expertise in backend development!"
       ],
       quickActions: ['About Hadrian', 'View experience', 'See skills']
+    },
+
+    availability: {
+      keywords: ['available', 'freelance', 'full-time', 'work', 'hire', 'job', 'employment', 'opportunity', 'position', 'looking for work', 'currently available', 'open to work'],
+      responses: [
+        "Absolutely! Hadrian's currently open to both freelance projects and full-time opportunities. He's passionate about backend development and enterprise solutions.",
+        "Yes, Hadrian is available for freelance work and considering full-time positions. He's got solid experience in .NET, PHP, and DevOps.",
+        "Definitely! Hadrian's on the lookout for exciting freelance gigs and full-time roles in backend development and system architecture.",
+        "You bet! Hadrian's available for freelance projects right now and open to full-time opportunities that match his expertise in enterprise systems.",
+        "Sure thing! Hadrian's currently available for freelance work and actively exploring full-time positions in backend development.",
+        "Yes! Hadrian's open to freelance opportunities and full-time roles. He's skilled in ASP.NET, Laravel, and CI/CD automation.",
+        "Absolutely open! Hadrian's available for freelance projects and interested in full-time positions that leverage his backend development experience.",
+        "Definitely available! Hadrian's looking for freelance work and full-time opportunities in enterprise software development.",
+        "Yes, he's available! Hadrian's open to freelance gigs and full-time positions in backend development and system architecture.",
+        "For sure! Hadrian's currently available for freelance projects and considering full-time roles in .NET and PHP development."
+      ],
+      quickActions: ['Contact Hadrian', 'View services', 'See experience']
     },
 
     experience_years: {
@@ -140,16 +211,16 @@
     thanks: {
       keywords: ['thank', 'thanks', 'appreciate', 'helpful', 'great', 'awesome', 'perfect'],
       responses: [
-            "You're welcome! Is there anything else you'd like to know about Hadrian's background or services?",
-            "Happy to help! Feel free to ask if you have more questions.",
-            "My pleasure! Let me know if you need any other information.",
-            "Glad I could help! Do you want to know more about Hadrian's skills or projects?",
-            "Anytime! If you have more questions about Hadrian’s experience, just ask.",
-            "You're welcome! Would you like to hear more about Hadrian’s work or services?",
-            "No problem! I’m here to answer anything else you want to know about Hadrian.",
-            "Happy to assist! Curious about Hadrian’s professional journey or technical expertise?",
-            "It’s my pleasure! Feel free to ask about Hadrian’s projects, skills, or experience.",
-            "You got it! Let me know if you want more details on Hadrian's work or background."
+            "You're welcome! Got any other questions about Hadrian's background or services?",
+            "Happy to help! Anything else you'd like to know?",
+            "My pleasure! Let me know if you need more info.",
+            "Glad I could help! Curious about Hadrian's skills or projects?",
+            "Anytime! More questions about Hadrian's experience? Shoot!",
+            "You're welcome! Want to hear more about Hadrian's work or services?",
+            "No problem at all! Anything else on your mind about Hadrian?",
+            "Happy to assist! More details on Hadrian's professional journey?",
+            "My pleasure! Feel free to ask about Hadrian's projects, skills, or experience.",
+            "You got it! Let me know if you want more scoop on Hadrian's background."
       ],
 
       quickActions: ['View resume', 'Contact Hadrian', 'See services']
@@ -204,7 +275,7 @@
 
   function extractName(message) {
     const lower = message.toLowerCase().trim();
-    const rejectionWords = ['none', 'no', 'skip', 'nothing', 'nope', 'nah', 'pass', 'anonymous', 'guest', 'dont', 'don\'t', 'do not'];
+    const rejectionWords = ['none', 'no', 'skip', 'nothing', 'nope', 'nah','no thanks','proceed','pass', 'anonymous', 'guest', 'dont', 'don\'t', 'do not'];
     let name = null;
     
     if (lower.includes('my name is')) {
@@ -352,30 +423,23 @@
     
     removeTypingIndicator();
     
-    if (state.waitingForName) {
-      state.userName = extractName(userMessage);
-      state.waitingForName = false;
-      const welcome = state.userName ? `Nice to meet you, ${state.userName}! I'm here to help you learn about Hadrian's expertise in backend development, enterprise system architecture, and available services. What would you like to know?` : `I'm here to help you learn about Hadrian's expertise in backend development, enterprise system architecture, and available services. What would you like to know?`;
-      const actions = ['Who is Hadrian?', 'What services offered?', 'Show skills'];
-      addMessage(welcome, 'assistant', actions);
-      state.isTyping = false;
-      if (elements.send) {
-        elements.send.disabled = false;
-      }
-      return;
-    }
-    
     const intent = detectIntent(userMessage);
     
     if (intent) {
       const response = getRandomResponse(intent.responses);
       addMessage(response, 'assistant', intent.quickActions);
+    } else if (state.waitingForName) {
+      state.userName = extractName(userMessage);
+      state.waitingForName = false;
+      const welcome = state.userName ? `Nice to meet you, ${state.userName}! I'm here to help you learn about Hadrian's expertise in backend development, enterprise system architecture, and available services. What would you like to know?` : `I'm here to help you learn about Hadrian's expertise in backend development, enterprise system architecture, and available services. What would you like to know?`;
+      const actions = ['Who is Hadrian?', 'What services offered?', 'Show skills'];
+      addMessage(welcome, 'assistant', actions);
     } else {
       // Fallback responses
       const fallbacks = [
-        "I'm not sure I understand. You can ask me about Hadrian's skills, experience, services, or how to get in touch!",
-        "That's an interesting question! Try asking me about backend development, technical expertise, or available services.",
-        "I'd love to help! You can ask about programming skills, work experience, contact information, or even just 'Who is Hadrian?'"
+        "I'm not sure I understand. Try using keywords like 'skills', 'experience', or 'contact'. You can ask me about Hadrian's skills, experience, services, or how to get in touch!",
+        "That's an interesting question! For better responses, use short phrases or keywords. Try asking me about backend development, technical expertise, or available services.",
+        "I'd love to help! Use keywords or short questions for best results. You can ask about programming skills, work experience, contact information, or even just 'Who is Hadrian?'"
       ];
       const fallbackActions = ['Who is Hadrian?', 'Show experience', 'Contact info'];
       addMessage(getRandomResponse(fallbacks), 'assistant', fallbackActions);
@@ -414,8 +478,8 @@
     if (state.hasGreeted) return;
     
     setTimeout(() => {
-      const greeting = "👋 Hi! I'm here to help you learn about Hadrian's expertise. First, may I know your name?";
-      const actions = [];
+      const greeting = "👋 Hi! I'm here to help you learn about Hadrian's expertise. For best results, use keywords or short phrases in your questions. First, may I know your name?";
+      const actions = ['Skip', 'No thanks'];
       
       addMessage(greeting, 'assistant', actions);
       state.hasGreeted = true;
