@@ -28,7 +28,15 @@ jobs:
 
       - name: Replace API Key
         run: |
+          echo "Starting API key replacement..."
           sed -i "s/REPLACE_WITH_YOUR_NEW_API_KEY/${GEMINI_API_KEY}/g" assets/js/chat-assistant.js
+          if grep -q "REPLACE_WITH_YOUR_NEW_API_KEY" assets/js/chat-assistant.js; then
+            echo "❌ Replacement failed: placeholder still present"
+            echo "Check if GEMINI_API_KEY secret is set with a valid value"
+            exit 1
+          else
+            echo "✅ Replacement successful: placeholder removed"
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
