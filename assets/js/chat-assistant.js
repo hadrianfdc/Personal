@@ -153,6 +153,14 @@
       ],
 
       quickActions: ['View resume', 'Contact Hadrian', 'See services']
+    },
+
+    self: {
+      keywords: ['about myself', 'tell me about myself', 'who am i', 'about me', 'tell me about me', 'my self', 'myself'],
+      responses: [
+        "I don't know you, but I can tell you who Hadrian is!"
+      ],
+      quickActions: ['Who is Hadrian?', 'Tell me about Hadrian', 'What services offered?']
     }
   };
 
@@ -161,7 +169,9 @@
     isOpen: false,
     hasGreeted: false,
     conversationHistory: [],
-    isTyping: false
+    isTyping: false,
+    userName: null,
+    waitingForName: true
   };
 
   // DOM Elements
@@ -192,6 +202,38 @@
     }, 100);
   }
 
+  function extractName(message) {
+    const lower = message.toLowerCase().trim();
+    let name = null;
+    
+    if (lower.includes('my name is')) {
+      const parts = message.split(/my name is/i);
+      if (parts[1]) {
+        name = parts[1].trim().split(/\s+/)[0];
+      }
+    } else if (lower.includes('i am')) {
+      const parts = message.split(/i am/i);
+      if (parts[1]) {
+        name = parts[1].trim().split(/\s+/)[0];
+      }
+    } else if (lower.includes("i'm")) {
+      const parts = message.split(/i'm/i);
+      if (parts[1]) {
+        name = parts[1].trim().split(/\s+/)[0];
+      }
+    }
+    
+    if (name) {
+      name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+    } else {
+      // Fallback: take the first word and capitalize
+      name = message.trim().split(/\s+/)[0] || 'Friend';
+      name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+    }
+    
+    return name;
+  }
+
   // Intent Detection
   function detectIntent(message) {
     const lowerMessage = message.toLowerCase().trim();
@@ -211,6 +253,10 @@
   // Message Rendering
   function addMessage(content, sender = 'assistant', showQuickActions = false) {
     if (!elements.messages) return;
+    
+    if (sender === 'assistant' && state.userName && !content.includes(state.userName)) {
+      content = state.userName + ', ' + content;
+    }
     
     const messageDiv = document.createElement('div');
     messageDiv.className = `chat-message ${sender}`;
@@ -295,6 +341,19 @@
     
     removeTypingIndicator();
     
+    if (state.waitingForName) {
+      state.userName = extractName(userMessage);
+      state.waitingForName = false;
+      const welcome = `Nice to meet you, ${state.userName}! I'm here to help you learn about Hadrian's expertise in backend development, enterprise system architecture, and available services. What would you like to know?`;
+      const actions = ['Who is Hadrian?', 'What services offered?', 'Show skills'];
+      addMessage(welcome, 'assistant', actions);
+      state.isTyping = false;
+      if (elements.send) {
+        elements.send.disabled = false;
+      }
+      return;
+    }
+    
     const intent = detectIntent(userMessage);
     
     if (intent) {
@@ -344,8 +403,8 @@
     if (state.hasGreeted) return;
     
     setTimeout(() => {
-      const greeting = "👋 Hi! I'm here to help you learn about Hadrian's expertise in backend development, enterprise system architecture, and available services. What would you like to know?";
-      const actions = ['Who is Hadrian?', 'What services offered?', 'Show skills'];
+      const greeting = "👋 Hi! I'm here to help you learn about Hadrian's expertise. First, may I know your name?";
+      const actions = [];
       
       addMessage(greeting, 'assistant', actions);
       state.hasGreeted = true;
