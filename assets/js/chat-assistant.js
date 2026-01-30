@@ -8,8 +8,14 @@
     autoGreetDelay: 1000,
     // Gemini API Configuration
     gemini: {
-      apiKey: 'AIzaSyC_19EvV1-BlxsqXYCD7BzHqqe1BIamlVE', // Replace with your actual API key from Google AI Studio
-      model: 'gemini-2.5-flash',
+      apiKey: 'AIzaSyC_19EvV1-BlxsqXYCD7BzHqqe1BIamlVE', 
+      models: [
+        'gemini-2.5-flash',
+        'gemini-2.5-flash-lite',
+        'gemini-2.5-flash-tts',
+        'gemini-3-flash',
+        'gemini-robotics-er-1.5-preview'
+      ],
       apiUrl: 'https://generativelanguage.googleapis.com/v1beta/models'
     }
   };
@@ -273,8 +279,9 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
   }
 
   // Gemini API Call
-  async function callGeminiAPI(userMessage) {
-    const { apiKey, model, apiUrl } = CONFIG.gemini;
+  async function callGeminiAPI(userMessage, modelIndex = 0) {
+    const { apiKey, models, apiUrl } = CONFIG.gemini;
+    const model = models[modelIndex];
     
     if (apiKey === 'YOUR_GEMINI_API_KEY') {
       console.error('❌ Gemini API Debug - API key not set');
@@ -321,6 +328,21 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
         console.error('❌ Gemini API Debug - API error response:', errorData);
         console.error('❌ Gemini API Debug - Error status:', response.status);
         console.error('❌ Gemini API Debug - Error statusText:', response.statusText);
+
+        // Check if it's a quota/rate limit error
+        const isQuotaError = response.status === 429 || 
+          errorData.error?.code === 'RESOURCE_EXHAUSTED' || 
+          (errorData.error?.message && (
+            errorData.error.message.toLowerCase().includes('quota') || 
+            errorData.error.message.toLowerCase().includes('rate limit') ||
+            errorData.error.message.toLowerCase().includes('requests per day')
+          ));
+
+        if (isQuotaError && modelIndex < models.length - 1) {
+          console.log(`Switching to next model: ${models[modelIndex + 1]}`);
+          return callGeminiAPI(userMessage, modelIndex + 1);
+        }
+
         throw new Error(`API error: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
       }
 
@@ -438,7 +460,7 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
       addMessage(welcome, 'assistant', quickActions);
     } else {
       // Call Gemini API for response
-      response = await callGeminiAPI(userMessage);
+      response = await callGeminiAPI(userMessage, 0);
       
       removeTypingIndicator();
       
