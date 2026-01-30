@@ -17,7 +17,7 @@
   // Knowledge Base - Embedded directly to avoid CORS issues
   const KNOWLEDGE_BASE = {
   "about": {
-    "name": "Hadriane Varula",
+    "name": "Hadrian Evarula",
     "title": "Backend / Fullstack Developer",
     "location": "Cebu City, Philippines",
     "email": "hadrianevarula@gmail.com",
@@ -83,7 +83,7 @@
     "general": [
       "Be concise and informative (under 150 words)",
       "Highlight skills and experience relevant to the question",
-      "Be professional, helpful, and enthusiastic about Hadriane's expertise"
+      "Be professional, helpful, and enthusiastic about Hadrian s expertise"
     ],
     "contact_handling": [
       "Provide email (hadrianevarula@gmail.com) or phone when asked",
@@ -98,7 +98,7 @@
       "Emphasize technologies used and problems solved in project descriptions"
     ],
     "personality": [
-      "Represent Hadriane's professional portfolio accurately, helpfully, and engagingly"
+      "Represent Hadrian s professional portfolio accurately, helpfully, and engagingly"
     ]
   }
 };
@@ -210,25 +210,28 @@ Title: ${about.title}
 Location: ${about.location}
 Email: ${about.email}
 Phone: ${about.phone}
-LinkedIn: ${about.linkedin}
-GitHub: ${about.github}
 
 === PROFESSIONAL SUMMARY ===
 ${kb.professional_summary}
 
 === TECHNICAL SKILLS ===
 Programming Languages:
-- Expert: ${kb.technical_skills.programming_languages.expert.join(', ')}
-- Proficient: ${kb.technical_skills.programming_languages.proficient.join(', ')}
+- ${kb.technical_skills.programming_languages.join(', ')}
 
 Frameworks & Libraries:
 - ${kb.technical_skills.frameworks_libraries.join(', ')}
 
-Tools & Platforms:
-- ${kb.technical_skills.tools_platforms.join(', ')}
-
 Databases:
 - ${kb.technical_skills.databases.join(', ')}
+
+DevOps Tools:
+- ${kb.technical_skills.devops_tools.join(', ')}
+
+Testing:
+- ${kb.technical_skills.testing.join(', ')}
+
+Architecture:
+- ${kb.technical_skills.architecture.join(', ')}
 
 === WORK EXPERIENCE ===\n`;
 
@@ -237,26 +240,27 @@ Databases:
       exp.responsibilities.forEach(resp => {
         prompt += `- ${resp}\n`;
       });
+      if (exp.tech_stack) {
+        prompt += `Tech Stack: ${exp.tech_stack.join(', ')}\n`;
+      }
     });
 
-    prompt += `\n=== EDUCATION ===
-${kb.education.degree}
-${kb.education.institution} (${kb.education.period})
-- ${kb.education.achievements.join('\n- ')}
+    prompt += `\n=== EDUCATION ===\n`;
 
-=== KEY PROJECTS ===\n`;
+    kb.education.forEach((edu, index) => {
+      prompt += `${index + 1}. ${edu.degree}\n   ${edu.institution} (${edu.period})\n`;
+    });
+
+    prompt += `\n=== KEY PROJECTS ===\n`;
 
     kb.key_projects.forEach((project, index) => {
-      prompt += `\n${index + 1}. ${project.name}${project.type ? ` (${project.type})` : ''}
+      prompt += `\n${index + 1}. ${project.name}
    - ${project.description}
    - Technologies: ${project.technologies.join(', ')}
    - Features: ${project.features.join(', ')}\n`;
     });
 
-    prompt += `\n=== CERTIFICATIONS ===
-- ${kb.certifications.join('\n- ')}
-
-=== GUIDELINES FOR RESPONSES ===
+    prompt += `\n=== GUIDELINES FOR RESPONSES ===
 - ${kb.response_guidelines.general.join('\n- ')}
 - ${kb.response_guidelines.contact_handling.join('\n- ')}
 - ${kb.response_guidelines.content_restrictions.join('\n- ')}
