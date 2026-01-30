@@ -1,0 +1,57 @@
+{
+  "personal_info": {
+    "name": "Hadriane Varula",
+    "location": "Hippodromo, Cebu City, Philippines",
+    "email": "hadrianevarula@gmail.com",
+    "phone": "+63 994-325-4337"
+  },
+  "summary": "Backend / Fullstack Developer with hands-on experience in ASP.NET MVC, C#, PHP, SQL. Experienced in REST APIs, CI/CD, unit testing, performance optimization, and clean architecture.",
+  "skills": {
+    "languages": ["PHP", "C#", "Node.js", "SQL"],
+    "frameworks": ["Laravel", "CakePHP", "ASP.NET MVC", "ASP.NET Core"],
+    "databases": ["MySQL", "SQL Server", "MongoDB"],
+    "devops": ["CI/CD", "GitHub Actions", "Cron Jobs", "Webhooks", "Docker"],
+    "testing": ["Codeception", "Unit Testing Automation"],
+    "architecture": ["MVC Architecture", "LINQ"]
+  },
+  "tools": ["Git", "GitHub", "Docker", "Ngrok"],
+  "education": [
+    {
+      "school": "University of San Carlos",
+      "degree": "Certificate in Computer Technology",
+      "years": "2021–2023"
+    },
+    {
+      "school": "Passerelles Numeriques Philippines",
+      "degree": "Fullstack Web Development Training",
+      "years": "2021–2023"
+    }
+  ],
+  "experience": [
+    {
+      "role": "Backend PHP Developer",
+      "company": "Forty Degrees Celsius Inc.",
+      "years": "Jan 2024 – Present",
+      "achievements": [
+        "Engineered CI/CD system automating multi-module unit tests, reducing manual QA time by 90%",
+        "Implemented GitHub-triggered job queueing and commit status updates",
+        "Collaborated with AI Specialists for RAG workflows for automated unit test generation",
+        "Built scalable REST APIs"
+      ],
+      "tech_stack": ["PHP 8", "CakePHP", "MySQL", "GitHub Actions", "Codeception"]
+    },
+    {
+      "role": "Fullstack .NET Developer",
+      "company": "Prince Retail Group",
+      "years": "Jan 2022 – Dec 2022",
+      "achievements": [
+        "Sole developer of enterprise Asset Management System for nationwide stores",
+        "Designed ASP.NET MVC system with normalized SQL Server schemas",
+        "Implemented RBAC with user roles, profiles, module-level permissions",
+        "Developed CRUD modules for assets, users, departments, device assignments",
+        "Automated asset lifecycle rules (ownership transfer for devices older than 4 years)"
+      ],
+      "tech_stack": ["C#", "ASP.NET MVC", "Razor", "SQL Server", "Entity Framework", "Bootstrap"]
+    }
+  ]
+}
