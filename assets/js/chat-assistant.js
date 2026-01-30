@@ -13,7 +13,7 @@
     about: {
       keywords: ['who is hadrian', 'tell me about hadrian', 'about hadrian', 'who are you', 'introduce hadrian', 'whos hadrian', 'hadrian info', 'describe hadrian', 'about yourself', 'tell me about yourself', 'tell me about him', 'about him', 'more about him', 'info about him'],
       responses: [
-        "Hadrian Evarula is a backend-focused full-stack developer from Cebu City, Philippines, specializing in enterprise system architecture and automated deployment pipelines.\n\nKey highlights:\n• 🎓 Computer Technology degree (2021-2023)\n• 💼 Backend/Fullstack Developer (2024-Present)\n• 🚀 Expert in ASP.NET Core, Laravel, CakePHP\n• 🔧 Strong DevOps & CI/CD experience\n• 📊 Enterprise database design specialist\n\nHadrian builds mission-critical applications with clean, maintainable code and scalable infrastructure!"
+        "Hadrian Evarula is a <strong>backend-focused full-stack developer</strong> from Cebu City, Philippines, specializing in enterprise system architecture and automated deployment pipelines.<br><br>✨ <strong>Key highlights:</strong><br>• 🎓 Computer Technology degree (2021-2023)<br>• 💼 Backend/Fullstack Developer (2024-Present)<br>• 🚀 Expert in ASP.NET Core, Laravel, CakePHP<br>• 🔧 Strong DevOps & CI/CD experience<br>• 📊 Enterprise database design specialist<br><br>Hadrian builds mission-critical applications with clean, maintainable code and scalable infrastructure!"
       ],
       quickActions: ['View skills', 'See experience', 'What services offered?']
     },
@@ -44,7 +44,7 @@
     skills: {
       keywords: ['skill', 'technology', 'tech stack', 'programming', 'languages', 'framework', 'what can', 'proficient', 'expertise', 'technologies', 'tools', 'know', 'capabilities', 'technical skills', 'good at'],
       responses: [
-        "Hadrian specializes in backend development with strong expertise in:\n\n• ASP.NET Core, ASP.NET MVC, C#\n• PHP frameworks (Laravel, CakePHP)\n• Database systems (SQL Server, MySQL, MongoDB)\n• RESTful API design and implementation\n• CI/CD pipelines with GitHub Actions\n• Clean architecture and RBAC implementation\n\nWould you like to know more about any specific technology?"
+        "Hadrian specializes in <strong>backend development</strong> with strong expertise in:<br><br>🛠️ <strong>Technologies:</strong><br>• ASP.NET Core, ASP.NET MVC, C#<br>• PHP frameworks (Laravel, CakePHP)<br>• Database systems (SQL Server, MySQL, MongoDB)<br>• RESTful API design and implementation<br>• CI/CD pipelines with GitHub Actions<br>• Clean architecture and RBAC implementation<br><br>Would you like to know more about any specific technology?"
       ],
       quickActions: ['Backend expertise', 'Database skills', 'DevOps experience']
     },
@@ -52,7 +52,7 @@
     experience: {
       keywords: ['experience', 'work', 'job', 'career', 'professional', 'background', 'history', 'worked', 'employment', 'previous work', 'work history', 'jobs', 'positions'],
       responses: [
-        "Hadrian has professional experience as:\n\n• Backend/Fullstack Developer (2024 - Present): Building enterprise-level applications with CakePHP, implementing production-ready APIs, and maintaining CI/CD pipelines.\n\n• Software Engineer (2023): Sole developer of an enterprise Asset Management System using ASP.NET MVC and SQL Server, achieving 90% reduction in manual QA time through CI/CD automation.\n\nKey achievements include RBAC implementation, normalized database design, and collaboration with AI engineers on automated testing."
+        "Here's Hadrian's professional experience:<br><br>🚀 <strong>Backend/Fullstack Developer (2024 - Present)</strong><br>   • Building enterprise-level applications with CakePHP<br>   • Implementing production-ready APIs<br>   • Maintaining CI/CD pipelines<br><br>💼 <strong>Software Engineer (2023)</strong><br>   • Sole developer of an enterprise Asset Management System using ASP.NET MVC and SQL Server<br>   • Achieved 90% reduction in manual QA time through CI/CD automation<br><br>🏆 <strong>Key Achievements:</strong><br>   • RBAC implementation<br>   • Normalized database design<br>   • Collaboration with AI engineers on automated testing"
       ],
       quickActions: ['View resume', 'See services', 'Contact info']
     },
@@ -60,7 +60,7 @@
     services: {
       keywords: ['service', 'offer', 'provide', 'help with', 'consulting', 'hire', 'freelance', 'work with', 'can you do', 'what do you offer', 'available for', 'do you provide'],
       responses: [
-        "Hadrian offers premium enterprise services:\n\n• Enterprise Backend Solutions\n• REST API Architecture\n• Data Architecture & Performance Engineering\n• DevOps & CI/CD Pipeline Setup\n• Legacy System Modernization\n• Strategic Technology Advisory\n\nAll services focus on scalability, maintainability, and long-term business value."
+        "Hadrian offers <strong>premium enterprise services</strong>:<br><br>🏗️ <strong>Enterprise Backend Solutions</strong><br>🔌 <strong>REST API Architecture</strong><br>🗄️ <strong>Data Architecture & Performance Engineering</strong><br>⚙️ <strong>DevOps & CI/CD Pipeline Setup</strong><br>🔄 <strong>Legacy System Modernization</strong><br>🎯 <strong>Strategic Technology Advisory</strong><br><br>All services focus on <em>scalability, maintainability, and long-term business value</em>."
       ],
       quickActions: ['Backend solutions', 'API development', 'Contact Hadrian']
     },
@@ -92,7 +92,7 @@
     contact: {
       keywords: ['contact', 'reach', 'email', 'phone', 'message', 'hire', 'available', 'get in touch', 'how to contact', 'reach out', 'talk to', 'speak with', 'connect with'],
       responses: [
-        "You can reach Hadrian at:\n\n📧 Email: hadrianevarula@gmail.com\n📱 Phone: +63 994 325 4337\n📍 Location: Cebu City, Philippines\n\nYou can also scroll to the Contact section below to send a message directly!"
+        "You can reach Hadrian at:<br><br>📧 <strong>Email:</strong> hadrianevarula@gmail.com<br>📱 <strong>Phone:</strong> +63 994 325 4337<br>📍 <strong>Location:</strong> Cebu City, Philippines<br><br>You can also scroll to the <strong>Contact section</strong> below to send a message directly!"
       ],
       quickActions: ['Go to contact form', 'View LinkedIn', 'Download resume']
     },
@@ -204,6 +204,7 @@
 
   function extractName(message) {
     const lower = message.toLowerCase().trim();
+    const rejectionWords = ['none', 'no', 'skip', 'nothing', 'nope', 'nah', 'pass', 'anonymous', 'guest', 'dont', 'don\'t', 'do not'];
     let name = null;
     
     if (lower.includes('my name is')) {
@@ -225,10 +226,20 @@
     
     if (name) {
       name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+      if (rejectionWords.includes(name.toLowerCase())) {
+        return null;
+      }
     } else {
       // Fallback: take the first word and capitalize
-      name = message.trim().split(/\s+/)[0] || 'Friend';
-      name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+      name = message.trim().split(/\s+/)[0];
+      if (name) {
+        name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+        if (rejectionWords.includes(name.toLowerCase())) {
+          return null;
+        }
+      } else {
+        return null;
+      }
     }
     
     return name;
@@ -263,7 +274,7 @@
     
     const bubbleDiv = document.createElement('div');
     bubbleDiv.className = 'message-bubble';
-    bubbleDiv.textContent = content;
+    bubbleDiv.innerHTML = content;
     
     messageDiv.appendChild(bubbleDiv);
     elements.messages.appendChild(messageDiv);
@@ -344,7 +355,7 @@
     if (state.waitingForName) {
       state.userName = extractName(userMessage);
       state.waitingForName = false;
-      const welcome = `Nice to meet you, ${state.userName}! I'm here to help you learn about Hadrian's expertise in backend development, enterprise system architecture, and available services. What would you like to know?`;
+      const welcome = state.userName ? `Nice to meet you, ${state.userName}! I'm here to help you learn about Hadrian's expertise in backend development, enterprise system architecture, and available services. What would you like to know?` : `I'm here to help you learn about Hadrian's expertise in backend development, enterprise system architecture, and available services. What would you like to know?`;
       const actions = ['Who is Hadrian?', 'What services offered?', 'Show skills'];
       addMessage(welcome, 'assistant', actions);
       state.isTyping = false;
