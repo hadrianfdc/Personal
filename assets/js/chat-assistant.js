@@ -145,8 +145,8 @@
     resume: {
       keywords: ['resume', 'cv', 'download', 'pdf', 'curriculum', 'download resume', 'get resume', 'see resume'],
       responses: [
-        "You can download Hadrian's full resume by scrolling to the Resume section and clicking the 'Download Resume' button, or check out the detailed experience and skills sections on this page!"
-      ],
+        "You can <a href=\"./Hadrian%20Evarula%20-%20Resume.pdf\" target='_blank' download>download Hadrian's full resume here</a>, or check out the detailed experience and skills sections on this page!"
+        ],
       quickActions: ['View experience', 'See skills', 'Services offered']
     },
 
@@ -437,9 +437,9 @@
     } else {
       // Fallback responses
       const fallbacks = [
-        "I'm not sure I understand. Try using keywords like 'skills', 'experience', or 'contact'. You can ask me about Hadrian's skills, experience, services, or how to get in touch!",
-        "That's an interesting question! For better responses, use short phrases or keywords. Try asking me about backend development, technical expertise, or available services.",
-        "I'd love to help! Use keywords or short questions for best results. You can ask about programming skills, work experience, contact information, or even just 'Who is Hadrian?'"
+        "I'm not sure I understand. Try using keywords like <strong>'skills'</strong>, <strong>'experience'</strong>, or <strong>'contact'</strong>, and remember to use <strong>Hadrian's name</strong> instead of 'you'. You can ask me about Hadrian's skills, experience, services, or how to get in touch!",
+        "That's an interesting question! For better responses, use short phrases or keywords, and please use <strong>Hadrian's name</strong> instead of 'you' to avoid confusion. Try asking me about backend development, technical expertise, or available services.",
+        "I'd love to help! Use keywords or short questions for best results, and remember to use <strong>Hadrian's name</strong> instead of 'you'. You can ask about programming skills, work experience, contact information, or even just 'Who is Hadrian?'"
       ];
       const fallbackActions = ['Who is Hadrian?', 'Show experience', 'Contact info'];
       addMessage(getRandomResponse(fallbacks), 'assistant', fallbackActions);
@@ -478,7 +478,7 @@
     if (state.hasGreeted) return;
     
     setTimeout(() => {
-      const greeting = "👋 Hi! I'm here to help you learn about Hadrian's expertise. For best results, use keywords or short phrases in your questions. First, may I know your name?";
+      const greeting = "👋 Hi! I'm here to help you learn about Hadrian's expertise. For best results, use <strong>keywords or short phrases</strong> in your questions, and please use <strong>Hadrian's name</strong> instead of <strong>'you'</strong> to avoid confusion. First, may I know your name?";
       const actions = ['Skip', 'No thanks'];
       
       addMessage(greeting, 'assistant', actions);
