@@ -29,8 +29,8 @@ jobs:
       - name: Replace API Key
         run: |
           echo "Starting API key replacement..."
-          sed -i "s/REPLACE_WITH_YOUR_NEW_API_KEY/${GEMINI_API_KEY}/g" assets/js/chat-assistant.js
-          if grep -q "REPLACE_WITH_YOUR_NEW_API_KEY" assets/js/chat-assistant.js; then
+          sed -i "s/GEMINI_API_KEY_PLACEHOLDER/${{ secrets.GEMINI_API_KEY }}/g" assets/js/config.js
+          if grep -q "GEMINI_API_KEY_PLACEHOLDER" assets/js/config.js; then
             echo "❌ Replacement failed: placeholder still present"
             echo "Check if GEMINI_API_KEY secret is set with a valid value"
             exit 1

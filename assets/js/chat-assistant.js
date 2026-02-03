@@ -8,7 +8,7 @@
     autoGreetDelay: 1000,
     // Gemini API Configuration
     gemini: {
-      apiKey: 'REPLACE_WITH_YOUR_NEW_API_KEY', // This will be replaced by GitHub Actions with the secret
+      apiKey: window.CONFIG_CONSTANTS?.GEMINI_API_KEY || 'GEMINI_API_KEY_PLACEHOLDER', // Use config constant with fallback
       models: [
         'gemini-2.5-flash',
         'gemini-2.5-flash-lite',
@@ -285,7 +285,7 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
     const { apiKey, models, apiUrl } = CONFIG.gemini;
     const model = models[modelIndex];
     
-    if (apiKey === 'YOUR_GEMINI_API_KEY') {
+    if (apiKey === 'GEMINI_API_KEY_PLACEHOLDER' || apiKey === 'YOUR_GEMINI_API_KEY') {
       console.error('❌ Gemini API Debug - API key not set');
       return "I'm having trouble connecting right now. Please try again later or use the contact form to reach Hadrian directly.";
     }
