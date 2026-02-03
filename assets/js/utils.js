@@ -62,6 +62,46 @@
     });
   }
 
+  // About Description Modal functionality
+  function initAboutModal() {
+    const aboutContainer = document.querySelector('.about-description-container');
+    const modal = document.getElementById('aboutModal');
+    const overlay = document.getElementById('aboutModalOverlay');
+    const closeBtn = document.getElementById('aboutModalCloseBtn');
+
+    if (!aboutContainer || !modal || !overlay || !closeBtn) return;
+
+    // Open modal on click
+    aboutContainer.addEventListener('click', function(e) {
+      // Prevent opening if clicking on the modal itself
+      if (e.target.closest('.about-modal')) return;
+      
+      modal.classList.add('show');
+      overlay.classList.add('show');
+      document.body.style.overflow = 'hidden'; // Prevent background scroll
+    });
+
+    // Close modal functions
+    function closeAboutModal() {
+      modal.classList.remove('show');
+      overlay.classList.remove('show');
+      document.body.style.overflow = ''; // Restore scroll
+    }
+
+    // Close on close button click
+    closeBtn.addEventListener('click', closeAboutModal);
+
+    // Close on overlay click
+    overlay.addEventListener('click', closeAboutModal);
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('show')) {
+        closeAboutModal();
+      }
+    });
+  }
+
   // Technical Expertise Modal functionality
   function initTechnicalModal() {
     const technicalContainer = document.querySelector('.technical-expertise-container');
@@ -149,11 +189,13 @@
       initModal();
       initTechnicalModal();
       initEducationModal();
+      initAboutModal();
     });
   } else {
     initCopyButtons();
     initModal();
     initTechnicalModal();
     initEducationModal();
+    initAboutModal();
   }
 })();

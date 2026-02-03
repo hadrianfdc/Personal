@@ -91,9 +91,99 @@
         </div>
         <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
           <h3>WEB DEVELOPER</h3>
-          <p class="fst-italic">
-            I am passionate about building robust, scalable backend systems that power mission-critical applications. With deep expertise in enterprise architecture and API design, I excel at creating efficient, secure, and high-performance solutions using modern frameworks and best practices. I specialize in ASP.NET Core, Laravel, and CakePHP development, with extensive experience in database optimization, CI/CD pipelines, and automated testing. My goal is to deliver enterprise-grade solutions that drive business value through clean code, reliable infrastructure, and seamless integrations.
-          </p>
+          <div class="about-description-container">
+            <p class="fst-italic">
+              I am passionate about building robust, scalable backend systems that power mission-critical applications. With deep expertise in enterprise architecture and API design, I excel at creating efficient, secure, and high-performance solutions using modern frameworks and best practices. I specialize in ASP.NET Core, Laravel, and CakePHP development, with extensive experience in database optimization, CI/CD pipelines, and automated testing. My goal is to deliver enterprise-grade solutions that drive business value through clean code, reliable infrastructure, and seamless integrations.
+            </p>
+            
+            <!-- Hover Tooltip -->
+            <div class="hover-tooltip">
+              <i class="bi bi-hand-index-thumb"></i>
+              Click to read more about me
+            </div>
+          </div>
+          
+          <!-- About Description Modal -->
+          <div class="about-modal" id="aboutModal">
+            <div class="modal-content">
+              <button class="modal-close-btn" id="aboutModalCloseBtn" aria-label="Close modal">
+                <i class="bi bi-x-lg"></i>
+              </button>
+              <h5><i class="bi bi-code-slash"></i> Professional Philosophy & Expertise</h5>
+              
+              <div class="about-content">
+                <div class="philosophy-section">
+                  <h6><i class="bi bi-lightbulb"></i> My Approach</h6>
+                  <p>I believe in crafting software solutions that not only meet technical requirements but also drive meaningful business impact. My development philosophy centers on:</p>
+                  <ul>
+                    <li><strong>Scalability First:</strong> Building systems that grow with your business needs</li>
+                    <li><strong>Quality Assurance:</strong> Implementing comprehensive testing and code review processes</li>
+                    <li><strong>Performance Optimization:</strong> Ensuring applications run efficiently at scale</li>
+                    <li><strong>Security by Design:</strong> Integrating security best practices from the ground up</li>
+                  </ul>
+                </div>
+                
+                <div class="expertise-section">
+                  <h6><i class="bi bi-gear"></i> Technical Specializations</h6>
+                  <div class="expertise-grid">
+                    <div class="expertise-item">
+                      <h7>Backend Architecture</h7>
+                      <p>Designing robust APIs and microservices with ASP.NET Core, Laravel, and CakePHP</p>
+                    </div>
+                    <div class="expertise-item">
+                      <h7>Database Engineering</h7>
+                      <p>Optimizing data solutions with SQL Server, MySQL, and MongoDB</p>
+                    </div>
+                    <div class="expertise-item">
+                      <h7>DevOps & Automation</h7>
+                      <p>Streamlining deployment pipelines with CI/CD and automated testing</p>
+                    </div>
+                    <div class="expertise-item">
+                      <h7>System Integration</h7>
+                      <p>Building seamless connections between disparate systems and APIs</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="achievements-section">
+                  <h6><i class="bi bi-trophy"></i> Key Achievements</h6>
+                  <div class="achievements-list">
+                    <div class="achievement">
+                      <span class="achievement-icon">🚀</span>
+                      <span>Reduced QA time by 90% through automated testing implementation</span>
+                    </div>
+                    <div class="achievement">
+                      <span class="achievement-icon">⚡</span>
+                      <span>Built scalable systems handling millions of requests daily</span>
+                    </div>
+                    <div class="achievement">
+                      <span class="achievement-icon">🔒</span>
+                      <span>Implemented enterprise-grade security in mission-critical applications</span>
+                    </div>
+                    <div class="achievement">
+                      <span class="achievement-icon">🤝</span>
+                      <span>Led cross-functional teams in delivering complex software projects</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="values-section">
+                  <h6><i class="bi bi-heart"></i> Core Values</h6>
+                  <div class="values-grid">
+                    <span class="value-tag">Excellence</span>
+                    <span class="value-tag">Innovation</span>
+                    <span class="value-tag">Collaboration</span>
+                    <span class="value-tag">Integrity</span>
+                    <span class="value-tag">Continuous Learning</span>
+                    <span class="value-tag">Problem Solving</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- About Modal Overlay -->
+          <div class="modal-overlay" id="aboutModalOverlay"></div>
           <div class="row">
             <div class="col-lg-6">
               <ul>

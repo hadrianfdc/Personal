@@ -865,6 +865,233 @@ html {
   line-height: 1.4;
 }
 
+/* ===========================
+   About Description Section
+   =========================== */
+.about-description-container {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 16px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.about-description-container:hover {
+  background: rgba(24, 210, 110, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(24, 210, 110, 0.15);
+  border: 1px solid rgba(24, 210, 110, 0.3);
+}
+
+.about-description-container:active {
+  transform: translateY(0);
+  transition: all 0.1s ease;
+}
+
+.about-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.about-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.about-modal.show ~ .modal-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+.about-modal .modal-content {
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(24, 210, 110, 0.3);
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 700px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(24, 210, 110, 0.1),
+    0 0 40px rgba(24, 210, 110, 0.2);
+  transform: scale(0.9) translateY(20px);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.about-modal.show .modal-content {
+  transform: scale(1) translateY(0);
+}
+
+.about-modal .modal-content h5 {
+  color: #18d26e;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.about-content {
+  display: grid;
+  gap: 24px;
+}
+
+.philosophy-section h6,
+.expertise-section h6,
+.achievements-section h6,
+.values-section h6 {
+  color: #18d26e;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.philosophy-section h6 i,
+.expertise-section h6 i,
+.achievements-section h6 i,
+.values-section h6 i {
+  font-size: 20px;
+}
+
+.philosophy-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.philosophy-section li {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(24, 210, 110, 0.1);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.philosophy-section li:last-child {
+  border-bottom: none;
+}
+
+.philosophy-section strong {
+  color: #18d26e;
+  min-width: 140px;
+}
+
+.philosophy-section p {
+  color: #ccc;
+  margin: 8px 0 16px 0;
+  line-height: 1.6;
+}
+
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.expertise-item {
+  background: rgba(24, 210, 110, 0.05);
+  border: 1px solid rgba(24, 210, 110, 0.2);
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.2s ease;
+}
+
+.expertise-item:hover {
+  background: rgba(24, 210, 110, 0.08);
+  border-color: rgba(24, 210, 110, 0.4);
+  transform: translateY(-2px);
+}
+
+.expertise-item h7 {
+  color: #18d26e;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.expertise-item p {
+  color: #bbb;
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.achievements-list {
+  display: grid;
+  gap: 12px;
+}
+
+.achievement {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(24, 210, 110, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(24, 210, 110, 0.1);
+  transition: all 0.2s ease;
+}
+
+.achievement:hover {
+  background: rgba(24, 210, 110, 0.08);
+  border-color: rgba(24, 210, 110, 0.3);
+}
+
+.achievement-icon {
+  font-size: 20px;
+  min-width: 30px;
+}
+
+.achievement span {
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.values-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.value-tag {
+  background: linear-gradient(135deg, rgba(24, 210, 110, 0.2), rgba(24, 210, 110, 0.1));
+  color: #18d26e;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid rgba(24, 210, 110, 0.3);
+  transition: all 0.2s ease;
+}
+
+.value-tag:hover {
+  background: linear-gradient(135deg, rgba(24, 210, 110, 0.3), rgba(24, 210, 110, 0.2));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(24, 210, 110, 0.2);
+}
+
 .resume-summary-container {
   position: relative;
   cursor: pointer;
@@ -873,6 +1100,11 @@ html {
 
 .resume-summary-container:hover {
   background: rgba(24, 210, 110, 0.05);
+}
+
+.about-description-container:hover {
+  background: rgba(24, 210, 110, 0.05);
+  cursor: pointer;
 }
 
 .hover-tooltip {
@@ -909,7 +1141,8 @@ html {
 
 .resume-summary-container:hover .hover-tooltip,
 .technical-expertise-container:hover .hover-tooltip,
-.education-container:hover .hover-tooltip {
+.education-container:hover .hover-tooltip,
+.about-description-container:hover .hover-tooltip {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
