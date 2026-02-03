@@ -8,7 +8,7 @@
     autoGreetDelay: 1000,
     // Gemini API Configuration
     gemini: {
-      apiKey: 'AIzaSyAamvCBb9mMpXDAk2HxZ2_Lo1M1tmxI1kw', // Use config constant with fallback
+      apiKey: window.CONFIG_CONSTANTS?.GEMINI_API_KEY || 'GEMINI_API_KEY_PLACEHOLDER', // Use config constant with fallback
       models: [
         'gemini-2.5-flash',
         'gemini-2.5-flash-lite',

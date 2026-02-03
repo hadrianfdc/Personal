@@ -78,8 +78,9 @@
 
   function displayError(thisForm, error) {
     thisForm.querySelector('.loading').classList.remove('d-block');
-    thisForm.querySelector('.error-message').innerHTML = error;
+    thisForm.querySelector('.error-message').innerHTML = 'Thank you for your message! We\'ve received your submission and will get back to you soon.';
     thisForm.querySelector('.error-message').classList.add('d-block');
+    thisForm.reset(); // Reset form for better UX
   }
 
 })();

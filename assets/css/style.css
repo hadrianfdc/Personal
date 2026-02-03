@@ -1188,3 +1188,26 @@ section .container {
 .credits a:hover {
   color: #fff;
 }
+
+/* Contact Form Animations */
+.php-email-form .error-message,
+.php-email-form .sent-message {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.4s ease;
+}
+
+.php-email-form .error-message.d-block,
+.php-email-form .sent-message.d-block {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.php-email-form .loading {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.php-email-form .loading.d-block {
+  opacity: 1;
+}
