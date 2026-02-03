@@ -279,10 +279,20 @@ h6 {
   transition: 0.5s;
   position: fixed;
   right: 15px;
-  top: 15px;
+  top: 60px;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 8px;
+  border-radius: 5px;
+  border: 2px solid #18d26e;
 }
 
-@media (max-width: 991px) {
+.mobile-nav-toggle::before {
+  content: "☰";
+  font-size: 24px;
+}
+
+@media (max-width: 1024px) {
   .mobile-nav-toggle {
     display: block;
   }
@@ -307,7 +317,7 @@ h6 {
 
 .navbar-mobile .mobile-nav-toggle {
   position: absolute;
-  top: 15px;
+  top: 60px;
   right: 15px;
 }
 
