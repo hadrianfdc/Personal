@@ -338,3 +338,144 @@ html {
     animation-delay: 0.4s;
   }
 }
+
+/* ===========================
+   About Section Hover Animations
+   =========================== */
+.about-me .content ul li {
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.about-me .content ul li:hover {
+  transform: translateX(10px);
+  color: #18d26e;
+}
+
+.about-me .content ul li:hover i {
+  transform: scale(1.2) rotate(10deg);
+  color: #35e888;
+}
+
+.about-me .content ul li:hover strong {
+  color: #35e888;
+}
+
+.about-me .content ul li::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #18d26e, #35e888);
+  transition: width 0.3s ease;
+}
+
+.about-me .content ul li:hover::before {
+  width: 15px;
+}
+
+/* ===========================
+   About Section Title Hover Animations
+   =========================== */
+.about-me .content h3 {
+  transition: all 0.4s ease;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+
+.about-me .content h3:hover {
+  transform: scale(1.05) translateY(-2px);
+  color: #35e888;
+  text-shadow: 0 0 20px rgba(24, 210, 110, 0.5);
+}
+
+.about-me .content h3::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #18d26e, #35e888, #18d26e);
+  transition: width 0.4s ease;
+  border-radius: 2px;
+}
+
+.about-me .content h3:hover::after {
+  width: 100%;
+}
+
+.about-me .content h3:hover::before {
+  content: '✨';
+  position: absolute;
+  top: -10px;
+  right: -20px;
+  font-size: 20px;
+  opacity: 0;
+  animation: sparkle 0.6s ease forwards;
+}
+
+@keyframes sparkle {
+  0% { opacity: 0; transform: scale(0) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+  100% { opacity: 0; transform: scale(0) rotate(360deg); }
+}
+
+/* ===========================
+   Section Title Subtitle Hover Animations
+   =========================== */
+.section-title p {
+  transition: all 0.4s ease;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title p:hover {
+  transform: scale(1.02) translateY(-3px);
+  color: #18d26e;
+  text-shadow: 0 0 15px rgba(24, 210, 110, 0.6);
+  letter-spacing: 1px;
+}
+
+.section-title p::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(45deg, transparent, rgba(24, 210, 110, 0.1), transparent);
+  border-radius: 10px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.4s ease;
+  z-index: -1;
+}
+
+.section-title p:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.section-title p:hover::after {
+  content: '👋';
+  position: absolute;
+  top: -15px;
+  right: -25px;
+  font-size: 24px;
+  opacity: 0;
+  animation: wave 0.8s ease forwards;
+}
+
+@keyframes wave {
+  0% { opacity: 0; transform: translateX(10px) rotate(0deg); }
+  30% { opacity: 1; transform: translateX(0) rotate(-10deg); }
+  60% { transform: translateX(0) rotate(10deg); }
+  100% { opacity: 0; transform: translateX(-10px) rotate(0deg); }
+}
