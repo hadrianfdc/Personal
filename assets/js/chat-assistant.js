@@ -131,7 +131,9 @@
     messages: document.getElementById('chatMessages'),
     input: document.getElementById('chatInput'),
     send: document.getElementById('chatSend'),
-    badge: document.getElementById('chatBadge')
+    badge: document.getElementById('chatBadge'),
+    themeToggle: document.getElementById('themeToggle'),
+    accentSelect: document.getElementById('accentSelect')
   };
 
   // Utility Functions
@@ -143,12 +145,53 @@
     return responses[Math.floor(Math.random() * responses.length)];
   }
 
+  function processMarkdown(text) {
+    // Convert **bold** to <strong>bold</strong>
+    return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  }
+
   function scrollToBottom() {
     setTimeout(() => {
       if (elements.messages) {
         elements.messages.scrollTop = elements.messages.scrollHeight;
       }
     }, 100);
+  }
+
+  // Theme Management
+  function toggleTheme() {
+    const widget = document.querySelector('.chat-widget');
+    const current = widget.getAttribute('data-theme');
+    const newTheme = current === 'dark' ? '' : 'dark';
+    widget.setAttribute('data-theme', newTheme);
+    localStorage.setItem('chatTheme', newTheme);
+    // Update icon
+    const icon = elements.themeToggle.querySelector('i');
+    icon.className = newTheme === 'dark' ? 'bi bi-sun' : 'bi bi-moon';
+  }
+
+  function changeAccent() {
+    const accent = elements.accentSelect.value;
+    const accents = {
+      green: { color: '#18d26e', light: '#149954' },
+      blue: { color: '#007bff', light: '#0056b3' },
+      purple: { color: '#6f42c1', light: '#5a32a3' },
+      orange: { color: '#fd7e14', light: '#e8680f' }
+    };
+    const { color, light } = accents[accent];
+    document.documentElement.style.setProperty('--accent-color', color);
+    document.documentElement.style.setProperty('--accent-light', light);
+    localStorage.setItem('chatAccent', accent);
+  }
+
+  function loadTheme() {
+    const theme = localStorage.getItem('chatTheme') || '';
+    document.querySelector('.chat-widget').setAttribute('data-theme', theme);
+    const icon = elements.themeToggle.querySelector('i');
+    icon.className = theme === 'dark' ? 'bi bi-sun' : 'bi bi-moon';
+    const accent = localStorage.getItem('chatAccent') || 'green';
+    elements.accentSelect.value = accent;
+    changeAccent(); // to set the variables
   }
 
   function extractName(message) {
@@ -352,7 +395,7 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
       
       if (data.candidates && data.candidates[0] && data.candidates[0].content) {
         const responseText = data.candidates[0].content.parts[0].text;
-        return responseText;
+        return processMarkdown(responseText);
       } else {
         console.error('❌ Gemini API Debug - Invalid response structure:', data);
         throw new Error('Invalid response structure');
@@ -629,6 +672,10 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
         handleUserMessage();
       }
     });
+
+    // Theme controls
+    elements.themeToggle.addEventListener('click', toggleTheme);
+    elements.accentSelect.addEventListener('change', changeAccent);
   }
 
   // Initialize
@@ -638,6 +685,7 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
       console.warn('⚠️ Knowledge base failed to load, chat assistant may not work properly');
     }
     initEventListeners();
+    loadTheme();
     showInitialGreeting();
   }
 
