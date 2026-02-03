@@ -84,6 +84,7 @@
 
 #header h2 {
   opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.4s forwards;
 }
 
 #header .navbar {
@@ -277,8 +278,10 @@ section.section-visible {
 }
 
 .btn:hover, button[type="submit"]:hover, .download-resume a:hover {
-  transform: translateY(-3px);
+  transform: translateY(-3px) scale(1.05);
   box-shadow: 0 10px 25px rgba(24, 210, 110, 0.4);
+  background-color: #18d26e;
+  color: black;
 }
 
 /* ===========================
