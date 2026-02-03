@@ -155,8 +155,13 @@
   }
 
   function processMarkdown(text) {
-    // Convert **bold** to <strong>bold</strong>
-    return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    // Convert line breaks to <br>
+    text = text.replace(/\n/g, '<br>');
+    // Convert **bold** to <strong>bold</strong> and add emphasis
+    text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    // Add <hr> after the first header for emphasis
+    text = text.replace(/(<strong>.*?<\/strong><br>)/, '$1<hr style="margin: 10px 0; border: none; border-top: 1px solid var(--border-color);"><br>');
+    return text;
   }
 
   function scrollToBottom() {
