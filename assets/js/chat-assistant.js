@@ -8,7 +8,7 @@
     autoGreetDelay: 1000,
     // Gemini API Configuration
     gemini: {
-      apiKey: window.CONFIG_CONSTANTS?.GEMINI_API_KEY || 'GEMINI_API_KEY_PLACEHOLDER', // Use config constant with fallback
+      apiKey: 'AIzaSyAamvCBb9mMpXDAk2HxZ2_Lo1M1tmxI1kw', // Use config constant with fallback
       models: [
         'gemini-2.5-flash',
         'gemini-2.5-flash-lite',
@@ -159,8 +159,8 @@
     text = text.replace(/\n/g, '<br>');
     // Convert **bold** to <strong>bold</strong> and add emphasis
     text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    // Add <hr> after the first header for emphasis
-    text = text.replace(/(<strong>.*?<\/strong><br>)/, '$1<hr style="margin: 10px 0; border: none; border-top: 1px solid var(--border-color);"><br>');
+    // Add extra <br> after the first header for spacing
+    text = text.replace(/(<strong>.*?<\/strong><br>)/, '$1<br>');
     return text;
   }
 
