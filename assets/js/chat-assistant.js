@@ -408,6 +408,45 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
     scrollToBottom();
   }
 
+  // Streaming Message Rendering
+  async function streamMessage(content, sender = 'assistant', showQuickActions = false) {
+    if (!elements.messages) return;
+    
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `chat-message ${sender}`;
+    
+    const bubbleDiv = document.createElement('div');
+    bubbleDiv.className = 'message-bubble';
+    
+    messageDiv.appendChild(bubbleDiv);
+    elements.messages.appendChild(messageDiv);
+    
+    // Disable input box during streaming
+    if (elements.input) elements.input.disabled = true;
+    
+    let index = 0;
+    const typingSpeed = 30; // ms per character
+    
+    return new Promise((resolve) => {
+      const interval = setInterval(() => {
+        if (index < content.length) {
+          bubbleDiv.innerHTML = content.substring(0, index + 1) + '<span class="cursor">▍</span>';
+          index++;
+          scrollToBottom();
+        } else {
+          clearInterval(interval);
+          bubbleDiv.innerHTML = content; // Remove cursor
+          // Re-enable input box
+          if (elements.input) elements.input.disabled = false;
+          if (showQuickActions && sender === 'assistant') {
+            addQuickActions(showQuickActions);
+          }
+          resolve();
+        }
+      }, typingSpeed);
+    });
+  }
+
   function showTypingIndicator() {
     if (!elements.messages) return;
     
@@ -472,7 +511,7 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
       // Add contextual quick actions based on keywords in the response
       quickActions = generateQuickActions(response, userMessage);
       
-      addMessage(response, 'assistant', quickActions);
+      await streamMessage(response, 'assistant', quickActions);
     }
     
     state.isTyping = false;
