@@ -20,28 +20,140 @@
         }
       });
     }
+  }
 
-    // Copy email button
-    const copyEmailBtn = document.getElementById('copy-email-btn');
-    if (copyEmailBtn) {
-      copyEmailBtn.addEventListener('click', function() {
-        const emailAddress = document.getElementById('email-address');
-        if (emailAddress) {
-          const text = emailAddress.innerText;
-          navigator.clipboard.writeText(text).then(function() {
-            alert('Email address copied to clipboard!');
-          }).catch(function(error) {
-            console.error('Could not copy email address: ', error);
-          });
-        }
-      });
+  // Education Modal functionality
+  function initEducationModal() {
+    const educationContainer = document.querySelector('.education-container');
+    const modal = document.getElementById('educationModal');
+    const overlay = document.getElementById('educationModalOverlay');
+    const closeBtn = document.getElementById('educationModalCloseBtn');
+
+    if (!educationContainer || !modal || !overlay || !closeBtn) return;
+
+    // Open modal on click
+    educationContainer.addEventListener('click', function(e) {
+      // Prevent opening if clicking on the modal itself
+      if (e.target.closest('.education-modal')) return;
+      
+      modal.classList.add('show');
+      overlay.classList.add('show');
+      document.body.style.overflow = 'hidden'; // Prevent background scroll
+    });
+
+    // Close modal functions
+    function closeEducationModal() {
+      modal.classList.remove('show');
+      overlay.classList.remove('show');
+      document.body.style.overflow = ''; // Restore scroll
     }
+
+    // Close on close button click
+    closeBtn.addEventListener('click', closeEducationModal);
+
+    // Close on overlay click
+    overlay.addEventListener('click', closeEducationModal);
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('show')) {
+        closeEducationModal();
+      }
+    });
+  }
+
+  // Technical Expertise Modal functionality
+  function initTechnicalModal() {
+    const technicalContainer = document.querySelector('.technical-expertise-container');
+    const modal = document.getElementById('technicalModal');
+    const overlay = document.getElementById('technicalModalOverlay');
+    const closeBtn = document.getElementById('technicalModalCloseBtn');
+
+    if (!technicalContainer || !modal || !overlay || !closeBtn) return;
+
+    // Open modal on click
+    technicalContainer.addEventListener('click', function(e) {
+      // Prevent opening if clicking on the modal itself
+      if (e.target.closest('.technical-modal')) return;
+      
+      modal.classList.add('show');
+      overlay.classList.add('show');
+      document.body.style.overflow = 'hidden'; // Prevent background scroll
+    });
+
+    // Close modal functions
+    function closeTechnicalModal() {
+      modal.classList.remove('show');
+      overlay.classList.remove('show');
+      document.body.style.overflow = ''; // Restore scroll
+    }
+
+    // Close on close button click
+    closeBtn.addEventListener('click', closeTechnicalModal);
+
+    // Close on overlay click
+    overlay.addEventListener('click', closeTechnicalModal);
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('show')) {
+        closeTechnicalModal();
+      }
+    });
+  }
+
+  // Modal functionality
+  function initModal() {
+    const summaryContainer = document.querySelector('.resume-summary-container');
+    const modal = document.getElementById('summaryModal');
+    const overlay = document.getElementById('modalOverlay');
+    const closeBtn = document.getElementById('modalCloseBtn');
+
+    if (!summaryContainer || !modal || !overlay || !closeBtn) return;
+
+    // Open modal on click
+    summaryContainer.addEventListener('click', function(e) {
+      // Prevent opening if clicking on the modal itself
+      if (e.target.closest('.summary-modal')) return;
+      
+      modal.classList.add('show');
+      overlay.classList.add('show');
+      document.body.style.overflow = 'hidden'; // Prevent background scroll
+    });
+
+    // Close modal functions
+    function closeModal() {
+      modal.classList.remove('show');
+      overlay.classList.remove('show');
+      document.body.style.overflow = ''; // Restore scroll
+    }
+
+    // Close on close button click
+    closeBtn.addEventListener('click', closeModal);
+
+    // Close on overlay click
+    overlay.addEventListener('click', closeModal);
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('show')) {
+        closeModal();
+      }
+    });
   }
 
   // Initialize on DOM ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCopyButtons);
+    document.addEventListener('DOMContentLoaded', function() {
+      initCopyButtons();
+      initModal();
+      initTechnicalModal();
+      initEducationModal();
+    });
   } else {
     initCopyButtons();
+    initModal();
+    initTechnicalModal();
+    initEducationModal();
   }
 })();
