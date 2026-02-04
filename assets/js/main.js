@@ -86,6 +86,7 @@
         sections.forEach((item) => {
           item.classList.remove('section-show')
         })
+        // Show thought bubble when back to header (will be handled by setInterval)
         return;
       }
 
@@ -96,13 +97,16 @@
             item.classList.remove('section-show')
           })
           section.classList.add('section-show')
-
+          // Hide thought bubble when section is shown
+          select('#thought-bubble').classList.remove('visible')
         }, 350);
       } else {
         sections.forEach((item) => {
           item.classList.remove('section-show')
         })
         section.classList.add('section-show')
+        // Hide thought bubble when section is shown
+        select('#thought-bubble').classList.remove('visible')
       }
 
       scrollto(this.hash)
@@ -132,6 +136,8 @@
 
         setTimeout(function() {
           initial_nav.classList.add('section-show')
+          // Hide thought bubble when section is shown
+          select('#thought-bubble').classList.remove('visible')
         }, 350);
 
         scrollto(window.location.hash)
@@ -250,5 +256,42 @@
    * Initiate Pure Counter 
    */
   new PureCounter();
+
+  /**
+   * Random background image movement
+   */
+  const thoughts = [
+    "Hello! I’m glad you’re here to check out my work.",
+    "Welcome! Here’s a quick view of my skills and projects.",
+    "Greetings! I hope you find my work engaging and clear.",
+    "Hi there! Thanks for stopping by to see my portfolio.",
+    "Hey! I’m excited to share my skills with you.",
+    "Salutations! Take a moment to explore my projects.",
+    "Hello! I hope my portfolio gives you a good impression.",
+    "Welcome! I’m excited to show what I can do.",
+    "Hi! Thanks for visiting my portfolio.",
+    "Hello! Take a look around and see my work."
+  ];
+
+
+
+  setInterval(() => {
+    const image = select('#animated-image');
+    const bubble = select('#thought-bubble');
+    
+    // Trigger tilt animation
+    image.classList.add('tilt');
+    setTimeout(() => image.classList.remove('tilt'), 500);
+    
+    // Show random thought with animation
+    const randomThought = thoughts[Math.floor(Math.random() * thoughts.length)];
+    bubble.textContent = randomThought;
+    bubble.classList.add('visible');
+    
+    // Hide bubble after 3 seconds with animation
+    setTimeout(() => {
+      bubble.classList.remove('visible');
+    }, 3000);
+  }, 5000);
 
 })()

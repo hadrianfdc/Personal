@@ -28,11 +28,65 @@ body {
   }
 }
 
+@keyframes tilt {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+  75% { transform: rotate(-5deg); }
+}
+
+#animated-image {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 50vw; /* adjust as needed */
+  height: 100vh;
+  background: url("../img/myself.png") center right no-repeat;
+  background-size: fill;
+  z-index: -1;
+  opacity: 1;
+}
+
+#animated-image.tilt {
+  animation: tilt 0.5s ease-in-out;
+}
+
+#thought-bubble {
+  position: fixed;
+  top: 10%;
+  right: 20%;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #000;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+#thought-bubble.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#thought-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid rgba(255, 255, 255, 0.9);
+}
+
 body::before {
   content: "";
   position: fixed;
-  background: #040404 url("../img/myself.png") center right  no-repeat;
-  background-size: fill;
+  background: #040404;
   left: 0;
   right: 0;
   top: 0;
