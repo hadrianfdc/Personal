@@ -152,6 +152,39 @@ h6 {
   color: #fff;
   line-height: 1;
   display: inline-block;
+  position: relative;
+  background: linear-gradient(45deg, #fff, #18d26e, #5578ff, #ffbb2c);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+#header h1 a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #18d26e, #ffbb2c, #5578ff);
+  border-radius: 2px;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px rgba(24, 210, 110, 0.5);
+}
+
+#header h1 a:hover {
+  background-position: 100% 0;
+  text-shadow: 0 0 20px rgba(24, 210, 110, 0.8), 0 0 40px rgba(85, 120, 255, 0.6);
+  transform: translateY(-3px) scale(1.02);
+}
+
+#header h1 a:hover::after {
+  width: 120%;
+  box-shadow: 0 0 20px rgba(24, 210, 110, 0.8);
 }
 
 #header h2 {
@@ -515,6 +548,35 @@ section .container {
 
 .about-me .content p:last-child {
   margin-bottom: 0;
+}
+
+.about-me img {
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.about-me img:hover {
+  animation: wowPulse 2s ease-in-out infinite;
+  transform: scale(1.02);
+}
+
+@keyframes wowPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.4);
+    filter: brightness(1) saturate(1);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 15px rgba(255, 215, 0, 0), 0 0 30px rgba(255, 215, 0, 0.6);
+    filter: brightness(1.1) saturate(1.2);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0), 0 0 20px rgba(255, 215, 0, 0.4);
+    filter: brightness(1) saturate(1);
+  }
 }
 
 /*--------------------------------------------------------------
