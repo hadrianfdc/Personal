@@ -1166,6 +1166,60 @@ html {
   visibility: visible;
 }
 
+.email-modal {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px) scale(0.95);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: auto;
+}
+
+.email-modal.show {
+  transform: translateX(-50%) translateY(-20px) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.phone-modal {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px) scale(0.95);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: auto;
+}
+
+.phone-modal.show {
+  transform: translateX(-50%) translateY(-20px) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.social-modal {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px) scale(0.95);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: auto;
+}
+
+.social-modal.show {
+  transform: translateX(-50%) translateY(-20px) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
 .modal-content {
   background: rgba(0, 0, 0, 0.95);
   backdrop-filter: blur(20px);
@@ -1252,6 +1306,132 @@ html {
   color: #ccc;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+.email-details {
+  margin-top: 16px;
+}
+
+.email-details p {
+  margin-bottom: 8px;
+}
+
+.email-details .btn {
+  background: #18d26e;
+  border: none;
+  color: #000;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.email-details .btn:hover {
+  background: #35e888;
+  transform: translateY(-1px);
+}
+
+.phone-details {
+  margin-top: 16px;
+}
+
+.phone-details p {
+  margin-bottom: 8px;
+}
+
+.phone-details .btn {
+  background: #18d26e;
+  border: none;
+  color: #000;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.phone-details .btn:hover {
+  background: #35e888;
+  transform: translateY(-1px);
+}
+
+.social-details {
+  margin-top: 16px;
+}
+
+.social-details p {
+  margin-bottom: 12px;
+}
+
+.social-links-modal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.social-link-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #fff;
+  background: rgba(24, 210, 110, 0.1);
+  border: 1px solid rgba(24, 210, 110, 0.3);
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.social-link-item:hover {
+  background: rgba(24, 210, 110, 0.2);
+  transform: translateY(-2px);
+  color: #18d26e;
+}
+
+.social-link-item.facebook:hover {
+  background: #1877f2;
+  border-color: #1877f2;
+}
+
+.social-link-item.linkedin:hover {
+  background: #0077b5;
+  border-color: #0077b5;
+}
+
+.social-link-item.twitter:hover {
+  background: #1da1f2;
+  border-color: #1da1f2;
+}
+
+.social-link-item.instagram:hover {
+  background: #e4405f;
+  border-color: #e4405f;
+}
+
+.social-link-item.skype:hover {
+  background: #00aff0;
+  border-color: #00aff0;
+}
+
+.copy-feedback {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  background: #18d26e;
+  color: #000;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-top: 10px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.copy-feedback.show {
+  opacity: 1;
+  visibility: visible;
 }
 
 /* Background blur overlay */

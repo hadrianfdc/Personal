@@ -1018,6 +1018,28 @@ section .container {
   padding: 20px;
   width: 100%;
   background: rgba(255, 255, 255, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact .info-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.contact .email-box {
+  position: relative;
+}
+
+.email-wrapper {
+  position: relative;
+}
+
+.phone-wrapper {
+  position: relative;
+}
+
+.social-wrapper {
+  position: relative;
 }
 
 .contact .info-box i.bx {
@@ -1060,6 +1082,18 @@ section .container {
 
 .contact .info-box .social-links a:hover {
   color: #18d26e;
+}
+
+.contact .address-box .address-map {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.contact .address-box:hover .address-map {
+  opacity: 1;
+  height: 200px;
 }
 
 .contact .php-email-form {
