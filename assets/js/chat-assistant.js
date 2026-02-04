@@ -142,7 +142,8 @@
     send: document.getElementById('chatSend'),
     badge: document.getElementById('chatBadge'),
     themeToggle: document.getElementById('themeToggle'),
-    accentSelect: document.getElementById('accentSelect')
+    colorPickerToggle: document.getElementById('colorPickerToggle'),
+    colorOptions: document.getElementById('colorOptions')
   };
 
   // Utility Functions
@@ -184,18 +185,27 @@
     icon.className = newTheme === 'dark' ? 'bi bi-sun' : 'bi bi-moon';
   }
 
-  function changeAccent() {
-    const accent = elements.accentSelect.value;
+  function changeAccent(color) {
+    const accent = color || elements.colorOptions.querySelector('.active')?.dataset.color || 'green';
     const accents = {
       green: { color: '#18d26e', light: '#149954' },
       blue: { color: '#007bff', light: '#0056b3' },
       purple: { color: '#6f42c1', light: '#5a32a3' },
-      orange: { color: '#fd7e14', light: '#e8680f' }
+      orange: { color: '#fd7e14', light: '#e8680f' },
+      red: { color: '#dc3545', light: '#c82333' },
+      pink: { color: '#e83e8c', light: '#d63384' },
+      teal: { color: '#20c997', light: '#17a2b8' },
+      yellow: { color: '#ffc107', light: '#e0a800' }
     };
-    const { color, light } = accents[accent];
-    document.documentElement.style.setProperty('--accent-color', color);
+    const { color: accentColor, light } = accents[accent];
+    document.documentElement.style.setProperty('--accent-color', accentColor);
     document.documentElement.style.setProperty('--accent-light', light);
     localStorage.setItem('chatAccent', accent);
+
+    // Update active state
+    elements.colorOptions.querySelectorAll('.color-option').forEach(option => {
+      option.classList.toggle('active', option.dataset.color === accent);
+    });
   }
 
   function loadTheme() {
@@ -204,8 +214,7 @@
     const icon = elements.themeToggle.querySelector('i');
     icon.className = theme === 'dark' ? 'bi bi-sun' : 'bi bi-moon';
     const accent = localStorage.getItem('chatAccent') || 'green';
-    elements.accentSelect.value = accent;
-    changeAccent(); // to set the variables
+    changeAccent(accent);
   }
 
   function extractName(message) {
@@ -689,7 +698,22 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
 
     // Theme controls
     elements.themeToggle.addEventListener('click', toggleTheme);
-    elements.accentSelect.addEventListener('change', changeAccent);
+    elements.colorPickerToggle.addEventListener('click', () => {
+      elements.colorOptions.classList.toggle('show');
+    });
+    elements.colorOptions.addEventListener('click', (e) => {
+      if (e.target.classList.contains('color-option')) {
+        changeAccent(e.target.dataset.color);
+        elements.colorOptions.classList.remove('show'); // Hide after selection
+      }
+    });
+
+    // Close color picker when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!elements.colorPickerToggle.contains(e.target) && !elements.colorOptions.contains(e.target)) {
+        elements.colorOptions.classList.remove('show');
+      }
+    });
   }
 
   // Initialize
