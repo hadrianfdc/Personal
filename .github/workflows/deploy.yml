@@ -30,6 +30,7 @@ jobs:
         run: |
           echo "Starting API key replacement..."
           sed -i "s/GEMINI_API_KEY_PLACEHOLDER/${{ secrets.GEMINI_API_KEY }}/g" assets/js/config.js
+          sed -i "s/FIREBASE_API_KEY_PLACEHOLDER/${{ secrets.FIREBASE_API_KEY }}/g" index.html
           sed -i "s/FIREBASE_API_KEY_PLACEHOLDER/${{ secrets.FIREBASE_API_KEY }}/g" analytics.html
           if grep -q "GEMINI_API_KEY_PLACEHOLDER" assets/js/config.js; then
             echo "❌ GEMINI API key replacement failed: placeholder still present"
@@ -38,12 +39,19 @@ jobs:
           else
             echo "✅ GEMINI API key replacement successful"
           fi
-          if grep -q "FIREBASE_API_KEY_PLACEHOLDER" analytics.html; then
-            echo "❌ FIREBASE API key replacement failed: placeholder still present"
+          if grep -q "FIREBASE_API_KEY_PLACEHOLDER" index.html; then
+            echo "❌ FIREBASE API key replacement failed in index.html: placeholder still present"
             echo "Check if FIREBASE_API_KEY secret is set with a valid value"
             exit 1
           else
-            echo "✅ FIREBASE API key replacement successful"
+            echo "✅ FIREBASE API key replacement successful in index.html"
+          fi
+          if grep -q "FIREBASE_API_KEY_PLACEHOLDER" analytics.html; then
+            echo "❌ FIREBASE API key replacement failed in analytics.html: placeholder still present"
+            echo "Check if FIREBASE_API_KEY secret is set with a valid value"
+            exit 1
+          else
+            echo "✅ FIREBASE API key replacement successful in analytics.html"
           fi
 
       - name: Setup Pages
