@@ -4,111 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Analytics</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 30px;
-        }
-        .analytics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-        .metric-card {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 6px;
-            text-align: center;
-            border: 1px solid #e9ecef;
-        }
-        .metric-value {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #007bff;
-            margin-bottom: 5px;
-        }
-        .metric-label {
-            color: #666;
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .error-message {
-            color: #dc3545;
-            text-align: center;
-            font-size: 1.2em;
-            margin-top: 50px;
-        }
-        .password-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .password-modal.hidden {
-            display: none;
-        }
-        .password-content {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
-        .password-input {
-            width: 100%;
-            padding: 10px;
-            margin: 15px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1em;
-        }
-        .password-button {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-        }
-        .password-button:hover {
-            background: #0056b3;
-        }
-        .loading {
-            text-align: center;
-            margin-top: 50px;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/analytics.css">
 </head>
 <body>
-    <div id="passwordModal" class="password-modal">
+    <div id="passwordModal" class="password-modal show">
         <div class="password-content">
             <h2>Enter Password</h2>
+            <p>Please enter the admin password to access the analytics dashboard</p>
             <input type="password" id="passwordInput" class="password-input" placeholder="Enter password">
             <br>
-            <button id="submitPassword" class="password-button">Submit</button>
+            <button id="submitPassword" class="password-button">Access Dashboard</button>
             <p id="passwordError" style="color: red; margin-top: 10px; display: none;">Incorrect password</p>
         </div>
     </div>
@@ -116,22 +21,63 @@
     <div id="analyticsContent" class="container" style="display: none;">
         <h1>Chat Analytics Dashboard</h1>
         
-        <div id="loading" class="loading">
-            <p>Loading analytics data...</p>
+        <div class="tab-buttons">
+            <button id="dashboardTab" class="tab-btn active">Dashboard</button>
+            <button id="usersTab" class="tab-btn">User Details</button>
+            <button id="refreshBtn" class="refresh-btn"><span>Refresh Data</span></button>
+            <button id="exportBtn" class="export-btn"><span>Export CSV</span></button>
         </div>
         
-        <div id="analyticsGrid" class="analytics-grid" style="display: none;">
-            <div class="metric-card">
-                <div class="metric-value" id="totalUsers">-</div>
-                <div class="metric-label">Total Users</div>
+        <div id="dashboardTabContent" class="tab-content active">
+            <div id="loading" class="loading">
+                <p>Loading analytics data...</p>
             </div>
-            <div class="metric-card">
-                <div class="metric-value" id="totalChats">-</div>
-                <div class="metric-label">Total Chat Sessions</div>
+            
+            <div id="analyticsGrid" class="analytics-grid" style="display: none;">
+                <div class="metric-card">
+                    <div class="metric-value" id="totalUsers">-</div>
+                    <div class="metric-label">Total Users</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="totalChats">-</div>
+                    <div class="metric-label">Total Chat Sessions</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="totalMessages">-</div>
+                    <div class="metric-label">Total Messages</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="avgMessages">-</div>
+                    <div class="metric-label">Avg Messages/User</div>
+                </div>
             </div>
-            <div class="metric-card">
-                <div class="metric-value" id="totalMessages">-</div>
-                <div class="metric-label">Total Messages</div>
+        </div>
+        
+        <div id="usersTabContent" class="tab-content">
+            <div id="usersLoading" class="loading">
+                <p>Loading user details...</p>
+            </div>
+            
+            <div id="usersTableContainer" style="display: none;">
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Name</th>
+                            <th>Company</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Total Chats</th>
+                            <th>Total Messages</th>
+                            <th>Created At</th>
+                            <th>Last Active</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <!-- User data will be populated here -->
+                    </tbody>
+                </table>
             </div>
         </div>
         
@@ -169,13 +115,80 @@
         let loading = document.getElementById('loading');
         let analyticsGrid = document.getElementById('analyticsGrid');
         let errorMessage = document.getElementById('errorMessage');
+        let usersLoading = document.getElementById('usersLoading');
+        let usersTableContainer = document.getElementById('usersTableContainer');
+        let usersTableBody = document.getElementById('usersTableBody');
+        let dashboardTab = document.getElementById('dashboardTab');
+        let usersTab = document.getElementById('usersTab');
+        let dashboardTabContent = document.getElementById('dashboardTabContent');
+        let usersTabContent = document.getElementById('usersTabContent');
+        let refreshBtn = document.getElementById('refreshBtn');
+        let exportBtn = document.getElementById('exportBtn');
+
+        let usersData = []; // Store user data for export
+
+        // Tab switching
+        dashboardTab.addEventListener('click', () => {
+            dashboardTab.classList.add('active');
+            usersTab.classList.remove('active');
+            dashboardTabContent.classList.add('active');
+            usersTabContent.classList.remove('active');
+        });
+
+        usersTab.addEventListener('click', () => {
+            usersTab.classList.add('active');
+            dashboardTab.classList.remove('active');
+            usersTabContent.classList.add('active');
+            dashboardTabContent.classList.remove('active');
+            if (usersData.length === 0) {
+                loadUserDetails();
+            }
+        });
+
+        // Refresh button
+        refreshBtn.addEventListener('click', async () => {
+            refreshBtn.classList.add('loading');
+            
+            // If user details tab is active, show loading state for table
+            if (usersTabContent.classList.contains('active')) {
+                usersTableContainer.style.display = 'none';
+                usersLoading.querySelector('p').textContent = 'Refreshing user data...';
+                usersLoading.style.display = 'block';
+            }
+            
+            try {
+                // Load analytics data first
+                await loadAnalytics();
+                
+                // If user details tab is active, load user details
+                if (usersTabContent.classList.contains('active')) {
+                    await loadUserDetails();
+                }
+            } catch (error) {
+                console.error('Error during refresh:', error);
+            } finally {
+                // Remove loading state from refresh button
+                refreshBtn.classList.remove('loading');
+            }
+        });
+
+        // Export button
+        exportBtn.addEventListener('click', () => {
+            exportToCSV();
+        });
 
         // Check password
         submitButton.addEventListener('click', () => {
+            // Clear any previous error messages
+            passwordError.style.display = 'none';
+
             if (passwordInput.value === PASSWORD) {
                 passwordModal.classList.add('hidden');
-                analyticsContent.style.display = 'block';
-                loadAnalytics();
+                setTimeout(() => {
+                    passwordModal.style.display = 'none';
+                    analyticsContent.style.display = 'block';
+                    loadAnalytics();
+                }, 300); // Wait for animation to complete
             } else {
                 passwordError.style.display = 'block';
                 passwordInput.value = '';
@@ -200,18 +213,28 @@
                 let totalUsers = 0;
                 let totalChats = 0;
                 let totalMessages = 0;
+                usersData = [];
                 
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
                     totalUsers++;
                     totalChats += data.totalChats || 0;
                     totalMessages += data.totalMessages || 0;
+                    
+                    // Store user data for detailed view
+                    usersData.push({
+                        id: doc.id,
+                        ...data
+                    });
                 });
+                
+                const avgMessages = totalUsers > 0 ? (totalMessages / totalUsers).toFixed(1) : 0;
                 
                 // Update UI
                 document.getElementById('totalUsers').textContent = totalUsers;
                 document.getElementById('totalChats').textContent = totalChats;
                 document.getElementById('totalMessages').textContent = totalMessages;
+                document.getElementById('avgMessages').textContent = avgMessages;
                 
                 loading.style.display = 'none';
                 analyticsGrid.style.display = 'grid';
@@ -221,6 +244,89 @@
                 loading.style.display = 'none';
                 errorMessage.style.display = 'block';
             }
+        }
+
+        // Load detailed user information
+        async function loadUserDetails() {
+            try {
+                usersLoading.querySelector('p').textContent = 'Loading user details...';
+                usersLoading.style.display = 'block';
+                usersTableContainer.style.display = 'none';
+                
+                if (usersData.length === 0) {
+                    await loadAnalytics(); // Load data if not already loaded
+                }
+                
+                usersTableBody.innerHTML = '';
+                
+                usersData.forEach(user => {
+                    const row = document.createElement('tr');
+                    
+                    const createdAt = user.createdAt ? new Date(user.createdAt.toDate()).toLocaleDateString() : 'N/A';
+                    const lastActive = user.lastActiveAt ? new Date(user.lastActiveAt.toDate()).toLocaleDateString() : 'Never';
+                    const status = user.lastActiveAt && 
+                        (new Date() - user.lastActiveAt.toDate()) < 24 * 60 * 60 * 1000 ? 
+                        'Active' : 'Inactive';
+                    const statusClass = status === 'Active' ? 'status-active' : 'status-inactive';
+                    
+                    row.innerHTML = `
+                        <td>${user.id.slice(0, 8)}...</td>
+                        <td>${user.name || 'N/A'}</td>
+                        <td>${user.company || 'N/A'}</td>
+                        <td>${user.email || 'N/A'}</td>
+                        <td>${user.phone || 'N/A'}</td>
+                        <td>${user.totalChats || 0}</td>
+                        <td>${user.totalMessages || 0}</td>
+                        <td>${createdAt}</td>
+                        <td>${lastActive}</td>
+                        <td class="${statusClass}">${status}</td>
+                    `;
+                    
+                    usersTableBody.appendChild(row);
+                });
+                
+                usersLoading.style.display = 'none';
+                usersTableContainer.style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error loading user details:', error);
+                usersLoading.style.display = 'none';
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        // Export data to CSV
+        function exportToCSV() {
+            if (usersData.length === 0) {
+                alert('No data to export. Please load the analytics first.');
+                return;
+            }
+            
+            const headers = ['User ID', 'Name', 'Company', 'Email', 'Phone', 'Total Chats', 'Total Messages', 'Created At', 'Last Active'];
+            const csvContent = [
+                headers.join(','),
+                ...usersData.map(user => [
+                    user.id,
+                    `"${user.name || ''}"`,
+                    `"${user.company || ''}"`,
+                    `"${user.email || ''}"`,
+                    `"${user.phone || ''}"`,
+                    user.totalChats || 0,
+                    user.totalMessages || 0,
+                    user.createdAt ? user.createdAt.toDate().toISOString() : '',
+                    user.lastActive ? user.lastActive.toDate().toISOString() : ''
+                ].join(','))
+            ].join('\n');
+            
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `chat_analytics_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
 
         // Focus password input on load
