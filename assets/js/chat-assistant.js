@@ -17,8 +17,46 @@
         'gemini-robotics-er-1.5-preview'
       ],
       apiUrl: 'https://generativelanguage.googleapis.com/v1beta/models'
-    }
+    },
+    // Static authentication token (replace with your actual custom token)
+    authToken: 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJodHRwczovL2lkZW50aXR5dG9vbGtpdC5nb29nbGVhcGlzLmNvbS9nb29nbGUuaWRlbnRpdHkuaWRlbnRpdHl0b29sa2l0LnYxLklkZW50aXR5VG9vbGtpdCIsImlhdCI6MTY4NDk4NzM5MCwiZXhwIjoxNjg0OTkwOTkwLCJpc3MiOiJmaXJlYmFzZS1hZG1pbnNkay1xNXJrMEBteS1wb3J0Zm9saW8tY2I1MDEuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJzdWIiOiJmaXJlYmFzZS1hZG1pbnNkay1xNXJrMEBteS1wb3J0Zm9saW8tY2I1MDEuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJ1aWQiOiJzdGF0aWNfdXNlcl90b2tlbiJ9.static_signature_placeholder'
   };
+
+  // Authentication state
+  let isFirebaseAuthenticated = false;
+
+  // Firebase Authentication Functions
+  async function authenticateWithFirebase() {
+    if (!window.auth) {
+      console.warn('Firebase Auth not initialized');
+      return false;
+    }
+
+    try {
+      const { signInWithCustomToken } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
+      
+      const tokenData = { token: CONFIG.authToken };
+      
+      await signInWithCustomToken(window.auth, tokenData.token);
+      isFirebaseAuthenticated = true;
+      console.log('✅ Firebase authenticated successfully');
+      
+      // Notify that authentication is complete
+      window.dispatchEvent(new CustomEvent('firebaseAuthReady', { 
+        detail: { authenticated: true }
+      }));
+      
+      return true;
+    } catch (error) {
+      isFirebaseAuthenticated = false;
+      console.error('❌ Firebase authentication failed:', error);
+      return false;
+    }
+  }
+
+  function isAuthenticated() {
+    return isFirebaseAuthenticated;
+  }
 
   // Firebase Analytics Functions
   async function initializeUserAnalytics() {
@@ -229,7 +267,16 @@
     "content_restrictions": [
       "Redirect unrelated questions politely",
       "Use simple Markdown for formatting (**bold**, - bullets); avoid complex markup",
-      "Focus only on professional or technical topics"
+      "Focus only on professional or technical topics",
+      "Require Firebase authentication for sensitive information requests",
+      "If user is not authenticated, prompt them to authenticate before providing detailed contact information"
+    ],
+    "authentication_rules": [
+      "Authentication is required for accessing detailed contact information",
+      "Use Firebase custom token authentication with static token",
+      "Check authentication status before responding to contact-related queries",
+      "If authentication fails, provide limited information and suggest authentication",
+      "Authenticated users get full access to portfolio details and contact information"
     ],
     "project_discussion": [
       "Emphasize technologies used and problems solved in project descriptions"
@@ -507,6 +554,7 @@ Architecture:
 - ${kb.response_guidelines.general.join('\n- ')}
 - ${kb.response_guidelines.contact_handling.join('\n- ')}
 - ${kb.response_guidelines.content_restrictions.join('\n- ')}
+- ${kb.response_guidelines.authentication_rules.join('\n- ')}
 - ${kb.response_guidelines.project_discussion.join('\n- ')}
 - ${kb.response_guidelines.personality.join('\n- ')}
 
@@ -710,6 +758,14 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
     }
   }
 
+  // Check if query requires authentication
+  function checkIfRequiresAuth(userMessage) {
+    const lowerMessage = userMessage.toLowerCase();
+    const authKeywords = ['contact', 'email', 'phone', 'phone number', 'reach', 'connect', 'hire', 'job', 'work with'];
+    
+    return authKeywords.some(keyword => lowerMessage.includes(keyword));
+  }
+
   // Response Generation
   async function generateResponse(userMessage) {
     state.isTyping = true;
@@ -768,6 +824,32 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
     } else {
       // Regular conversation - increment message count for user message
       await incrementMessageCount();
+      
+      // Check if authentication is required for this query
+      const requiresAuth = checkIfRequiresAuth(userMessage);
+      
+      if (requiresAuth && !isAuthenticated()) {
+        // Attempt authentication
+        const authSuccess = await authenticateWithFirebase();
+        
+        if (!authSuccess) {
+          removeTypingIndicator();
+          const authMessage = "I need to authenticate you before providing detailed contact information. Please wait while I authenticate... If authentication fails, I'll provide limited information.";
+          addMessage(authMessage, 'assistant');
+          
+          // Provide limited response without full contact details
+          const limitedResponse = await callGeminiAPI(userMessage + " (Note: User not authenticated, provide limited contact information only)", 0);
+          state.conversationHistory.push({ role: 'assistant', content: limitedResponse });
+          await incrementMessageCount();
+          await streamMessage(limitedResponse, 'assistant');
+          
+          state.isTyping = false;
+          if (elements.send) {
+            elements.send.disabled = false;
+          }
+          return;
+        }
+      }
       
       // Call Gemini API for response
       response = await callGeminiAPI(userMessage, 0);
@@ -929,11 +1011,15 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
   }
 
   // Initialize
-  function init() {
+  async function init() {
     const knowledgeLoaded = loadKnowledgeBase();
     if (!knowledgeLoaded) {
       console.warn('⚠️ Knowledge base failed to load, chat assistant may not work properly');
     }
+    
+    // Initialize authentication
+    await authenticateWithFirebase();
+    
     initEventListeners();
     loadTheme();
     showInitialGreeting();
