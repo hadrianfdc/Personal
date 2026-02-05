@@ -48,6 +48,7 @@ coverage/
 .firebase/
 firebase-debug.log
 firestore-debug.log
+firebase-config.js
 
 # Temporary files
 *.tmp
