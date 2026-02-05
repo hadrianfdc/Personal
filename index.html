@@ -968,6 +968,27 @@
   <!-- Config Script -->
   <script src="assets/js/config.js"></script>
 
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+    import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDLpa0kYS1bcQlAraXdjoanpEr2ahkoI5I",
+      authDomain: "my-portfolio-cb501.firebaseapp.com",
+      projectId: "my-portfolio-cb501",
+      storageBucket: "my-portfolio-cb501.firebasestorage.app",
+      messagingSenderId: "291781785974",
+      appId: "1:291781785974:web:16e697f1962c3a805ee257",
+      measurementId: "G-RVTDSR5GVV"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    window.db = getFirestore(app);
+  </script>
+
   <!-- Portfolio Assistant -->
   <script src="assets/js/chat-assistant.js"></script>
 

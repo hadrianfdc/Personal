@@ -16,6 +16,7 @@ A modern, responsive personal portfolio website showcasing Hadrian Evarula's exp
 ### 🤖 AI Chat Assistant
 - **Intelligent Responses**: Powered by Google Gemini AI for contextual conversations
 - **Streaming Effect**: ChatGPT-like character-by-character message animation
+- **Analytics Integration**: Firebase Firestore for user analytics and chat metrics
 - **Theme Customization**:
   - Light/Dark mode toggle
   - 4 accent colors (Green, Blue, Purple, Orange)
@@ -60,11 +61,19 @@ A modern, responsive personal portfolio website showcasing Hadrian Evarula's exp
    - Update `assets/js/config.js` with your API key
    - Without API key, chat shows fallback messages
 
+4. **Configure Firebase Analytics (Optional)**
+   - Create a Firebase project at [Firebase Console](https://console.firebase.google.com/)
+   - Enable Firestore Database
+   - Get your Firebase config from Project Settings
+   - Update the Firebase config in `index.html` and `analytics.html`
+   - Set up Firestore security rules to allow read/write for authenticated users (or adjust as needed)
+
 ## 📁 Project Structure
 
 ```
 hadrian-portfolio/
 ├── index.html                 # Main portfolio page
+├── analytics.html             # Analytics dashboard (password protected)
 ├── assets/
 │   ├── css/
 │   │   ├── style.css         # Main stylesheet
@@ -92,9 +101,10 @@ hadrian-portfolio/
 - **Contact**: Contact form and information
 
 ### Chat Assistant Features
-- **Greeting Flow**: Personalized welcome with name collection
+- **Greeting Flow**: Personalized welcome with name and company collection
 - **Contextual Responses**: AI understands portfolio context
 - **Theme Integration**: Chat adapts to selected theme
+- **Analytics Dashboard**: Password-protected metrics at `/analytics.html`
 - **Error Handling**: Graceful fallbacks for API issues
 - **Mobile Optimized**: Responsive chat interface
 

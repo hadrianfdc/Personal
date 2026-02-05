@@ -20,6 +20,126 @@
     }
   };
 
+  // Firebase Analytics Functions
+  async function initializeUserAnalytics() {
+    if (!window.db) {
+      console.warn('Firebase not initialized - skipping analytics');
+      return;
+    }
+
+    // Generate a unique user ID if not exists
+    if (!state.userId) {
+      state.userId = localStorage.getItem('chatUserId');
+      if (!state.userId) {
+        state.userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('chatUserId', state.userId);
+      }
+    }
+
+    try {
+      const { doc, getDoc, setDoc, updateDoc, increment, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+
+      const userRef = doc(window.db, 'chat_users', state.userId);
+
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {
+        // New user - document will be created later
+      } else {
+        await updateDoc(userRef, {
+          lastActiveAt: serverTimestamp()
+        });
+      }
+    } catch (error) {
+      console.error('❌ Error initializing user analytics:', error);
+      console.error('❌ Error code:', error.code);
+      console.error('❌ Error message:', error.message);
+      console.error('❌ Full error object:', error);
+
+      // Additional debugging
+      if (error.code === 'permission-denied') {
+        console.error('🚫 PERMISSION DENIED: Check your Firestore security rules!');
+        console.error('🚫 Make sure chat_users collection allows read/write access');
+      }
+    }
+  }
+
+  async function createUserDocument(name, company) {
+    if (!window.db || !state.userId) {
+      console.warn('Firebase not ready or no userId - skipping document creation');
+      return;
+    }
+
+    try {
+      const { doc, setDoc, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+
+      const userRef = doc(window.db, 'chat_users', state.userId);
+
+      await setDoc(userRef, {
+        name: name,
+        company: company,
+        totalChats: 0, // Will be incremented on session start
+        totalMessages: 0,
+        createdAt: serverTimestamp(),
+        lastActiveAt: serverTimestamp()
+      });
+    } catch (error) {
+      console.error('❌ Error creating user document:', error);
+      console.error('❌ Error code:', error.code);
+      console.error('❌ Error message:', error.message);
+
+      if (error.code === 'permission-denied') {
+        console.error('🚫 PERMISSION DENIED: Cannot create user document!');
+        console.error('🚫 Check Firestore rules for chat_users collection write access');
+      }
+    }
+  }
+
+  async function incrementChatSession() {
+    if (!window.db || !state.userId) {
+      console.warn('Firebase not ready or no userId - skipping session increment');
+      return;
+    }
+
+    try {
+      const { doc, updateDoc, increment, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+
+      const userRef = doc(window.db, 'chat_users', state.userId);
+
+      await updateDoc(userRef, {
+        totalChats: increment(1),
+        lastActiveAt: serverTimestamp()
+      });
+    } catch (error) {
+      console.error('❌ Error incrementing chat session:', error);
+      console.error('❌ Error code:', error.code);
+      console.error('❌ Error message:', error.message);
+
+      if (error.code === 'permission-denied') {
+        console.error('🚫 PERMISSION DENIED: Cannot increment chat session!');
+        console.error('🚫 Check Firestore rules for chat_users collection write access');
+      }
+    }
+  }
+
+  async function incrementMessageCount() {
+    if (!window.db || !state.userId) {
+      console.warn('Firebase not ready or no userId - skipping message increment');
+      return;
+    }
+
+    try {
+      const { doc, updateDoc, increment, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+      
+      await updateDoc(doc(window.db, 'chat_users', state.userId), {
+        totalMessages: increment(1),
+        lastActiveAt: serverTimestamp()
+      });
+    } catch (error) {
+      console.error('Error incrementing message count:', error);
+    }
+  }
+
   // Knowledge Base - Embedded directly to avoid CORS issues
   const KNOWLEDGE_BASE = {
   "about": {
@@ -128,7 +248,10 @@
     conversationHistory: [],
     isTyping: false,
     userName: null,
+    userCompany: null,
     waitingForName: true,
+    waitingForCompany: false,
+    userId: null, // Firebase user ID or generated UUID
     knowledgeBase: KNOWLEDGE_BASE
   };
 
@@ -258,6 +381,52 @@
     }
     
     return name;
+  }
+
+  function extractCompany(message) {
+    const lower = message.toLowerCase().trim();
+    const rejectionWords = ['none', 'no', 'skip', 'nothing', 'nope', 'nah','no thanks','proceed','pass', 'anonymous', 'guest', 'dont', 'don\'t', 'do not', 'personal', 'individual', 'self-employed', 'freelancer'];
+    let company = null;
+    
+    if (lower.includes('work at') || lower.includes('work for')) {
+      const pattern = lower.includes('work at') ? /work at/i : /work for/i;
+      const parts = message.split(pattern);
+      if (parts[1]) {
+        company = parts[1].trim().split(/\s+/).slice(0, 3).join(' '); // Take up to 3 words
+      }
+    } else if (lower.includes('company is') || lower.includes('company name is')) {
+      const pattern = lower.includes('company is') ? /company is/i : /company name is/i;
+      const parts = message.split(pattern);
+      if (parts[1]) {
+        company = parts[1].trim().split(/\s+/).slice(0, 3).join(' ');
+      }
+    } else if (lower.includes('from ')) {
+      const parts = message.split(/from /i);
+      if (parts[1]) {
+        company = parts[1].trim().split(/\s+/).slice(0, 3).join(' ');
+      }
+    }
+    
+    if (company) {
+      company = company.charAt(0).toUpperCase() + company.slice(1).toLowerCase();
+      if (rejectionWords.includes(company.toLowerCase())) {
+        return null;
+      }
+    } else {
+      // Fallback: take the message as company name if it's short
+      const words = message.trim().split(/\s+/);
+      if (words.length <= 3) {
+        company = words.join(' ');
+        company = company.charAt(0).toUpperCase() + company.slice(1).toLowerCase();
+        if (rejectionWords.includes(company.toLowerCase())) {
+          return null;
+        }
+      } else {
+        return null;
+      }
+    }
+    
+    return company;
   }
 
   // Load Knowledge Base (no longer needed - embedded directly)
@@ -556,16 +725,50 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
     // Handle name collection flow
     if (state.waitingForName) {
       state.userName = extractName(userMessage);
-      state.waitingForName = false;
       
       removeTypingIndicator();
       
-      const welcome = state.userName 
-        ? `Nice to meet you, ${state.userName}! I'm here to help you learn about Hadrian's expertise in backend development, enterprise system architecture, and available services. What would you like to know?` 
-        : `I'm here to help you learn about Hadrian's expertise in backend development, enterprise system architecture, and available services. What would you like to know?`;
+      if (!state.userName) {
+        // Invalid name, ask again
+        const retryMessage = "I didn't catch your name. Could you please tell me your name?";
+        addMessage(retryMessage, 'assistant');
+        return; // Don't proceed to next step
+      }
+      
+      state.waitingForName = false;
+      state.waitingForCompany = true;
+      
+      const nameResponse = `Great to meet you, ${state.userName}! Could you also tell me which company you work for? This helps me provide more personalized assistance.`;
+      addMessage(nameResponse, 'assistant');
+    } 
+    // Handle company collection flow
+    else if (state.waitingForCompany) {
+      state.userCompany = extractCompany(userMessage);
+      
+      removeTypingIndicator();
+      
+      if (!state.userCompany) {
+        // Invalid company, ask again
+        const retryMessage = "I didn't catch your company name. Could you please tell me which company you work for?";
+        addMessage(retryMessage, 'assistant');
+        return; // Don't proceed to next step
+      }
+      
+      state.waitingForCompany = false;
+      
+      // Create user document in Firestore
+      await createUserDocument(state.userName, state.userCompany);
+      
+      // Increment chat session for new user
+      await incrementChatSession();
+      
+      const welcome = `Thanks for that information, ${state.userName}! I'm here to help you learn about Hadrian's expertise in backend development, enterprise system architecture, and available services. What would you like to know?`;
       quickActions = ['Who is Hadrian?', 'What services offered?', 'Show skills'];
       addMessage(welcome, 'assistant', quickActions);
     } else {
+      // Regular conversation - increment message count for user message
+      await incrementMessageCount();
+      
       // Call Gemini API for response
       response = await callGeminiAPI(userMessage, 0);
       
@@ -573,6 +776,9 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
       
       // Store assistant response in history
       state.conversationHistory.push({ role: 'assistant', content: response });
+      
+      // Increment message count for assistant response
+      await incrementMessageCount();
       
       // Add contextual quick actions based on keywords in the response
       quickActions = generateQuickActions(response, userMessage);
@@ -642,10 +848,9 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
     if (state.hasGreeted) return;
     
     setTimeout(() => {
-      const greeting = "👋 Hi! I'm here to help you learn about Hadrian's expertise. For best results, use <strong>keywords or short phrases</strong> in your questions, and please use <strong>Hadrian's name</strong> instead of <strong>'you'</strong> to avoid confusion. First, may I know your name?";
-      const actions = ['Skip', 'No thanks'];
+      const greeting = "👋 Hi! I'm here to help you learn about Hadrian's expertise. <strong> First, may I know your name </strong>?";
       
-      addMessage(greeting, 'assistant', actions);
+      addMessage(greeting, 'assistant');
       state.hasGreeted = true;
       
       // Show notification badge
@@ -663,7 +868,7 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
     }
 
     // Toggle chat window
-    elements.toggle.addEventListener('click', () => {
+    elements.toggle.addEventListener('click', async () => {
       state.isOpen = !state.isOpen;
       elements.window.classList.toggle('active');
       elements.toggle.classList.toggle('active');
@@ -675,6 +880,13 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
         elements.input.focus();
         if (!state.hasGreeted) {
           showInitialGreeting();
+        }
+        // Initialize user analytics on first open
+        if (!state.userId) {
+          await initializeUserAnalytics();
+        } else if (!state.waitingForName && !state.waitingForCompany) {
+          // Increment chat session for users who have completed onboarding
+          await incrementChatSession();
         }
       }
     });
