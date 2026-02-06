@@ -14,6 +14,102 @@
   }
 }
 
+/* Profile List Item Animations */
+@keyframes profileItemSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.about .content ul li {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: none;
+  will-change: transform, opacity; /* Optimize for animation performance */
+}
+
+.about .content ul li.animate-in {
+  animation: profileItemSlideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.about .content ul li.animate-in i {
+  animation: profileItemSlideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Stagger delays for sequential animation - re-triggers on each viewport entry */
+.about .content ul li:nth-child(1).animate-in { animation-delay: 1.5s; }
+.about .content ul li:nth-child(2).animate-in { animation-delay: 1.6s; }
+.about .content ul li:nth-child(3).animate-in { animation-delay: 1.7s; }
+.about .content ul li:nth-child(4).animate-in { animation-delay: 1.8s; }
+
+/* Fast Typewriter animation for closing paragraph */
+.about .content > p:last-of-type {
+  opacity: 0;
+}
+
+.about .content > p:last-of-type.typing-active {
+  opacity: 1;
+}
+
+/* Respect prefers-reduced-motion for typewriter */
+@media (prefers-reduced-motion: reduce) {
+  .about .content > p:last-of-type {
+    width: 100% !important;
+    white-space: normal !important;
+    animation: none !important;
+  }
+  
+  .about .content > p:last-of-type.typing-active {
+    animation: none !important;
+  }
+}
+
+/* Line-by-line About Description Animation */
+@keyframes lineReveal {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.about .content .about-description-container p.fst-italic {
+  line-height: 1.6;
+}
+
+.about .content .about-description-container p.fst-italic .line {
+  display: block;
+  opacity: 0;
+  transform: translateY(15px);
+  will-change: transform, opacity;
+}
+
+.about .content .about-description-container p.fst-italic .line.animate-line {
+  animation: lineReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .about .content .about-description-container p.fst-italic {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .about .content .about-description-container p.fst-italic.github-animate {
+    animation: none !important;
+  }
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
