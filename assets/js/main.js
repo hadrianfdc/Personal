@@ -258,6 +258,121 @@
   new PureCounter();
 
   /**
+   * Resume Section Animations with IntersectionObserver
+   * Each element animates individually when it enters the viewport
+   */
+  const initResumeAnimations = () => {
+    const resumeSection = select('#resume');
+    if (!resumeSection) return;
+
+    // Check if user prefers reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      const allElements = select('.resume .section-title, .resume .col-lg-6, .resume .resume-title, .resume .resume-item, .resume .resume-item ul li, .resume .download-resume', true);
+      allElements.forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
+      return;
+    }
+
+    // Collect all elements to animate
+    const sectionTitle = select('.resume .section-title');
+    const resumeTitles = select('.resume .resume-title', true);
+    const resumeItems = select('.resume .resume-item', true);
+    const downloadButton = select('.resume .download-resume');
+
+    // Store animated elements to allow re-animation
+    const animatedElements = new WeakSet();
+
+    // Observer options for individual elements
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -100px 0px',
+      threshold: 0.2
+    };
+
+    // Create observer for elements
+    const elementObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const element = entry.target;
+        
+        if (entry.isIntersecting) {
+          // Element is entering viewport - animate it
+          element.classList.add('animate-resume');
+          animatedElements.add(element);
+          
+          // If it's a resume item, also animate its list items immediately (no stagger)
+          if (element.classList.contains('resume-item')) {
+            const listItems = element.querySelectorAll('ul li');
+            listItems.forEach(li => {
+              li.classList.add('animate-resume');
+            });
+          }
+        } else if (animatedElements.has(element)) {
+          // Element has left viewport - reset for re-animation
+          element.classList.remove('animate-resume');
+          
+          // Reset list items if it's a resume item
+          if (element.classList.contains('resume-item')) {
+            const listItems = element.querySelectorAll('ul li');
+            listItems.forEach(li => {
+              li.classList.remove('animate-resume');
+            });
+          }
+          
+          animatedElements.delete(element);
+        }
+      });
+    }, observerOptions);
+
+    // Observe section title
+    if (sectionTitle) {
+      elementObserver.observe(sectionTitle);
+    }
+
+    // Observe all resume titles
+    resumeTitles.forEach(title => {
+      elementObserver.observe(title);
+    });
+
+    // Observe all resume items
+    resumeItems.forEach(item => {
+      elementObserver.observe(item);
+    });
+
+    // Observe download button with different threshold (lower on page)
+    if (downloadButton) {
+      const downloadObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const element = entry.target;
+          
+          if (entry.isIntersecting) {
+            element.classList.add('animate-resume');
+            animatedElements.add(element);
+          } else if (animatedElements.has(element)) {
+            element.classList.remove('animate-resume');
+            animatedElements.delete(element);
+          }
+        });
+      }, {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      });
+      
+      downloadObserver.observe(downloadButton);
+    }
+  };
+
+  // Initialize resume animations when DOM is ready
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      initResumeAnimations();
+    }, 200);
+  });
+
+  /**
    * Random background image movement
    */
   const thoughts = [

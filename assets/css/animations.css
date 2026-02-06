@@ -96,6 +96,178 @@
   animation: lineReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* ===========================
+   Resume Section Animations
+   =========================== */
+
+/* Base state - elements start hidden, will be shown by JS when ready */
+.resume .section-title:not(.animate-resume),
+.resume .resume-title:not(.animate-resume),
+.resume .resume-item:not(.animate-resume),
+.resume .resume-item ul li:not(.animate-resume),
+.resume .download-resume:not(.animate-resume) {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Section Title Animation */
+@keyframes resumeFadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.resume .section-title.animate-resume {
+  animation: resumeFadeInDown 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Column Animations */
+@keyframes resumeFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.resume .col-lg-6.animate-resume {
+  animation: resumeFadeInUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Stagger columns */
+.resume .col-lg-6:nth-child(1).animate-resume {
+  animation-delay: 0.2s;
+}
+
+.resume .col-lg-6:nth-child(2).animate-resume {
+  animation-delay: 0.3s;
+}
+
+.resume .col-lg-6:nth-child(3).animate-resume {
+  animation-delay: 0.4s;
+}
+
+/* Resume Title (Summary, Education, etc.) */
+@keyframes resumeTitleSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.resume .resume-title.animate-resume {
+  animation: resumeTitleSlide 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Resume Items */
+@keyframes resumeItemFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.resume .resume-item.animate-resume {
+  animation: resumeItemFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* List Items inside Resume Items */
+@keyframes resumeListItemSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.resume .resume-item ul li.animate-resume {
+  animation: resumeListItemSlide 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Download Resume Button */
+@keyframes resumeButtonPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.resume .download-resume.animate-resume {
+  animation: resumeButtonPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Staggered delays for resume items within each column */
+.resume .resume-item:nth-child(2).animate-resume { animation-delay: 0.1s; }
+.resume .resume-item:nth-child(3).animate-resume { animation-delay: 0.2s; }
+.resume .resume-item:nth-child(4).animate-resume { animation-delay: 0.3s; }
+.resume .resume-item:nth-child(5).animate-resume { animation-delay: 0.4s; }
+
+/* List items animate together with their parent (no stagger) */
+.resume .resume-item ul li.animate-resume {
+  animation: resumeListItemSlide 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: 0s;
+}
+
+/* Performance optimization */
+.resume .section-title.animate-resume,
+.resume .resume-title.animate-resume,
+.resume .resume-item.animate-resume,
+.resume .resume-item ul li.animate-resume,
+.resume .download-resume.animate-resume {
+  will-change: transform, opacity;
+}
+
+/* Respect prefers-reduced-motion for Resume section */
+@media (prefers-reduced-motion: reduce) {
+  .resume .section-title,
+  .resume .col-lg-6,
+  .resume .resume-title,
+  .resume .resume-item,
+  .resume .resume-item ul li,
+  .resume .download-resume {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  
+  .resume .section-title.animate-resume,
+  .resume .col-lg-6.animate-resume,
+  .resume .resume-title.animate-resume,
+  .resume .resume-item.animate-resume,
+  .resume .resume-item ul li.animate-resume,
+  .resume .download-resume.animate-resume {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* Respect prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   .about .content .about-description-container p.fst-italic {
@@ -606,27 +778,25 @@ html {
 }
 
 .technical-modal {
-  position: absolute;
-  top: -20px;
+  position: fixed;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%) translateY(-10px) scale(0.95);
-  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.95);
+  opacity: 0 !important;
   visibility: hidden;
-  z-index: 1000;
+  z-index: 1001;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: auto;
 }
 
 .technical-modal.show {
-  transform: translateX(-50%) translateY(-30px) scale(1);
-  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1 !important;
   visibility: visible;
 }
 
 .technical-modal .modal-content {
   background: rgba(0, 0, 0, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(24, 210, 110, 0.3);
   border-radius: 12px;
   padding: 24px;
@@ -746,27 +916,25 @@ html {
 }
 
 .education-modal {
-  position: absolute;
-  top: -20px;
+  position: fixed;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%) translateY(-10px) scale(0.95);
-  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.95);
+  opacity: 0 !important;
   visibility: hidden;
-  z-index: 1000;
+  z-index: 1001;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: auto;
 }
 
 .education-modal.show {
-  transform: translateX(-50%) translateY(-30px) scale(1);
-  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1 !important;
   visibility: visible;
 }
 
 .education-modal .modal-content {
   background: rgba(0, 0, 0, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(24, 210, 110, 0.3);
   border-radius: 12px;
   padding: 24px;
@@ -1057,8 +1225,6 @@ html {
 
 .about-modal .modal-content {
   background: rgba(0, 0, 0, 0.95);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
   border: 1px solid rgba(24, 210, 110, 0.3);
   border-radius: 16px;
   padding: 32px;
@@ -1289,81 +1455,79 @@ html {
 }
 
 .summary-modal {
-  position: absolute;
-  top: -20px;
+  position: fixed;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%) translateY(-10px) scale(0.95);
-  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.95);
+  opacity: 0 !important;
   visibility: hidden;
-  z-index: 1000;
+  z-index: 1001;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: auto;
 }
 
 .summary-modal.show {
-  transform: translateX(-50%) translateY(-20px) scale(1);
-  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1 !important;
   visibility: visible;
 }
 
 .email-modal {
-  position: absolute;
-  top: -20px;
+  position: fixed;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%) translateY(-10px) scale(0.95);
+  transform: translate(-50%, -50%) scale(0.95);
   opacity: 0;
   visibility: hidden;
-  z-index: 1000;
+  z-index: 1001;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: auto;
 }
 
 .email-modal.show {
-  transform: translateX(-50%) translateY(-20px) scale(1);
+  transform: translate(-50%, -50%) scale(1);
   opacity: 1;
   visibility: visible;
 }
 
 .phone-modal {
-  position: absolute;
-  top: -20px;
+  position: fixed;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%) translateY(-10px) scale(0.95);
+  transform: translate(-50%, -50%) scale(0.95);
   opacity: 0;
   visibility: hidden;
-  z-index: 1000;
+  z-index: 1001;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: auto;
 }
 
 .phone-modal.show {
-  transform: translateX(-50%) translateY(-20px) scale(1);
+  transform: translate(-50%, -50%) scale(1);
   opacity: 1;
   visibility: visible;
 }
 
 .social-modal {
-  position: absolute;
-  top: -20px;
+  position: fixed;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%) translateY(-10px) scale(0.95);
+  transform: translate(-50%, -50%) scale(0.95);
   opacity: 0;
   visibility: hidden;
-  z-index: 1000;
+  z-index: 1001;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: auto;
 }
 
 .social-modal.show {
-  transform: translateX(-50%) translateY(-20px) scale(1);
+  transform: translate(-50%, -50%) scale(1);
   opacity: 1;
   visibility: visible;
 }
 
 .modal-content {
   background: rgba(0, 0, 0, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(24, 210, 110, 0.3);
   border-radius: 12px;
   padding: 24px;
@@ -1581,18 +1745,20 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   z-index: 999;
   opacity: 0;
   visibility: hidden;
   transition: all 0.2s ease;
+  pointer-events: none;
 }
 
 .modal-overlay.show {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
 /* Responsive adjustments */
