@@ -46,8 +46,9 @@
 
     const ctx = canvas.getContext('2d');
     let W, H, particles, scrollY = 0;
-    const COUNT = window.innerWidth < 768 ? 35 : 70;
-    const COLORS = ['rgba(24,210,110,', 'rgba(139,92,246,', 'rgba(255,255,255,'];
+    const COUNT = window.innerWidth < 768 ? 25 : 55;
+    /* Warm-theme palette: soft orange, lavender, peach — visible on light cream bg */
+    const COLORS = ['rgba(255,159,67,', 'rgba(156,136,255,', 'rgba(255,180,120,'];
 
     function resize() {
       W = canvas.width  = section.offsetWidth;

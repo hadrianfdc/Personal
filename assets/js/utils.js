@@ -400,78 +400,6 @@
     });
   }
 
-  // Fast Typewriter Animation for Closing Paragraph (Re-triggering)
-  function initTypewriterAnimation() {
-    const closingParagraph = document.querySelector('.about .content > p:last-of-type');
-    
-    if (!closingParagraph) return;
-
-    // Store original text
-    const originalText = closingParagraph.textContent.trim();
-
-    // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
-    if (prefersReducedMotion) {
-      closingParagraph.classList.add('typing-active');
-      return;
-    }
-
-    let typingTimeout = null;
-
-    function typeWriter(text, element, speed = 8) {
-      element.textContent = '';
-      element.classList.add('typing-active');
-      let i = 0;
-      
-      function type() {
-        if (i < text.length) {
-          element.textContent += text.charAt(i);
-          i++;
-          typingTimeout = setTimeout(type, speed);
-        }
-      }
-      
-      // Start typing after list items complete (2600ms)
-      setTimeout(type, 2600);
-    }
-
-    function resetTyping() {
-      if (typingTimeout) {
-        clearTimeout(typingTimeout);
-        typingTimeout = null;
-      }
-      closingParagraph.textContent = '';
-      closingParagraph.classList.remove('typing-active');
-    }
-
-    // Create IntersectionObserver with re-trigger capability
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Start typewriter effect
-            requestAnimationFrame(() => {
-              typeWriter(originalText, closingParagraph, 8);
-            });
-          } else {
-            // Reset when out of viewport
-            requestAnimationFrame(() => {
-              resetTyping();
-            });
-          }
-        });
-      },
-      {
-        threshold: 0.2,
-        rootMargin: '0px 0px -50px 0px'
-      }
-    );
-
-    // Observe the paragraph continuously
-    observer.observe(closingParagraph);
-  }
-
   // Skills Progress Bar Animation (Re-triggering)
   function initSkillsAnimation() {
     const skillsContent = document.querySelector('.skills-content');
@@ -532,7 +460,6 @@
       initPhoneModal();
       initSocialModal();
       initProfileItemsAnimation();
-      initTypewriterAnimation();
       initSkillsAnimation();
     });
   } else {

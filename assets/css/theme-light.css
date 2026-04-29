@@ -1,0 +1,657 @@
+/* ============================================================
+   Welcoming Light Theme Override
+   Replaces dark/neon-green palette with warm cream + orange
+   Load AFTER all other CSS files.
+   ============================================================ */
+
+/* ── Token aliases ────────────────────────────────────────── */
+:root {
+  --c-bg:          #F9F9F7;   /* warm cream background        */
+  --c-surface:     #FFFFFF;   /* white card surfaces          */
+  --c-peach:       #FFEFDF;   /* bio / secondary card         */
+  --c-text-head:   #2C3E50;   /* deep blue-gray headings      */
+  --c-text-body:   #4A5568;   /* taupe-gray body text         */
+  --c-text-muted:  #718096;   /* lighter descriptive text     */
+  --c-accent:      #FF9F43;   /* warm orange primary accent   */
+  --c-accent-dark: #E8892B;   /* darker orange hover/depth    */
+  --c-accent-rgb:  255,159,67;
+  --c-lav:         #9C88FF;   /* lavender secondary accent    */
+  --c-lav-dark:    #7B68EE;
+  --c-lav-rgb:     156,136,255;
+  --c-border:      rgba(44,62,80,0.10);
+  --c-shadow:      rgba(44,62,80,0.10);
+}
+
+/* ════════════════════════════════════════════════════════════
+   1. GLOBAL BASE — body, background, links, headings
+   ════════════════════════════════════════════════════════════ */
+
+body {
+  background-color: var(--c-bg) !important;
+  background: var(--c-bg) !important;
+  color: var(--c-text-body) !important;
+}
+
+/* The dark full-viewport overlay pseudo-element */
+body::before {
+  background: var(--c-bg) !important;
+}
+
+/* Background portrait image — lighten blend so it works on cream */
+#animated-image {
+  opacity: 0.18 !important;
+  mix-blend-mode: multiply;
+}
+
+a           { color: var(--c-accent) !important; }
+a:hover     { color: var(--c-accent-dark) !important; }
+
+h1, h2, h3, h4, h5, h6 { color: var(--c-text-head) !important; }
+
+/* ════════════════════════════════════════════════════════════
+   2. HEADER — full-viewport home panel
+   ════════════════════════════════════════════════════════════ */
+
+#header {
+  background: transparent !important;
+}
+
+#header.header-top {
+  background: rgba(249,249,247,0.96) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  box-shadow: 0 2px 20px var(--c-shadow) !important;
+  border-bottom: 1px solid var(--c-border) !important;
+}
+
+/* Name gradient — warm blue-gray to orange */
+#header h1 a,
+#header h1 a:hover {
+  background: linear-gradient(45deg, var(--c-text-head), var(--c-accent), var(--c-lav), var(--c-text-head)) !important;
+  background-size: 300% 300% !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+#header h2 {
+  color: var(--c-text-body) !important;
+}
+
+/* Social links */
+#header .social-links a {
+  background: rgba(44,62,80,0.08) !important;
+  color: var(--c-text-head) !important;
+}
+
+#header .social-links a:hover {
+  background: var(--c-accent) !important;
+  color: #fff !important;
+}
+
+/* ════════════════════════════════════════════════════════════
+   3. NAVIGATION
+   ════════════════════════════════════════════════════════════ */
+
+.navbar a,
+.navbar a:focus,
+.navbar li:hover > a {
+  color: var(--c-text-head) !important;
+}
+
+.navbar a:hover,
+.navbar .active,
+.navbar .active:focus {
+  color: var(--c-accent) !important;
+}
+
+/* Active underline bar */
+.navbar a:before,
+.navbar a::after {
+  background-color: var(--c-accent) !important;
+  background: var(--c-accent) !important;
+}
+
+/* Animations.css nav underline */
+.navbar a::after {
+  background: var(--c-accent) !important;
+}
+
+/* Mobile nav overlay */
+.navbar-mobile {
+  background: rgba(249,249,247,0.98) !important;
+}
+
+/* ════════════════════════════════════════════════════════════
+   4. SECTIONS — general container panels
+   ════════════════════════════════════════════════════════════ */
+
+section .container {
+  background: rgba(255,255,255,0.97) !important;
+  box-shadow: 0 4px 30px var(--c-shadow) !important;
+  border-radius: 2px;
+}
+
+.section-title h2 {
+  color: var(--c-text-muted) !important;
+}
+
+.section-title p {
+  color: var(--c-text-head) !important;
+}
+
+/* section-title subtitle hover */
+.section-title p:hover {
+  color: var(--c-accent) !important;
+  text-shadow: 0 0 15px rgba(var(--c-accent-rgb),0.35) !important;
+}
+
+/* ════════════════════════════════════════════════════════════
+   5. ABOUT — profile card, bio glass, info list
+   ════════════════════════════════════════════════════════════ */
+
+/* Profile card glassmorphism → clean white card */
+.profile-card-3d {
+  background: rgba(255,255,255,0.85) !important;
+  border: 2px solid rgba(255,255,255,0.9) !important;
+  box-shadow:
+    0 8px 32px rgba(44,62,80,0.12),
+    0 2px 8px rgba(44,62,80,0.06) !important;
+}
+
+/* Glowing conic border → soft orange/lavender on light bg */
+.profile-card-3d::before {
+  background: conic-gradient(
+    from var(--glow-angle, 0deg),
+    transparent 0deg,
+    rgba(var(--c-accent-rgb), 0.6) 60deg,
+    rgba(var(--c-lav-rgb), 0.5) 120deg,
+    transparent 180deg
+  ) !important;
+}
+
+.profile-card-3d::after {
+  background: rgba(255,255,255,0.92) !important;
+}
+
+/* Badge — lavender-to-blue gradient */
+.profile-card-badge {
+  background: linear-gradient(135deg, var(--c-lav), #7EC8E3) !important;
+  box-shadow: 0 4px 16px rgba(var(--c-lav-rgb),0.35) !important;
+  color: #fff !important;
+}
+
+/* Bio glassmorphism container → warm peach */
+.about-bio-glass {
+  background: var(--c-peach) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: 0 4px 20px rgba(255,159,67,0.12), 0 1px 4px rgba(44,62,80,0.06) !important;
+}
+
+/* Left accent bar: keep orange-to-lavender */
+.about-bio-glass::after {
+  background: linear-gradient(to bottom, transparent, var(--c-accent), var(--c-lav), transparent) !important;
+}
+
+/* Sweep highlight → warm peach shimmer */
+.about-bio-glass::before {
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255,159,67,0.10) 45%,
+    rgba(255,255,255,0.15) 50%,
+    rgba(255,159,67,0.10) 55%,
+    transparent 80%
+  ) !important;
+}
+
+/* Bio text colour */
+.about-bio-text {
+  color: var(--c-text-body) !important;
+}
+
+/* Bio char gradient pan: orange highlight on warm text */
+.about-bio-glass.bio-chars-ready .bio-char {
+  background: linear-gradient(
+    90deg,
+    var(--c-text-body) 0%,
+    var(--c-accent) 40%,
+    var(--c-text-body) 60%
+  ) !important;
+  background-size: 300% 100% !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* h3 "WEB DEVELOPER" label */
+.about-me .content h3 {
+  color: var(--c-accent) !important;
+}
+
+.about-me .content h3:hover {
+  color: var(--c-accent-dark) !important;
+  text-shadow: 0 0 20px rgba(var(--c-accent-rgb),0.4) !important;
+}
+
+.about-me .content h3::after {
+  background: linear-gradient(90deg, var(--c-accent), var(--c-lav), var(--c-accent)) !important;
+}
+
+/* About info list items */
+.about-me .content ul li {
+  color: var(--c-text-body) !important;
+}
+
+.about-me .content ul li:hover {
+  color: var(--c-accent) !important;
+}
+
+.about-me .content ul li i {
+  color: var(--c-accent) !important;
+}
+
+.about-me .content ul li:hover strong {
+  color: var(--c-accent-dark) !important;
+}
+
+.about-me .content ul li::before {
+  background: linear-gradient(90deg, var(--c-accent), var(--c-accent-dark)) !important;
+}
+
+/* Closing static paragraph */
+.about-me .content > p:last-of-type,
+.about .content > p:last-of-type {
+  color: var(--c-text-body) !important;
+}
+
+/* Hover tooltip */
+.hover-tooltip {
+  background: rgba(255,255,255,0.95) !important;
+  color: var(--c-accent) !important;
+  border: 1px solid rgba(var(--c-accent-rgb),0.25) !important;
+  box-shadow: 0 4px 12px var(--c-shadow) !important;
+}
+
+.hover-tooltip::after {
+  border-top-color: rgba(255,255,255,0.95) !important;
+}
+
+/* ════════════════════════════════════════════════════════════
+   6. SKILLS
+   ════════════════════════════════════════════════════════════ */
+
+/* Base template skill bar */
+.skills .progress .skill {
+  color: var(--c-text-head) !important;
+}
+
+.skills .progress-bar-wrap {
+  background: rgba(44,62,80,0.10) !important;
+}
+
+.skills .progress-bar {
+  background-color: var(--c-accent) !important;
+}
+
+.skills .progress:hover .skill {
+  color: var(--c-accent) !important;
+  text-shadow: 0 0 8px rgba(var(--c-accent-rgb),0.4) !important;
+}
+
+/* 3D skill bar (about-3d.css overrides) */
+.skills-3d .progress-bar-wrap {
+  background: rgba(44,62,80,0.08) !important;
+  box-shadow:
+    inset 0 2px 4px rgba(44,62,80,0.12),
+    inset 0 -1px 2px rgba(255,255,255,0.6) !important;
+}
+
+.skills-3d .progress-bar {
+  background: linear-gradient(90deg, var(--c-accent) 0%, var(--c-lav) 100%) !important;
+  box-shadow: 0 0 10px rgba(var(--c-accent-rgb),0.5) !important;
+}
+
+.skills-3d .skill {
+  color: var(--c-text-head) !important;
+}
+
+.skills-3d .val {
+  color: var(--c-accent) !important;
+}
+
+/* ════════════════════════════════════════════════════════════
+   7. INTERESTS GRID
+   ════════════════════════════════════════════════════════════ */
+
+.interests-3d .icon-box,
+.interests .icon-box {
+  background: rgba(255,255,255,0.7) !important;
+  border: 1px solid rgba(44,62,80,0.07) !important;
+  box-shadow: 0 2px 12px rgba(44,62,80,0.06) !important;
+}
+
+.interests-3d .icon-box:hover,
+.interests .icon-box:hover {
+  background: rgba(255,255,255,0.96) !important;
+  border-color: rgba(var(--c-accent-rgb),0.3) !important;
+  box-shadow:
+    0 12px 30px rgba(44,62,80,0.12),
+    0 0 16px rgba(var(--c-accent-rgb),0.12) !important;
+  transform: translateY(-6px) scale(1.03) !important;
+}
+
+.interests-3d .icon-box::before {
+  background: radial-gradient(circle at 50% 50%, rgba(var(--c-accent-rgb),0.08), transparent 70%) !important;
+}
+
+.interests .icon-box h3 {
+  color: var(--c-text-head) !important;
+}
+
+.interests .icon-box:hover h3 {
+  color: var(--c-accent) !important;
+  text-shadow: none !important;
+}
+
+/* ════════════════════════════════════════════════════════════
+   8. RESUME SECTION
+   ════════════════════════════════════════════════════════════ */
+
+.resume .resume-title {
+  color: var(--c-accent) !important;
+}
+
+.resume .resume-item h4 {
+  color: var(--c-text-head) !important;
+}
+
+.resume .resume-item h5 {
+  color: var(--c-accent) !important;
+  background: rgba(var(--c-accent-rgb),0.08) !important;
+  border-color: rgba(var(--c-accent-rgb),0.2) !important;
+}
+
+.resume .resume-item p,
+.resume .resume-item ul li {
+  color: var(--c-text-body) !important;
+}
+
+/* Timeline dot & line */
+.resume .resume-item::before {
+  background: var(--c-accent) !important;
+  border-color: var(--c-accent) !important;
+}
+
+/* ════════════════════════════════════════════════════════════
+   9. SERVICES SECTION
+   ════════════════════════════════════════════════════════════ */
+
+.services .icon-box {
+  background: rgba(255,255,255,0.6) !important;
+  border: 1px solid var(--c-border) !important;
+  box-shadow: 0 2px 16px var(--c-shadow) !important;
+}
+
+.services .icon-box .icon {
+  background: var(--c-accent) !important;
+}
+
+.services .icon-box h4 a {
+  color: var(--c-text-head) !important;
+}
+
+.services .icon-box p {
+  color: var(--c-text-body) !important;
+}
+
+.services .icon-box:hover {
+  background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark)) !important;
+  border-color: var(--c-accent) !important;
+  box-shadow: 0 20px 40px rgba(var(--c-accent-rgb),0.25) !important;
+}
+
+.services .icon-box:hover .icon {
+  background: #fff !important;
+}
+
+.services .icon-box:hover .icon i {
+  color: var(--c-accent) !important;
+}
+
+.services .icon-box:hover h4 a,
+.services .icon-box:hover p {
+  color: #fff !important;
+}
+
+/* ════════════════════════════════════════════════════════════
+   10. CONTACT SECTION
+   ════════════════════════════════════════════════════════════ */
+
+.contact .info-box {
+  background: rgba(255,255,255,0.7) !important;
+  border: 1px solid var(--c-border) !important;
+  box-shadow: 0 2px 16px var(--c-shadow) !important;
+  color: var(--c-text-body) !important;
+}
+
+.contact .info-box i {
+  color: var(--c-accent) !important;
+}
+
+.contact .info-box h3 {
+  color: var(--c-text-head) !important;
+}
+
+.contact .info-box p {
+  color: var(--c-text-body) !important;
+}
+
+.contact .social-links a {
+  background: rgba(44,62,80,0.08) !important;
+  color: var(--c-text-head) !important;
+}
+
+.contact .social-links a:hover {
+  background: var(--c-accent) !important;
+  color: #fff !important;
+}
+
+/* ════════════════════════════════════════════════════════════
+   11. ALL MODALS — dark panels → white
+   ════════════════════════════════════════════════════════════ */
+
+.modal-content,
+.summary-modal .modal-content,
+.education-modal .modal-content,
+.technical-modal .modal-content,
+.about-modal .modal-content,
+.email-modal .modal-content,
+.phone-modal .modal-content,
+.social-modal .modal-content {
+  background: rgba(255,255,255,0.98) !important;
+  border: 1px solid rgba(var(--c-accent-rgb),0.2) !important;
+  box-shadow:
+    0 20px 40px rgba(44,62,80,0.15),
+    0 0 20px rgba(var(--c-accent-rgb),0.08) !important;
+  color: var(--c-text-body) !important;
+}
+
+.modal-content h5,
+.about-modal .modal-content h5 {
+  color: var(--c-accent) !important;
+}
+
+.modal-content p { color: var(--c-text-body) !important; }
+
+.modal-close-btn {
+  background: rgba(var(--c-accent-rgb),0.08) !important;
+  border-color: rgba(var(--c-accent-rgb),0.25) !important;
+  color: var(--c-accent) !important;
+}
+
+.modal-close-btn:hover {
+  background: rgba(var(--c-accent-rgb),0.18) !important;
+}
+
+.modal-overlay {
+  background: rgba(44,62,80,0.25) !important;
+}
+
+/* Stats / tags inside modals */
+.stat-number { color: var(--c-accent) !important; }
+.stat-label  { color: var(--c-text-muted) !important; }
+
+.skill-tag, .value-tag {
+  background: rgba(var(--c-accent-rgb),0.08) !important;
+  color: var(--c-accent) !important;
+  border-color: rgba(var(--c-accent-rgb),0.25) !important;
+}
+
+.skill-tag.expert {
+  background: rgba(var(--c-accent-rgb),0.12) !important;
+  border-color: var(--c-accent) !important;
+}
+
+.skill-tag.advanced {
+  background: rgba(var(--c-lav-rgb),0.10) !important;
+  border-color: rgba(var(--c-lav-rgb),0.4) !important;
+  color: var(--c-lav-dark) !important;
+}
+
+.expertise-item, .education-item, .skill-category, .achievement {
+  background: rgba(var(--c-accent-rgb),0.04) !important;
+  border-color: rgba(var(--c-accent-rgb),0.15) !important;
+}
+
+.expertise-item h7,
+.education-header h6,
+.tech-section h6,
+.achievements-section h6,
+.philosophy-section h6,
+.skills-developed h6 {
+  color: var(--c-accent) !important;
+}
+
+.education-year {
+  color: var(--c-accent) !important;
+  background: rgba(var(--c-accent-rgb),0.08) !important;
+}
+
+.cert-list li::before,
+.achievement-list li::before { color: var(--c-accent) !important; }
+
+.achievement span,
+.education-details .institution,
+.education-details .degree,
+.education-details .description,
+.skill-category p,
+.expertise-item p,
+.cert-list li,
+.achievement-list li { color: var(--c-text-body) !important; }
+
+.philosophy-section strong { color: var(--c-accent) !important; }
+.philosophy-section li     { border-color: rgba(var(--c-accent-rgb),0.1) !important; }
+
+.social-link-item {
+  color: var(--c-text-body) !important;
+  background: rgba(var(--c-accent-rgb),0.06) !important;
+  border-color: rgba(var(--c-accent-rgb),0.2) !important;
+}
+
+.social-link-item:hover { color: #fff !important; }
+
+/* ════════════════════════════════════════════════════════════
+   12. CHAT WIDGET — green → orange
+   ════════════════════════════════════════════════════════════ */
+
+:root {
+  --accent-color:  #FF9F43 !important;
+  --accent-light:  #E8892B !important;
+  --hover-bg:      rgba(255,159,67,0.10) !important;
+  --header-bg:     linear-gradient(135deg, #FF9F43 0%, #E8892B 100%) !important;
+}
+
+.chat-toggle {
+  background: linear-gradient(135deg, var(--c-accent) 0%, var(--c-accent-dark) 100%) !important;
+  box-shadow: 0 4px 12px rgba(var(--c-accent-rgb),0.4) !important;
+}
+
+.chat-toggle:hover {
+  box-shadow: 0 6px 20px rgba(var(--c-accent-rgb),0.5) !important;
+}
+
+/* ════════════════════════════════════════════════════════════
+   13. BUTTONS & GLOBAL INTERACTIVE ELEMENTS
+   ════════════════════════════════════════════════════════════ */
+
+.btn:hover,
+button[type="submit"]:hover,
+.download-resume a:hover {
+  background: linear-gradient(45deg, var(--c-accent), var(--c-accent-dark)) !important;
+  box-shadow: 0 15px 35px rgba(var(--c-accent-rgb),0.45) !important;
+  border-color: var(--c-accent) !important;
+}
+
+.copy-feedback {
+  background: var(--c-accent) !important;
+  color: #fff !important;
+}
+
+/* ════════════════════════════════════════════════════════════
+   14. ANIMATIONS — swap green glows to orange
+   ════════════════════════════════════════════════════════════ */
+
+/* Social link hover shimmer (animations.css) */
+.social-links a::before {
+  background: linear-gradient(135deg,
+    rgba(var(--c-accent-rgb),0.3),
+    rgba(var(--c-accent-rgb),0.6)) !important;
+}
+
+.social-links a:hover {
+  box-shadow: 0 10px 20px rgba(var(--c-accent-rgb),0.35) !important;
+}
+
+.social-links a.twitter:hover   { background-color: #1da1f2 !important; border-color: #1da1f2 !important; }
+.social-links a.facebook:hover  { background-color: #1877f2 !important; border-color: #1877f2 !important; }
+.social-links a.linkedin:hover  { background-color: #0077b5 !important; border-color: #0077b5 !important; }
+
+/* Navbar underline (animations.css) */
+.navbar a::after { background: var(--c-accent) !important; }
+
+/* Split-heading chars — orange gradient for light bg */
+.split-heading.revealed .char {
+  color: var(--c-text-head);
+}
+
+/* ════════════════════════════════════════════════════════════
+   15. PARTICLES CANVAS — lighter opacity on cream background
+   ════════════════════════════════════════════════════════════ */
+
+#about-particles-canvas { opacity: 0.25 !important; }
+
+/* ════════════════════════════════════════════════════════════
+   16. SCROLL-BAR — warm, minimal
+   ════════════════════════════════════════════════════════════ */
+
+::-webkit-scrollbar             { width: 6px; }
+::-webkit-scrollbar-track       { background: var(--c-bg); }
+::-webkit-scrollbar-thumb       { background: rgba(var(--c-accent-rgb),0.4); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--c-accent); }
+
+/* ════════════════════════════════════════════════════════════
+   17. MOBILE ADJUSTMENTS
+   ════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .navbar-mobile {
+    background: rgba(249,249,247,0.98) !important;
+  }
+
+  #header.header-top {
+    background: rgba(249,249,247,0.98) !important;
+  }
+}

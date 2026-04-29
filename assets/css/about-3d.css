@@ -447,6 +447,37 @@
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
+/* ----------  Closing paragraph — strip all animations & hover effects  ---------- */
+/* Targets "I am passionate about creating polished and functional websites…" */
+.about-me .content > p:last-of-type,
+.about .content > p:last-of-type {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+  cursor: default !important;
+  color: inherit !important;
+  text-shadow: none !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  border-right: none !important;
+  animation: none !important;
+  padding: 0 !important;
+}
+
+.about-me .content > p:last-of-type::before,
+.about-me .content > p:last-of-type::after,
+.about .content > p:last-of-type::before,
+.about .content > p:last-of-type::after {
+  display: none !important;
+}
+
+.about-me .content > p:last-of-type:hover,
+.about .content > p:last-of-type:hover {
+  color: inherit !important;
+  text-shadow: none !important;
+  transform: none !important;
+}
+
 /* ----------  Override base .interests .icon-box layout  ---------- */
 /* The base template uses flex (icon left, text right). We override to centered column. */
 .interests-3d .icon-box {

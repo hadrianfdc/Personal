@@ -47,27 +47,7 @@
 .about .content ul li:nth-child(3).animate-in { animation-delay: 1.7s; }
 .about .content ul li:nth-child(4).animate-in { animation-delay: 1.8s; }
 
-/* Fast Typewriter animation for closing paragraph */
-.about .content > p:last-of-type {
-  opacity: 0;
-}
-
-.about .content > p:last-of-type.typing-active {
-  opacity: 1;
-}
-
-/* Respect prefers-reduced-motion for typewriter */
-@media (prefers-reduced-motion: reduce) {
-  .about .content > p:last-of-type {
-    width: 100% !important;
-    white-space: normal !important;
-    animation: none !important;
-  }
-  
-  .about .content > p:last-of-type.typing-active {
-    animation: none !important;
-  }
-}
+/* Typewriter animation removed — closing paragraph displays as plain static text */
 
 /* Bio paragraph line-by-line animation removed — replaced by GSAP Glass-Shatter in about-3d.js */
 
