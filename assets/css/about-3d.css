@@ -1,0 +1,398 @@
+/* ============================================================
+   3D Interactive About Section — Dark/Green/Purple Theme
+   ============================================================ */
+
+/* ----------  Canvas Particle Background  ---------- */
+#about-particles-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+}
+
+.about {
+  position: relative;
+  overflow: hidden;
+}
+
+.about > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ----------  Glassmorphism Profile Card  ---------- */
+.profile-card-3d-wrapper {
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-card-3d {
+  position: relative;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(24, 210, 110, 0.25);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 0 40px rgba(24, 210, 110, 0.08);
+  padding: 16px;
+  width: 100%;
+  max-width: 320px;
+  transform-style: preserve-3d;
+  transform: rotateX(0deg) rotateY(0deg);
+  transition: box-shadow 0.15s ease;
+  animation: cardFloat 6s ease-in-out infinite;
+  will-change: transform;
+  cursor: crosshair;
+}
+
+@keyframes cardFloat {
+  0%, 100% { transform: rotateX(0deg) rotateY(0deg) translateY(0px); }
+  25%       { transform: rotateX(1deg) rotateY(0.5deg) translateY(-8px); }
+  50%       { transform: rotateX(0deg) rotateY(-0.5deg) translateY(-14px); }
+  75%       { transform: rotateX(-1deg) rotateY(0.5deg) translateY(-6px); }
+}
+
+.profile-card-3d.tilt-active {
+  animation-play-state: paused;
+}
+
+/* Glowing cursor-tracking border */
+.profile-card-3d::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 22px;
+  background: conic-gradient(
+    from var(--glow-angle, 0deg),
+    transparent 0deg,
+    rgba(24, 210, 110, 0.7) 60deg,
+    rgba(139, 92, 246, 0.6) 120deg,
+    transparent 180deg
+  );
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.profile-card-3d:hover::before {
+  opacity: 1;
+}
+
+/* Inner glow layer */
+.profile-card-3d::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: 19px;
+  background: rgba(10, 10, 20, 0.85);
+  z-index: -1;
+}
+
+.profile-card-img {
+  width: 100%;
+  border-radius: 14px;
+  display: block;
+  transform: translateZ(20px);
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6));
+  transition: filter 0.3s ease;
+}
+
+.profile-card-3d:hover .profile-card-img {
+  filter: drop-shadow(0 12px 32px rgba(24, 210, 110, 0.25));
+}
+
+/* Badge that floats above the card */
+.profile-card-badge {
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%) translateZ(30px);
+  background: linear-gradient(135deg, #18d26e, #8b5cf6);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 20px;
+  border-radius: 20px;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(24, 210, 110, 0.45);
+}
+
+/* ----------  Split-text Section Heading  ---------- */
+.split-heading {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.split-heading .char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(100%) rotateX(-90deg);
+  transform-origin: bottom center;
+  transition: opacity 0.55s cubic-bezier(0.16,1,0.3,1),
+              transform 0.55s cubic-bezier(0.16,1,0.3,1);
+}
+
+.split-heading.revealed .char {
+  opacity: 1;
+  transform: translateY(0) rotateX(0deg);
+}
+
+/* ----------  3D Skill Bars  ---------- */
+.skills-3d .progress {
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1),
+              transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+
+.skills-3d .progress.skill-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.skills-3d .skill {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.skills-3d .val {
+  margin-left: auto;
+  color: #18d26e;
+  font-weight: 700;
+}
+
+/* 3D depth container */
+.skills-3d .progress-bar-wrap {
+  height: 10px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  box-shadow:
+    inset 0 2px 4px rgba(0,0,0,0.5),
+    inset 0 -1px 2px rgba(255,255,255,0.04);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Sheen overlay for 3D depth */
+.skills-3d .progress-bar-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.07), transparent);
+  border-radius: 8px 8px 0 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.skills-3d .progress-bar {
+  height: 100%;
+  border-radius: 8px;
+  width: 0%;
+  background: linear-gradient(90deg, #18d26e 0%, #8b5cf6 100%);
+  box-shadow: 0 0 12px rgba(24, 210, 110, 0.6);
+  transition: width 1.4s cubic-bezier(0.16,1,0.3,1);
+  position: relative;
+}
+
+/* Animated shimmer on bar fill */
+.skills-3d .progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  animation: barShimmer 2.5s ease-in-out infinite;
+}
+
+@keyframes barShimmer {
+  0%   { left: -60%; }
+  100% { left: 110%; }
+}
+
+/* ----------  3D Interests Grid  ---------- */
+.interests-3d .icon-box {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  padding: 24px 18px;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+  overflow: hidden;
+}
+
+/* Glow pulse on hover */
+.interests-3d .icon-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(circle at 50% 50%, rgba(24, 210, 110, 0.12), transparent 70%);
+}
+
+.interests-3d .icon-box:hover::before {
+  opacity: 1;
+}
+
+.interests-3d .icon-box:hover {
+  transform: translateZ(16px) translateY(-6px) scale(1.04);
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.4),
+    0 0 20px rgba(24, 210, 110, 0.2);
+  border-color: rgba(24, 210, 110, 0.4);
+  background: rgba(24, 210, 110, 0.06);
+}
+
+/* Magnetic effect offset applied via JS */
+.interests-3d .icon-box .icon-inner {
+  display: inline-block;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.interests-3d .icon-box i {
+  display: block;
+  font-size: 36px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.interests-3d .icon-box:hover i {
+  transform: translateZ(10px) scale(1.15);
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+.interests-3d .icon-box h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ccc;
+  margin: 0;
+  transition: color 0.25s ease;
+}
+
+.interests-3d .icon-box:hover h3 {
+  color: #fff;
+}
+
+/* Float-in animation for interest items */
+.interests-3d .icon-box {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+}
+
+.interests-3d .icon-box.interest-revealed {
+  animation: interestPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes interestPop {
+  from { opacity: 0; transform: translateY(20px) scale(0.9); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ----------  Override base .interests .icon-box layout  ---------- */
+/* The base template uses flex (icon left, text right). We override to centered column. */
+.interests-3d .icon-box {
+  display: block !important;
+  text-align: center;
+}
+
+/* Override base hover transform so our 3D hover wins cleanly */
+.interests-3d .icon-box:hover {
+  background: rgba(24, 210, 110, 0.06) !important;
+  transform: translateZ(16px) translateY(-6px) scale(1.04) !important;
+}
+
+.interests-3d .icon-box:hover i {
+  transform: translateZ(10px) scale(1.15) !important;
+  filter: drop-shadow(0 0 8px currentColor) !important;
+}
+
+.interests-3d .icon-box:hover h3 {
+  transform: none !important;
+  color: #fff !important;
+  text-shadow: none !important;
+}
+
+/* Make icon not use the side padding from base */
+.interests-3d .icon-box i {
+  padding-right: 0 !important;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* ----------  Responsive  ---------- */
+@media (max-width: 768px) {
+  .profile-card-3d {
+    max-width: 260px;
+  }
+
+  .profile-card-badge {
+    font-size: 10px;
+    padding: 5px 14px;
+  }
+
+  #about-particles-canvas {
+    opacity: 0.3;
+  }
+
+  .interests-3d .icon-box:hover {
+    transform: translateY(-4px) scale(1.02);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-card-3d {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .skills-3d .progress,
+  .interests-3d .icon-box {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .split-heading .char {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .skills-3d .progress-bar::after {
+    animation: none !important;
+  }
+}
