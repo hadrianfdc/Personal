@@ -15,8 +15,22 @@
     initParticles();
     initProfileCard();
     initSplitHeading();
+    initBioText();
     initSkillBars();
     initInterestsGrid();
+
+    /* Re-measure canvas when section becomes visible via section-show class */
+    const aboutSection = document.getElementById('about');
+    if (aboutSection && window._aboutParticleResize) {
+      const mo = new MutationObserver(function (mutations) {
+        mutations.forEach(function (m) {
+          if (m.attributeName === 'class' && aboutSection.classList.contains('section-show')) {
+            setTimeout(window._aboutParticleResize, 50);
+          }
+        });
+      });
+      mo.observe(aboutSection, { attributes: true });
+    }
   });
 
   /* ════════════════════════════════════════════════════════════
@@ -90,6 +104,9 @@
     resize();
     build();
     loop();
+
+    /* Expose resize so MutationObserver can trigger it when section-show fires */
+    window._aboutParticleResize = function () { resize(); build(); };
 
     const ro = new ResizeObserver(function () {
       resize();
@@ -237,6 +254,164 @@
     }, { threshold: 0.3 });
 
     bars.forEach(function (b) { obs.observe(b); });
+  }
+
+  /* ════════════════════════════════════════════════════════════
+     4b. BIO TEXT — Glass-Shatter GSAP Reveal + Magnetic Hover
+     ════════════════════════════════════════════════════════════ */
+  function initBioText() {
+    const para = document.getElementById('about-bio-text');
+    if (!para) return;
+
+    const isMobile   = window.matchMedia('(max-width: 768px)').matches;
+    const prefersRed = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const glass      = para.closest('.about-bio-glass');
+
+    /* ── 1. Split paragraph into word + character spans ── */
+    const rawText = para.textContent.trim();
+    para.textContent = '';
+
+    const allChars = [];
+
+    rawText.split(' ').forEach(function (word, wi, words) {
+      const wordEl = document.createElement('span');
+      wordEl.className = 'bio-word';
+
+      word.split('').forEach(function (ch) {
+        const charEl = document.createElement('span');
+        charEl.className = 'bio-char';
+        charEl.textContent = ch;
+        wordEl.appendChild(charEl);
+        allChars.push(charEl);
+      });
+
+      para.appendChild(wordEl);
+
+      /* Preserve space between words as a raw text node */
+      if (wi < words.length - 1) {
+        para.appendChild(document.createTextNode(' '));
+      }
+    });
+
+    /* ── 2. Stagger gradient-pan delay per char ── */
+    if (!isMobile) {
+      allChars.forEach(function (ch, i) {
+        ch.style.animationDelay = (i * 0.018) + 's';
+      });
+      if (glass) glass.classList.add('bio-chars-ready');
+    }
+
+    /* ── 3. Reduced-motion: skip all animation ── */
+    if (prefersRed) {
+      allChars.forEach(function (ch) {
+        ch.style.opacity = '1';
+        ch.style.transform = 'none';
+        ch.style.filter = 'none';
+      });
+      return;
+    }
+
+    /* ── 4. GSAP not yet loaded? wait for it ── */
+    function whenGSAP(cb) {
+      if (typeof gsap !== 'undefined') { cb(); return; }
+      const t = setInterval(function () {
+        if (typeof gsap !== 'undefined') { clearInterval(t); cb(); }
+      }, 50);
+    }
+
+    whenGSAP(function () {
+      /* Set hidden start state: behind camera, blurred, invisible */
+      gsap.set(allChars, {
+        opacity: 0,
+        z: -260,
+        scale: 0.75,
+        filter: 'blur(9px)',
+        transformPerspective: 900
+      });
+
+      let revealed = false;
+
+      /* ── 5. IntersectionObserver triggers the shatter reveal ── */
+      const obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting || revealed) return;
+          revealed = true;
+
+          gsap.to(allChars, {
+            opacity: 1,
+            z: 0,
+            scale: 1,
+            filter: 'blur(0px)',
+            duration: 0.72,
+            ease: 'power3.out',
+            stagger: { amount: 1.5, from: 'random' }
+          });
+
+          obs.unobserve(para);
+        });
+      }, { threshold: 0.18 });
+
+      obs.observe(para);
+
+      /* ── 6. Magnetic hover distortion (desktop only) ── */
+      if (isMobile || !glass) return;
+
+      const RADIUS  = 50;  /* px — influence zone around cursor */
+      let rafId     = null;
+      let mouseX    = -9999;
+      let mouseY    = -9999;
+
+      function applyMagnet() {
+        allChars.forEach(function (ch) {
+          const r    = ch.getBoundingClientRect();
+          const cx   = r.left + r.width  / 2;
+          const cy   = r.top  + r.height / 2;
+          const dist = Math.hypot(mouseX - cx, mouseY - cy);
+
+          if (dist < RADIUS) {
+            const strength = 1 - dist / RADIUS;
+            gsap.to(ch, {
+              z: 14 * strength,
+              scale: 1 + 0.06 * strength,
+              filter: 'brightness(' + (1 + 0.55 * strength) + ')',
+              duration: 0.18,
+              ease: 'power2.out',
+              overwrite: 'auto'
+            });
+          } else {
+            gsap.to(ch, {
+              z: 0,
+              scale: 1,
+              filter: 'brightness(1)',
+              duration: 0.45,
+              ease: 'power2.out',
+              overwrite: 'auto'
+            });
+          }
+        });
+
+        rafId = null;
+      }
+
+      glass.addEventListener('mousemove', function (e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (!rafId) rafId = requestAnimationFrame(applyMagnet);
+      });
+
+      glass.addEventListener('mouseleave', function () {
+        mouseX = -9999;
+        mouseY = -9999;
+        if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+        gsap.to(allChars, {
+          z: 0,
+          scale: 1,
+          filter: 'brightness(1)',
+          duration: 0.5,
+          ease: 'power3.out'
+        });
+      });
+    });
   }
 
   /* ════════════════════════════════════════════════════════════

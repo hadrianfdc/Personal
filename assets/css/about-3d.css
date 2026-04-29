@@ -2,6 +2,129 @@
    3D Interactive About Section — Dark/Green/Purple Theme
    ============================================================ */
 
+/* ----------  Bio Paragraph — Glassmorphism + Gradient Pan  ---------- */
+
+/* Override old hover effects on the container that conflict */
+.about-description-container {
+  cursor: default !important;
+  background: transparent !important;
+  transform: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+.about-description-container:hover {
+  background: transparent !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Glassmorphism wrapper */
+.about-bio-glass {
+  position: relative;
+  background: rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 22px 26px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+/* Inner left accent line */
+.about-bio-glass::after {
+  content: '';
+  position: absolute;
+  top: 16px;
+  bottom: 16px;
+  left: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, #18d26e, #8b5cf6, transparent);
+  border-radius: 2px;
+}
+
+/* Panning highlight sweep */
+.about-bio-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(24, 210, 110, 0.07) 45%,
+    rgba(255, 255, 255, 0.04) 50%,
+    rgba(24, 210, 110, 0.07) 55%,
+    transparent 80%
+  );
+  background-size: 250% 100%;
+  animation: bioPan 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes bioPan {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Typography */
+.about-bio-text {
+  font-size: 14.5px !important;
+  line-height: 1.85 !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.012em;
+  color: rgba(220, 230, 220, 0.9) !important;
+  margin: 0 !important;
+  font-style: italic !important;
+  /* Reset any conflicting rules from animations.css / style.css */
+  opacity: 1 !important;
+  transform: none;
+  transition: none !important;
+  text-shadow: none !important;
+  /* Perspective context for GSAP Z-axis moves */
+  transform-style: preserve-3d;
+  perspective: 900px;
+}
+
+/* Kill the old underline ::after from animations.css */
+.about-bio-text::after {
+  display: none !important;
+}
+
+/* Individual character spans injected by GSAP init */
+.about-bio-text .bio-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.about-bio-text .bio-char {
+  display: inline-block;
+  will-change: transform, filter, opacity;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Gradient text highlight on chars (desktop only — applied via JS class) */
+.about-bio-glass.bio-chars-ready .bio-char {
+  background: linear-gradient(
+    90deg,
+    rgba(220, 230, 220, 0.9) 0%,
+    #18d26e 40%,
+    rgba(220, 230, 220, 0.9) 60%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: charGradientPan 6s ease-in-out infinite;
+  /* stagger per char applied inline by JS */
+}
+
+@keyframes charGradientPan {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
 /* ----------  Canvas Particle Background  ---------- */
 #about-particles-canvas {
   position: absolute;
@@ -14,12 +137,15 @@
   opacity: 0.55;
 }
 
+/* NOTE: .about already has position:absolute from the template's section rule —
+   do NOT set position:relative here or it breaks the section-show hide/reveal mechanism */
 .about {
-  position: relative;
-  overflow: hidden;
+  overflow: hidden; /* already set by template, kept for clarity */
 }
 
-.about > * {
+.about .about-me,
+.about .skills,
+.about .interests {
   position: relative;
   z-index: 1;
 }
@@ -370,6 +496,24 @@
   .interests-3d .icon-box:hover {
     transform: translateY(-4px) scale(1.02);
   }
+
+  /* Keep bio readable on mobile — no gradient clip (WebKit text fill can cause layout bugs) */
+  .about-bio-glass.bio-chars-ready .bio-char {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: rgba(220, 230, 220, 0.9) !important;
+    background-clip: unset !important;
+    animation: none !important;
+  }
+
+  .about-bio-text {
+    font-size: 14px !important;
+    line-height: 1.75 !important;
+  }
+
+  .about-bio-glass {
+    padding: 16px 18px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -393,6 +537,21 @@
   }
 
   .skills-3d .progress-bar::after {
+    animation: none !important;
+  }
+
+  /* Bio text: show immediately, no animations */
+  .about-bio-text .bio-char {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .about-bio-glass::before {
+    animation: none !important;
+  }
+
+  .about-bio-glass.bio-chars-ready .bio-char {
     animation: none !important;
   }
 }

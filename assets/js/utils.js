@@ -472,72 +472,6 @@
     observer.observe(closingParagraph);
   }
 
-  // Line-by-line About Description Animation (Re-triggering)
-  function initAboutDescriptionAnimation() {
-    // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
-    const aboutText = document.querySelector('.about-description-container p.fst-italic');
-    if (!aboutText) return;
-
-    // Store original text
-    const originalText = aboutText.textContent.trim();
-    
-    if (prefersReducedMotion) {
-      // If user prefers reduced motion, show content immediately without animation
-      aboutText.style.opacity = '1';
-      aboutText.style.transform = 'none';
-      return;
-    }
-
-    // Split text into sentences for more reliable line-by-line animation
-    const sentences = originalText.split(/(?<=[.!?])\s+/);
-    
-    // Clear the paragraph and add sentence spans
-    aboutText.innerHTML = '';
-    sentences.forEach((sentence, index) => {
-      const sentenceSpan = document.createElement('span');
-      sentenceSpan.className = 'line';
-      sentenceSpan.textContent = sentence;
-      if (index < sentences.length - 1) {
-        sentenceSpan.textContent += ' ';
-      }
-      aboutText.appendChild(sentenceSpan);
-    });
-
-    // Create IntersectionObserver with re-trigger capability
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // When entering viewport: animate sentences sequentially
-            const lines = aboutText.querySelectorAll('.line');
-            lines.forEach((line, index) => {
-              setTimeout(() => {
-                requestAnimationFrame(() => {
-                  line.classList.add('animate-line');
-                });
-              }, 100 + (index * 200)); // Start at 100ms, then 200ms delay between each sentence
-            });
-          } else {
-            // When leaving viewport: reset all lines
-            const lines = aboutText.querySelectorAll('.line');
-            lines.forEach(line => {
-              line.classList.remove('animate-line');
-            });
-          }
-        });
-      },
-      {
-        threshold: 0.15, // Trigger when 15% of element is visible
-        rootMargin: '0px 0px -40px 0px' // Subtle offset for smooth trigger
-      }
-    );
-
-    // Observe the paragraph continuously (allows re-triggering)
-    observer.observe(aboutText);
-  }
-
   // Skills Progress Bar Animation (Re-triggering)
   function initSkillsAnimation() {
     const skillsContent = document.querySelector('.skills-content');
@@ -599,7 +533,6 @@
       initSocialModal();
       initProfileItemsAnimation();
       initTypewriterAnimation();
-      initAboutDescriptionAnimation();
       initSkillsAnimation();
     });
   } else {
@@ -613,7 +546,6 @@
     initSocialModal();
     initProfileItemsAnimation();
     initTypewriterAnimation();
-    initAboutDescriptionAnimation();
     initSkillsAnimation();
   }
 })();
