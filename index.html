@@ -101,7 +101,31 @@
         <div class="col-lg-4" data-aos="fade-right">
           <div class="profile-card-3d-wrapper">
             <div class="profile-card-3d">
-              <img src="assets/img/myself.png" class="profile-card-img img-fluid" alt="Hadrian Evarula">
+              <!--
+                srcset resolution switching:
+                  - myself.webp / myself@2x.webp  → modern format, sharp on Retina
+                  - myself.png  / myself@2x.png   → PNG fallback
+                To prepare: export your original photo at 2× its display size
+                (e.g. 640px wide if the card renders at 320px), save as
+                myself@2x.webp + myself@2x.png alongside the originals.
+              -->
+              <picture>
+                <source
+                  type="image/webp"
+                  srcset="assets/img/myself.webp 1x, assets/img/myself@2x.webp 2x">
+                <source
+                  type="image/png"
+                  srcset="assets/img/myself.png 1x, assets/img/myself@2x.png 2x">
+                <img
+                  src="assets/img/myself.png"
+                  class="profile-card-img img-fluid"
+                  alt="Hadrian Evarula"
+                  loading="eager"
+                  decoding="sync"
+                  fetchpriority="high"
+                  width="320"
+                  height="380">
+              </picture>
               <span class="profile-card-badge">Web Developer</span>
             </div>
           </div>

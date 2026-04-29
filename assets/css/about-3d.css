@@ -162,13 +162,15 @@
   position: relative;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  /* backdrop-filter removed: it creates a separate GPU compositing layer
+     that causes the child <img> to be rendered softly at sub-pixel boundaries.
+     Box-shadow achieves the depth look without the blur bleed. */
   border: 1px solid rgba(24, 210, 110, 0.25);
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
-    0 0 40px rgba(24, 210, 110, 0.08);
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    0 0 40px rgba(24, 210, 110, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.3);
   padding: 16px;
   width: 100%;
   max-width: 320px;
@@ -178,6 +180,9 @@
   animation: cardFloat 6s ease-in-out infinite;
   will-change: transform;
   cursor: crosshair;
+  /* Prevent GPU layer from sub-pixel softening child elements */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 @keyframes cardFloat {
@@ -227,13 +232,24 @@
   width: 100%;
   border-radius: 14px;
   display: block;
-  transform: translateZ(20px);
-  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6));
-  transition: filter 0.3s ease;
+  /* translateZ(20px) removed: pushing the image on Z-axis inside preserve-3d
+     causes the browser to composite it at a fractional effective scale,
+     producing soft/blurry edges. Keep Z at 0 for pixel-perfect rendering. */
+  transform: translateZ(0);
+  /* Crisp rendering at all DPR levels */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  /* Prevent GPU bleed from parent layer */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  /* drop-shadow replaced with box-shadow: filter() forces an extra raster
+     pass which can soften edges; box-shadow is composited natively. */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.3s ease;
 }
 
 .profile-card-3d:hover .profile-card-img {
-  filter: drop-shadow(0 12px 32px rgba(24, 210, 110, 0.25));
+  box-shadow: 0 12px 32px rgba(24, 210, 110, 0.2);
 }
 
 /* Badge that floats above the card */

@@ -634,6 +634,92 @@ button[type="submit"]:hover,
 #about-particles-canvas { opacity: 0.25 !important; }
 
 /* ════════════════════════════════════════════════════════════
+   16. SHARPNESS & HIGH-DPI RENDERING FIXES
+   ════════════════════════════════════════════════════════════ */
+
+/* ── Global text anti-aliasing ──────────────────────────── */
+/* subpixel-antialiased keeps letterforms crisp on all screen densities */
+body,
+#header,
+#header h1,
+#header h1 a,
+#header h2,
+.navbar a,
+#header .social-links a,
+.section-title p,
+.section-title h2 {
+  -webkit-font-smoothing: subpixel-antialiased !important;
+  -moz-osx-font-smoothing: auto !important;
+  text-rendering: optimizeLegibility !important;
+}
+
+/* ── Header container: strip any opacity / filter that blurs children ── */
+#header {
+  /* Animations.css starts h1/h2 at opacity:0 and fades them in.
+     After the animation completes, the elements are fully opaque.
+     Ensure no parent filter or will-change causes a stale compositing layer. */
+  isolation: auto !important;
+  filter: none !important;
+}
+
+/* ── Remove mix-blend-mode from the portrait — it forces GPU compositing
+       of the entire element, causing softness on non-Retina displays ── */
+#animated-image {
+  mix-blend-mode: normal !important;
+  /* Crisp background-image rendering */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* ── Social icon glyphs: force pixel-level clarity ── */
+#header .social-links a i,
+.social-links a i {
+  -webkit-font-smoothing: subpixel-antialiased !important;
+  /* Prevent icon font from being rasterised on a blurred parent layer */
+  transform: translateZ(0);
+  display: block;
+}
+
+/* ── Profile card: light theme override for backdrop-filter removal ──
+   (about-3d.css already removed backdrop-filter; reinforce here) */
+.profile-card-3d {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  /* Compensate with a rich shadow for the glass-depth feel */
+  box-shadow:
+    0 8px 30px rgba(44,62,80,0.14),
+    0 2px 6px rgba(44,62,80,0.08),
+    0 0 0 1.5px rgba(255,255,255,0.85) inset !important;
+}
+
+/* ── Profile image: maximum sharpness in 3D card context ── */
+.profile-card-img,
+.profile-card-3d picture img {
+  image-rendering: -webkit-optimize-contrast !important;
+  image-rendering: crisp-edges !important;
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
+  /* translateZ(0) keeps image on its own GPU layer without Z-offset blur */
+  transform: translateZ(0) !important;
+  will-change: auto !important;  /* release permanent GPU layer between interactions */
+}
+
+/* ── HiDPI media query — switch to 2× assets if they exist ──
+   Replace the src values once you export @2x images from your editor */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  #animated-image {
+    /* Uncomment when myself@2x.webp / myself@2x.png are ready:
+    background-image:
+      image-set(
+        url("../img/myself@2x.webp") type("image/webp"),
+        url("../img/myself@2x.png")  type("image/png")
+      );
+    */
+    background-size: contain;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
    16. SCROLL-BAR — warm, minimal
    ════════════════════════════════════════════════════════════ */
 
