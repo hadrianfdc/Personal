@@ -243,24 +243,31 @@
 
           <!-- About Modal Overlay -->
           <div class="modal-overlay" id="aboutModalOverlay"></div>
-          <div class="row">
-            <div class="col-lg-6">
-              <ul>
-                <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>March 28 2002</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+63 994 325 4337</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Cebu City, Philippines</span></li>
-              </ul>
+
+          <!-- System Specs Dashboard -->
+          <div class="sys-specs" id="sys-specs">
+            <div class="sys-specs__bar">
+              <span class="bar-dot bar-dot--red"></span>
+              <span class="bar-dot bar-dot--yellow"></span>
+              <span class="bar-dot bar-dot--green"></span>
+              <span class="bar-title">profile.json — read-only</span>
             </div>
-            <div class="col-lg-6">
-              <ul>
-                <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>23</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>Associate's Degree</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>hadrianevarula@gmail.com</span></li>
-              </ul>
+            <div class="sys-specs__body">
+              <div class="sys-spec-row"><span class="spec-k">UNIT_ID</span><span class="spec-sep">&gt;&gt;</span><span class="spec-v">Hadrian Evarula · HE-2002</span></div>
+              <div class="sys-spec-row"><span class="spec-k">LOCATION</span><span class="spec-sep">&gt;&gt;</span><span class="spec-v">Cebu City, Philippines</span></div>
+              <div class="sys-spec-row"><span class="spec-k">CHANNEL</span><span class="spec-sep">&gt;&gt;</span><span class="spec-v">hadrianevarula@gmail.com</span></div>
+              <div class="sys-spec-row"><span class="spec-k">PHONE</span><span class="spec-sep">&gt;&gt;</span><span class="spec-v">+63 994 325 4337</span></div>
+              <div class="sys-spec-row"><span class="spec-k">DEGREE</span><span class="spec-sep">&gt;&gt;</span><span class="spec-v">Associate's Degree · Computer Technology</span></div>
+              <div class="sys-spec-row"><span class="spec-k">AGE</span><span class="spec-sep">&gt;&gt;</span><span class="spec-v">23 · Born March 28, 2002</span></div>
+              <div class="sys-spec-row"><span class="spec-k">STATUS</span><span class="spec-sep">&gt;&gt;</span><span class="spec-v spec-v--active"><span class="status-pulse"></span>ACTIVE · AI Task Force @ Forty Degrees Celsius</span></div>
             </div>
           </div>
-          <p>
-            I ship AI. From rapid prototypes to production-grade integrations — I close the gap between what AI can do and what systems actually need. Let's build something that matters.
+
+          <!-- Key phrase — decrypt reveal on scroll -->
+          <p class="about-keyphrase" id="about-keyphrase">
+            I ship AI. From rapid prototypes to production-grade integrations —
+            <em class="keyphrase-core" id="keyphrase-core">"I close the gap between what AI can do and what systems actually need."</em>
+            Let's build something that matters.
           </p>
         </div>
       </div>
@@ -268,65 +275,70 @@
     </div><!-- End About Me -->
 
 
-    <!-- ======= Skills  ======= -->
-    <div class="skills skills-3d container">
+    <!-- ======= Skills ======= -->
+    <div class="skills skills-radar container">
 
       <div class="section-title">
         <h2>Skills</h2>
       </div>
 
-      <div class="row skills-content">
-
-        <div class="col-lg-6">
-
-          <div class="progress">
-            <span class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" alt="ASP.NET" class="tech-logo"> ASP.NET MVC <i class="val">80%</i></span>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-
-          <div class="progress">
-            <span class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" class="tech-logo"> NODE JS <i class="val">75%</i></span>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-
-          <div class="progress">
-            <span class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="tech-logo"> JavaScript <i class="val">75%</i></span>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-
+      <!-- Radar + stat cards layout -->
+      <div class="skills-radar-layout">
+        <!-- SVG Radar — built entirely by JS -->
+        <div class="radar-svg-container">
+          <svg id="skill-radar-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-label="Skill proficiency radar chart"></svg>
         </div>
-
-        <div class="col-lg-6">
-
-          <div class="progress">
-            <span class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" class="tech-logo"> PHP <i class="val">80%</i></span>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+        <!-- Animated stat bars with count-up -->
+        <div class="skill-stat-list" id="skill-stat-list">
+          <div class="skill-stat" data-pct="80">
+            <div class="skill-stat-header">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" class="skill-stat-icon">
+              <span class="skill-stat-name">PHP</span>
+              <span class="skill-stat-pct"><span class="count-num">0</span>%</span>
             </div>
+            <div class="skill-stat-track"><div class="skill-stat-fill"></div></div>
           </div>
-
-          <div class="progress">
-            <span class="skill"><img src="https://laravel.com/img/logomark.min.svg" alt="Laravel" class="tech-logo"> LARAVEL <i class="val">80%</i></span>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+          <div class="skill-stat" data-pct="80">
+            <div class="skill-stat-header">
+              <img src="https://laravel.com/img/logomark.min.svg" alt="Laravel" class="skill-stat-icon">
+              <span class="skill-stat-name">Laravel</span>
+              <span class="skill-stat-pct"><span class="count-num">0</span>%</span>
             </div>
+            <div class="skill-stat-track"><div class="skill-stat-fill"></div></div>
           </div>
-
-          <div class="progress">
-            <span class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cakephp/cakephp-original.svg" alt="CakePHP" class="tech-logo"> CAKEPHP <i class="val">85%</i></span>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+          <div class="skill-stat" data-pct="85">
+            <div class="skill-stat-header">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cakephp/cakephp-original.svg" alt="CakePHP" class="skill-stat-icon">
+              <span class="skill-stat-name">CakePHP</span>
+              <span class="skill-stat-pct"><span class="count-num">0</span>%</span>
             </div>
+            <div class="skill-stat-track"><div class="skill-stat-fill"></div></div>
           </div>
-
+          <div class="skill-stat" data-pct="80">
+            <div class="skill-stat-header">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" alt="ASP.NET MVC" class="skill-stat-icon">
+              <span class="skill-stat-name">ASP.NET MVC</span>
+              <span class="skill-stat-pct"><span class="count-num">0</span>%</span>
+            </div>
+            <div class="skill-stat-track"><div class="skill-stat-fill"></div></div>
+          </div>
+          <div class="skill-stat" data-pct="75">
+            <div class="skill-stat-header">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" class="skill-stat-icon">
+              <span class="skill-stat-name">Node.js</span>
+              <span class="skill-stat-pct"><span class="count-num">0</span>%</span>
+            </div>
+            <div class="skill-stat-track"><div class="skill-stat-fill"></div></div>
+          </div>
+          <div class="skill-stat" data-pct="75">
+            <div class="skill-stat-header">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="skill-stat-icon">
+              <span class="skill-stat-name">JavaScript</span>
+              <span class="skill-stat-pct"><span class="count-num">0</span>%</span>
+            </div>
+            <div class="skill-stat-track"><div class="skill-stat-fill"></div></div>
+          </div>
         </div>
-
       </div>
 
     </div><!-- End Skills -->
@@ -340,99 +352,111 @@
 
       <div class="row">
         <div class="col-lg-3 col-md-4">
-          <div class="icon-box">
+          <div class="icon-box" data-tip="Where LeetCode meets midnight coffee. I don't just solve problems — I architect solutions.">
             <div class="icon-inner">
               <i class="ri-store-line" style="color: #ffbb2c;"></i>
               <h3>Coding Challenges</h3>
             </div>
+            <div class="interest-tip"></div>
           </div>
         </div>
         <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-          <div class="icon-box">
+          <div class="icon-box" data-tip="From Clean Code to AI papers. If it sharpens the blade, it's already on my list.">
             <div class="icon-inner">
               <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
               <h3>Reading</h3>
             </div>
+            <div class="interest-tip"></div>
           </div>
         </div>
         <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-          <div class="icon-box">
+          <div class="icon-box" data-tip="Ship dates are not suggestions. Milestones measured, not guessed — OKRs over vibes.">
             <div class="icon-inner">
               <i class="ri-calendar-todo-line" style="color: #e80368;"></i>
               <h3>Goal Tracking</h3>
             </div>
+            <div class="interest-tip"></div>
           </div>
         </div>
         <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
-          <div class="icon-box">
+          <div class="icon-box" data-tip="Every position evaluated 3 moves ahead. Same framework I apply to system design.">
             <div class="icon-inner">
               <i class="ri-paint-brush-line" style="color: #e361ff;"></i>
               <h3>Chess</h3>
             </div>
+            <div class="interest-tip"></div>
           </div>
         </div>
         <div class="col-lg-3 col-md-4 mt-4">
-          <div class="icon-box">
+          <div class="icon-box" data-tip="The backbone of every fast system. I think in Big-O before I think in code.">
             <div class="icon-inner">
               <i class="ri-database-2-line" style="color: #47aeff;"></i>
               <h3>Data Structure</h3>
             </div>
+            <div class="interest-tip"></div>
           </div>
         </div>
         <div class="col-lg-3 col-md-4 mt-4">
-          <div class="icon-box">
+          <div class="icon-box" data-tip="Deep work blocks, no meetings before noon. Flow state is the real competitive edge.">
             <div class="icon-inner">
               <i class="ri-gradienter-line" style="color: #ffa76e;"></i>
               <h3>Time Management</h3>
             </div>
+            <div class="interest-tip"></div>
           </div>
         </div>
         <div class="col-lg-3 col-md-4 mt-4">
-          <div class="icon-box">
+          <div class="icon-box" data-tip="Spec first, code second. Nothing gets built without a clear task definition.">
             <div class="icon-inner">
               <i class="ri-file-list-3-line" style="color: #11dbcf;"></i>
               <h3>To Do List</h3>
             </div>
+            <div class="interest-tip"></div>
           </div>
         </div>
         <div class="col-lg-3 col-md-4 mt-4">
-          <div class="icon-box">
+          <div class="icon-box" data-tip="How I find the bleeding edge before it becomes mainstream. Curiosity is a moat.">
             <div class="icon-inner">
               <i class="ri-price-tag-2-line" style="color: #4233ff;"></i>
               <h3>Explore Things</h3>
             </div>
+            <div class="interest-tip"></div>
           </div>
         </div>
         <div class="col-lg-3 col-md-4 mt-4">
-          <div class="icon-box">
+          <div class="icon-box" data-tip="The only constant in this industry. I track it like others track the stock market.">
             <div class="icon-inner">
               <i class="ri-anchor-line" style="color: #b2904f;"></i>
               <h3>Technology</h3>
             </div>
+            <div class="interest-tip"></div>
           </div>
         </div>
         <div class="col-lg-3 col-md-4 mt-4">
-          <div class="icon-box">
+          <div class="icon-box" data-tip="My debugging soundtrack. Lo-fi beats while chasing stack traces at 2 AM.">
             <div class="icon-inner">
               <i class="ri-disc-line" style="color: #b20969;"></i>
               <h3>Music</h3>
             </div>
+            <div class="interest-tip"></div>
           </div>
         </div>
         <div class="col-lg-3 col-md-4 mt-4">
-          <div class="icon-box">
+          <div class="icon-box" data-tip="Where UX meets backend logic. I ship what I also design — no handoffs, no lost context.">
             <div class="icon-inner">
               <i class="ri-base-station-line" style="color: #ff5828;"></i>
               <h3>Web Design</h3>
             </div>
+            <div class="interest-tip"></div>
           </div>
         </div>
         <div class="col-lg-3 col-md-4 mt-4">
-          <div class="icon-box">
+          <div class="icon-box" data-tip="Prototype → ship → iterate. Done beats perfect. Innovation is a habit, not a moment.">
             <div class="icon-inner">
               <i class="ri-fingerprint-line" style="color: #29cc61;"></i>
               <h3>Innovation</h3>
             </div>
+            <div class="interest-tip"></div>
           </div>
         </div>
       </div>
