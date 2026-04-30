@@ -36,6 +36,9 @@
   <!-- Chat Assistant Styles -->
   <link href="assets/css/chat-assistant.css" rel="stylesheet">
 
+  <!-- Contact Section Enhancements -->
+  <link href="assets/css/contact-enhanced.css" rel="stylesheet">
+
   <!-- Light Theme Override (loads last to win all specificity battles) -->
   <link href="assets/css/theme-light.css" rel="stylesheet">
 
@@ -805,15 +808,18 @@
   <section id="contact" class="contact">
     <div class="container">
 
+      <!-- Dot-grid background pattern -->
+      <div class="contact-bg-pattern" aria-hidden="true"></div>
+
       <div class="section-title">
         <h2>Contact</h2>
-        <p>Contact Me</p>
+        <p id="contact-heading-text">Contact Me</p>
       </div>
 
       <div class="row mt-2">
 
         <div class="col-md-6 d-flex align-items-stretch">
-          <div class="info-box address-box">
+          <div class="info-box address-box contact-card">
             <i class="bx bx-map"></i>
             <h3>My Address</h3>
             <p>Cebu City, Philippines</p>
@@ -825,7 +831,7 @@
 
         <div class="col-md-6 mt-4 mt-md-0 d-flex align-items-stretch">
           <div class="social-wrapper">
-            <div class="info-box">
+            <div class="info-box contact-card">
               <i class="bx bx-share-alt"></i>
               <h3>Social Profiles</h3>
               <div class="social-links">
@@ -881,13 +887,16 @@
 
         <div class="col-md-6 mt-4 d-flex align-items-stretch">
           <div class="email-wrapper">
-            <div class="info-box email-box">
+            <div class="info-box email-box contact-card">
               <i class="bx bx-envelope"></i>
               <h3>Email Me</h3>
-              <p id="email-address">hadrianevarula@gmail.com</p>
-              <button id="copy-email-btn" class="btn" style="border: none; background: transparent; cursor: pointer;">
-                <i class="bx bx-copy"></i> <!-- Copy icon -->
-              </button>
+              <div class="contact-value-row">
+                <span class="contact-value" id="email-address">hadrianevarula@gmail.com</span>
+                <button id="copy-email-btn" class="contact-copy-trigger" data-copy="hadrianevarula@gmail.com" aria-label="Copy email address">
+                  <i class="bx bx-copy"></i> Copy
+                  <span class="contact-copied-badge">Copied!</span>
+                </button>
+              </div>
             </div>
             
             <!-- Email Modal -->
@@ -913,14 +922,16 @@
         </div>        
         <div class="col-md-6 mt-4 d-flex align-items-stretch">
           <div class="phone-wrapper">
-            <div class="info-box">
+            <div class="info-box contact-card">
               <i class="bx bx-phone-call"></i>
               <h3>Call Me</h3>
-              <p id="phone-number">+63 994 325 4337</p>
-              <button id="copy-btn" class="btn" style="border: none; background: transparent; cursor: pointer;">
-                <i class="bx bx-copy"></i> <!-- Copy icon -->
-              </button>
-              <div id="phone-copy-feedback" class="copy-feedback">Phone copied! ✓</div>
+              <div class="contact-value-row">
+                <span class="contact-value" id="phone-number">+63 994 325 4337</span>
+                <button id="copy-btn" class="contact-copy-trigger" data-copy="+63 994 325 4337" aria-label="Copy phone number">
+                  <i class="bx bx-copy"></i> Copy
+                  <span class="contact-copied-badge">Copied!</span>
+                </button>
+              </div>
             </div>
             
             <!-- Phone Modal -->
@@ -1055,6 +1066,9 @@
 
   <!-- 3D About Section -->
   <script src="assets/js/about-3d.js"></script>
+
+  <!-- Contact Section Enhancements -->
+  <script src="assets/js/contact-enhanced.js"></script>
 
 </body>
 </html>
