@@ -1511,6 +1511,46 @@ section .container {
 }
 
 /* ── Projects Section ── */
+
+/* Featured card (FaithStack full-width) */
+.project-card-featured {
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 4px 24px rgba(44,62,80,0.10);
+  border: 1px solid rgba(44,62,80,0.08);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.project-card-featured:hover {
+  box-shadow: 0 8px 40px rgba(44,62,80,0.15);
+  transform: translateY(-2px);
+}
+
+/* Standard project cards (Johnny Davis, Portfolio Assistant) */
+.project-card {
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 4px 24px rgba(44,62,80,0.10);
+  border: 1px solid rgba(44,62,80,0.08);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.project-card:hover {
+  box-shadow: 0 8px 40px rgba(44,62,80,0.15);
+  transform: translateY(-3px);
+}
+
+/* Info panel text inside project cards */
+.project-card h4,
+.project-card-featured h4 {
+  color: #2C3E50 !important;
+}
+
+.project-card p,
+.project-card-featured p {
+  color: #4A5568 !important;
+}
+
 .project-thumbs-strip {
   scrollbar-width: thin;
   scrollbar-color: #ccc transparent;
