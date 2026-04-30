@@ -273,7 +273,9 @@ h6 {
 }
 
 #header.header-top .social-links,
-#header.header-top h2 {
+#header.header-top h2,
+#header.header-top .hero-cta,
+#header.header-top #hero-canvas {
   display: none;
 }
 

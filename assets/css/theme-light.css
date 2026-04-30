@@ -64,6 +64,11 @@ h1, h2, h3, h4, h5, h6 { color: var(--c-text-head) !important; }
   border-bottom: 1px solid var(--c-border) !important;
 }
 
+#header.header-top .hero-cta,
+#header.header-top #hero-canvas {
+  display: none !important;
+}
+
 /* Name gradient — warm blue-gray to orange */
 #header h1 a,
 #header h1 a:hover {
