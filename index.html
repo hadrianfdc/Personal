@@ -43,6 +43,9 @@
   <!-- Chat Assistant Styles -->
   <link href="assets/css/chat-assistant.css" rel="stylesheet">
 
+  <!-- Resume Timeline Styles -->
+  <link href="assets/css/resume-timeline.css" rel="stylesheet">
+
   <!-- Contact Section Enhancements -->
   <link href="assets/css/contact-enhanced.css" rel="stylesheet">
 
@@ -429,7 +432,7 @@
   </section><!-- End About Section -->
 
   <!-- ======= Resume Section ======= -->
-  <section id="resume" class="resume">
+  <section id="resume" class="resume" x-data="resumeSection()">
     <div class="container">
 
       <div class="section-title">
@@ -437,110 +440,234 @@
         <p>Check My Resume</p>
       </div>
 
-      <div class="row">
-        <div class="col-lg-6">
-          <h3 class="resume-title">Summary</h3>
-          <div class="resume-item pb-0 resume-summary-container">
-            <h4>Hadrian Evarula</h4>
-            <p><em>Backend-focused full-stack developer specializing in enterprise system architecture, API design, and automated deployment pipelines. Proven track record building mission-critical applications from the ground up with clean, maintainable code and scalable infrastructure. Experienced in owning complete development lifecycles—from database design to production deployment—while collaborating with cross-functional teams to deliver reliable, high-performance solutions.</em></p>
-            <p>
-            <ul>
-              <li>Cebu City, Philippines</li>
-              <li>+63 994 325 4337</li>
-              <li>hadrianevarula@gmail.com</li>
-            </ul>
-            </p>
-            
-            <!-- Hover Tooltip -->
-            <div class="hover-tooltip">
-              <i class="bi bi-hand-index-thumb"></i>
-              Click to view detailed professional summary
+      <!-- ── Summary Card ── -->
+      <div class="resume-summary-card resume-summary-container" id="resume-summary">
+        <div class="summary-header">
+          <div class="summary-identity">
+            <div class="summary-avatar-icon">
+              <i class="bx bx-user-circle"></i>
+            </div>
+            <div>
+              <h3 class="summary-name">Hadrian Evarula</h3>
+              <p class="summary-role">Backend Developer &middot; Enterprise Systems</p>
             </div>
           </div>
-
-          <h3 class="resume-title">Education</h3>
-          <div class="resume-item education-container">
-            <h4>Certificate in Computer Technology</h4>
-            <h5>2021 - 2023</h5>
-            <p><em>University of San Carlos - Talamban Campus</em></p>
-            <p>Software Engineer.</p>
-            
-            <!-- Hover Tooltip -->
-            <div class="hover-tooltip">
-              <i class="bi bi-hand-index-thumb"></i>
-              Click to explore educational background in detail
+          <div class="summary-stats">
+            <div class="stat-item">
+              <span class="stat-num">3+</span>
+              <span class="stat-lbl">Years Exp.</span>
             </div>
-          </div>
-          <div class="resume-item">
-            <h4>Science and Technological Engineering, Mathematics</h4>
-            <h5>2018 - 2020</h5>
-            <p><em>Argao National High School</em></p>
-            <p>Science Class</p>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <h3 class="resume-title">Technical Expertise</h3>
-          <div class="resume-item technical-expertise-container">
-            <h4>Core Technologies</h4>
-            <p>
-              <ul>
-                <li><strong>Backend Frameworks:</strong> ASP.NET MVC, ASP.NET Core, Laravel, CakePHP</li>
-                <li><strong>Languages:</strong> C#, PHP, JavaScript, Node.js</li>
-                <li><strong>Database Systems:</strong> SQL Server, MySQL, MongoDB</li>
-                <li><strong>API Development:</strong> RESTful APIs, Postman, Swagger, API Versioning</li>
-                <li><strong>DevOps & Automation:</strong> GitHub Actions, CI/CD Pipelines, Automated Testing</li>
-                <li><strong>Testing Frameworks:</strong> Codeception (Unit Testing)</li>
-                <li><strong>Architecture Patterns:</strong> MVC, Clean Architecture, RBAC</li>
-                <li><strong>Version Control:</strong> Git, GitHub</li>
-                <li><strong>Project Management:</strong> JIRA, Agile Methodologies</li>
-                <li><strong>Frontend Technologies:</strong> HTML, CSS, Bootstrap, jQuery, Ajax</li>
-              </ul>
-            </p>
-            
-            <!-- Hover Tooltip -->
-            <div class="hover-tooltip">
-              <i class="bi bi-hand-index-thumb"></i>
-              Click to explore technical expertise in detail
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-num">10+</span>
+              <span class="stat-lbl">Projects</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-num">5</span>
+              <span class="stat-lbl">Tech Stacks</span>
             </div>
           </div>
         </div>
-        <div class="col-lg-6">
-          <h3 class="resume-title">Professional Experience</h3>
-          <div class="resume-item">
-            <h4>Backend PHP Developer</h4>
-            <h5>Jan 2024 – Present</h5>
-            <p><em>Forty Degrees Celsius Inc.</em></p>
-            <p>
-            <ul>
-              <li>Maintained and enhanced a large-scale legacy PHP codebase (10+ years) for the NativeCamp platform</li>
-              <li>Engineered CI/CD system automating multi-module unit tests, reducing QA time by 90%</li>
-              <li>Authored and maintained unit tests covering 200+ NativeCamp controllers, significantly improving code reliability and test coverage</li>
-              <li>Implemented GitHub-triggered job queueing and commit status updates</li>
-              <li>Collaborated with AI specialists to implement RAG workflows for automated unit test generation</li>
-              <li>Built scalable REST APIs for production use</li>
-            </ul>
-            </p>
-          </div>
-          <div class="resume-item">
-            <h4>Fullstack .NET Developer</h4>
-            <h5>Jan 2022 – Dec 2022</h5>
-            <p><em>Prince Retail Group</em></p>
-            <p>
-            <ul>
-              <li>Sole developer of enterprise Asset Management System tracking IT assets nationwide</li>
-              <li>Designed ASP.NET MVC system with normalized SQL Server database schemas</li>
-              <li>Implemented role-based access control (RBAC) with user roles, profiles, and module-level permissions</li>
-              <li>Developed CRUD modules for assets, users, departments, and device assignments</li>
-              <li>Automated asset lifecycle rules (ownership transfer for devices older than 4 years)</li>
-            </ul>
-            </p>
-          </div>
+        <p class="summary-bio">Backend-focused full-stack developer specializing in enterprise system architecture, API design, and automated deployment pipelines. Proven track record building mission-critical applications with clean, maintainable code and scalable infrastructure.</p>
+        <div class="summary-meta">
+          <span><i class="bx bx-map-pin"></i> Cebu City, Philippines</span>
+          <span><i class="bx bx-phone"></i> +63 994 325 4337</span>
+          <span><i class="bx bx-envelope"></i> hadrianevarula@gmail.com</span>
         </div>
-
+        <div class="hover-tooltip">
+          <i class="bi bi-hand-index-thumb"></i>
+          Click to view detailed professional summary
+        </div>
       </div>
 
-       <div class="download-resume">
-          <a href="https://drive.google.com/file/d/1Tf2IKm2vqvcDvYwf5_tskYHeubGJKZiT/view" target="_blank" class="btn" style="color: #18d26e; background-color: black; border: white 1px solid; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;"><i class="bi bi-download"></i> Download Resume</a>
+      <!-- ── Timeline Grid ── -->
+      <div class="row" style="margin-top:36px;">
+
+        <!-- LEFT: Education Timeline -->
+        <div class="col-lg-6" style="margin-bottom:32px;">
+          <h3 class="timeline-section-title">
+            <span class="title-icon"><i class="bx bx-book-open"></i></span>
+            Education
+          </h3>
+          <div class="resume-timeline education-container" id="education-timeline">
+            <div class="timeline-track"><div class="timeline-progress"></div></div>
+
+            <div class="timeline-entry" data-reveal>
+              <div class="timeline-node"></div>
+              <div class="timeline-card">
+                <div class="card-period">2021 – 2023</div>
+                <h4 class="card-title">Certificate in Computer Technology</h4>
+                <p class="card-institution">
+                  <i class="bx bx-buildings"></i> University of San Carlos – Talamban Campus
+                </p>
+                <p class="card-detail">Software Engineering program — database design, algorithms, enterprise web development, and system analysis fundamentals.</p>
+                <div class="card-chips">
+                  <span class="tech-chip">Software Engineering</span>
+                  <span class="tech-chip">Data Structures</span>
+                  <span class="tech-chip">Database Design</span>
+                  <span class="tech-chip">Web Development</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-entry" data-reveal>
+              <div class="timeline-node"></div>
+              <div class="timeline-card">
+                <div class="card-period">2018 – 2020</div>
+                <h4 class="card-title">Science &amp; Technology Engineering, Mathematics</h4>
+                <p class="card-institution">
+                  <i class="bx bx-buildings"></i> Argao National High School
+                </p>
+                <p class="card-detail">STEM track — advanced mathematics, physics, and foundational computer science preparing for engineering fields.</p>
+                <div class="card-chips">
+                  <span class="tech-chip">Mathematics</span>
+                  <span class="tech-chip">Physics</span>
+                  <span class="tech-chip">STEM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Experience Timeline -->
+        <div class="col-lg-6" style="margin-bottom:32px;">
+          <h3 class="timeline-section-title">
+            <span class="title-icon"><i class="bx bx-briefcase"></i></span>
+            Professional Experience
+          </h3>
+          <div class="resume-timeline" id="experience-timeline">
+            <div class="timeline-track"><div class="timeline-progress"></div></div>
+
+            <!-- NativeCamp -->
+            <div class="timeline-entry" data-reveal
+                 data-entry-id="exp-nativecamp"
+                 :class="{ 'entry-highlighted': isHighlighted('exp-nativecamp'), 'entry-dimmed': isDimmed('exp-nativecamp') }">
+              <div class="timeline-node timeline-node--active"></div>
+              <div class="timeline-card">
+                <div class="card-header-row">
+                  <div class="card-period">Jan 2024 – Present</div>
+                  <span class="current-badge">Current</span>
+                </div>
+                <h4 class="card-title">Backend PHP Developer</h4>
+                <p class="card-institution">
+                  <i class="bx bx-buildings"></i> Forty Degrees Celsius Inc.
+                  <span class="project-label">&middot; NativeCamp</span>
+                </p>
+                <ul class="card-bullets">
+                  <li>Maintained large-scale legacy PHP codebase (10+ years) for the NativeCamp platform</li>
+                  <li>Engineered CI/CD system automating multi-module unit tests — <strong>90% QA time reduction</strong></li>
+                  <li>Authored unit tests covering <strong>200+ NativeCamp controllers</strong></li>
+                  <li>Implemented GitHub-triggered job queueing and commit status updates</li>
+                  <li>Integrated RAG workflows with AI specialists for automated test generation</li>
+                  <li>Built scalable REST APIs for production use</li>
+                </ul>
+                <div class="card-chips">
+                  <span class="tech-chip">PHP</span>
+                  <span class="tech-chip">CakePHP</span>
+                  <span class="tech-chip">CI/CD</span>
+                  <span class="tech-chip">GitHub Actions</span>
+                  <span class="tech-chip">REST APIs</span>
+                  <span class="tech-chip">Codeception</span>
+                  <span class="tech-chip">MySQL</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Prince Retail -->
+            <div class="timeline-entry" data-reveal
+                 data-entry-id="exp-prince"
+                 :class="{ 'entry-highlighted': isHighlighted('exp-prince'), 'entry-dimmed': isDimmed('exp-prince') }">
+              <div class="timeline-node"></div>
+              <div class="timeline-card">
+                <div class="card-period">Jan 2022 – Dec 2022</div>
+                <h4 class="card-title">Fullstack .NET Developer</h4>
+                <p class="card-institution">
+                  <i class="bx bx-buildings"></i> Prince Retail Group
+                  <span class="project-label">&middot; Asset Management System</span>
+                </p>
+                <ul class="card-bullets">
+                  <li>Sole developer — enterprise Asset Management System tracking IT assets nationwide</li>
+                  <li>Designed ASP.NET MVC system with normalized SQL Server database schemas</li>
+                  <li>Implemented RBAC with user roles, profiles, and module-level permissions</li>
+                  <li>Developed CRUD modules: assets, users, departments, device assignments</li>
+                  <li>Automated asset lifecycle rules (ownership transfer for 4+ year devices)</li>
+                </ul>
+                <div class="card-chips">
+                  <span class="tech-chip">C#</span>
+                  <span class="tech-chip">ASP.NET MVC</span>
+                  <span class="tech-chip">SQL Server</span>
+                  <span class="tech-chip">RBAC</span>
+                  <span class="tech-chip">REST APIs</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- End Timeline Grid -->
+
+      <!-- ── Technical Expertise: Interactive Chips ── -->
+      <div class="skills-section technical-expertise-container" id="skills-section">
+        <h3 class="timeline-section-title">
+          <span class="title-icon"><i class="bx bx-chip"></i></span>
+          Technical Expertise
+          <span class="skills-hint">Hover a chip to highlight related experience</span>
+        </h3>
+
+        <div class="skill-groups">
+
+          <div class="skill-group" data-reveal>
+            <div class="skill-group-label">Languages</div>
+            <div class="chip-row">
+              <span class="skill-chip" @mouseenter="hoverChip('PHP')"         @mouseleave="leaveChip()" :class="{ 'chip-lit': activeChip === 'PHP' }">PHP</span>
+              <span class="skill-chip" @mouseenter="hoverChip('C#')"          @mouseleave="leaveChip()" :class="{ 'chip-lit': activeChip === 'C#' }">C#</span>
+              <span class="skill-chip" @mouseenter="hoverChip('JavaScript')"  @mouseleave="leaveChip()" :class="{ 'chip-lit': activeChip === 'JavaScript' }">JavaScript</span>
+              <span class="skill-chip" @mouseenter="hoverChip('SQL')"         @mouseleave="leaveChip()" :class="{ 'chip-lit': activeChip === 'SQL' }">SQL</span>
+              <span class="skill-chip" @mouseenter="hoverChip('Node.js')"     @mouseleave="leaveChip()" :class="{ 'chip-lit': activeChip === 'Node.js' }">Node.js</span>
+            </div>
+          </div>
+
+          <div class="skill-group" data-reveal>
+            <div class="skill-group-label">Frameworks</div>
+            <div class="chip-row">
+              <span class="skill-chip" @mouseenter="hoverChip('ASP.NET MVC')"  @mouseleave="leaveChip()" :class="{ 'chip-lit': activeChip === 'ASP.NET MVC' }">ASP.NET MVC</span>
+              <span class="skill-chip" @mouseenter="hoverChip('ASP.NET Core')" @mouseleave="leaveChip()" :class="{ 'chip-lit': activeChip === 'ASP.NET Core' }">ASP.NET Core</span>
+              <span class="skill-chip" @mouseenter="hoverChip('Laravel')"      @mouseleave="leaveChip()" :class="{ 'chip-lit': activeChip === 'Laravel' }">Laravel</span>
+              <span class="skill-chip" @mouseenter="hoverChip('CakePHP')"      @mouseleave="leaveChip()" :class="{ 'chip-lit': activeChip === 'CakePHP' }">CakePHP</span>
+            </div>
+          </div>
+
+          <div class="skill-group" data-reveal>
+            <div class="skill-group-label">Databases</div>
+            <div class="chip-row">
+              <span class="skill-chip" @mouseenter="hoverChip('SQL Server')"  @mouseleave="leaveChip()" :class="{ 'chip-lit': activeChip === 'SQL Server' }">SQL Server</span>
+              <span class="skill-chip" @mouseenter="hoverChip('MySQL')"       @mouseleave="leaveChip()" :class="{ 'chip-lit': activeChip === 'MySQL' }">MySQL</span>
+              <span class="skill-chip" @mouseenter="hoverChip('MongoDB')"     @mouseleave="leaveChip()" :class="{ 'chip-lit': activeChip === 'MongoDB' }">MongoDB</span>
+              <span class="skill-chip" @mouseenter="hoverChip('PostgreSQL')"  @mouseleave="leaveChip()" :class="{ 'chip-lit': activeChip === 'PostgreSQL' }">PostgreSQL</span>
+            </div>
+          </div>
+
+          <div class="skill-group" data-reveal>
+            <div class="skill-group-label">DevOps &amp; Tools</div>
+            <div class="chip-row">
+              <span class="skill-chip" @mouseenter="hoverChip('GitHub Actions')" @mouseleave="leaveChip()" :class="{ 'chip-lit': activeChip === 'GitHub Actions' }">GitHub Actions</span>
+              <span class="skill-chip" @mouseenter="hoverChip('CI/CD')"          @mouseleave="leaveChip()" :class="{ 'chip-lit': activeChip === 'CI/CD' }">CI/CD</span>
+              <span class="skill-chip" @mouseenter="hoverChip('Git')"            @mouseleave="leaveChip()" :class="{ 'chip-lit': activeChip === 'Git' }">Git</span>
+              <span class="skill-chip" @mouseenter="hoverChip('REST APIs')"      @mouseleave="leaveChip()" :class="{ 'chip-lit': activeChip === 'REST APIs' }">REST APIs</span>
+              <span class="skill-chip" @mouseenter="hoverChip('RBAC')"           @mouseleave="leaveChip()" :class="{ 'chip-lit': activeChip === 'RBAC' }">RBAC</span>
+              <span class="skill-chip" @mouseenter="hoverChip('Codeception')"    @mouseleave="leaveChip()" :class="{ 'chip-lit': activeChip === 'Codeception' }">Codeception</span>
+              <span class="skill-chip" @mouseenter="hoverChip('JIRA')"           @mouseleave="leaveChip()" :class="{ 'chip-lit': activeChip === 'JIRA' }">JIRA</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="hover-tooltip" style="display:none;">
+          <i class="bi bi-hand-index-thumb"></i>
+          Click to explore technical expertise in detail
+        </div>
       </div>
 
       <!-- All Resume Modals (placed outside resume-items to avoid stacking context issues) -->
@@ -982,6 +1109,16 @@
     </div>
   </section><!-- End Contact Section -->
 
+  <!-- Floating Resume Download Button (shown when scrolled past Summary) -->
+  <a href="https://drive.google.com/file/d/1Tf2IKm2vqvcDvYwf5_tskYHeubGJKZiT/view"
+     target="_blank"
+     class="resume-fab"
+     id="resumeFab"
+     aria-label="Download Resume">
+    <i class="bx bx-download"></i>
+    <span>Resume</span>
+  </a>
+
   <!-- Chat Assistant Widget -->
   <div class="chat-widget">
     <button class="chat-toggle" id="chatToggle">
@@ -1083,11 +1220,15 @@
   <!-- Utility Scripts -->
   <script src="assets/js/utils.js"></script>
 
-  <!-- GSAP (for bio Glass-Shatter reveal) -->
+  <!-- GSAP core + ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d+q2ZC9ULTGv7a5MFD/HxnCHMoMogFQ9eL6Rml4DUbRmSSREHv6dLQDEGbfAt3kMtIk/OA0tw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- 3D About Section -->
   <script src="assets/js/about-3d.js"></script>
+
+  <!-- Resume Timeline -->
+  <script src="assets/js/resume-timeline.js"></script>
 
   <!-- Contact Section Enhancements -->
   <script src="assets/js/contact-enhanced.js"></script>

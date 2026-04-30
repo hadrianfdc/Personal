@@ -1,0 +1,547 @@
+/* ============================================================
+   Resume — Modern Timeline Layout
+   ============================================================ */
+
+/* ════════════════════════════════════════════════════════════
+   Section / group headings
+   ════════════════════════════════════════════════════════════ */
+.timeline-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 19px !important;
+  font-weight: 700 !important;
+  color: #2C3E50 !important;
+  margin-bottom: 26px !important;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(255, 159, 67, 0.18);
+}
+
+.timeline-section-title .title-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(255, 159, 67, 0.10);
+  border: 1px solid rgba(255, 159, 67, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.timeline-section-title .title-icon i {
+  font-size: 17px;
+  color: #FF9F43;
+}
+
+.skills-hint {
+  font-size: 11px;
+  font-weight: 500;
+  color: #9C88FF;
+  margin-left: auto;
+  letter-spacing: 0.01em;
+  opacity: 0.85;
+}
+
+/* ════════════════════════════════════════════════════════════
+   Summary Card
+   ════════════════════════════════════════════════════════════ */
+.resume-summary-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.88) 0%, rgba(255,248,240,0.80) 100%);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-bottom: 40px;
+  box-shadow:
+    0 0 0 1.5px rgba(255, 159, 67, 0.22),
+    0 0 0 3px rgba(156, 136, 255, 0.10),
+    0 8px 32px rgba(44, 62, 80, 0.08);
+  cursor: pointer;
+  transition: box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  position: relative;
+}
+
+.resume-summary-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 0 1.5px rgba(255, 159, 67, 0.40),
+    0 0 0 3px rgba(156, 136, 255, 0.18),
+    0 16px 48px rgba(44, 62, 80, 0.11);
+}
+
+.summary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.summary-identity {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.summary-avatar-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(255, 159, 67, 0.10);
+  border: 1px solid rgba(255, 159, 67, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.summary-avatar-icon i {
+  font-size: 26px;
+  color: #FF9F43;
+}
+
+.summary-name {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: #2C3E50 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.summary-role {
+  font-size: 13px;
+  color: #9C88FF;
+  font-weight: 500;
+  margin: 3px 0 0 !important;
+}
+
+.summary-stats {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.stat-item { text-align: center; }
+
+.stat-num {
+  display: block;
+  font-size: 24px;
+  font-weight: 800;
+  color: #FF9F43;
+  line-height: 1;
+}
+
+.stat-lbl {
+  display: block;
+  font-size: 11px;
+  color: #4A5568;
+  margin-top: 3px;
+  letter-spacing: 0.02em;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 38px;
+  background: rgba(44, 62, 80, 0.12);
+}
+
+.summary-bio {
+  color: #4A5568 !important;
+  font-size: 14px !important;
+  line-height: 1.75 !important;
+  margin: 0 0 14px !important;
+  font-style: italic;
+}
+
+.summary-meta {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+
+.summary-meta span {
+  font-size: 13px;
+  color: #4A5568;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.summary-meta i {
+  color: #FF9F43;
+  font-size: 14px;
+}
+
+/* ════════════════════════════════════════════════════════════
+   Timeline wrapper
+   ════════════════════════════════════════════════════════════ */
+.resume-timeline {
+  position: relative;
+  padding-left: 36px;
+}
+
+/* Gray background track */
+.timeline-track {
+  position: absolute;
+  left: 15px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: rgba(44, 62, 80, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+/* Animated gradient progress bar */
+.timeline-progress {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #FF9F43 0%, #9C88FF 100%);
+  transform-origin: top center;
+  transform: scaleY(0);
+}
+
+/* ── Entry ── */
+.timeline-entry {
+  position: relative;
+  margin-bottom: 22px;
+  transition: opacity 0.38s ease, filter 0.38s ease;
+}
+
+.timeline-entry:last-child { margin-bottom: 0; }
+
+/* ── Node ── */
+.timeline-node {
+  position: absolute;
+  left: -27px;
+  top: 21px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2.5px solid #FF9F43;
+  box-shadow: 0 0 0 4px rgba(255, 159, 67, 0.14);
+  z-index: 2;
+  transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.28s ease;
+}
+
+.timeline-node--active {
+  background: #FF9F43;
+  box-shadow: 0 0 0 4px rgba(255, 159, 67, 0.22), 0 0 14px rgba(255, 159, 67, 0.40);
+}
+
+/* Pulse ring on current job */
+.timeline-node--active::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 159, 67, 0.45);
+  animation: nodePulse 2.6s ease-in-out infinite;
+}
+
+@keyframes nodePulse {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50%       { opacity: 0;   transform: scale(1.9); }
+}
+
+.timeline-entry:hover .timeline-node {
+  transform: scale(1.35);
+  box-shadow: 0 0 0 6px rgba(255, 159, 67, 0.20);
+}
+
+/* ════════════════════════════════════════════════════════════
+   Timeline Card
+   ════════════════════════════════════════════════════════════ */
+.timeline-card {
+  background: rgba(255, 255, 255, 0.90);
+  backdrop-filter: blur(6px);
+  border-radius: 14px;
+  padding: 20px 22px;
+  border-left: 3px solid #FF9F43;
+  box-shadow:
+    0 2px 14px rgba(44, 62, 80, 0.07),
+    0 1px 3px rgba(44, 62, 80, 0.04);
+  transition:
+    border-left-width 0.22s ease,
+    border-left-color 0.22s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top shimmer line */
+.timeline-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,159,67,0.5), rgba(156,136,255,0.3), transparent);
+}
+
+.timeline-entry:hover .timeline-card {
+  border-left-width: 5px;
+  transform: translateX(5px);
+  box-shadow:
+    0 8px 28px rgba(44, 62, 80, 0.10),
+    0 2px 6px rgba(255, 159, 67, 0.08);
+}
+
+/* Card content */
+.card-header-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.card-period {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #FF9F43;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.current-badge {
+  background: rgba(255, 159, 67, 0.12);
+  color: #FF9F43;
+  font-size: 9.5px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 159, 67, 0.25);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.card-title {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #2C3E50 !important;
+  margin: 0 0 6px !important;
+}
+
+.card-institution {
+  font-size: 13px !important;
+  color: #4A5568 !important;
+  margin: 0 0 10px !important;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.card-institution i { color: #9C88FF; font-size: 14px; }
+
+.project-label {
+  color: #9C88FF;
+  font-style: italic;
+  font-size: 12px;
+}
+
+.card-detail {
+  font-size: 13px !important;
+  color: #4A5568 !important;
+  line-height: 1.65;
+  margin: 0 0 12px !important;
+}
+
+.card-bullets {
+  font-size: 13px;
+  color: #4A5568;
+  padding-left: 16px;
+  margin: 0 0 14px !important;
+  line-height: 1.65;
+}
+
+.card-bullets li { margin-bottom: 5px; }
+
+/* Chips inside cards */
+.card-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.tech-chip {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(255, 159, 67, 0.08);
+  color: #FF9F43;
+  border: 1px solid rgba(255, 159, 67, 0.20);
+  letter-spacing: 0.02em;
+}
+
+/* ════════════════════════════════════════════════════════════
+   Alpine highlight / dim (chip hover → experience card)
+   ════════════════════════════════════════════════════════════ */
+.entry-highlighted .timeline-card {
+  border-left-color: #9C88FF !important;
+  border-left-width: 5px !important;
+  box-shadow:
+    0 0 0 1.5px rgba(156, 136, 255, 0.22),
+    0 0 0 3px rgba(156, 136, 255, 0.08),
+    0 8px 28px rgba(156, 136, 255, 0.12) !important;
+  transform: translateX(5px);
+}
+
+.entry-highlighted .timeline-node {
+  border-color: #9C88FF !important;
+  box-shadow: 0 0 0 6px rgba(156, 136, 255, 0.18) !important;
+}
+
+.entry-dimmed {
+  opacity: 0.30;
+  filter: grayscale(0.25);
+}
+
+/* ════════════════════════════════════════════════════════════
+   Skills Section
+   ════════════════════════════════════════════════════════════ */
+.skills-section {
+  margin-top: 44px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(44, 62, 80, 0.07);
+}
+
+.skill-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.skill-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.skill-group-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #2C3E50;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  min-width: 88px;
+  padding-top: 7px;
+  opacity: 0.55;
+  flex-shrink: 0;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Interactive skill chips */
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.82);
+  color: #4A5568;
+  border: 1px solid rgba(44, 62, 80, 0.12);
+  cursor: default;
+  user-select: none;
+  box-shadow: 0 1px 4px rgba(44, 62, 80, 0.06);
+}
+
+.skill-chip.chip-lit {
+  background: linear-gradient(135deg, rgba(255,159,67,0.14), rgba(156,136,255,0.08));
+  color: #FF9F43;
+  border-color: rgba(255, 159, 67, 0.38);
+  box-shadow: 0 2px 12px rgba(255, 159, 67, 0.18);
+}
+
+/* ════════════════════════════════════════════════════════════
+   Floating Download Button (FAB)
+   ════════════════════════════════════════════════════════════ */
+.resume-fab {
+  position: fixed;
+  bottom: 32px;
+  right: 90px;
+  z-index: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #FF9F43 0%, #E8892B 100%);
+  color: #fff !important;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none !important;
+  box-shadow:
+    0 6px 24px rgba(255, 159, 67, 0.45),
+    0 2px 6px rgba(255, 159, 67, 0.25);
+  opacity: 0;
+  transform: translateY(18px) scale(0.88);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.resume-fab.fab-visible {
+  pointer-events: all;
+}
+
+.resume-fab:hover {
+  box-shadow:
+    0 10px 32px rgba(255, 159, 67, 0.55),
+    0 3px 8px rgba(255, 159, 67, 0.30);
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+.resume-fab i { font-size: 17px; }
+
+/* ════════════════════════════════════════════════════════════
+   Mobile
+   ════════════════════════════════════════════════════════════ */
+@media (max-width: 991px) {
+  .resume-summary-card { padding: 22px 20px; }
+
+  .summary-header { flex-direction: column; align-items: flex-start; }
+
+  .skill-group { flex-direction: column; gap: 8px; }
+  .skill-group-label { min-width: unset; }
+}
+
+@media (max-width: 576px) {
+  .resume-fab {
+    right: 16px;
+    bottom: 76px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .resume-fab span { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline-card,
+  .timeline-entry,
+  .skill-chip,
+  .resume-fab,
+  .resume-summary-card {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .timeline-node--active::after { animation: none !important; }
+
+  .timeline-progress { transform: scaleY(1) !important; }
+}
