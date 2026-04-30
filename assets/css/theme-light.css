@@ -447,6 +447,68 @@ section .container {
 }
 
 /* ════════════════════════════════════════════════════════════
+   ENHANCED ABOUT — Light-theme adaptations for new elements
+   ════════════════════════════════════════════════════════════ */
+
+/* About-me glassmorphism override (section .container gives white bg — we keep it light) */
+.about .about-me.container {
+  background: rgba(255,255,255,0.82) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255,255,255,0.95) !important;
+  box-shadow:
+    0 0 0 1px rgba(var(--c-accent-rgb),0.07) inset,
+    0 0 40px rgba(var(--c-accent-rgb),0.04) inset,
+    0 16px 48px rgba(44,62,80,0.10) !important;
+}
+
+/* Skills radar section container */
+.skills-radar.container {
+  background: rgba(255,255,255,0.88) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(44,62,80,0.08) !important;
+  box-shadow: 0 4px 24px rgba(44,62,80,0.08) !important;
+}
+
+/* Skill stat list — light theme text */
+.skill-stat-name {
+  color: var(--c-text-head) !important;
+}
+
+.skill-stat-pct {
+  color: var(--c-accent) !important;
+}
+
+.skill-stat-track {
+  background: rgba(44,62,80,0.09) !important;
+  box-shadow: inset 0 1px 3px rgba(44,62,80,0.10) !important;
+}
+
+.skill-stat-fill {
+  background: linear-gradient(90deg, var(--c-accent) 0%, var(--c-lav) 100%) !important;
+  box-shadow: 0 0 8px rgba(var(--c-accent-rgb),0.4) !important;
+}
+
+/* Key phrase */
+.about-keyphrase {
+  color: var(--c-text-body) !important;
+}
+
+.keyphrase-core {
+  background: linear-gradient(90deg, var(--c-accent), var(--c-lav), var(--c-accent)) !important;
+  background-size: 200% 100% !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* SVG radar — warm palette on light bg */
+#skill-radar-svg {
+  filter: drop-shadow(0 0 16px rgba(var(--c-accent-rgb),0.22)) !important;
+}
+
+/* ════════════════════════════════════════════════════════════
    8. RESUME SECTION
    ════════════════════════════════════════════════════════════ */
 
