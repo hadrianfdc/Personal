@@ -443,46 +443,98 @@
       <!-- ── FaithStack (featured, full-width top) ── -->
       <div class="row mb-4">
         <div class="col-12">
-          <div class="icon-box" style="padding:0; overflow:hidden;">
+          <!--
+            Alpine state: playing = false (image shown) | true (iframe injected + video plays)
+            x-data lives on the card so both the left media column and right info panel share state.
+          -->
+          <div class="icon-box" style="padding:0; overflow:hidden;" x-data="{ playing: false }">
             <div class="row g-0">
 
-              <!-- Left: Main screenshot + video overlay -->
-              <div class="col-lg-7" style="position:relative; min-height:340px; overflow:hidden; background:#000;">
-                <a href="faithstack/landingpage_1st_section.png"
-                   class="glightbox"
-                   data-gallery="faithstack"
-                   data-description="FaithStack — Landing Page"
-                   style="display:block; height:340px; overflow:hidden;">
-                  <img src="faithstack/landingpage_1st_section.png"
-                       alt="FaithStack landing page"
-                       style="width:100%; height:100%; object-fit:cover; object-position:top; transition:transform 0.5s ease; opacity:0.88;"
-                       onmouseover="this.style.transform='scale(1.04)'; this.style.opacity='1'"
-                       onmouseout="this.style.transform='scale(1)'; this.style.opacity='0.88'">
-                </a>
+              <!-- ── Left: Media column ── -->
+              <div class="col-lg-7"
+                   style="position:relative; height:340px; overflow:hidden; background:#000; flex-shrink:0;">
 
-                <!-- Video play button overlay -->
-                <a href="https://jam.dev/c/acbfcd87-451e-486e-91b9-f6175a4fd366" target="_blank"
-                   title="Watch Demo Video"
-                   style="position:absolute; bottom:20px; left:20px; display:inline-flex; align-items:center; gap:10px;
-                          background:rgba(0,0,0,0.78); color:#fff; text-decoration:none;
-                          padding:11px 20px; border-radius:40px; font-weight:700; font-size:14px;
-                          border:2px solid rgba(255,255,255,0.25); backdrop-filter:blur(6px);
-                          transition:background 0.2s, transform 0.2s;"
-                   onmouseover="this.style.background='rgba(220,38,38,0.9)'; this.style.transform='scale(1.04)'"
-                   onmouseout="this.style.background='rgba(0,0,0,0.78)'; this.style.transform='scale(1)'">
-                  <i class="bi bi-play-circle-fill" style="font-size:22px; color:#ff4444;"></i>
-                  Watch Demo Video
-                </a>
+                <!-- IMAGE VIEW — hidden while video is playing -->
+                <div x-show="!playing"
+                     x-transition:leave="transition ease-in duration-200"
+                     x-transition:leave-start="opacity-100"
+                     x-transition:leave-end="opacity-0"
+                     style="height:340px; position:relative;">
 
-                <!-- Click-to-expand hint -->
-                <span style="position:absolute; top:14px; right:14px; background:rgba(0,0,0,0.65);
-                             color:#fff; font-size:12px; padding:5px 12px; border-radius:20px;
-                             backdrop-filter:blur(4px); pointer-events:none;">
-                  <i class="bi bi-zoom-in"></i> Click to expand
-                </span>
-              </div>
+                  <a href="faithstack/landingpage_1st_section.png"
+                     class="glightbox"
+                     data-gallery="faithstack"
+                     data-description="FaithStack — Landing Page"
+                     style="display:block; height:340px; overflow:hidden;">
+                    <img src="faithstack/landingpage_1st_section.png"
+                         alt="FaithStack landing page"
+                         style="width:100%; height:100%; object-fit:cover; object-position:top;
+                                transition:transform 0.5s ease, opacity 0.3s ease; opacity:0.88;"
+                         onmouseover="this.style.transform='scale(1.04)'; this.style.opacity='1'"
+                         onmouseout="this.style.transform='scale(1)'; this.style.opacity='0.88'">
+                  </a>
 
-              <!-- Right: Info -->
+                  <!-- Play overlay button — @click.stop prevents glightbox from also firing -->
+                  <button @click.stop="playing = true"
+                          title="Watch Demo Video"
+                          style="position:absolute; bottom:20px; left:20px; display:inline-flex;
+                                 align-items:center; gap:10px; background:rgba(0,0,0,0.78);
+                                 color:#fff; border:2px solid rgba(255,255,255,0.25);
+                                 padding:11px 20px; border-radius:40px; font-weight:700;
+                                 font-size:14px; cursor:pointer; backdrop-filter:blur(6px);
+                                 transition:background 0.2s, transform 0.2s;"
+                          onmouseover="this.style.background='rgba(220,38,38,0.9)'; this.style.transform='scale(1.04)'"
+                          onmouseout="this.style.background='rgba(0,0,0,0.78)'; this.style.transform='scale(1)'">
+                    <i class="bi bi-play-circle-fill" style="font-size:22px; color:#ff4444;"></i>
+                    Watch Demo Video
+                  </button>
+
+                  <!-- Expand hint (image lightbox) -->
+                  <span style="position:absolute; top:14px; right:14px; background:rgba(0,0,0,0.65);
+                               color:#fff; font-size:12px; padding:5px 12px; border-radius:20px;
+                               backdrop-filter:blur(4px); pointer-events:none;">
+                    <i class="bi bi-zoom-in"></i> Click image to expand
+                  </span>
+                </div>
+
+                <!-- VIDEO VIEW — iframe injected into DOM only when playing=true.
+                     x-if removes it on close so the video stops immediately (no src="" hack needed). -->
+                <template x-if="playing">
+                  <div x-transition:enter="transition ease-out duration-300"
+                       x-transition:enter-start="opacity-0"
+                       x-transition:enter-end="opacity-100"
+                       style="position:absolute; inset:0; background:#000;">
+
+                    <!--
+                      Jam.dev embed URL format: replace /c/ with /embed/c/
+                      allow="autoplay" lets the iframe start immediately.
+                    -->
+                    <iframe
+                      src="https://jam.dev/embed/c/acbfcd87-451e-486e-91b9-f6175a4fd366"
+                      style="width:100%; height:100%; border:none; display:block;"
+                      allow="autoplay; fullscreen; clipboard-write"
+                      allowfullscreen
+                      loading="eager">
+                    </iframe>
+
+                    <!-- Close Video button -->
+                    <button @click="playing = false"
+                            style="position:absolute; top:14px; right:14px; display:inline-flex;
+                                   align-items:center; gap:7px; background:rgba(0,0,0,0.75);
+                                   color:#fff; border:1.5px solid rgba(255,255,255,0.3);
+                                   padding:7px 16px; border-radius:30px; font-size:13px;
+                                   font-weight:700; cursor:pointer; backdrop-filter:blur(6px);
+                                   transition:background 0.2s;"
+                            onmouseover="this.style.background='rgba(220,38,38,0.85)'"
+                            onmouseout="this.style.background='rgba(0,0,0,0.75)'">
+                      <i class="bi bi-x-circle-fill"></i> Close Video
+                    </button>
+                  </div>
+                </template>
+
+              </div><!-- end media column -->
+
+              <!-- ── Right: Info panel ── -->
               <div class="col-lg-5" style="padding:32px; display:flex; flex-direction:column; justify-content:space-between;">
                 <div>
                   <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
@@ -501,14 +553,23 @@
                     <span class="tech-chip">Multi-Tenant</span>
                   </div>
                 </div>
-                <div style="display:flex; flex-wrap:wrap; gap:12px;">
-                  <a href="https://jam.dev/c/acbfcd87-451e-486e-91b9-f6175a4fd366" target="_blank"
-                     style="display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:700;
-                            color:#fff; background:#dc2626; padding:9px 18px; border-radius:8px; text-decoration:none;
-                            transition:opacity 0.2s;"
-                     onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-                    <i class="bi bi-play-circle-fill"></i> Watch Demo
-                  </a>
+
+                <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+
+                  <!-- Watch Demo — toggles inline video; label reacts to state -->
+                  <button @click="playing = !playing"
+                          :style="playing
+                            ? 'background:#6b7280; color:#fff;'
+                            : 'background:#dc2626; color:#fff;'"
+                          style="display:inline-flex; align-items:center; gap:7px; font-size:13px;
+                                 font-weight:700; padding:9px 18px; border-radius:8px; border:none;
+                                 cursor:pointer; transition:background 0.2s, opacity 0.2s;"
+                          onmouseover="this.style.opacity='0.85'"
+                          onmouseout="this.style.opacity='1'">
+                    <i class="bi" :class="playing ? 'bi-stop-circle-fill' : 'bi-play-circle-fill'"></i>
+                    <span x-text="playing ? 'Stop Demo' : 'Watch Demo'"></span>
+                  </button>
+
                   <a href="https://faithstack-main-pp7ylp.free.laravel.cloud/" target="_blank"
                      style="display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:600;
                             color:var(--color-primary,#0563bb); text-decoration:none; padding:9px 0;">
@@ -520,7 +581,7 @@
                     <i class="bi bi-github"></i> GitHub
                   </a>
                 </div>
-              </div>
+              </div><!-- end info panel -->
 
             </div>
           </div>
