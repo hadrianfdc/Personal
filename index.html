@@ -65,12 +65,16 @@
 
   <!-- ======= Header ======= -->
   <header id="header">
+
+    <!-- Dot-grid canvas — pointer-events:none, z-index:0, fills header -->
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
     <div class="container">
 
       <h1><a href="index.html">Hadrian Evarula</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
-      <h2>AI Developer &amp; Backend Engineer — Cebu, Philippines</h2>
+
+      <!-- id="hero-tagline" + class="scrambling" for TextScramble + cursor -->
+      <h2 id="hero-tagline" class="scrambling">AI Developer &amp; Backend Engineer — Cebu, Philippines</h2>
 
       <nav id="navbar" class="navbar">
         <ul>
@@ -89,6 +93,14 @@
         <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
         <a href="https://www.linkedin.com/in/hadrian-evarula-b36a01327?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" class="linkedin"><i class="bi bi-linkedin"></i></a>
       </div>
+
+      <!-- Primary CTA button — glowing border, fill-sweep on hover -->
+      <a href="#projects"
+         class="nav-link hero-cta"
+         onclick="event.preventDefault(); document.querySelector('#navbar a[href=\'#projects\']').click();">
+        <span><i class="bi bi-grid-1x2-fill"></i></span>
+        <span>View My Work</span>
+      </a>
 
     </div>
   </header><!-- End Header -->
@@ -497,37 +509,68 @@
                   </span>
                 </div>
 
-                <!-- VIDEO VIEW — iframe injected into DOM only when playing=true.
-                     x-if removes it on close so the video stops immediately (no src="" hack needed). -->
+                <!-- VIDEO LAUNCH OVERLAY — shown when playing=true.
+                     Jam.dev does not expose a public iframe embed URL, so we open the
+                     recording in a new tab for guaranteed full-quality playback. -->
                 <template x-if="playing">
                   <div x-transition:enter="transition ease-out duration-300"
                        x-transition:enter-start="opacity-0"
                        x-transition:enter-end="opacity-100"
-                       style="position:absolute; inset:0; background:#000;">
+                       style="position:absolute; inset:0; overflow:hidden;">
 
-                    <!--
-                      Jam.dev embed URL format: replace /c/ with /embed/c/
-                      allow="autoplay" lets the iframe start immediately.
-                    -->
-                    <iframe
-                      src="https://jam.dev/embed/c/acbfcd87-451e-486e-91b9-f6175a4fd366"
-                      style="width:100%; height:100%; border:none; display:block;"
-                      allow="autoplay; fullscreen; clipboard-write"
-                      allowfullscreen
-                      loading="eager">
-                    </iframe>
+                    <!-- Blurred screenshot as background -->
+                    <img src="faithstack/landingpage_1st_section.png"
+                         alt=""
+                         style="width:100%; height:100%; object-fit:cover; object-position:top;
+                                filter:blur(10px) brightness(0.25); transform:scale(1.08);">
 
-                    <!-- Close Video button -->
+                    <!-- Centred launch panel -->
+                    <div style="position:absolute; inset:0; display:flex; flex-direction:column;
+                                align-items:center; justify-content:center; gap:18px; padding:24px; text-align:center;">
+
+                      <!-- Animated play ring -->
+                      <div style="position:relative; width:80px; height:80px;">
+                        <div style="position:absolute; inset:0; border-radius:50%;
+                                    border:2px solid rgba(220,38,38,0.4);
+                                    animation:ping 1.4s cubic-bezier(0,0,0.2,1) infinite;"></div>
+                        <div style="position:absolute; inset:6px; border-radius:50%;
+                                    background:rgba(220,38,38,0.15); border:2px solid rgba(220,38,38,0.6);
+                                    display:flex; align-items:center; justify-content:center;">
+                          <i class="bi bi-play-fill" style="font-size:28px; color:#fff; margin-left:3px;"></i>
+                        </div>
+                      </div>
+
+                      <div>
+                        <p style="color:#fff; font-weight:700; font-size:15px; margin:0 0 4px;">FaithStack — Full Demo Recording</p>
+                        <p style="color:rgba(255,255,255,0.55); font-size:12px; margin:0;">Opens in Jam.dev · full-quality playback</p>
+                      </div>
+
+                      <a href="https://jam.dev/c/acbfcd87-451e-486e-91b9-f6175a4fd366"
+                         target="_blank" rel="noopener"
+                         style="display:inline-flex; align-items:center; gap:9px;
+                                background:#dc2626; color:#fff; text-decoration:none;
+                                padding:13px 28px; border-radius:10px; font-weight:700;
+                                font-size:14px; letter-spacing:0.3px;
+                                box-shadow:0 4px 20px rgba(220,38,38,0.45);
+                                transition:transform 0.2s, box-shadow 0.2s;"
+                         onmouseover="this.style.transform='scale(1.04)'; this.style.boxShadow='0 6px 28px rgba(220,38,38,0.6)'"
+                         onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 20px rgba(220,38,38,0.45)'">
+                        <i class="bi bi-box-arrow-up-right" style="font-size:15px;"></i>
+                        Watch Full Demo
+                      </a>
+                    </div>
+
+                    <!-- Close button -->
                     <button @click="playing = false"
                             style="position:absolute; top:14px; right:14px; display:inline-flex;
-                                   align-items:center; gap:7px; background:rgba(0,0,0,0.75);
-                                   color:#fff; border:1.5px solid rgba(255,255,255,0.3);
+                                   align-items:center; gap:7px; background:rgba(0,0,0,0.6);
+                                   color:#fff; border:1.5px solid rgba(255,255,255,0.25);
                                    padding:7px 16px; border-radius:30px; font-size:13px;
                                    font-weight:700; cursor:pointer; backdrop-filter:blur(6px);
                                    transition:background 0.2s;"
                             onmouseover="this.style.background='rgba(220,38,38,0.85)'"
-                            onmouseout="this.style.background='rgba(0,0,0,0.75)'">
-                      <i class="bi bi-x-circle-fill"></i> Close Video
+                            onmouseout="this.style.background='rgba(0,0,0,0.6)'">
+                      <i class="bi bi-x-circle-fill"></i> Close
                     </button>
                   </div>
                 </template>
@@ -1595,6 +1638,10 @@
 
   <!-- Contact Section Enhancements -->
   <script src="assets/js/contact-enhanced.js"></script>
+
+  <!-- Hero Section Enhancements (dot canvas, scramble, GSAP, magnetic icons) -->
+  <!-- Must load AFTER gsap.min.js -->
+  <script src="assets/js/hero-enhanced.js"></script>
 
 </body>
 </html>

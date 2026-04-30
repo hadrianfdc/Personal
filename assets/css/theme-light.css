@@ -78,10 +78,95 @@ h1, h2, h3, h4, h5, h6 { color: var(--c-text-head) !important; }
   color: var(--c-text-body) !important;
 }
 
+/* ── Hero canvas — dot-grid background ── */
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Keep header content above the canvas */
+#header .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── TextScramble glyphs ── */
+.scramble-glyph {
+  color: var(--c-accent);
+  opacity: 0.65;
+  font-family: monospace;
+}
+.scramble-blank {
+  opacity: 0.12;
+}
+
+/* Blinking cursor after tagline while scramble runs */
+#hero-tagline.scrambling::after {
+  content: '|';
+  display: inline-block;
+  color: var(--c-accent);
+  animation: cursor-blink 0.9s step-end infinite;
+  margin-left: 2px;
+}
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ── Hero CTA button — glowing orange border ── */
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 30px;
+  padding: 13px 30px;
+  background: transparent;
+  color: var(--c-accent) !important;
+  border: 2px solid var(--c-accent);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-decoration: none !important;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  animation: cta-glow 2.6s ease-in-out infinite;
+  transition: color 0.3s ease !important;
+  will-change: transform;
+}
+
+/* Fill sweep on hover */
+.hero-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--c-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.32s ease !important;
+  z-index: 0;
+}
+.hero-cta:hover::before { transform: scaleX(1); }
+.hero-cta:hover         { color: #fff !important; }
+.hero-cta span, .hero-cta i { position: relative; z-index: 1; }
+
+@keyframes cta-glow {
+  0%,  100% { box-shadow: 0 0  8px rgba(255,159,67,0.35), 0 0 22px rgba(255,159,67,0.12); }
+  50%        { box-shadow: 0 0 20px rgba(255,159,67,0.65), 0 0 48px rgba(255,159,67,0.30); }
+}
+
+/* ── Magnetic social links — smooth will-change ── */
 /* Social links */
 #header .social-links a {
   background: rgba(44,62,80,0.08) !important;
   color: var(--c-text-head) !important;
+  will-change: transform;
+  transition: background 0.25s ease, color 0.25s ease !important;
 }
 
 #header .social-links a:hover {
