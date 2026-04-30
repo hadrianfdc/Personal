@@ -440,70 +440,173 @@
         <p>Real-World Client Work &amp; Builds</p>
       </div>
 
-      <div class="row">
+      <!-- ── FaithStack (featured, full-width top) ── -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="icon-box" style="padding:0; overflow:hidden;">
+            <div class="row g-0">
 
-        <!-- FaithStack -->
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-          <div class="icon-box" style="padding:0; overflow:hidden; display:flex; flex-direction:column;">
-            <div style="position:relative; overflow:hidden; height:200px;">
-              <img src="faithstack/landingpage_1st_section.png"
-                   alt="FaithStack — CMS platform for faith communities"
-                   style="width:100%; height:100%; object-fit:cover; object-position:top; transition:transform 0.4s ease;"
-                   onmouseover="this.style.transform='scale(1.05)'"
-                   onmouseout="this.style.transform='scale(1)'">
-            </div>
-            <div style="padding:24px; flex:1; display:flex; flex-direction:column;">
-              <h4 style="margin-bottom:8px;"><a href="https://faithstack-main-pp7ylp.free.laravel.cloud/" target="_blank">FaithStack</a></h4>
-              <p style="flex:1;">A complete CMS platform built for faith communities — drag-and-drop editor, 80+ themes, donation management, and custom branding. Built for organizations that need a polished web presence without a developer on staff.</p>
-              <div style="margin:12px 0; display:flex; flex-wrap:wrap; gap:6px;">
-                <span class="tech-chip">Laravel</span>
-                <span class="tech-chip">PHP</span>
-                <span class="tech-chip">MySQL</span>
-                <span class="tech-chip">CMS</span>
-                <span class="tech-chip">Donation Management</span>
-              </div>
-              <div style="display:flex; gap:10px; margin-top:auto;">
-                <a href="https://faithstack-main-pp7ylp.free.laravel.cloud/" target="_blank"
-                   style="display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:var(--color-primary, #0563bb); text-decoration:none;">
-                  <i class="bx bx-globe"></i> Live Demo
+              <!-- Left: Main screenshot + video overlay -->
+              <div class="col-lg-7" style="position:relative; min-height:340px; overflow:hidden; background:#000;">
+                <a href="faithstack/landingpage_1st_section.png"
+                   class="glightbox"
+                   data-gallery="faithstack"
+                   data-description="FaithStack — Landing Page"
+                   style="display:block; height:340px; overflow:hidden;">
+                  <img src="faithstack/landingpage_1st_section.png"
+                       alt="FaithStack landing page"
+                       style="width:100%; height:100%; object-fit:cover; object-position:top; transition:transform 0.5s ease; opacity:0.88;"
+                       onmouseover="this.style.transform='scale(1.04)'; this.style.opacity='1'"
+                       onmouseout="this.style.transform='scale(1)'; this.style.opacity='0.88'">
                 </a>
-                <a href="https://github.com/haddyscript/FaithStack" target="_blank"
-                   style="display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:#555; text-decoration:none;">
-                  <i class="bi bi-github"></i> GitHub
-                </a>
+
+                <!-- Video play button overlay -->
                 <a href="https://jam.dev/c/acbfcd87-451e-486e-91b9-f6175a4fd366" target="_blank"
-                   style="display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:#555; text-decoration:none;">
-                  <i class="bx bx-play-circle"></i> Video
+                   title="Watch Demo Video"
+                   style="position:absolute; bottom:20px; left:20px; display:inline-flex; align-items:center; gap:10px;
+                          background:rgba(0,0,0,0.78); color:#fff; text-decoration:none;
+                          padding:11px 20px; border-radius:40px; font-weight:700; font-size:14px;
+                          border:2px solid rgba(255,255,255,0.25); backdrop-filter:blur(6px);
+                          transition:background 0.2s, transform 0.2s;"
+                   onmouseover="this.style.background='rgba(220,38,38,0.9)'; this.style.transform='scale(1.04)'"
+                   onmouseout="this.style.background='rgba(0,0,0,0.78)'; this.style.transform='scale(1)'">
+                  <i class="bi bi-play-circle-fill" style="font-size:22px; color:#ff4444;"></i>
+                  Watch Demo Video
+                </a>
+
+                <!-- Screenshot count badge -->
+                <a href="faithstack/landingpage_1st_section.png"
+                   class="glightbox" data-gallery="faithstack" data-description="FaithStack — Landing Page"
+                   style="position:absolute; top:14px; right:14px; background:rgba(0,0,0,0.65);
+                          color:#fff; font-size:12px; padding:5px 12px; border-radius:20px;
+                          text-decoration:none; backdrop-filter:blur(4px);">
+                  <i class="bi bi-images"></i> View Screenshot
                 </a>
               </div>
+
+              <!-- Right: Info -->
+              <div class="col-lg-5" style="padding:32px; display:flex; flex-direction:column; justify-content:space-between;">
+                <div>
+                  <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+                    <h4 style="margin:0;">FaithStack</h4>
+                    <span style="background:#dcfce7; color:#166534; font-size:11px; font-weight:700;
+                                 padding:3px 10px; border-radius:20px; letter-spacing:0.5px;">CLIENT PROJECT</span>
+                  </div>
+                  <p style="color:#888; font-size:13px; margin-bottom:14px;">Full-Stack CMS Platform &middot; Deployed on Laravel Cloud</p>
+                  <p style="margin-bottom:18px;">A complete CMS platform built for faith communities — drag-and-drop editor, 80+ themes, donation management, and custom branding. Designed for organizations that need a professional web presence without needing a developer on staff.</p>
+                  <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:22px;">
+                    <span class="tech-chip">Laravel</span>
+                    <span class="tech-chip">PHP</span>
+                    <span class="tech-chip">MySQL</span>
+                    <span class="tech-chip">CMS</span>
+                    <span class="tech-chip">Donation Management</span>
+                    <span class="tech-chip">Multi-Tenant</span>
+                  </div>
+                </div>
+                <div style="display:flex; flex-wrap:wrap; gap:12px;">
+                  <a href="https://jam.dev/c/acbfcd87-451e-486e-91b9-f6175a4fd366" target="_blank"
+                     style="display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:700;
+                            color:#fff; background:#dc2626; padding:9px 18px; border-radius:8px; text-decoration:none;
+                            transition:opacity 0.2s;"
+                     onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+                    <i class="bi bi-play-circle-fill"></i> Watch Demo
+                  </a>
+                  <a href="https://faithstack-main-pp7ylp.free.laravel.cloud/" target="_blank"
+                     style="display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:600;
+                            color:var(--color-primary,#0563bb); text-decoration:none; padding:9px 0;">
+                    <i class="bx bx-globe"></i> Live Site
+                  </a>
+                  <a href="https://github.com/haddyscript/FaithStack" target="_blank"
+                     style="display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:600;
+                            color:#555; text-decoration:none; padding:9px 0;">
+                    <i class="bi bi-github"></i> GitHub
+                  </a>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- ── Johnny Davis + Portfolio Assistant (side by side) ── -->
+      <div class="row">
 
         <!-- Johnny Davis Global Mission -->
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-          <div class="icon-box" style="padding:0; overflow:hidden; display:flex; flex-direction:column;">
-            <div style="position:relative; overflow:hidden; height:200px;">
-              <img src="johnny_davis_global_mission/landingpage.png"
-                   alt="Johnny Davis Global Mission — nonprofit donation platform"
-                   style="width:100%; height:100%; object-fit:cover; object-position:top; transition:transform 0.4s ease;"
-                   onmouseover="this.style.transform='scale(1.05)'"
-                   onmouseout="this.style.transform='scale(1)'">
+        <div class="col-lg-8 col-md-12 d-flex align-items-stretch mb-4">
+          <div class="icon-box" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column;">
+
+            <!-- Main hero image -->
+            <div style="position:relative; height:280px; overflow:hidden; background:#000;">
+              <a href="johnny_davis_global_mission/landingpage.png"
+                 class="glightbox"
+                 data-gallery="johnnydavis"
+                 data-description="Johnny Davis Global Mission — Landing Page"
+                 style="display:block; height:100%;">
+                <img src="johnny_davis_global_mission/landingpage.png"
+                     alt="Johnny Davis Global Mission landing page"
+                     style="width:100%; height:100%; object-fit:cover; object-position:top;
+                            transition:transform 0.5s ease; opacity:0.9;"
+                     onmouseover="this.style.transform='scale(1.03)'; this.style.opacity='1'"
+                     onmouseout="this.style.transform='scale(1)'; this.style.opacity='0.9'">
+              </a>
+              <span style="position:absolute; top:14px; right:14px; background:rgba(0,0,0,0.65);
+                           color:#fff; font-size:12px; padding:5px 12px; border-radius:20px;
+                           backdrop-filter:blur(4px);">
+                <i class="bi bi-images"></i> 9 Screenshots
+              </span>
             </div>
+
+            <!-- Thumbnail strip -->
+            <div style="display:flex; gap:6px; padding:10px 12px; overflow-x:auto; background:#f8f8f8; flex-shrink:0;"
+                 class="project-thumbs-strip">
+              <a href="johnny_davis_global_mission/admin_dashboard_1.png" class="glightbox" data-gallery="johnnydavis" data-description="Admin Dashboard" style="flex-shrink:0;">
+                <img src="johnny_davis_global_mission/admin_dashboard_1.png" alt="Admin Dashboard" style="height:64px; width:100px; object-fit:cover; border-radius:5px; border:2px solid #ddd; transition:border-color 0.2s;" onmouseover="this.style.borderColor='#0563bb'" onmouseout="this.style.borderColor='#ddd'">
+              </a>
+              <a href="johnny_davis_global_mission/admin_dashboard_2.png" class="glightbox" data-gallery="johnnydavis" data-description="Admin Dashboard — Detail" style="flex-shrink:0;">
+                <img src="johnny_davis_global_mission/admin_dashboard_2.png" alt="Admin Dashboard Detail" style="height:64px; width:100px; object-fit:cover; border-radius:5px; border:2px solid #ddd; transition:border-color 0.2s;" onmouseover="this.style.borderColor='#0563bb'" onmouseout="this.style.borderColor='#ddd'">
+              </a>
+              <a href="johnny_davis_global_mission/admin_campaign.png" class="glightbox" data-gallery="johnnydavis" data-description="Campaign Management" style="flex-shrink:0;">
+                <img src="johnny_davis_global_mission/admin_campaign.png" alt="Campaign Management" style="height:64px; width:100px; object-fit:cover; border-radius:5px; border:2px solid #ddd; transition:border-color 0.2s;" onmouseover="this.style.borderColor='#0563bb'" onmouseout="this.style.borderColor='#ddd'">
+              </a>
+              <a href="johnny_davis_global_mission/admin_donations_1.png" class="glightbox" data-gallery="johnnydavis" data-description="Donations Panel" style="flex-shrink:0;">
+                <img src="johnny_davis_global_mission/admin_donations_1.png" alt="Donations Panel" style="height:64px; width:100px; object-fit:cover; border-radius:5px; border:2px solid #ddd; transition:border-color 0.2s;" onmouseover="this.style.borderColor='#0563bb'" onmouseout="this.style.borderColor='#ddd'">
+              </a>
+              <a href="johnny_davis_global_mission/admin_donations_modal.png" class="glightbox" data-gallery="johnnydavis" data-description="Donation Detail Modal" style="flex-shrink:0;">
+                <img src="johnny_davis_global_mission/admin_donations_modal.png" alt="Donation Detail Modal" style="height:64px; width:100px; object-fit:cover; border-radius:5px; border:2px solid #ddd; transition:border-color 0.2s;" onmouseover="this.style.borderColor='#0563bb'" onmouseout="this.style.borderColor='#ddd'">
+              </a>
+              <a href="johnny_davis_global_mission/admin_login.png" class="glightbox" data-gallery="johnnydavis" data-description="Admin Login Page" style="flex-shrink:0;">
+                <img src="johnny_davis_global_mission/admin_login.png" alt="Admin Login" style="height:64px; width:100px; object-fit:cover; border-radius:5px; border:2px solid #ddd; transition:border-color 0.2s;" onmouseover="this.style.borderColor='#0563bb'" onmouseout="this.style.borderColor='#ddd'">
+              </a>
+              <a href="johnny_davis_global_mission/admin_side_bar.png" class="glightbox" data-gallery="johnnydavis" data-description="Admin Sidebar Navigation" style="flex-shrink:0;">
+                <img src="johnny_davis_global_mission/admin_side_bar.png" alt="Admin Sidebar" style="height:64px; width:100px; object-fit:cover; border-radius:5px; border:2px solid #ddd; transition:border-color 0.2s;" onmouseover="this.style.borderColor='#0563bb'" onmouseout="this.style.borderColor='#ddd'">
+              </a>
+              <a href="johnny_davis_global_mission/admin_side_bar_2.png" class="glightbox" data-gallery="johnnydavis" data-description="Admin Sidebar — Expanded" style="flex-shrink:0;">
+                <img src="johnny_davis_global_mission/admin_side_bar_2.png" alt="Admin Sidebar Expanded" style="height:64px; width:100px; object-fit:cover; border-radius:5px; border:2px solid #ddd; transition:border-color 0.2s;" onmouseover="this.style.borderColor='#0563bb'" onmouseout="this.style.borderColor='#ddd'">
+              </a>
+            </div>
+
+            <!-- Info -->
             <div style="padding:24px; flex:1; display:flex; flex-direction:column;">
-              <h4 style="margin-bottom:8px;"><a href="https://johnny-davis-global-mission-main-yaxzaf.free.laravel.cloud/" target="_blank">Johnny Davis Global Mission</a></h4>
-              <p style="flex:1;">A full-featured nonprofit platform for a Christian mission organization serving Filipino communities. Includes campaign management, recurring donation tracking, admin dashboard with live reporting, subscriber management, and content publishing.</p>
-              <div style="margin:12px 0; display:flex; flex-wrap:wrap; gap:6px;">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+                <h4 style="margin:0;">Johnny Davis Global Mission</h4>
+                <span style="background:#dcfce7; color:#166534; font-size:11px; font-weight:700;
+                             padding:3px 10px; border-radius:20px; letter-spacing:0.5px;">CLIENT PROJECT</span>
+              </div>
+              <p style="color:#888; font-size:13px; margin-bottom:12px;">Nonprofit Donation &amp; Campaign Platform &middot; Deployed on Laravel Cloud</p>
+              <p style="margin-bottom:16px;">Full-featured platform for a Christian mission organization serving Filipino communities. Ships with real-time campaign tracking, recurring donations, admin dashboard with live reporting, subscriber management, and a full content publishing system.</p>
+              <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;">
                 <span class="tech-chip">Laravel</span>
                 <span class="tech-chip">PHP</span>
                 <span class="tech-chip">MySQL</span>
                 <span class="tech-chip">Admin Dashboard</span>
                 <span class="tech-chip">Donation System</span>
+                <span class="tech-chip">Campaign Management</span>
               </div>
-              <div style="display:flex; gap:10px; margin-top:auto;">
+              <div style="display:flex; gap:14px; margin-top:auto;">
                 <a href="https://johnny-davis-global-mission-main-yaxzaf.free.laravel.cloud/" target="_blank"
-                   style="display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:var(--color-primary, #0563bb); text-decoration:none;">
-                  <i class="bx bx-globe"></i> Live Demo
+                   style="display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:var(--color-primary,#0563bb); text-decoration:none;">
+                  <i class="bx bx-globe"></i> Live Site
                 </a>
                 <a href="https://github.com/haddyscript/johnny_davis_global_mission" target="_blank"
                    style="display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:#555; text-decoration:none;">
@@ -511,35 +614,66 @@
                 </a>
               </div>
             </div>
+
           </div>
         </div>
 
         <!-- Portfolio AI Assistant -->
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-          <div class="icon-box" style="display:flex; flex-direction:column;">
-            <div style="height:200px; background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%); display:flex; align-items:center; justify-content:center; border-radius:8px 8px 0 0; margin:-24px -24px 0;">
-              <div style="text-align:center; color:white;">
-                <i class="bi bi-robot" style="font-size:52px; opacity:0.9;"></i>
-                <p style="margin:8px 0 0; font-size:13px; opacity:0.7; letter-spacing:1px;">LIVE ON THIS SITE</p>
-              </div>
+        <div class="col-lg-4 col-md-12 d-flex align-items-stretch mb-4">
+          <div class="icon-box" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column;">
+
+            <!-- Dark gradient hero -->
+            <div style="height:280px; background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+                        display:flex; flex-direction:column; align-items:center; justify-content:center;
+                        position:relative; overflow:hidden;">
+              <!-- Subtle animated ring -->
+              <div style="position:absolute; width:200px; height:200px; border-radius:50%;
+                          border:1.5px solid rgba(255,255,255,0.07); top:50%; left:50%;
+                          transform:translate(-50%,-50%);"></div>
+              <div style="position:absolute; width:140px; height:140px; border-radius:50%;
+                          border:1.5px solid rgba(255,255,255,0.1); top:50%; left:50%;
+                          transform:translate(-50%,-50%);"></div>
+              <i class="bi bi-robot" style="font-size:60px; color:#a78bfa; z-index:1;"></i>
+              <p style="color:rgba(255,255,255,0.5); font-size:11px; letter-spacing:2px; margin:10px 0 0; z-index:1;">LIVE ON THIS PAGE</p>
+              <!-- Try it button overlay -->
+              <button onclick="document.getElementById('chatToggle').click()"
+                      style="position:absolute; bottom:18px; right:18px;
+                             background:rgba(167,139,250,0.2); border:1.5px solid rgba(167,139,250,0.5);
+                             color:#c4b5fd; padding:7px 16px; border-radius:30px; cursor:pointer;
+                             font-size:12px; font-weight:700; letter-spacing:0.5px;
+                             transition:background 0.2s;"
+                      onmouseover="this.style.background='rgba(167,139,250,0.35)'"
+                      onmouseout="this.style.background='rgba(167,139,250,0.2)'">
+                <i class="bi bi-chat-dots"></i> Try It Now
+              </button>
             </div>
-            <div style="padding-top:24px; flex:1; display:flex; flex-direction:column;">
-              <h4 style="margin-bottom:8px;"><a href="#contact">Portfolio AI Assistant</a></h4>
-              <p style="flex:1;">An AI-powered chat assistant embedded directly in this portfolio — answers visitor questions about my experience, skills, and projects in real time. Built with Firebase for persistence and a custom system prompt trained on my profile context.</p>
-              <div style="margin:12px 0; display:flex; flex-wrap:wrap; gap:6px;">
+
+            <!-- Info -->
+            <div style="padding:24px; flex:1; display:flex; flex-direction:column;">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+                <h4 style="margin:0;">Portfolio AI Assistant</h4>
+                <span style="background:#ede9fe; color:#5b21b6; font-size:11px; font-weight:700;
+                             padding:3px 10px; border-radius:20px; letter-spacing:0.5px;">AI BUILD</span>
+              </div>
+              <p style="color:#888; font-size:13px; margin-bottom:12px;">LLM Integration &middot; Firebase &middot; Live on this site</p>
+              <p style="margin-bottom:16px; flex:1;">AI-powered chat assistant embedded in this portfolio — answers questions about my experience, skills, and projects in real time. Built with a custom system prompt, Firebase persistence, and integrated with an LLM API.</p>
+              <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;">
                 <span class="tech-chip">AI Integration</span>
+                <span class="tech-chip">LLM API</span>
                 <span class="tech-chip">Firebase</span>
                 <span class="tech-chip">JavaScript</span>
-                <span class="tech-chip">LLM API</span>
                 <span class="tech-chip">Alpine.js</span>
               </div>
-              <div style="display:flex; gap:10px; margin-top:auto;">
-                <a href="#contact" onclick="document.getElementById('chatToggle').click(); return false;"
-                   style="display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:var(--color-primary, #0563bb); text-decoration:none;">
-                  <i class="bi bi-chat-dots"></i> Try It Live
-                </a>
-              </div>
+              <button onclick="document.getElementById('chatToggle').click()"
+                      style="align-self:flex-start; display:inline-flex; align-items:center; gap:7px;
+                             font-size:13px; font-weight:700; color:#fff; background:#7c3aed;
+                             padding:9px 18px; border-radius:8px; border:none; cursor:pointer;
+                             transition:opacity 0.2s;"
+                      onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+                <i class="bi bi-chat-dots-fill"></i> Try It Live
+              </button>
             </div>
+
           </div>
         </div>
 
