@@ -1510,6 +1510,31 @@ section .container {
   transition: opacity 0.3s ease;
 }
 
+/* ── Projects Section ── */
+.project-thumbs-strip {
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+
+.project-thumbs-strip::-webkit-scrollbar {
+  height: 4px;
+}
+
+.project-thumbs-strip::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.project-thumbs-strip::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.project-thumbs-strip::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+/* ── End Projects Section ── */
+
 .php-email-form .loading.d-block {
   opacity: 1;
 }
