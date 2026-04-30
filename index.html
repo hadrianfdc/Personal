@@ -16,6 +16,13 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
+  <!-- Tailwind CSS (preflight disabled — Bootstrap handles the base reset) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { corePlugins: { preflight: false } }</script>
+
+  <!-- Alpine.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -819,27 +826,36 @@
       <div class="row mt-2">
 
         <div class="col-md-6 d-flex align-items-stretch">
-          <div class="info-box address-box contact-card">
-            <i class="bx bx-map"></i>
-            <h3>My Address</h3>
-            <p>Cebu City, Philippines</p>
-            <div class="address-map">
+          <div class="info-box address-box contact-card contact-card--info">
+            <div class="flex items-start gap-3">
+              <div class="contact-icon-bubble"><i class="bx bx-map"></i></div>
+              <div>
+                <h3 class="contact-card-title">My Address</h3>
+                <p class="contact-card-body">Cebu City, Philippines</p>
+              </div>
+            </div>
+            <div class="address-map" style="margin-top:14px;">
               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3925.0000!2d123.8854!3d10.3157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a9994b4c3c0001%3A0x4b4c3c0000000001!2sCebu%20City%2C%20Cebu%2C%20Philippines!5e0!3m2!1sen!2sus!4v1234567890!5m2!1sen!2sus" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
         </div>
 
         <div class="col-md-6 mt-4 mt-md-0 d-flex align-items-stretch">
-          <div class="social-wrapper">
-            <div class="info-box contact-card">
-              <i class="bx bx-share-alt"></i>
-              <h3>Social Profiles</h3>
+          <div class="social-wrapper" style="width:100%;">
+            <div class="info-box contact-card contact-card--info">
+              <div class="flex items-center gap-3" style="margin-bottom:8px;">
+                <div class="contact-icon-bubble"><i class="bx bx-share-alt"></i></div>
+                <div>
+                  <h3 class="contact-card-title">Social Profiles</h3>
+                  <p class="contact-card-body">Connect with me online</p>
+                </div>
+              </div>
               <div class="social-links">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="https://www.facebook.com/share/15TfMbmH1q/?mibextid=wwXIfr" target="_blank" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
-                <a href="https://www.linkedin.com/in/hadrian-evarula-b36a01327?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                <a href="#" class="twitter"   data-color="#1DA1F2" data-bg="rgba(29,161,242,0.08)"><i class="bi bi-twitter"></i></a>
+                <a href="https://www.facebook.com/share/15TfMbmH1q/?mibextid=wwXIfr" target="_blank" class="facebook" data-color="#1877F2" data-bg="rgba(24,119,242,0.08)"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram" data-color="#E4405F" data-bg="rgba(228,64,95,0.08)"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="google-plus" data-color="#00AFF0" data-bg="rgba(0,175,240,0.08)"><i class="bi bi-skype"></i></a>
+                <a href="https://www.linkedin.com/in/hadrian-evarula-b36a01327?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" class="linkedin" data-color="#0A66C2" data-bg="rgba(10,102,194,0.08)"><i class="bi bi-linkedin"></i></a>
               </div>
             </div>
             
@@ -886,17 +902,24 @@
         </div>
 
         <div class="col-md-6 mt-4 d-flex align-items-stretch">
-          <div class="email-wrapper">
-            <div class="info-box email-box contact-card">
-              <i class="bx bx-envelope"></i>
-              <h3>Email Me</h3>
-              <div class="contact-value-row">
-                <span class="contact-value" id="email-address">hadrianevarula@gmail.com</span>
-                <button id="copy-email-btn" class="contact-copy-trigger" data-copy="hadrianevarula@gmail.com" aria-label="Copy email address">
-                  <i class="bx bx-copy"></i> Copy
-                  <span class="contact-copied-badge">Copied!</span>
-                </button>
+          <div class="email-wrapper" style="width:100%;">
+            <div class="info-box email-box contact-card contact-card--action"
+                 x-data="contactCopy('hadrianevarula@gmail.com')">
+              <div class="flex items-start gap-3" style="margin-bottom:18px;">
+                <div class="contact-icon-bubble"><i class="bx bx-envelope"></i></div>
+                <div>
+                  <h3 class="contact-card-title">Email Me</h3>
+                  <p class="contact-card-body" id="email-address">hadrianevarula@gmail.com</p>
+                </div>
               </div>
+              <button id="copy-email-btn"
+                      class="contact-copy-trigger"
+                      :class="{ 'contact-copy-trigger--success': copied }"
+                      @click="copy($event.currentTarget)"
+                      aria-label="Copy email address">
+                <i class="bx" :class="copied ? 'bx-check-circle' : 'bx-copy'"></i>
+                <span x-text="copied ? 'Copied!' : 'Copy'">Copy</span>
+              </button>
             </div>
             
             <!-- Email Modal -->
@@ -921,17 +944,24 @@
           <div class="modal-overlay" id="emailModalOverlay"></div>
         </div>        
         <div class="col-md-6 mt-4 d-flex align-items-stretch">
-          <div class="phone-wrapper">
-            <div class="info-box contact-card">
-              <i class="bx bx-phone-call"></i>
-              <h3>Call Me</h3>
-              <div class="contact-value-row">
-                <span class="contact-value" id="phone-number">+63 994 325 4337</span>
-                <button id="copy-btn" class="contact-copy-trigger" data-copy="+63 994 325 4337" aria-label="Copy phone number">
-                  <i class="bx bx-copy"></i> Copy
-                  <span class="contact-copied-badge">Copied!</span>
-                </button>
+          <div class="phone-wrapper" style="width:100%;">
+            <div class="info-box contact-card contact-card--action"
+                 x-data="contactCopy('+63 994 325 4337')">
+              <div class="flex items-start gap-3" style="margin-bottom:18px;">
+                <div class="contact-icon-bubble"><i class="bx bx-phone-call"></i></div>
+                <div>
+                  <h3 class="contact-card-title">Call Me</h3>
+                  <p class="contact-card-body" id="phone-number">+63 994 325 4337</p>
+                </div>
               </div>
+              <button id="copy-btn"
+                      class="contact-copy-trigger"
+                      :class="{ 'contact-copy-trigger--success': copied }"
+                      @click="copy($event.currentTarget)"
+                      aria-label="Copy phone number">
+                <i class="bx" :class="copied ? 'bx-check-circle' : 'bx-copy'"></i>
+                <span x-text="copied ? 'Copied!' : 'Copy'">Copy</span>
+              </button>
             </div>
             
             <!-- Phone Modal -->

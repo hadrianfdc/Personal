@@ -81,30 +81,75 @@
     0 1px 4px rgba(44, 62, 80, 0.05) !important;
 }
 
-/* ── Card icon ── */
-.contact-card > i.bx,
-.contact-card > .bx {
-  font-size: 38px !important;
-  color: #FF9F43 !important;
-  display: block;
-  margin-bottom: 12px;
+/* ── Icon bubble ── */
+.contact-icon-bubble {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(255, 159, 67, 0.10);
+  border: 1px solid rgba(255, 159, 67, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-icon-bubble i {
+  font-size: 22px;
+  color: #FF9F43;
+  line-height: 1;
 }
 
 /* ── Card title ── */
-.contact-card h3 {
-  font-size: 17px !important;
-  font-weight: 700 !important;
-  color: #2C3E50 !important;
-  margin-bottom: 6px;
+.contact-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2C3E50;
+  margin-bottom: 3px;
   letter-spacing: 0.01em;
 }
 
 /* ── Card body text ── */
-.contact-card p {
-  color: #4A5568 !important;
-  font-size: 14px !important;
-  line-height: 1.5 !important;
+.contact-card-body {
+  color: #4A5568;
+  font-size: 14px;
+  line-height: 1.5;
   margin: 0;
+}
+
+/* ── Info variant (Address, Social) — gradient glow border ── */
+.contact-card--info {
+  background: linear-gradient(145deg, rgba(255,255,255,0.85) 0%, rgba(255,248,240,0.78) 100%) !important;
+  box-shadow:
+    0 0 0 1.5px rgba(255, 159, 67, 0.28),
+    0 0 0 3px rgba(156, 136, 255, 0.12),
+    0 4px 20px rgba(44, 62, 80, 0.08),
+    0 1px 4px rgba(44, 62, 80, 0.04) !important;
+}
+
+.contact-card--info:hover {
+  box-shadow:
+    0 0 0 1.5px rgba(255, 159, 67, 0.45),
+    0 0 0 3px rgba(156, 136, 255, 0.22),
+    0 20px 50px rgba(44, 62, 80, 0.13),
+    0 6px 20px rgba(255, 159, 67, 0.10) !important;
+}
+
+/* ── Action variant (Email, Call) ── */
+.contact-card--action {
+  background: rgba(255, 255, 255, 0.90) !important;
+}
+
+/* ── Copy button success state ── */
+.contact-copy-trigger--success {
+  background: rgba(34, 197, 94, 0.10) !important;
+  border-color: rgba(34, 197, 94, 0.40) !important;
+  color: #16a34a !important;
+}
+
+.contact-copy-trigger--success:hover {
+  background: rgba(34, 197, 94, 0.16) !important;
+  border-color: rgba(34, 197, 94, 0.55) !important;
 }
 
 /* ── Map iframe ── */

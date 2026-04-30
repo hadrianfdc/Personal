@@ -1,6 +1,47 @@
 /* ============================================================
-   Contact Section — GSAP-powered enhancements
+   Contact Section — GSAP + Alpine.js enhancements
    ============================================================ */
+
+/* ── Alpine.js component: copy-to-clipboard with GSAP button pulse ── */
+document.addEventListener('alpine:init', function () {
+  Alpine.data('contactCopy', function (value) {
+    return {
+      value: value,
+      copied: false,
+      _timer: null,
+
+      copy: function (btn) {
+        if (this.copied) return;
+
+        var self = this;
+
+        function animate() {
+          if (typeof gsap !== 'undefined') {
+            gsap.timeline()
+              .to(btn, { scale: 0.92, duration: 0.1, ease: 'power2.in' })
+              .to(btn, { scale: 1,    duration: 0.35, ease: 'back.out(2.5)' });
+          }
+          self.copied = true;
+          clearTimeout(self._timer);
+          self._timer = setTimeout(function () { self.copied = false; }, 2000);
+        }
+
+        navigator.clipboard.writeText(this.value)
+          .then(animate)
+          .catch(function () {
+            var ta = document.createElement('textarea');
+            ta.value = value;
+            ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            animate();
+          });
+      }
+    };
+  });
+});
 
 (function () {
   'use strict';
@@ -95,94 +136,35 @@
   }
 
   /* ────────────────────────────────────────────────────────────
-     3. Copy to clipboard + GSAP badge bounce
-  ──────────────────────────────────────────────────────────── */
-  function initContactCopy() {
-    const triggers = document.querySelectorAll('.contact-copy-trigger');
-    triggers.forEach(function (btn) {
-      const badge = btn.querySelector('.contact-copied-badge');
-      let animating = false;
-
-      btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        if (animating) return;
-
-        const value = btn.dataset.copy;
-        if (!value) return;
-
-        navigator.clipboard.writeText(value).then(function () {
-          animating = true;
-          gsap.killTweensOf(badge);
-          gsap.timeline({
-            onComplete: function () { animating = false; }
-          })
-            .set(badge, { opacity: 0, scale: 0, y: 0 })
-            .to(badge, {
-              opacity: 1,
-              scale: 1,
-              duration: 0.4,
-              ease: 'back.out(2.5)'
-            })
-            .to(badge, {
-              opacity: 0,
-              scale: 0.85,
-              y: -6,
-              duration: 0.35,
-              ease: 'power2.in',
-              delay: 1.6
-            });
-        }).catch(function () {
-          /* Fallback for older browsers */
-          const ta = document.createElement('textarea');
-          ta.value = value;
-          ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
-          document.body.appendChild(ta);
-          ta.select();
-          document.execCommand('copy');
-          document.body.removeChild(ta);
-          /* Still animate the badge */
-          animating = true;
-          gsap.killTweensOf(badge);
-          gsap.timeline({
-            onComplete: function () { animating = false; }
-          })
-            .set(badge, { opacity: 0, scale: 0, y: 0 })
-            .to(badge, { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(2.5)' })
-            .to(badge, { opacity: 0, scale: 0.85, y: -6, duration: 0.35, ease: 'power2.in', delay: 1.6 });
-        });
-      });
-    });
-  }
-
-  /* ────────────────────────────────────────────────────────────
-     4. Magnetic social icons
+     4. Magnetic social icons — platform-specific colors via GSAP
   ──────────────────────────────────────────────────────────── */
   function initContactSocial() {
-    const RADIUS = 80;   /* px — magnetic pull distance */
-    const PULL   = 10;   /* px — max displacement        */
+    const RADIUS = 80;
+    const PULL   = 10;
 
     const links = document.querySelectorAll('.contact .contact-card .social-links a');
     if (!links.length) return;
 
-    /* Only on non-touch devices */
     if (window.matchMedia('(hover: none)').matches) return;
 
     links.forEach(function (link) {
       const icon = link.querySelector('i');
+      const platformColor = link.dataset.color || '#FF9F43';
+      const platformBg    = link.dataset.bg    || 'rgba(255,159,67,0.08)';
 
       link.addEventListener('mouseenter', function () {
         gsap.to(link, {
-          scale: 1.18,
-          boxShadow: '0 6px 20px rgba(255,159,67,0.30)',
-          borderColor: 'rgba(255,159,67,0.6)',
+          scale: 1.22,
+          backgroundColor: platformBg,
+          boxShadow: '0 8px 24px ' + platformBg,
           duration: 0.28,
           ease: 'power2.out',
           overwrite: 'auto'
         });
         if (icon) {
           gsap.to(icon, {
-            color: '#FF9F43',
-            duration: 0.28,
+            color: platformColor,
+            duration: 0.25,
             ease: 'power2.out',
             overwrite: 'auto'
           });
@@ -194,8 +176,8 @@
           scale: 1,
           x: 0,
           y: 0,
+          backgroundColor: 'rgba(255,255,255,0.75)',
           boxShadow: '0 2px 8px rgba(44,62,80,0.06)',
-          borderColor: 'rgba(44,62,80,0.1)',
           duration: 0.45,
           ease: 'elastic.out(1, 0.5)',
           overwrite: 'auto'
@@ -212,16 +194,16 @@
 
       link.addEventListener('mousemove', function (e) {
         const rect = link.getBoundingClientRect();
-        const cx = rect.left + rect.width  / 2;
-        const cy = rect.top  + rect.height / 2;
-        const dx = e.clientX - cx;
-        const dy = e.clientY - cy;
+        const cx   = rect.left + rect.width  / 2;
+        const cy   = rect.top  + rect.height / 2;
+        const dx   = e.clientX - cx;
+        const dy   = e.clientY - cy;
         const dist = Math.hypot(dx, dy);
         if (dist > RADIUS) return;
         const strength = (1 - dist / RADIUS) * PULL;
         gsap.to(link, {
-          x: dx / dist * strength,
-          y: dy / dist * strength,
+          x: (dx / dist) * strength,
+          y: (dy / dist) * strength,
           duration: 0.2,
           ease: 'power2.out',
           overwrite: 'auto'
@@ -237,7 +219,6 @@
     whenGSAP(function () {
       if (!_copyAndSocialReady) {
         _copyAndSocialReady = true;
-        initContactCopy();
         initContactSocial();
       }
       /* Heading + cards need section to be visible for IntersectionObserver */
