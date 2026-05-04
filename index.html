@@ -636,6 +636,99 @@
         </div>
       </div>
 
+      <!-- ── NativeCamp / FDCI Backend & AI work ── -->
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="project-card" x-data="{ mouseX:50, mouseY:50, aiHover:false, spotlightIndex:0, spotlights:['Implemented reCAPTCHA security','Optimized AI-driven support summary logic'], init(){ setInterval(()=>{ this.spotlightIndex = (this.spotlightIndex + 1) % this.spotlights.length }, 4200) }, updateMouse(event){ const rect = event.currentTarget.getBoundingClientRect(); this.mouseX = ((event.clientX - rect.left) / rect.width) * 100; this.mouseY = ((event.clientY - rect.top) / rect.height) * 100; } }" x-init="init()" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:22px; background:#ffffff; box-shadow:0 20px 50px rgba(15,23,42,0.08); border:1px solid rgba(148,163,184,0.18);">
+            <div @mousemove="updateMouse($event)" style="position:relative; height:320px; overflow:hidden; background: linear-gradient(90deg, rgba(255,255,255,0.00) 0%, rgba(255,255,255,0.50) 35%, rgba(255,255,255,0.95) 75%), url('assets/img/nativecamp.png') center/cover; filter:grayscale(15%) brightness(1.05);">
+              <!-- Linear gradient mask: white fade into the card background -->
+              <div style="position:absolute; inset:0; background:linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 35%, rgba(255,255,255,1) 80%); z-index:1;"></div>
+              <!-- Radial light accents -->
+              <div style="position:absolute; inset:0; background:radial-gradient(circle at 12% 18%, rgba(251,191,36,0.08), transparent 20%), radial-gradient(circle at 84% 22%, rgba(16,185,129,0.06), transparent 18%), radial-gradient(circle at 52% 70%, rgba(168,85,247,0.06), transparent 14%); filter:blur(26px); z-index:2;"></div>
+              <!-- Mouse-reactive spotlight -->
+              <div :style="'position:absolute; inset:0; background:radial-gradient(circle at ' + mouseX + '% ' + mouseY + '%, rgba(251,191,36,0.08), transparent 18%), linear-gradient(180deg, rgba(248,250,252,0.50), rgba(248,250,252,0.75)); mix-blend-mode:soft-light; z-index:2;' "></div>
+              <!-- Grid texture -->
+              <div style="position:absolute; inset:0; background-image:linear-gradient(0deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size:100% 44px; opacity:0.18; z-index:2;"></div>
+              <div style="position:absolute; inset:0; background-image:linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size:44px 100%; opacity:0.12; z-index:2;"></div>
+              <!-- Decorative elements -->
+              <div style="position:absolute; top:24px; right:24px; width:96px; height:96px; border-radius:26px; background:rgba(255,255,255,0.08); border:1px solid rgba(251,191,36,0.18); box-shadow:0 0 34px rgba(251,191,36,0.12); z-index:3;"></div>
+              <div style="position:absolute; left:24px; bottom:30px; width:156px; height:156px; border-radius:30px; background:rgba(248,250,252,0.50); border:1px solid rgba(251,191,36,0.20); backdrop-filter:blur(18px); box-shadow:0 0 42px rgba(251,191,36,0.14); z-index:3;"></div>
+              <!-- Content: Pill + Title + Description -->
+              <div style="position:absolute; inset:0; z-index:3; display:flex; flex-direction:column; justify-content:flex-start; padding:24px 36px;">
+                <span style="display:inline-flex; align-items:center; gap:10px; color:#0f172a; background:#fde8ec; border:1px solid rgba(251,186,210,0.75); box-shadow:0 0 16px rgba(251,186,210,0.18); font-size:10px; font-weight:800; letter-spacing:0.7px; padding:12px 18px; border-radius:999px; backdrop-filter:blur(8px); width:fit-content;">AI ENGINEERED BACKEND</span>
+              </div>
+              <!-- Title + Description in lower section -->
+              <div style="position:absolute; bottom:0; left:0; right:0; z-index:3; padding:36px; background:linear-gradient(180deg, rgba(0,0,0,0.15), rgba(248,244,237,0.90) 50%, rgba(248,244,237,1) 100%); backdrop-filter: blur(10px);">
+                <h4 style="margin:0 0 12px; font-size:38px; font-weight:800; letter-spacing:-0.04em; color:#0f172a;">NativeCamp</h4>
+                <p style="margin:0; max-width:680px; color:#334155; font-size:15px; line-height:1.75;">AI-enabled English learning with 24/7 instant lessons, global instructor access, and automated pronunciation feedback powered by backend intelligence.</p>
+              </div>
+            </div>
+            <div style="padding:34px 36px 36px; display:flex; flex-direction:column; gap:24px; position:relative;">
+              <div style="position:absolute; left:22px; top:34px; width:2px; height:298px; background:#d1d5db; pointer-events:none;"></div>
+              <div style="display:flex; flex-wrap:wrap; gap:18px; justify-content:space-between; align-items:flex-start; position:relative;">
+                <div style="min-width:280px; max-width:62%;">
+                  <p style="margin:0 0 16px; color:#334155; font-size:15px; line-height:1.8;">As a Backend & AI Developer on the NativeCamp/FDCI team, I helped deliver scalable API services and AI-powered learning experiences for a global English teaching platform.</p>
+                  <div style="display:flex; flex-wrap:wrap; gap:10px;">
+                    <span title="PHP — CakePHP / Laravel" style="display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px; font-size:12px; font-weight:700; color:#4b5563; background:#f1f5f9; border:1px solid rgba(75,85,99,0.55); box-shadow:0 0 18px rgba(56,189,248,0.20);">PHP</span>
+                    <span title="APIs — REST / Microservices" style="display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px; font-size:12px; font-weight:700; color:#4b5563; background:#f1f5f9; border:1px solid rgba(75,85,99,0.55); box-shadow:0 0 18px rgba(59,130,246,0.18);">APIs</span>
+                    <span title="AI — NLU / ML-assisted workflows" style="display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px; font-size:12px; font-weight:700; color:#4b5563; background:#f1f5f9; border:1px solid rgba(75,85,99,0.55); box-shadow:0 0 18px rgba(168,85,247,0.18);">AI</span>
+                    <span title="Performance — caching / scaling" style="display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px; font-size:12px; font-weight:700; color:#4b5563; background:#f1f5f9; border:1px solid rgba(75,85,99,0.55); box-shadow:0 0 18px rgba(132,204,22,0.16);">Performance</span>
+                    <span title="Maintainability — tests / refactoring" style="display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px; font-size:12px; font-weight:700; color:#4b5563; background:#f1f5f9; border:1px solid rgba(75,85,99,0.55); box-shadow:0 0 18px rgba(255,255,255,0.08);">Maintainability</span>
+                    <span title="MySQL — Database Management" style="display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px; font-size:12px; font-weight:700; color:#4b5563; background:#f1f5f9; border:1px solid rgba(75,85,99,0.55); box-shadow:0 0 18px rgba(56,189,248,0.20);">MySQL</span>
+                    <span title="JavaScript — Frontend Scripting" style="display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px; font-size:12px; font-weight:700; color:#4b5563; background:#f1f5f9; border:1px solid rgba(75,85,99,0.55); box-shadow:0 0 18px rgba(59,130,246,0.18);">JavaScript</span>
+                    <span title="Vue.js — Reactive Frameworks" style="display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px; font-size:12px; font-weight:700; color:#4b5563; background:#f1f5f9; border:1px solid rgba(75,85,99,0.55); box-shadow:0 0 18px rgba(168,85,247,0.18);">Vue.js</span>
+                    <span title="AI Engineered Development — Intelligent Systems" style="display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px; font-size:12px; font-weight:700; color:#4b5563; background:#f1f5f9; border:1px solid rgba(75,85,99,0.55); box-shadow:0 0 18px rgba(132,204,22,0.16);">AI Engineered Development</span>
+                    <span title="SDD — Spec Driven Development" style="display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px; font-size:12px; font-weight:700; color:#4b5563; background:#f1f5f9; border:1px solid rgba(75,85,99,0.55); box-shadow:0 0 18px rgba(255,255,255,0.08);">SDD Spec Driven Development</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display:grid; gap:14px; grid-template-columns:repeat(2, minmax(0,1fr));">
+                <div style="display:flex; gap:12px; align-items:flex-start; padding:18px; border-radius:20px; background:#ffffff; border:1px solid rgba(226,232,240,0.75); color:#1f2937; transition:transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease; box-shadow:0 2px 8px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)'; this.style.background='#fffbeb'; this.style.boxShadow='0 20px 55px rgba(245,158,11,0.14)'; this.children[0].style.boxShadow='0 0 24px rgba(251,191,36,0.40)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='#ffffff'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.05)'; this.children[0].style.boxShadow='0 0 24px rgba(251,191,36,0.16)'">
+                  <div style="width:38px; height:38px; display:inline-flex; align-items:center; justify-content:center; border-radius:14px; background:rgba(251,191,36,0.18); box-shadow:0 0 24px rgba(251,191,36,0.16);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2L10 9H4L9 14L7 22L16 13H11L12 2Z" fill="#d97706"/>
+                    </svg>
+                  </div>
+                  <span style="color:#334155; font-size:14px; line-height:1.75;">Engineered scalable REST APIs using PHP 8 and CakePHP for real-time lesson scheduling and routing, ensuring efficient handling of peak usage.</span>
+                </div>
+                <div style="display:flex; gap:12px; align-items:flex-start; padding:18px; border-radius:20px; background:#ffffff; border:1px solid rgba(226,232,240,0.75); color:#1f2937; transition:transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease; box-shadow:0 2px 8px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)'; this.style.background='#fffbeb'; this.style.boxShadow='0 20px 55px rgba(245,158,11,0.14)'; this.children[0].style.boxShadow='0 0 24px rgba(216,180,254,0.40)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='#ffffff'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.05)'; this.children[0].style.boxShadow='0 0 24px rgba(216,180,254,0.16)'">
+                  <div style="width:38px; height:38px; display:inline-flex; align-items:center; justify-content:center; border-radius:14px; background:rgba(216,180,254,0.18); box-shadow:0 0 24px rgba(216,180,254,0.16);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2C8.13 2 5 5.13 5 9C5 11.87 6.49 14.3 8.9 15.38L8.5 18.5L12 16.85L15.5 18.5L15.1 15.38C17.51 14.3 19 11.87 19 9C19 5.13 15.87 2 12 2Z" fill="#c084fc"/>
+                    </svg>
+                  </div>
+                  <span style="color:#334155; font-size:14px; line-height:1.75;">Integrated Claude API into backend services to power AI-driven speaking training and automated pronunciation feedback workflows.</span>
+                </div>
+                <div style="display:flex; gap:12px; align-items:flex-start; padding:18px; border-radius:20px; background:#ffffff; border:1px solid rgba(226,232,240,0.75); color:#1f2937; transition:transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease; box-shadow:0 2px 8px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)'; this.style.background='#fffbeb'; this.style.boxShadow='0 20px 55px rgba(245,158,11,0.14)'; this.children[0].style.boxShadow='0 0 24px rgba(16,185,129,0.40)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='#ffffff'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.05)'; this.children[0].style.boxShadow='0 0 24px rgba(16,185,129,0.16)'">
+                  <div style="width:38px; height:38px; display:inline-flex; align-items:center; justify-content:center; border-radius:14px; background:rgba(16,185,129,0.18); box-shadow:0 0 24px rgba(16,185,129,0.16);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 12H19" stroke="#059669" stroke-width="2" stroke-linecap="round"/>
+                      <path d="M12 5V19" stroke="#059669" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <span style="color:#334155; font-size:14px; line-height:1.75;">Implemented CI/CD pipelines with GitHub Actions and Codeception, automating unit tests and reducing manual QA time by 90% for enhanced system reliability.</span>
+                </div>
+                <div style="display:flex; gap:12px; align-items:flex-start; padding:18px; border-radius:20px; background:#ffffff; border:1px solid rgba(226,232,240,0.75); color:#1f2937; transition:transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease; box-shadow:0 2px 8px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)'; this.style.background='#fffbeb'; this.style.boxShadow='0 20px 55px rgba(245,158,11,0.14)'; this.children[0].style.boxShadow='0 0 24px rgba(248,113,113,0.40)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='#ffffff'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.05)'; this.children[0].style.boxShadow='0 0 24px rgba(248,113,113,0.16)'">
+                  <div style="width:38px; height:38px; display:inline-flex; align-items:center; justify-content:center; border-radius:14px; background:rgba(248,113,113,0.18); box-shadow:0 0 24px rgba(248,113,113,0.16);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 12C5 8.69 7.69 6 11 6H13C16.31 6 19 8.69 19 12C19 15.31 16.31 18 13 18H11C7.69 18 5 15.31 5 12Z" fill="#fecaca"/>
+                      <path d="M12 9V15" stroke="#b91c1c" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <span style="color:#334155; font-size:14px; line-height:1.75;">Led cross-functional collaboration with product and QA teams, utilizing n8n and Diffy Chatflow for AI-augmented backend services and delivery alignment.</span>
+                </div>
+              </div>
+
+              <a href="https://nativecamp.net/" target="_blank" style="align-self:flex-start; display:inline-flex; align-items:center; gap:8px; color:#7dd3fc; font-weight:700; font-size:14px; text-decoration:none;">
+                <i class="bx bx-globe"></i>
+                Live Site
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- ── Johnny Davis + Portfolio Assistant (side by side) ── -->
       <div class="row">
 
