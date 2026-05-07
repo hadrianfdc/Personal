@@ -297,6 +297,18 @@
     }, 100);
   }
 
+  function updateWidgetAttention() {
+    const widget = document.querySelector('.chat-widget');
+    if (!widget || !elements.badge) return;
+
+    const badgeText = elements.badge.textContent.trim();
+    const badgeVisible = elements.badge.style.display !== 'none' && elements.badge.style.display !== '';
+    const badgeShownInLayout = elements.badge.offsetParent !== null;
+    const shouldAnimate = (badgeText === '1' || badgeVisible || badgeShownInLayout) && elements.badge.style.display !== 'none';
+
+    widget.classList.toggle('attention', shouldAnimate);
+  }
+
   // Theme Management
   function toggleTheme() {
     const widget = document.querySelector('.chat-widget');
@@ -876,6 +888,7 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
       // Show notification badge
       if (!state.isOpen && elements.badge) {
         elements.badge.style.display = 'flex';
+        updateWidgetAttention();
       }
     }, CONFIG.autoGreetDelay);
   }
@@ -894,6 +907,7 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
       elements.toggle.classList.toggle('active');
       if (elements.badge) {
         elements.badge.style.display = 'none';
+        updateWidgetAttention();
       }
       
       if (state.isOpen) {
@@ -957,6 +971,7 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
     
     initEventListeners();
     loadTheme();
+    updateWidgetAttention();
     showInitialGreeting();
   }
 
