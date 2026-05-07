@@ -395,7 +395,7 @@ h6 {
   opacity: 0;
   transform: translate(-50%, -50%) scale(0.92);
   transition: opacity 0.18s ease, transform 0.18s ease;
-  z-index: 1150;
+  z-index: 2147483647;
   overflow: hidden;
   border: 1.25px solid rgba(255, 255, 255, 0.85);
   background: rgba(10, 18, 34, 0.18);

@@ -1,6 +1,16 @@
 (function() {
   'use strict';
 
+  function isHomePage() {
+    const path = window.location.pathname.replace(/\\/g, '/');
+    const filename = path.substring(path.lastIndexOf('/') + 1).toLowerCase();
+    return filename === '' || filename === 'index.html' || filename === 'index.htm';
+  }
+
+  if (!isHomePage()) {
+    return;
+  }
+
   const navbar = document.getElementById('navbar');
   const lens = document.getElementById('nav-magnifier');
   const canvas = document.getElementById('nav-magnifier-canvas');
