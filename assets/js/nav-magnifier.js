@@ -159,7 +159,7 @@
     cursorRelY = Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height));
     const margin = radius + 8;
     targetX = Math.min(window.innerWidth - margin, Math.max(margin, event.clientX));
-    targetY = Math.min(window.innerHeight - margin, Math.max(margin, event.clientY));
+    targetY = Math.min(window.innerHeight - margin, Math.max(margin, rect.top + rect.height / 2));
   }
 
   function onLinkEnter(event) {
