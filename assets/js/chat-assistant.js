@@ -302,11 +302,51 @@
     if (!widget || !elements.badge) return;
 
     const badgeText = elements.badge.textContent.trim();
+    const badgeCount = parseInt(badgeText) || 0;
     const badgeVisible = elements.badge.style.display !== 'none' && elements.badge.style.display !== '';
     const badgeShownInLayout = elements.badge.offsetParent !== null;
-    const shouldAnimate = (badgeText === '1' || badgeVisible || badgeShownInLayout) && elements.badge.style.display !== 'none';
+    const shouldAnimate = (badgeCount > 0 || badgeVisible || badgeShownInLayout) && elements.badge.style.display !== 'none';
 
     widget.classList.toggle('attention', shouldAnimate);
+
+    // Handle tooltip visibility
+    const tooltip = document.getElementById('chatTooltip');
+    
+    // Clear any existing tooltip interval
+    if (window.tooltipInterval) {
+      clearInterval(window.tooltipInterval);
+      window.tooltipInterval = null;
+    }
+    
+    if (shouldAnimate && tooltip) {
+      // Function to show tooltip
+      const showTooltip = () => {
+        tooltip.style.display = 'block';
+        tooltip.style.animation = 'tooltip-float 2s ease-in-out infinite, tooltip-fade-in 0.3s ease-out forwards';
+        
+        // Auto-hide after 2 seconds
+        setTimeout(() => {
+          if (tooltip) {
+            tooltip.style.animation = 'tooltip-fade-out 0.3s ease-in forwards';
+            setTimeout(() => {
+              if (tooltip) tooltip.style.display = 'none';
+            }, 300);
+          }
+        }, 2000);
+      };
+      
+      // Show tooltip immediately
+      showTooltip();
+      
+      // Set up interval to show tooltip every 3 seconds
+      window.tooltipInterval = setInterval(showTooltip, 3000);
+    } else if (tooltip) {
+      // Hide tooltip immediately if no attention needed
+      tooltip.style.animation = 'tooltip-fade-out 0.3s ease-in forwards';
+      setTimeout(() => {
+        if (tooltip) tooltip.style.display = 'none';
+      }, 300);
+    }
   }
 
   // Theme Management
