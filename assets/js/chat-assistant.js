@@ -323,14 +323,25 @@
     };
     const { color: accentColor, light } = accents[accent];
     const widget = document.querySelector('.chat-widget');
+    const headerGradient = `linear-gradient(135deg, ${accentColor} 0%, ${light} 100%)`;
     if (widget) {
-      widget.style.setProperty('--accent-color', accentColor);
-      widget.style.setProperty('--accent-light', light);
-      widget.style.setProperty('--header-bg', `linear-gradient(135deg, ${accentColor} 0%, ${light} 100%)`);
+      widget.style.setProperty('--accent-color', accentColor, 'important');
+      widget.style.setProperty('--accent-light', light, 'important');
+      widget.style.setProperty('--header-bg', headerGradient, 'important');
+
+      const header = widget.querySelector('.chat-header');
+      if (header) {
+        header.style.setProperty('background', headerGradient, 'important');
+      }
+
+      const toggle = widget.querySelector('.chat-toggle');
+      if (toggle) {
+        toggle.style.setProperty('background', headerGradient, 'important');
+      }
     } else {
-      document.documentElement.style.setProperty('--accent-color', accentColor);
-      document.documentElement.style.setProperty('--accent-light', light);
-      document.documentElement.style.setProperty('--header-bg', `linear-gradient(135deg, ${accentColor} 0%, ${light} 100%)`);
+      document.documentElement.style.setProperty('--accent-color', accentColor, 'important');
+      document.documentElement.style.setProperty('--accent-light', light, 'important');
+      document.documentElement.style.setProperty('--header-bg', headerGradient, 'important');
     }
     localStorage.setItem('chatAccent', accent);
 
