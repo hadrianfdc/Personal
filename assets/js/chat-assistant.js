@@ -322,8 +322,16 @@
       yellow: { color: '#ffc107', light: '#e0a800' }
     };
     const { color: accentColor, light } = accents[accent];
-    document.documentElement.style.setProperty('--accent-color', accentColor);
-    document.documentElement.style.setProperty('--accent-light', light);
+    const widget = document.querySelector('.chat-widget');
+    if (widget) {
+      widget.style.setProperty('--accent-color', accentColor);
+      widget.style.setProperty('--accent-light', light);
+      widget.style.setProperty('--header-bg', `linear-gradient(135deg, ${accentColor} 0%, ${light} 100%)`);
+    } else {
+      document.documentElement.style.setProperty('--accent-color', accentColor);
+      document.documentElement.style.setProperty('--accent-light', light);
+      document.documentElement.style.setProperty('--header-bg', `linear-gradient(135deg, ${accentColor} 0%, ${light} 100%)`);
+    }
     localStorage.setItem('chatAccent', accent);
 
     // Update active state
