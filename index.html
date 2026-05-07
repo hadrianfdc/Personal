@@ -463,7 +463,112 @@
 
     </div><!-- End Interests -->
 
-  
+    <!-- Coding Challenges Modal -->
+    <div id="coding-modal" class="coding-modal-overlay" style="display: none;">
+      <!-- Backdrop -->
+      <div class="coding-modal-backdrop" id="modal-backdrop"></div>
+      
+      <!-- Modal Content -->
+      <div class="coding-modal-container">
+        <div id="modal-content" class="coding-modal-content">
+          
+          <!-- Header -->
+          <div class="coding-modal-header">
+            <div class="d-flex align-items-center">
+              <div class="coding-modal-icon">
+                <i class="ri-code-line text-white"></i>
+              </div>
+              <div class="ms-3">
+                <h3 class="coding-modal-title">Coding Challenges</h3>
+                <p class="coding-modal-subtitle">Algorithm Mastery & Problem Solving</p>
+              </div>
+            </div>
+            <button id="modal-close" class="coding-modal-close">
+              <i class="ri-close-line"></i>
+            </button>
+          </div>
+
+          <!-- Content -->
+          <div class="coding-modal-body">
+            <div class="row">
+              
+              <!-- Left Column - Illustration & Stats -->
+              <div class="col-md-6">
+                
+                <!-- 3D Circuit Illustration Placeholder -->
+                <div class="coding-circuit-container">
+                  <div class="coding-circuit-overlay"></div>
+                  <!-- Matrix Rain Effect Container -->
+                  <canvas id="matrix-canvas" class="coding-matrix-canvas"></canvas>
+                  
+                  <!-- Circuit SVG Placeholder -->
+                  <div class="coding-circuit-placeholder">
+                    <div class="coding-circuit-icon">
+                      <i class="ri-code-s-slash-line"></i>
+                    </div>
+                    <p class="coding-circuit-text">Interactive Circuit Board</p>
+                  </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="coding-stats">
+                  <div class="coding-stat-item">
+                    <span class="coding-stat-label">Challenges Completed</span>
+                    <span class="coding-stat-value coding-stat-amber">250+</span>
+                  </div>
+                  <div class="coding-stat-item">
+                    <span class="coding-stat-label">Global Rank</span>
+                    <span class="coding-stat-value coding-stat-blue">Top 1%</span>
+                  </div>
+                  <div class="coding-stat-item">
+                    <span class="coding-stat-label">Languages Mastered</span>
+                    <span class="coding-stat-value coding-stat-green">8+</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Column - Typewriter & Content -->
+              <div class="col-md-6">
+                
+                <!-- Typewriter Effect -->
+                <div class="coding-terminal">
+                  <div class="coding-terminal-header">
+                    <div class="coding-terminal-dots">
+                      <span class="dot dot-red"></span>
+                      <span class="dot dot-yellow"></span>
+                      <span class="dot dot-green"></span>
+                    </div>
+                    <span class="coding-terminal-label">Terminal</span>
+                  </div>
+                  <div class="coding-terminal-content">
+                    <span class="coding-terminal-prompt">$ </span>
+                    <span id="typewriter-text" class="coding-terminal-text"></span>
+                    <span id="cursor" class="coding-terminal-cursor">|</span>
+                  </div>
+                </div>
+
+                <!-- Description -->
+                <div class="coding-description">
+                  <h4 class="coding-description-title">Algorithm Mastery</h4>
+                  <p class="coding-description-text">
+                    From Dijkstra's shortest path to recursive backtracking, I transform complex problems into elegant solutions. 
+                    Each challenge is a puzzle waiting to be solved with optimal efficiency.
+                  </p>
+                </div>
+
+                <!-- Skills Tags -->
+                <div class="coding-skills">
+                  <span class="coding-skill-tag coding-skill-amber">Dynamic Programming</span>
+                  <span class="coding-skill-tag coding-skill-blue">Graph Theory</span>
+                  <span class="coding-skill-tag coding-skill-green">Data Structures</span>
+                  <span class="coding-skill-tag coding-skill-purple">System Design</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </section><!-- End About Section -->
 
@@ -1736,6 +1841,9 @@
 
   <!-- 3D About Section -->
   <script src="assets/js/about-3d.js"></script>
+
+  <!-- Coding Challenges Modal -->
+  <script src="assets/js/coding-modal.js"></script>
 
   <!-- Resume Timeline -->
   <script src="assets/js/resume-timeline.js"></script>
