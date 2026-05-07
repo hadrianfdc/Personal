@@ -442,7 +442,7 @@
           </div>
         </div>
         <div class="col-lg-3 col-md-4 mt-4">
-          <div class="icon-box" data-tip="Where UX meets backend logic. I ship what I also design — no handoffs, no lost context.">
+          <div class="icon-box" data-tip="Where UX meets backend logic. I ship what I also design — no handoffs, no lost context." data-modal-card="web-design">
             <div class="icon-inner">
               <i class="ri-base-station-line" style="color: #ff5828;"></i>
               <h3>Web Design</h3>
@@ -534,6 +534,57 @@
                   <p>Track progress with a calm, glassmorphism panel that feels precise and modern.</p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Web Design Modal -->
+    <div id="web-design-modal" class="web-design-modal-overlay" aria-hidden="true" style="display: none;">
+      <div class="web-design-modal-backdrop" id="web-design-modal-backdrop"></div>
+      <div id="web-design-modal-content" class="web-design-modal-content rounded-3xl shadow-2xl bg-white/80 backdrop-blur-xl border border-orange-300/30">
+        <button id="web-design-modal-close" class="web-design-modal-close" aria-label="Close web design modal">
+          <i class="ri-close-line"></i>
+        </button>
+        <div class="web-design-modal-inner">
+          <div class="web-design-modal-header">
+            <div>
+              <p class="web-design-modal-eyebrow">Minimalist Gallery</p>
+              <h3 class="web-design-modal-title">Web Design</h3>
+            </div>
+            <span class="web-design-modal-tag">Canvas UI</span>
+          </div>
+
+          <div class="web-design-spiral-wrap" aria-hidden="true">
+            <svg class="web-design-spiral" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+              <path d="M110 110 m-50 0 a50 50 0 1 1 100 0 a35 35 0 1 0 -70 0 a20 20 0 1 1 40 0 a10 10 0 1 0 -20 0" />
+            </svg>
+          </div>
+
+          <div class="web-design-swatch-row">
+            <button type="button" class="web-design-swatch" style="background:#ff8a00;" data-hex="#FF8A00"><span>#FF8A00</span></button>
+            <button type="button" class="web-design-swatch" style="background:#fb7900;" data-hex="#FB7900"><span>#FB7900</span></button>
+            <button type="button" class="web-design-swatch" style="background:#fbbf24;" data-hex="#FBBF24"><span>#FBBF24</span></button>
+            <button type="button" class="web-design-swatch" style="background:#d97706;" data-hex="#D97706"><span>#D97706</span></button>
+            <button type="button" class="web-design-swatch" style="background:#f97316;" data-hex="#F97316"><span>#F97316</span></button>
+          </div>
+
+          <div class="web-design-typo-row">
+            <h2 id="web-design-typo-preview" class="web-design-typo">Serif Elegance</h2>
+            <p class="web-design-typo-subtitle">A premium font showcase for editorial, modern, and code-forward interfaces.</p>
+          </div>
+
+          <div class="web-design-float-grid">
+            <div class="web-design-floating-element web-design-floating-hero">
+              <span class="wireframe-line wireframe-title"></span>
+              <span class="wireframe-line wireframe-sub"></span>
+            </div>
+            <div class="web-design-floating-element web-design-floating-navbar">
+              <span class="wireframe-line wireframe-link"></span>
+            </div>
+            <div class="web-design-floating-element web-design-floating-button">
+              <span class="wireframe-line wireframe-button"></span>
             </div>
           </div>
         </div>
@@ -2008,6 +2059,8 @@
   <script src="assets/js/coding-modal.js"></script>
   <!-- Goal Tracking Modal -->
   <script src="assets/js/goal-tracking-modal.js"></script>
+  <!-- Web Design Modal -->
+  <script src="assets/js/web-design-modal.js"></script>
   <!-- Data Structure Modal -->
   <script src="assets/js/data-structure-modal.js"></script>
 
