@@ -27,6 +27,9 @@
   ];
 
   function createRing(circle) {
+    if (!circle) {
+      return null;
+    }
     const radius = circle.r.baseVal.value;
     const circumference = 2 * Math.PI * radius;
     circle.style.strokeDasharray = `${circumference} ${circumference}`;
@@ -35,6 +38,7 @@
   }
 
   function updateRing(ring, percent) {
+    if (!ring || !ring.circle) return;
     const offset = ring.circumference * (1 - percent / 100);
     ring.circle.style.strokeDashoffset = offset;
   }
@@ -42,6 +46,10 @@
   function animateRings() {
     const ringEls = ringConfigs.map(cfg => {
       const circle = document.querySelector(cfg.selector);
+      if (!circle) {
+        console.warn(`Goal Tracking ring element not found: ${cfg.selector}`);
+        return null;
+      }
       return createRing(circle);
     });
 
@@ -107,6 +115,28 @@
     }
   }
 
+  function setModalPosition(targetCard) {
+    if (!elements.modalContent || !targetCard) return;
+
+    const rect = targetCard.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const modalWidth = Math.min(520, Math.max(320, viewportWidth - 48));
+    const centerX = rect.left + rect.width / 2;
+    const topAbove = rect.top - 24;
+    const topBelow = rect.bottom + 24;
+    const top = topAbove > 220 ? topAbove : topBelow;
+
+    const minLeft = 24 + modalWidth / 2;
+    const maxLeft = viewportWidth - 24 - modalWidth / 2;
+    const left = Math.min(maxLeft, Math.max(minLeft, centerX));
+
+    elements.modalContent.style.width = `${modalWidth}px`;
+    elements.modalContent.style.left = `${left}px`;
+    elements.modalContent.style.top = `${Math.max(24, top)}px`;
+    elements.modalContent.style.transform = 'translate(-50%, 0) scale(0.94)';
+  }
+
   function openModal() {
     if (state.isOpen) return;
     state.isOpen = true;
@@ -117,6 +147,10 @@
     if (elements.modalContent) {
       elements.modalContent.style.animation = '';
       elements.modalContent.classList.add('open', 'glow');
+    }
+
+    if (state.hoverTargetCard) {
+      setModalPosition(state.hoverTargetCard);
     }
 
     animateCounter();
@@ -174,22 +208,36 @@
   function initHoverListeners() {
     const goalCard = Array.from(document.querySelectorAll('.icon-box')).find(card => {
       const title = card.querySelector('h3');
-      return title && title.textContent.trim() === 'Goal Tracking';
+      return title && title.textContent.trim().toLowerCase().includes('goal tracking');
     });
 
-    if (!goalCard || !elements.modal) {
+    if (!goalCard) {
+      console.warn('Goal Tracking card not found for hover modal.');
+      return;
+    }
+
+    if (!elements.modal) {
+      console.warn('Goal Tracking modal element not found.');
       return;
     }
 
     goalCard.addEventListener('mouseenter', () => {
       state.hoverTarget = true;
+      state.hoverTargetCard = goalCard;
       clearCloseTimeout();
+      setModalPosition(goalCard);
       openModal();
     });
 
     goalCard.addEventListener('mouseleave', () => {
       state.hoverTarget = false;
       scheduleClose();
+    });
+
+    window.addEventListener('resize', () => {
+      if (state.isOpen && state.hoverTargetCard) {
+        setModalPosition(state.hoverTargetCard);
+      }
     });
 
     elements.modal.addEventListener('mouseenter', () => {
