@@ -463,6 +463,83 @@
 
     </div><!-- End Interests -->
 
+    <!-- Goal Tracking Modal -->
+    <div id="goal-modal" class="goal-modal-overlay" style="display: none;">
+      <div class="goal-modal-backdrop" id="goal-modal-backdrop"></div>
+      <div class="goal-modal-container">
+        <div id="goal-modal-content" class="goal-modal-content">
+          <div class="goal-modal-header d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+              <div class="goal-modal-icon">
+                <i class="ri-check-double-line text-white"></i>
+              </div>
+              <div>
+                <h3 class="goal-modal-title">Goal Tracking</h3>
+                <p class="goal-modal-subtitle">Progress, simplified</p>
+              </div>
+            </div>
+            <button id="goal-modal-close" class="goal-modal-close">
+              <i class="ri-close-line"></i>
+            </button>
+          </div>
+
+          <div class="goal-modal-body">
+            <div class="row gx-4 gy-4 align-items-center">
+              <div class="col-lg-6">
+                <div class="goal-visual-card">
+                  <div class="goal-grid-backdrop"></div>
+                  <div class="goal-rings">
+                    <svg viewBox="0 0 220 220" class="goal-ring-svg">
+                      <circle class="goal-ring track ring-outer" cx="110" cy="110" r="96"></circle>
+                      <circle class="goal-ring progress ring-outer-fill" cx="110" cy="110" r="96" data-target="75"></circle>
+                      <circle class="goal-ring track ring-middle" cx="110" cy="110" r="74"></circle>
+                      <circle class="goal-ring progress ring-middle-fill" cx="110" cy="110" r="74" data-target="90"></circle>
+                      <circle class="goal-ring track ring-inner" cx="110" cy="110" r="52"></circle>
+                      <circle class="goal-ring progress ring-inner-fill" cx="110" cy="110" r="52" data-target="60"></circle>
+                    </svg>
+                    <div class="goal-ring-center">
+                      <div class="goal-counter">
+                        <span id="goal-counter-value">0</span>
+                        <small>Goals Met</small>
+                      </div>
+                      <div class="goal-checkmark" id="goal-checkmark">
+                        <i class="ri-checkbox-circle-fill"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="goal-tags-grid">
+                  <span class="goal-tag goal-tag-pink">Fitness</span>
+                  <span class="goal-tag goal-tag-soft">Learning</span>
+                  <span class="goal-tag goal-tag-muted">Career</span>
+                </div>
+                <div class="goal-summary-card">
+                  <div class="goal-summary-item">
+                    <span>Total goals met</span>
+                    <strong>42</strong>
+                  </div>
+                  <div class="goal-summary-item">
+                    <span>Daily streak</span>
+                    <strong>15 days</strong>
+                  </div>
+                  <div class="goal-summary-item">
+                    <span>Focus habits</span>
+                    <strong>3 active</strong>
+                  </div>
+                </div>
+                <div class="goal-description">
+                  <p>Track progress with a calm, glassmorphism panel that feels precise and modern.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Coding Challenges Modal -->
     <div id="coding-modal" class="coding-modal-overlay" style="display: none;">
       <!-- Backdrop -->
@@ -1843,6 +1920,8 @@
 
   <!-- Coding Challenges Modal -->
   <script src="assets/js/coding-modal.js"></script>
+  <!-- Goal Tracking Modal -->
+  <script src="assets/js/goal-tracking-modal.js"></script>
 
   <!-- Resume Timeline -->
   <script src="assets/js/resume-timeline.js"></script>
