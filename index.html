@@ -646,6 +646,92 @@
       </div>
     </div>
 
+    <!-- Data Structure Modal -->
+    <div id="data-structure-modal" class="data-structure-modal-overlay" style="display: none;">
+      <div class="data-structure-modal-backdrop" id="data-structure-modal-backdrop"></div>
+      <div class="data-structure-modal-container">
+        <div id="data-structure-modal-content" class="data-structure-modal-content">
+          <div class="data-structure-modal-header flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="data-structure-modal-icon">
+                <i class="ri-database-2-line text-white"></i>
+              </div>
+              <div>
+                <h3 class="data-structure-modal-title">Data Structure</h3>
+                <p class="data-structure-modal-subtitle">Cyber blueprint flow</p>
+              </div>
+            </div>
+            <button id="data-structure-modal-close" class="data-structure-modal-close">
+              <i class="ri-close-line"></i>
+            </button>
+          </div>
+
+          <div class="data-structure-modal-body row gx-4 gy-4">
+            <div class="col-lg-7">
+              <div class="data-map-card">
+                <div class="data-map-scanlines"></div>
+                <svg viewBox="0 0 520 320" class="data-map-svg" aria-hidden="true">
+                  <g class="data-map-lines">
+                    <line x1="80" y1="60" x2="220" y2="60"></line>
+                    <line x1="220" y1="60" x2="340" y2="120"></line>
+                    <line x1="220" y1="60" x2="220" y2="180"></line>
+                    <line x1="220" y1="180" x2="360" y2="240"></line>
+                    <line x1="340" y1="120" x2="420" y2="90"></line>
+                  </g>
+                  <g class="data-map-nodes">
+                    <circle class="data-node" cx="80" cy="60" r="10"></circle>
+                    <circle class="data-node" cx="220" cy="60" r="10"></circle>
+                    <circle class="data-node" cx="340" cy="120" r="10"></circle>
+                    <circle class="data-node" cx="220" cy="180" r="10"></circle>
+                    <circle class="data-node" cx="360" cy="240" r="10"></circle>
+                    <circle class="data-node" cx="420" cy="90" r="10"></circle>
+                  </g>
+                  <g class="data-map-packets">
+                    <circle class="data-packet packet-1" cx="80" cy="60" r="4"></circle>
+                    <circle class="data-packet packet-2" cx="220" cy="60" r="4"></circle>
+                    <circle class="data-packet packet-3" cx="220" cy="180" r="4"></circle>
+                  </g>
+                </svg>
+              </div>
+            </div>
+
+            <div class="col-lg-5">
+              <div class="data-stream-panel">
+                <div class="data-stream-header">
+                  <span>Live Data Stream</span>
+                </div>
+                <div class="data-stream-feed">
+                  <div class="data-stream-track">
+                    <div class="data-stream-line">{"node":"root","value":42,"status":"ok"}</div>
+                    <div class="data-stream-line">[10101011, 11001010, 11100011]</div>
+                    <div class="data-stream-line">{"queue":["taskA","taskB","taskC"]}</div>
+                    <div class="data-stream-line">{"latency":12.4,"unit":"ms"}</div>
+                    <div class="data-stream-line">{"cache":"hit","ratio":0.92}</div>
+                    <div class="data-stream-line">{"path":["A","B","C","D"]}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="stack-visualization mt-4">
+                <div class="stack-visualization-title">Stack / Queue</div>
+                <div class="stack-frame">
+                  <div class="stack-block block-bottom">POP</div>
+                  <div class="stack-block block-middle">PROCESS</div>
+                  <div class="stack-block block-top">PUSH</div>
+                </div>
+              </div>
+
+              <div class="data-metrics mt-4">
+                <div class="data-metric-pill">Optimization: <strong>O(log n)</strong></div>
+                <div class="data-metric-pill">Efficiency: <strong>99.9%</strong></div>
+                <div class="data-metric-pill">Latency: <strong>12ms</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </section><!-- End About Section -->
 
   <!-- ======= Projects Section ======= -->
@@ -1922,6 +2008,8 @@
   <script src="assets/js/coding-modal.js"></script>
   <!-- Goal Tracking Modal -->
   <script src="assets/js/goal-tracking-modal.js"></script>
+  <!-- Data Structure Modal -->
+  <script src="assets/js/data-structure-modal.js"></script>
 
   <!-- Resume Timeline -->
   <script src="assets/js/resume-timeline.js"></script>
