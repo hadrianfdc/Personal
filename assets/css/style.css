@@ -393,19 +393,29 @@ h6 {
   border-radius: 50%;
   pointer-events: none;
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.92);
-  transition: opacity 0.18s ease, transform 0.18s ease;
+  transform: translate3d(-50%, -50%, 0) scale(0.92);
+  transition: opacity 0.3s ease, transform 0.3s ease;
   z-index: 2147483647;
   overflow: hidden;
-  border: 1.25px solid rgba(255, 255, 255, 0.85);
-  background: rgba(10, 18, 34, 0.18);
-  box-shadow: 0 20px 42px rgba(10, 16, 30, 0.32), inset 0 0 0 1px rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(10, 18, 34, 0.15);
+  box-shadow:
+    /* Outer shadow for depth */
+    0 20px 42px rgba(10, 16, 30, 0.4),
+    /* Inner glow for refraction */
+    inset 0 0 20px rgba(0, 255, 255, 0.1),
+    inset 0 0 40px rgba(255, 215, 0, 0.05),
+    /* Edge highlights */
+    inset -2px -2px 4px rgba(0, 0, 0, 0.2),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px) saturate(200%);
+  /* Soft edge */
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2));
 }
 
 #nav-magnifier.open {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate3d(-50%, -50%, 0) scale(1);
 }
 
 .nav-magnifier-canvas {
@@ -417,10 +427,11 @@ h6 {
 .nav-magnifier-refraction {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 22% 24%, rgba(255, 255, 255, 0.65), transparent 24%),
-              radial-gradient(circle at 78% 16%, rgba(255, 255, 255, 0.25), transparent 8%);
-  opacity: 0.92;
+  background: radial-gradient(circle at 22% 24%, rgba(255, 255, 255, 0.7), transparent 30%),
+              radial-gradient(circle at 78% 16%, rgba(255, 255, 255, 0.3), transparent 15%);
+  opacity: 0.9;
   pointer-events: none;
+  mix-blend-mode: overlay;
 }
 
 .nav-magnifier-glint {
