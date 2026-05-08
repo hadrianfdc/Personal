@@ -1,16 +1,6 @@
 (function() {
   'use strict';
 
-  function isHomePage() {
-    const path = window.location.pathname.replace(/\\/g, '/');
-    const filename = path.substring(path.lastIndexOf('/') + 1).toLowerCase();
-    return filename === '' || filename === 'index.html' || filename === 'index.htm';
-  }
-
-  if (!isHomePage()) {
-    return;
-  }
-
   const navbar = document.getElementById('navbar');
   const lens = document.getElementById('nav-magnifier');
   const canvas = document.getElementById('nav-magnifier-canvas');
@@ -35,6 +25,7 @@
   let cursorRelX = 0.5;
   let cursorRelY = 0.5;
   let rafId = null;
+  let listenersEnabled = false;
 
   function resizeCanvas() {
     canvas.width = lensSize * dpr;
@@ -186,15 +177,65 @@
     hideLens();
   }
 
+  function enableListeners() {
+    if (listenersEnabled) return;
+    listenersEnabled = true;
+    links.forEach((link) => {
+      link.addEventListener('mouseenter', onLinkEnter);
+      link.addEventListener('mousemove', onLinkMove);
+      link.addEventListener('mouseleave', onLinkLeave);
+      link.addEventListener('focus', onLinkEnter);
+      link.addEventListener('blur', onLinkLeave);
+    });
+    navbar.addEventListener('mouseleave', hideLens);
+  }
+
+  function disableListeners() {
+    if (!listenersEnabled) return;
+    listenersEnabled = false;
+    hideLens();
+    links.forEach((link) => {
+      link.removeEventListener('mouseenter', onLinkEnter);
+      link.removeEventListener('mousemove', onLinkMove);
+      link.removeEventListener('mouseleave', onLinkLeave);
+      link.removeEventListener('focus', onLinkEnter);
+      link.removeEventListener('blur', onLinkLeave);
+    });
+    navbar.removeEventListener('mouseleave', hideLens);
+  }
+
+  // Check if Home section is active based on nav link highlight
+  function isHomeActive() {
+    const homeLink = document.querySelector('.navbar a[href="#header"]');
+    return homeLink && homeLink.classList.contains('active');
+  }
+
+  function updateListeners() {
+    if (isHomeActive()) {
+      enableListeners();
+    } else {
+      disableListeners();
+    }
+  }
+
+  // Initial check
+  updateListeners();
+
+  // Listen for changes to the active class
+  // Use MutationObserver on the navbar to detect when active class changes
+  if (navbar) {
+    const observer = new MutationObserver(updateListeners);
+    observer.observe(navbar, { attributes: true, subtree: true, attributeFilter: ['class'] });
+  }
+
+  // Also listen for scroll to update in case the scroll spy updates on scroll
+  window.addEventListener('scroll', updateListeners);
+
+  // Hide lens on navigation clicks
   links.forEach((link) => {
-    link.addEventListener('mouseenter', onLinkEnter);
-    link.addEventListener('mousemove', onLinkMove);
-    link.addEventListener('mouseleave', onLinkLeave);
-    link.addEventListener('focus', onLinkEnter);
-    link.addEventListener('blur', onLinkLeave);
+    link.addEventListener('click', hideLens);
   });
 
-  navbar.addEventListener('mouseleave', hideLens);
   window.addEventListener('resize', resizeCanvas);
 
   resizeCanvas();
