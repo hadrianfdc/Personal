@@ -45,11 +45,11 @@ body {
      Drop @2x filenames here once you export them from your editor. */
   background-image:
     image-set(
-      url("../img/my-landing-photo.webp") type("image/webp"),
-      url("../img/my-landing-photo.png")  type("image/png")
+      url("../img/founder-portfolio-enhance.png") type("image/webp"),
+      url("../img/founder-portfolio-enhance.png")  type("image/png")
     );
   /* Fallback for browsers that don't support image-set() */
-  background-image: url("../img/my-landing-photo.png");
+  background-image: url("../img/founder-portfolio-enhance.png");
   background-position: center right;
   background-repeat: no-repeat;
   /* 'fill' is not a valid background-size value — fixed to 'contain' */
