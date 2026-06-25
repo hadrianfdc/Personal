@@ -970,10 +970,12 @@
       </div>
 
       <!-- ── NativeCamp + Johnny Davis Ministries (balanced grid) ── -->
-      <div class="row">
+      <!-- align-items-start (not stretch): NativeCamp's card is intentionally much taller
+           than Johnny Davis Ministries' — stretching would leave empty whitespace in the shorter card. -->
+      <div class="row align-items-start">
 
         <!-- NativeCamp / FDCI Backend & AI work -->
-        <div class="col-lg-6 col-md-12 d-flex align-items-stretch mb-4">
+        <div class="col-lg-6 col-md-12 mb-4">
           <div class="project-card" x-data="{ mouseX:50, mouseY:50, aiHover:false, spotlightIndex:0, spotlights:['Implemented reCAPTCHA security','Optimized AI-driven support summary logic'], init(){ setInterval(()=>{ this.spotlightIndex = (this.spotlightIndex + 1) % this.spotlights.length }, 4200) }, updateMouse(event){ const rect = event.currentTarget.getBoundingClientRect(); this.mouseX = ((event.clientX - rect.left) / rect.width) * 100; this.mouseY = ((event.clientY - rect.top) / rect.height) * 100; } }" x-init="init()" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:8px; background:#ffffff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08);">
             <div @mousemove="updateMouse($event)" style="position:relative; height:280px; overflow:hidden; background: linear-gradient(90deg, rgba(255,255,255,0.00) 0%, rgba(255,255,255,0.50) 35%, rgba(255,255,255,0.95) 75%), url('assets/img/nativecamp.png') center/cover; filter:grayscale(15%) brightness(1.05);">
               <!-- Linear gradient mask: white fade into the card background -->
@@ -1064,7 +1066,7 @@
         </div>
 
         <!-- Johnny Davis Ministries -->
-        <div class="col-lg-6 col-md-12 d-flex align-items-stretch mb-4">
+        <div class="col-lg-6 col-md-12 mb-4">
           <div class="project-card" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:8px; background:#fff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08);">
 
             <!-- Main hero image -->
