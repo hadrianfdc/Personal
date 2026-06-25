@@ -2968,6 +2968,11 @@ section .container {
   color: #5b21b6;
 }
 
+.project-badge.badge-staging {
+  background: #fef3c7;
+  color: #92400e;
+}
+
 /* Equal-height project rows for consistent grid rhythm */
 @media (min-width: 992px) {
   .projects-grid-row {
