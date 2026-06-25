@@ -2933,6 +2933,49 @@ section .container {
   background: #aaa;
 }
 
+/* Tech stack pill chips used across all project cards */
+.tech-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #4b5563;
+  background: #f1f5f9;
+  border: 1px solid rgba(75, 85, 99, 0.18);
+  line-height: 1.6;
+}
+
+/* Project type badges (CLIENT PROJECT / AI BUILD etc.) */
+.project-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+.project-badge.badge-client {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.project-badge.badge-ai {
+  background: #ede9fe;
+  color: #5b21b6;
+}
+
+/* Equal-height project rows for consistent grid rhythm */
+@media (min-width: 992px) {
+  .projects-grid-row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
 /* ── End Projects Section ── */
 
 .php-email-form .loading.d-block {

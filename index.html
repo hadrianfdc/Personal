@@ -921,8 +921,7 @@
                 <div>
                   <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
                     <h4 style="margin:0;">FaithStack</h4>
-                    <span style="background:#dcfce7; color:#166534; font-size:11px; font-weight:700;
-                                 padding:3px 10px; border-radius:20px; letter-spacing:0.5px;">CLIENT PROJECT</span>
+                    <span class="project-badge badge-client">CLIENT PROJECT</span>
                   </div>
                   <p style="color:#888; font-size:13px; margin-bottom:14px;">Full-Stack CMS Platform &middot; Deployed on Laravel Cloud</p>
                   <p style="margin-bottom:18px;">A complete CMS platform built for faith communities — drag-and-drop editor, 80+ themes, donation management, and custom branding. Designed for organizations that need a professional web presence without needing a developer on staff.</p>
@@ -970,11 +969,13 @@
         </div>
       </div>
 
-      <!-- ── NativeCamp / FDCI Backend & AI work ── -->
-      <div class="row mb-4">
-        <div class="col-12">
-          <div class="project-card" x-data="{ mouseX:50, mouseY:50, aiHover:false, spotlightIndex:0, spotlights:['Implemented reCAPTCHA security','Optimized AI-driven support summary logic'], init(){ setInterval(()=>{ this.spotlightIndex = (this.spotlightIndex + 1) % this.spotlights.length }, 4200) }, updateMouse(event){ const rect = event.currentTarget.getBoundingClientRect(); this.mouseX = ((event.clientX - rect.left) / rect.width) * 100; this.mouseY = ((event.clientY - rect.top) / rect.height) * 100; } }" x-init="init()" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:22px; background:#ffffff; box-shadow:0 20px 50px rgba(15,23,42,0.08); border:1px solid rgba(148,163,184,0.18);">
-            <div @mousemove="updateMouse($event)" style="position:relative; height:320px; overflow:hidden; background: linear-gradient(90deg, rgba(255,255,255,0.00) 0%, rgba(255,255,255,0.50) 35%, rgba(255,255,255,0.95) 75%), url('assets/img/nativecamp.png') center/cover; filter:grayscale(15%) brightness(1.05);">
+      <!-- ── NativeCamp + Johnny Davis Ministries (balanced grid) ── -->
+      <div class="row">
+
+        <!-- NativeCamp / FDCI Backend & AI work -->
+        <div class="col-lg-6 col-md-12 d-flex align-items-stretch mb-4">
+          <div class="project-card" x-data="{ mouseX:50, mouseY:50, aiHover:false, spotlightIndex:0, spotlights:['Implemented reCAPTCHA security','Optimized AI-driven support summary logic'], init(){ setInterval(()=>{ this.spotlightIndex = (this.spotlightIndex + 1) % this.spotlights.length }, 4200) }, updateMouse(event){ const rect = event.currentTarget.getBoundingClientRect(); this.mouseX = ((event.clientX - rect.left) / rect.width) * 100; this.mouseY = ((event.clientY - rect.top) / rect.height) * 100; } }" x-init="init()" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:8px; background:#ffffff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08);">
+            <div @mousemove="updateMouse($event)" style="position:relative; height:280px; overflow:hidden; background: linear-gradient(90deg, rgba(255,255,255,0.00) 0%, rgba(255,255,255,0.50) 35%, rgba(255,255,255,0.95) 75%), url('assets/img/nativecamp.png') center/cover; filter:grayscale(15%) brightness(1.05);">
               <!-- Linear gradient mask: white fade into the card background -->
               <div style="position:absolute; inset:0; background:linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 35%, rgba(255,255,255,1) 80%); z-index:1;"></div>
               <!-- Radial light accents -->
@@ -1061,11 +1062,9 @@
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- ── Johnny Davis Ministries ── -->
-      <div class="row mb-4">
-        <div class="col-12">
+        <!-- Johnny Davis Ministries -->
+        <div class="col-lg-6 col-md-12 d-flex align-items-stretch mb-4">
           <div class="project-card" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:8px; background:#fff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08);">
 
             <!-- Main hero image -->
@@ -1122,8 +1121,7 @@
             <div style="padding:24px; flex:1; display:flex; flex-direction:column;">
               <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
                 <h4 style="margin:0;">Johnny Davis Ministries</h4>
-                <span style="background:#dcfce7; color:#166534; font-size:11px; font-weight:700;
-                             padding:3px 10px; border-radius:20px; letter-spacing:0.5px;">CLIENT PROJECT</span>
+                <span class="project-badge badge-client">CLIENT PROJECT</span>
               </div>
               <p style="color:#888; font-size:13px; margin-bottom:12px;">Ministry &amp; Outreach Platform</p>
               <p style="margin-bottom:16px;">Ministry website built to share the organization's mission, leadership, and outreach programs, with dedicated sections for inspiration, live events, and community commitment.</p>
@@ -1143,13 +1141,14 @@
 
           </div>
         </div>
+
       </div>
 
-      <!-- ── Johnny Davis + Portfolio Assistant (side by side) ── -->
+      <!-- ── Johnny Davis Global Mission + Portfolio AI Assistant (balanced grid) ── -->
       <div class="row">
 
         <!-- Johnny Davis Global Mission -->
-        <div class="col-lg-8 col-md-12 d-flex align-items-stretch mb-4">
+        <div class="col-lg-6 col-md-12 d-flex align-items-stretch mb-4">
           <div class="project-card" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:8px; background:#fff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08);">
 
             <!-- Main hero image -->
@@ -1206,8 +1205,7 @@
             <div style="padding:24px; flex:1; display:flex; flex-direction:column;">
               <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
                 <h4 style="margin:0;">Johnny Davis Global Mission</h4>
-                <span style="background:#dcfce7; color:#166534; font-size:11px; font-weight:700;
-                             padding:3px 10px; border-radius:20px; letter-spacing:0.5px;">CLIENT PROJECT</span>
+                <span class="project-badge badge-client">CLIENT PROJECT</span>
               </div>
               <p style="color:#888; font-size:13px; margin-bottom:12px;">Nonprofit Donation &amp; Campaign Platform &middot; Deployed on Laravel Cloud</p>
               <p style="margin-bottom:16px;">Full-featured platform for a Christian mission organization serving Filipino communities. Ships with real-time campaign tracking, recurring donations, admin dashboard with live reporting, subscriber management, and a full content publishing system.</p>
@@ -1224,10 +1222,10 @@
                    style="display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:var(--color-primary,#0563bb); text-decoration:none;">
                   <i class="bx bx-globe"></i> Live Site
                 </a>
-                <a href="https://github.com/haddyscript/johnny_davis_global_mission" target="_blank"
+                <!-- <a href="https://github.com/haddyscript/johnny_davis_global_mission" target="_blank"
                    style="display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:#555; text-decoration:none;">
                   <i class="bi bi-github"></i> GitHub
-                </a>
+                </a> -->
               </div>
             </div>
 
@@ -1235,7 +1233,7 @@
         </div>
 
         <!-- Portfolio AI Assistant -->
-        <div class="col-lg-4 col-md-12 d-flex align-items-stretch mb-4">
+        <div class="col-lg-6 col-md-12 d-flex align-items-stretch mb-4">
           <div class="project-card" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:8px; background:#fff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08);">
 
             <!-- Dark gradient hero -->
@@ -1268,8 +1266,7 @@
             <div style="padding:24px; flex:1; display:flex; flex-direction:column;">
               <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
                 <h4 style="margin:0;">Portfolio AI Assistant</h4>
-                <span style="background:#ede9fe; color:#5b21b6; font-size:11px; font-weight:700;
-                             padding:3px 10px; border-radius:20px; letter-spacing:0.5px;">AI BUILD</span>
+                <span class="project-badge badge-ai">AI BUILD</span>
               </div>
               <p style="color:#888; font-size:13px; margin-bottom:12px;">LLM Integration &middot; Firebase &middot; Live on this site</p>
               <p style="margin-bottom:16px; flex:1;">AI-powered chat assistant embedded in this portfolio — answers questions about my experience, skills, and projects in real time. Built with a custom system prompt, Firebase persistence, and integrated with an LLM API.</p>
