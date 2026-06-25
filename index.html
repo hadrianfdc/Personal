@@ -817,7 +817,7 @@
             Alpine state: playing = false (image shown) | true (iframe injected + video plays)
             x-data lives on the card so both the left media column and right info panel share state.
           -->
-          <div class="project-card-featured" style="padding:0; overflow:hidden; border-radius:8px; background:#fff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08);" x-data="{ playing: false }">
+          <div class="project-card-featured" style="padding:0; overflow:hidden; border-radius:8px; background:#fff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08); border-top:4px solid #0563bb;" x-data="{ playing: false }">
             <div class="row g-0">
 
               <!-- ── Left: Media column ── -->
@@ -976,7 +976,7 @@
 
         <!-- NativeCamp / FDCI Backend & AI work -->
         <div class="col-lg-6 col-md-12 mb-4">
-          <div class="project-card" x-data="{ mouseX:50, mouseY:50, aiHover:false, spotlightIndex:0, spotlights:['Implemented reCAPTCHA security','Optimized AI-driven support summary logic'], init(){ setInterval(()=>{ this.spotlightIndex = (this.spotlightIndex + 1) % this.spotlights.length }, 4200) }, updateMouse(event){ const rect = event.currentTarget.getBoundingClientRect(); this.mouseX = ((event.clientX - rect.left) / rect.width) * 100; this.mouseY = ((event.clientY - rect.top) / rect.height) * 100; } }" x-init="init()" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:8px; background:#ffffff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08);">
+          <div class="project-card" x-data="{ mouseX:50, mouseY:50, aiHover:false, spotlightIndex:0, spotlights:['Implemented reCAPTCHA security','Optimized AI-driven support summary logic'], init(){ setInterval(()=>{ this.spotlightIndex = (this.spotlightIndex + 1) % this.spotlights.length }, 4200) }, updateMouse(event){ const rect = event.currentTarget.getBoundingClientRect(); this.mouseX = ((event.clientX - rect.left) / rect.width) * 100; this.mouseY = ((event.clientY - rect.top) / rect.height) * 100; } }" x-init="init()" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:8px; background:#ffffff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08); border-top:4px solid #f59e0b;">
             <div @mousemove="updateMouse($event)" style="position:relative; height:280px; overflow:hidden; background: linear-gradient(90deg, rgba(255,255,255,0.00) 0%, rgba(255,255,255,0.50) 35%, rgba(255,255,255,0.95) 75%), url('assets/img/nativecamp.png') center/cover; filter:grayscale(15%) brightness(1.05);">
               <!-- Linear gradient mask: white fade into the card background -->
               <div style="position:absolute; inset:0; background:linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 35%, rgba(255,255,255,1) 80%); z-index:1;"></div>
@@ -1067,7 +1067,7 @@
 
         <!-- Johnny Davis Ministries -->
         <div class="col-lg-6 col-md-12 mb-4">
-          <div class="project-card" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:8px; background:#fff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08);">
+          <div class="project-card" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:8px; background:#fff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08); border-top:4px solid #10b981;">
 
             <!-- Main hero image -->
             <div style="position:relative; height:280px; overflow:hidden; background:#000;">
@@ -1151,7 +1151,7 @@
 
         <!-- Johnny Davis Global Mission -->
         <div class="col-lg-6 col-md-12 d-flex align-items-stretch mb-4">
-          <div class="project-card" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:8px; background:#fff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08);">
+          <div class="project-card" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:8px; background:#fff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08); border-top:4px solid #6366f1;">
 
             <!-- Main hero image -->
             <div style="position:relative; height:280px; overflow:hidden; background:#000;">
@@ -1236,7 +1236,7 @@
 
         <!-- Portfolio AI Assistant -->
         <div class="col-lg-6 col-md-12 d-flex align-items-stretch mb-4">
-          <div class="project-card" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:8px; background:#fff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08);">
+          <div class="project-card" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:8px; background:#fff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08); border-top:4px solid #7c3aed;">
 
             <!-- Dark gradient hero -->
             <div style="height:280px; background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
