@@ -2981,6 +2981,79 @@ section .container {
   }
 }
 
+/* ── Project stat counters ── */
+.project-stat-card {
+  position: relative;
+  text-align: center;
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid rgba(44, 62, 80, 0.08);
+  box-shadow: 0 4px 20px rgba(44, 62, 80, 0.06);
+  padding: 30px 16px 26px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.project-stat-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-stat-card:hover {
+  box-shadow: 0 14px 36px rgba(44, 62, 80, 0.14);
+  border-color: rgba(5, 99, 187, 0.25);
+}
+
+.project-stat-icon {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 24px;
+  color: #fff;
+}
+
+.project-stat-icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  opacity: 0.6;
+  animation: ping 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.project-stat-number {
+  font-size: 2.4rem;
+  font-weight: 800;
+  line-height: 1;
+  margin: 0 0 6px;
+  background: linear-gradient(135deg, #0563bb, #18d26e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.project-stat-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+@media (max-width: 576px) {
+  .project-stat-number {
+    font-size: 1.9rem;
+  }
+}
+
 /* ── End Projects Section ── */
 
 .php-email-form .loading.d-block {

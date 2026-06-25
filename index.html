@@ -810,6 +810,77 @@
         <p>Real-World Client Work &amp; Builds</p>
       </div>
 
+      <!-- ── Project Stat Counters ── -->
+      <div class="row mb-5"
+           x-data="{
+             revealed: false,
+             counts: { projects: 0, clients: 0, corporate: 0, personal: 0 },
+             targets: { projects: 7, clients: 5, corporate: 1, personal: 1 },
+             reveal(){
+               if (this.revealed) return;
+               this.revealed = true;
+               this.$el.querySelectorAll('.project-stat-card').forEach((card, i) => {
+                 setTimeout(() => card.classList.add('is-visible'), i * 120);
+               });
+               const duration = 1400;
+               const start = performance.now();
+               const tick = (now) => {
+                 const progress = Math.min((now - start) / duration, 1);
+                 const eased = 1 - Math.pow(1 - progress, 3);
+                 Object.keys(this.targets).forEach(k => {
+                   this.counts[k] = Math.round(this.targets[k] * eased);
+                 });
+                 if (progress < 1) requestAnimationFrame(tick);
+               };
+               requestAnimationFrame(tick);
+             }
+           }"
+           x-init="new IntersectionObserver((entries) => {
+             entries.forEach(entry => { if (entry.isIntersecting) { reveal(); } });
+           }, { threshold: 0.3 }).observe($el)">
+
+        <div class="col-6 col-md-3 mb-4">
+          <div class="project-stat-card">
+            <div class="project-stat-icon" style="background:linear-gradient(135deg,#0563bb,#0ea5e9); color:#0ea5e9;">
+              <i class="bi bi-rocket-takeoff-fill"></i>
+            </div>
+            <h3 class="project-stat-number" x-text="counts.projects + '+'"></h3>
+            <p class="project-stat-label">Real-World Projects</p>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3 mb-4">
+          <div class="project-stat-card">
+            <div class="project-stat-icon" style="background:linear-gradient(135deg,#18d26e,#10b981); color:#10b981;">
+              <i class="bi bi-briefcase-fill"></i>
+            </div>
+            <h3 class="project-stat-number" x-text="counts.clients + '+'"></h3>
+            <p class="project-stat-label">Client Projects Done</p>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3 mb-4">
+          <div class="project-stat-card">
+            <div class="project-stat-icon" style="background:linear-gradient(135deg,#6366f1,#8b5cf6); color:#6366f1;">
+              <i class="bi bi-building-fill"></i>
+            </div>
+            <h3 class="project-stat-number" x-text="counts.corporate"></h3>
+            <p class="project-stat-label">Corporate Project</p>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3 mb-4">
+          <div class="project-stat-card">
+            <div class="project-stat-icon" style="background:linear-gradient(135deg,#7c3aed,#a78bfa); color:#7c3aed;">
+              <i class="bi bi-person-fill"></i>
+            </div>
+            <h3 class="project-stat-number" x-text="counts.personal"></h3>
+            <p class="project-stat-label">Personal Project</p>
+          </div>
+        </div>
+
+      </div>
+
       <!-- ── FaithStack (featured, full-width top) ── -->
       <div class="row mb-4">
         <div class="col-12">
