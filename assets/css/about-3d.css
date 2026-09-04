@@ -2,6 +2,12 @@
    3D Interactive About Section — Dark/Green/Purple Theme
    ============================================================ */
 
+/* Accent token — overridden by theme-dark.css so every selector below
+   only needs to reference the variable once. */
+:root {
+  --a3d-purple: #8b5cf6;
+}
+
 /* ----------  Bio Paragraph — Glassmorphism + Gradient Pan  ---------- */
 
 /* Override old hover effects on the container that conflict */
@@ -40,7 +46,7 @@
   bottom: 16px;
   left: 0;
   width: 2px;
-  background: linear-gradient(to bottom, transparent, #18d26e, #8b5cf6, transparent);
+  background: linear-gradient(to bottom, transparent, #18d26e, var(--a3d-purple), transparent);
   border-radius: 2px;
 }
 
@@ -258,7 +264,7 @@
   bottom: -14px;
   left: 50%;
   transform: translateX(-50%) translateZ(30px);
-  background: linear-gradient(135deg, #18d26e, #8b5cf6);
+  background: linear-gradient(135deg, #18d26e, var(--a3d-purple));
   color: #fff;
   font-size: 12px;
   font-weight: 700;
@@ -350,7 +356,7 @@
   height: 100%;
   border-radius: 8px;
   width: 0%;
-  background: linear-gradient(90deg, #18d26e 0%, #8b5cf6 100%);
+  background: linear-gradient(90deg, #18d26e 0%, var(--a3d-purple) 100%);
   box-shadow: 0 0 12px rgba(24, 210, 110, 0.6);
   transition: width 1.4s cubic-bezier(0.16,1,0.3,1);
   position: relative;
@@ -767,7 +773,7 @@
 .keyphrase-core {
   font-style: normal;
   font-weight: 700;
-  background: linear-gradient(90deg, #18d26e, #8b5cf6, #18d26e);
+  background: linear-gradient(90deg, #18d26e, var(--a3d-purple), #18d26e);
   background-size: 200% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -967,7 +973,7 @@
   height: 100%;
   width: 0%;
   border-radius: 4px;
-  background: linear-gradient(90deg, #18d26e 0%, #8b5cf6 100%);
+  background: linear-gradient(90deg, #18d26e 0%, var(--a3d-purple) 100%);
   box-shadow: 0 0 8px rgba(24, 210, 110, 0.5);
   transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;

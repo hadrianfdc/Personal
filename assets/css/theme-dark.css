@@ -1,0 +1,110 @@
+/* ============================================================
+   Dark Theme Override — strictly black / white / green
+   Loaded conditionally alongside theme-light.css via the
+   #theme-dark-link <link disabled> toggle in index.html — only
+   one of the two is ever enabled at a time (see theme-toggle.js).
+
+   Scope: structural chrome only (backgrounds, text, nav, cards,
+   buttons, borders). Decorative accents are left untouched on
+   purpose — the 12 Interest icon colors, the 4 Projects stat-card
+   icon gradients (both inline in index.html), and every modal's
+   own accent palette (Goal Tracking, Web Design, Data Structure,
+   Coding Challenges — all in style.css) keep their normal colors
+   in both themes.
+
+   Most of the site is already black-bg/white-text/green-accent by
+   default (see style.css's un-themed base) — that identity is what
+   this file is layered on top of. It only needs to patch the
+   handful of structural elements that hardcode a non-green accent:
+   resume-timeline.css (orange/lavender, via --rt-* tokens),
+   contact-enhanced.css (orange/lavender, via --ct-* tokens),
+   about-3d.css (purple, via --a3d-purple), and the hero CTA button
+   (which has no base style at all — only theme-light.css styled it).
+   ============================================================ */
+
+:root {
+  /* resume-timeline.css tokens */
+  --rt-accent:        #18d26e;
+  --rt-accent-rgb:    24, 210, 110;
+  --rt-accent-dark:   #0f8b5c;
+  --rt-lavender:      #35e888;
+  --rt-lavender-rgb:  53, 232, 136;
+
+  /* contact-enhanced.css tokens */
+  --ct-accent:        #18d26e;
+  --ct-accent-rgb:    24, 210, 110;
+  --ct-accent-dark:   #0f8b5c;
+  --ct-lavender-rgb:  53, 232, 136;
+
+  /* about-3d.css token */
+  --a3d-purple: #35e888;
+}
+
+/* ════════════════════════════════════════════════════════════
+   Hero CTA button ("View My Work") — no base style exists
+   anywhere else, so this is a full standalone definition.
+   ════════════════════════════════════════════════════════════ */
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 30px;
+  padding: 13px 30px;
+  background: transparent;
+  color: #18d26e !important;
+  border: 2px solid #18d26e;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-decoration: none !important;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  animation: cta-glow-dark 2.6s ease-in-out infinite;
+  transition: color 0.3s ease !important;
+  will-change: transform;
+}
+
+.hero-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #18d26e;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.32s ease !important;
+  z-index: 0;
+}
+.hero-cta:hover::before { transform: scaleX(1); }
+.hero-cta:hover         { color: #000 !important; }
+.hero-cta span, .hero-cta i { position: relative; z-index: 1; }
+
+@keyframes cta-glow-dark {
+  0%,  100% { box-shadow: 0 0  8px rgba(24, 210, 110, 0.35), 0 0 22px rgba(24, 210, 110, 0.12); }
+  50%       { box-shadow: 0 0 20px rgba(24, 210, 110, 0.65), 0 0 48px rgba(24, 210, 110, 0.30); }
+}
+
+/* ════════════════════════════════════════════════════════════
+   Hero tagline scramble decorations — only styled in
+   theme-light.css otherwise, so no base fallback exists.
+   ════════════════════════════════════════════════════════════ */
+.scramble-glyph {
+  color: #18d26e;
+  opacity: 0.65;
+  font-family: monospace;
+}
+.scramble-blank {
+  opacity: 0.12;
+}
+#hero-tagline.scrambling::after {
+  content: '|';
+  display: inline-block;
+  color: #18d26e;
+  animation: cursor-blink 0.9s step-end infinite;
+  margin-left: 2px;
+}
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}

@@ -53,7 +53,20 @@
   <link href="assets/css/custom-cursor.css" rel="stylesheet">
 
   <!-- Light Theme Override (loads last to win all specificity battles) -->
-  <link href="assets/css/theme-light.css" rel="stylesheet">
+  <link id="theme-light-link" href="assets/css/theme-light.css" rel="stylesheet">
+
+  <!-- Dark Theme Override — black/white/green only; toggled via disabled property below -->
+  <link id="theme-dark-link" href="assets/css/theme-dark.css" rel="stylesheet" disabled>
+
+  <!-- Apply the stored theme synchronously, before first paint, to avoid a flash of the wrong theme -->
+  <script>
+    (function () {
+      var theme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+      document.getElementById('theme-light-link').disabled = (theme !== 'light');
+      document.getElementById('theme-dark-link').disabled = (theme !== 'dark');
+    })();
+  </script>
 
   <!-- =======================================================
   * Template Name: Personal
@@ -123,6 +136,14 @@
 
     </div>
   </header><!-- End Header -->
+
+  <!-- Site Theme Toggle — kept OUTSIDE #header: header-top's backdrop-filter
+       establishes a containing block for position:fixed descendants, which
+       would otherwise trap this button inside the shrunk header bar (same
+       class of bug the mobile nav overlay hit — see theme-light.css). -->
+  <button id="siteThemeToggle" class="theme-toggle-btn" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+    <i class="bi bi-moon-fill" aria-hidden="true"></i>
+  </button>
 
   <!-- Animated Image -->
   <div id="animated-image"></div>
@@ -2384,6 +2405,9 @@
 
   <!-- Utility Scripts -->
   <script src="assets/js/utils.js"></script>
+
+  <!-- Site Theme Toggle (dark/light, persisted in localStorage) -->
+  <script src="assets/js/theme-toggle.js"></script>
 
   <!-- Custom Trailing Cursor (stretchy ring, hover zoom, nav pill morph) -->
   <script src="assets/js/custom-cursor.js"></script>

@@ -2,6 +2,16 @@
    Resume — Modern Timeline Layout
    ============================================================ */
 
+/* Accent tokens — overridden wholesale by theme-dark.css so every
+   selector below only needs to reference the variable once. */
+:root {
+  --rt-accent:      #FF9F43;
+  --rt-accent-rgb:  255, 159, 67;
+  --rt-accent-dark: var(--rt-accent-dark);
+  --rt-lavender:    #9C88FF;
+  --rt-lavender-rgb: 156, 136, 255;
+}
+
 /* ════════════════════════════════════════════════════════════
    Section / group headings
    ════════════════════════════════════════════════════════════ */
@@ -14,15 +24,15 @@
   color: #2C3E50 !important;
   margin-bottom: 26px !important;
   padding-bottom: 12px;
-  border-bottom: 2px solid rgba(255, 159, 67, 0.18);
+  border-bottom: 2px solid rgba(var(--rt-accent-rgb), 0.18);
 }
 
 .timeline-section-title .title-icon {
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background: rgba(255, 159, 67, 0.10);
-  border: 1px solid rgba(255, 159, 67, 0.22);
+  background: rgba(var(--rt-accent-rgb), 0.10);
+  border: 1px solid rgba(var(--rt-accent-rgb), 0.22);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,13 +41,13 @@
 
 .timeline-section-title .title-icon i {
   font-size: 17px;
-  color: #FF9F43;
+  color: var(--rt-accent);
 }
 
 .skills-hint {
   font-size: 11px;
   font-weight: 500;
-  color: #9C88FF;
+  color: var(--rt-lavender);
   margin-left: auto;
   letter-spacing: 0.01em;
   opacity: 0.85;
@@ -53,8 +63,8 @@
   padding: 28px 32px;
   margin-bottom: 40px;
   box-shadow:
-    0 0 0 1.5px rgba(255, 159, 67, 0.22),
-    0 0 0 3px rgba(156, 136, 255, 0.10),
+    0 0 0 1.5px rgba(var(--rt-accent-rgb), 0.22),
+    0 0 0 3px rgba(var(--rt-lavender-rgb), 0.10),
     0 8px 32px rgba(44, 62, 80, 0.08);
   cursor: pointer;
   transition: box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
@@ -64,8 +74,8 @@
 .resume-summary-card:hover {
   transform: translateY(-4px);
   box-shadow:
-    0 0 0 1.5px rgba(255, 159, 67, 0.40),
-    0 0 0 3px rgba(156, 136, 255, 0.18),
+    0 0 0 1.5px rgba(var(--rt-accent-rgb), 0.40),
+    0 0 0 3px rgba(var(--rt-lavender-rgb), 0.18),
     0 16px 48px rgba(44, 62, 80, 0.11);
 }
 
@@ -88,8 +98,8 @@
   width: 52px;
   height: 52px;
   border-radius: 14px;
-  background: rgba(255, 159, 67, 0.10);
-  border: 1px solid rgba(255, 159, 67, 0.22);
+  background: rgba(var(--rt-accent-rgb), 0.10);
+  border: 1px solid rgba(var(--rt-accent-rgb), 0.22);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,7 +108,7 @@
 
 .summary-avatar-icon i {
   font-size: 26px;
-  color: #FF9F43;
+  color: var(--rt-accent);
 }
 
 .summary-name {
@@ -111,7 +121,7 @@
 
 .summary-role {
   font-size: 13px;
-  color: #9C88FF;
+  color: var(--rt-lavender);
   font-weight: 500;
   margin: 3px 0 0 !important;
 }
@@ -128,7 +138,7 @@
   display: block;
   font-size: 24px;
   font-weight: 800;
-  color: #FF9F43;
+  color: var(--rt-accent);
   line-height: 1;
 }
 
@@ -169,7 +179,7 @@
 }
 
 .summary-meta i {
-  color: #FF9F43;
+  color: var(--rt-accent);
   font-size: 14px;
 }
 
@@ -197,7 +207,7 @@
 .timeline-progress {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, #FF9F43 0%, #9C88FF 100%);
+  background: linear-gradient(180deg, var(--rt-accent) 0%, var(--rt-lavender) 100%);
   transform-origin: top center;
   transform: scaleY(0);
 }
@@ -220,15 +230,15 @@
   height: 14px;
   border-radius: 50%;
   background: #fff;
-  border: 2.5px solid #FF9F43;
-  box-shadow: 0 0 0 4px rgba(255, 159, 67, 0.14);
+  border: 2.5px solid var(--rt-accent);
+  box-shadow: 0 0 0 4px rgba(var(--rt-accent-rgb), 0.14);
   z-index: 2;
   transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.28s ease;
 }
 
 .timeline-node--active {
-  background: #FF9F43;
-  box-shadow: 0 0 0 4px rgba(255, 159, 67, 0.22), 0 0 14px rgba(255, 159, 67, 0.40);
+  background: var(--rt-accent);
+  box-shadow: 0 0 0 4px rgba(var(--rt-accent-rgb), 0.22), 0 0 14px rgba(var(--rt-accent-rgb), 0.40);
 }
 
 /* Pulse ring on current job */
@@ -237,7 +247,7 @@
   position: absolute;
   inset: -5px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 159, 67, 0.45);
+  border: 2px solid rgba(var(--rt-accent-rgb), 0.45);
   animation: nodePulse 2.6s ease-in-out infinite;
 }
 
@@ -248,7 +258,7 @@
 
 .timeline-entry:hover .timeline-node {
   transform: scale(1.35);
-  box-shadow: 0 0 0 6px rgba(255, 159, 67, 0.20);
+  box-shadow: 0 0 0 6px rgba(var(--rt-accent-rgb), 0.20);
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -259,7 +269,7 @@
   backdrop-filter: blur(6px);
   border-radius: 14px;
   padding: 20px 22px;
-  border-left: 3px solid #FF9F43;
+  border-left: 3px solid var(--rt-accent);
   box-shadow:
     0 2px 14px rgba(44, 62, 80, 0.07),
     0 1px 3px rgba(44, 62, 80, 0.04);
@@ -278,7 +288,7 @@
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(90deg, rgba(255,159,67,0.5), rgba(156,136,255,0.3), transparent);
+  background: linear-gradient(90deg, rgba(var(--rt-accent-rgb),0.5), rgba(var(--rt-lavender-rgb),0.3), transparent);
 }
 
 .timeline-entry:hover .timeline-card {
@@ -286,7 +296,7 @@
   transform: translateX(5px);
   box-shadow:
     0 8px 28px rgba(44, 62, 80, 0.10),
-    0 2px 6px rgba(255, 159, 67, 0.08);
+    0 2px 6px rgba(var(--rt-accent-rgb), 0.08);
 }
 
 /* Card content */
@@ -300,20 +310,20 @@
 .card-period {
   font-size: 11.5px;
   font-weight: 700;
-  color: #FF9F43;
+  color: var(--rt-accent);
   letter-spacing: 0.05em;
   text-transform: uppercase;
   margin-bottom: 5px;
 }
 
 .current-badge {
-  background: rgba(255, 159, 67, 0.12);
-  color: #FF9F43;
+  background: rgba(var(--rt-accent-rgb), 0.12);
+  color: var(--rt-accent);
   font-size: 9.5px;
   font-weight: 800;
   padding: 2px 8px;
   border-radius: 20px;
-  border: 1px solid rgba(255, 159, 67, 0.25);
+  border: 1px solid rgba(var(--rt-accent-rgb), 0.25);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -334,10 +344,10 @@
   gap: 5px;
 }
 
-.card-institution i { color: #9C88FF; font-size: 14px; }
+.card-institution i { color: var(--rt-lavender); font-size: 14px; }
 
 .project-label {
-  color: #9C88FF;
+  color: var(--rt-lavender);
   font-style: italic;
   font-size: 12px;
 }
@@ -372,9 +382,9 @@
   font-weight: 600;
   padding: 3px 10px;
   border-radius: 20px;
-  background: rgba(255, 159, 67, 0.08);
-  color: #FF9F43;
-  border: 1px solid rgba(255, 159, 67, 0.20);
+  background: rgba(var(--rt-accent-rgb), 0.08);
+  color: var(--rt-accent);
+  border: 1px solid rgba(var(--rt-accent-rgb), 0.20);
   letter-spacing: 0.02em;
 }
 
@@ -382,18 +392,18 @@
    Alpine highlight / dim (chip hover → experience card)
    ════════════════════════════════════════════════════════════ */
 .entry-highlighted .timeline-card {
-  border-left-color: #9C88FF !important;
+  border-left-color: var(--rt-lavender) !important;
   border-left-width: 5px !important;
   box-shadow:
-    0 0 0 1.5px rgba(156, 136, 255, 0.22),
-    0 0 0 3px rgba(156, 136, 255, 0.08),
-    0 8px 28px rgba(156, 136, 255, 0.12) !important;
+    0 0 0 1.5px rgba(var(--rt-lavender-rgb), 0.22),
+    0 0 0 3px rgba(var(--rt-lavender-rgb), 0.08),
+    0 8px 28px rgba(var(--rt-lavender-rgb), 0.12) !important;
   transform: translateX(5px);
 }
 
 .entry-highlighted .timeline-node {
-  border-color: #9C88FF !important;
-  box-shadow: 0 0 0 6px rgba(156, 136, 255, 0.18) !important;
+  border-color: var(--rt-lavender) !important;
+  box-shadow: 0 0 0 6px rgba(var(--rt-lavender-rgb), 0.18) !important;
 }
 
 .entry-dimmed {
@@ -458,10 +468,10 @@
 }
 
 .skill-chip.chip-lit {
-  background: linear-gradient(135deg, rgba(255,159,67,0.14), rgba(156,136,255,0.08));
-  color: #FF9F43;
-  border-color: rgba(255, 159, 67, 0.38);
-  box-shadow: 0 2px 12px rgba(255, 159, 67, 0.18);
+  background: linear-gradient(135deg, rgba(var(--rt-accent-rgb),0.14), rgba(var(--rt-lavender-rgb),0.08));
+  color: var(--rt-accent);
+  border-color: rgba(var(--rt-accent-rgb), 0.38);
+  box-shadow: 0 2px 12px rgba(var(--rt-accent-rgb), 0.18);
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -477,14 +487,14 @@
   gap: 8px;
   padding: 12px 22px;
   border-radius: 50px;
-  background: linear-gradient(135deg, #FF9F43 0%, #E8892B 100%);
+  background: linear-gradient(135deg, var(--rt-accent) 0%, var(--rt-accent-dark) 100%);
   color: #fff !important;
   font-size: 14px;
   font-weight: 700;
   text-decoration: none !important;
   box-shadow:
-    0 6px 24px rgba(255, 159, 67, 0.45),
-    0 2px 6px rgba(255, 159, 67, 0.25);
+    0 6px 24px rgba(var(--rt-accent-rgb), 0.45),
+    0 2px 6px rgba(var(--rt-accent-rgb), 0.25);
   opacity: 0;
   transform: translateY(18px) scale(0.88);
   pointer-events: none;
@@ -497,8 +507,8 @@
 
 .resume-fab:hover {
   box-shadow:
-    0 10px 32px rgba(255, 159, 67, 0.55),
-    0 3px 8px rgba(255, 159, 67, 0.30);
+    0 10px 32px rgba(var(--rt-accent-rgb), 0.55),
+    0 3px 8px rgba(var(--rt-accent-rgb), 0.30);
   color: #fff !important;
   text-decoration: none !important;
 }
