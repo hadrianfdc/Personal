@@ -92,6 +92,11 @@
 
       if (!header.classList.contains('header-top')) {
         header.classList.add('header-top')
+        // Clear any leftover parallax transform/opacity from the hero (see
+        // interactive.js) so it can't trap the fixed-position mobile nav
+        // overlay inside the shrunk header bar before the next scroll event.
+        header.style.transform = ''
+        header.style.opacity = ''
         setTimeout(function() {
           sections.forEach((item) => {
             item.classList.remove('section-show')
@@ -125,6 +130,8 @@
         let navlinks = select('#navbar .nav-link', true)
 
         header.classList.add('header-top')
+        header.style.transform = ''
+        header.style.opacity = ''
 
         navlinks.forEach((item) => {
           if (item.getAttribute('href') == window.location.hash) {

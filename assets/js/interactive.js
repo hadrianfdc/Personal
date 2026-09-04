@@ -234,6 +234,19 @@
     if (!header) return;
     
     window.addEventListener('scroll', () => {
+      // Parallax only applies to the full-height hero. Once a section is
+      // active, #header shrinks into a fixed top bar (see .header-top) and
+      // is a DOM ancestor of the mobile nav's fixed-position overlay — an
+      // inline transform here (even translateY(0px)) would create a new
+      // containing block and trap that overlay inside the shrunk bar.
+      if (header.classList.contains('header-top')) {
+        if (header.style.transform || header.style.opacity) {
+          header.style.transform = '';
+          header.style.opacity = '';
+        }
+        return;
+      }
+
       const scrolled = window.pageYOffset;
       if (scrolled < window.innerHeight) {
         header.style.transform = `translateY(${scrolled * 0.4}px)`;
