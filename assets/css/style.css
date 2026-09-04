@@ -176,6 +176,16 @@ h6 {
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
+/* -webkit-text-fill-color and text-shadow above are inherited by all
+   descendant text (including this tooltip nested inside the <a>) — without
+   this reset "Verified Developer" paints fully transparent on hover. */
+.verify-badge-tooltip {
+  -webkit-text-fill-color: #f1f5f9;
+  text-shadow: none;
+  background-clip: initial;
+  -webkit-background-clip: initial;
+}
+
 #header h1 a::after {
   content: '';
   position: absolute;
