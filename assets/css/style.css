@@ -1539,6 +1539,11 @@ section .container {
   inset: 0;
   background: rgba(15, 23, 42, 0.75);
   backdrop-filter: blur(16px);
+  /* .goal-modal-overlay/.goal-modal-container set pointer-events:none so the
+     rest of the page stays clickable while this modal is otherwise hidden —
+     re-enable it here so a click on the backdrop itself (i.e. "outside" the
+     panel) actually reaches the close handler instead of passing through. */
+  pointer-events: auto;
 }
 
 .goal-modal-container {
