@@ -121,18 +121,25 @@
   line-height: 1;
 }
 
-/* ── Card title ── */
+/* ── Card title ──
+   !important needed: style.css:2713 has a legacy ".contact .info-box h3"
+   rule (2 classes + element = higher specificity than this class alone)
+   from the original template's dark-card contact design, styling h3 at
+   50% white — invisible in light mode only because theme-light.css's
+   blanket "h1..h6 { color !important }" rule happened to beat it. Dark
+   mode has no such rescue, so it washed this title out to near-invisible
+   against the light glass card underneath. */
 .contact-card-title {
   font-size: 16px;
   font-weight: 700;
-  color: #2C3E50;
+  color: #2C3E50 !important;
   margin-bottom: 3px;
   letter-spacing: 0.01em;
 }
 
-/* ── Card body text ── */
+/* ── Card body text ── (same legacy-rule risk via ".contact .info-box p") */
 .contact-card-body {
-  color: #4A5568;
+  color: #4A5568 !important;
   font-size: 14px;
   line-height: 1.5;
   margin: 0;
