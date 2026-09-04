@@ -117,6 +117,14 @@
    and border (dark navy at 12% alpha, meant to read against a
    white page) both wash out to near-invisible against black.
    ════════════════════════════════════════════════════════════ */
+/* Section headings ("Education", "Professional Experience",
+   "Technical Expertise") sit directly on the black page background,
+   not inside a white card — their #2C3E50 (dark navy) !important
+   color from resume-timeline.css is nearly invisible there. */
+.timeline-section-title {
+  color: #fff !important;
+}
+
 .skill-group-label {
   color: rgba(255, 255, 255, 0.6);
 }
