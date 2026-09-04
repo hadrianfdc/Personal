@@ -1347,9 +1347,16 @@ html {
   transition: all 0.3s ease;
 }
 
-.resume-summary-container:hover {
-  background: rgba(24, 210, 110, 0.05);
-}
+/* NOTE: this element also carries .resume-summary-card (same div, two
+   classes — see index.html#resume-summary), which owns its own opaque
+   white/cream background + hover lift/glow (resume-timeline.css). A
+   background here — same property, and :hover raises this selector's
+   specificity above the plain .resume-summary-card rule — would
+   completely replace that card background with a near-transparent wash
+   letting the page behind show through. Harmless-looking on the light
+   theme's light page, but reads as a broken near-black card with
+   illegible text on the dark theme's black page. Intentionally no
+   background override here; the card's own hover state is enough. */
 
 .about-description-container:hover {
   background: rgba(24, 210, 110, 0.05);
