@@ -29,25 +29,29 @@
    Glassmorphism Card base
    ════════════════════════════════════════════════════════════ */
 .contact-card {
+  --cc-cut: 26px;
+  --cc-border-grad: linear-gradient(135deg, rgba(255, 159, 67, 0.7), rgba(156, 136, 255, 0.5));
   background: rgba(255, 255, 255, 0.72) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.88) !important;
-  border-radius: 20px !important;
-  box-shadow:
-    0 4px 20px rgba(44, 62, 80, 0.08),
-    0 1px 4px rgba(44, 62, 80, 0.04) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  clip-path: polygon(0 0, calc(100% - var(--cc-cut)) 0, 100% var(--cc-cut), 100% 100%, var(--cc-cut) 100%, 0 calc(100% - var(--cc-cut)));
+  box-shadow: none !important;
+  filter:
+    drop-shadow(0 4px 20px rgba(44, 62, 80, 0.08))
+    drop-shadow(0 1px 4px rgba(44, 62, 80, 0.04));
   padding: 28px 24px !important;
   transition:
     transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 0.38s ease !important;
+    filter 0.38s ease !important;
   position: relative !important;
   overflow: hidden;
   will-change: transform;
   width: 100%;
 }
 
-/* Glass specular highlight */
+/* Glass specular highlight — auto-clipped to the chamfered shape */
 .contact-card::before {
   content: '';
   position: absolute;
@@ -56,29 +60,37 @@
   right: 0;
   height: 50%;
   background: linear-gradient(180deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 100%);
-  border-radius: 20px 20px 0 0;
   pointer-events: none;
 }
 
-/* Warm accent top-edge shimmer */
+/* Gradient outline that traces the diagonal corner-cut edge */
 .contact-card::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 15%;
-  right: 15%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(255,159,67,0.6), rgba(156,136,255,0.4), transparent);
-  border-radius: 0 0 2px 2px;
+  inset: 0;
+  clip-path: inherit;
+  padding: 1.5px;
+  background: var(--cc-border-grad);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: background 0.3s ease;
 }
 
-/* Hover — lift + expanded shadow */
+/* Hover — lift + expanded shadow + brighter outline */
 .contact-card:hover {
   transform: translateY(-8px) !important;
-  box-shadow:
-    0 20px 50px rgba(44, 62, 80, 0.13),
-    0 6px 20px rgba(255, 159, 67, 0.10),
-    0 1px 4px rgba(44, 62, 80, 0.05) !important;
+  --cc-border-grad: linear-gradient(135deg, rgba(255, 159, 67, 0.95), rgba(156, 136, 255, 0.7));
+  filter:
+    drop-shadow(0 20px 50px rgba(44, 62, 80, 0.13))
+    drop-shadow(0 6px 20px rgba(255, 159, 67, 0.10))
+    drop-shadow(0 1px 4px rgba(44, 62, 80, 0.05)) !important;
 }
 
 /* ── Icon bubble ── */
@@ -117,22 +129,9 @@
   margin: 0;
 }
 
-/* ── Info variant (Address, Social) — gradient glow border ── */
+/* ── Info variant (Address, Social) — warm glass tint, outline handled by ::after ── */
 .contact-card--info {
   background: linear-gradient(145deg, rgba(255,255,255,0.85) 0%, rgba(255,248,240,0.78) 100%) !important;
-  box-shadow:
-    0 0 0 1.5px rgba(255, 159, 67, 0.28),
-    0 0 0 3px rgba(156, 136, 255, 0.12),
-    0 4px 20px rgba(44, 62, 80, 0.08),
-    0 1px 4px rgba(44, 62, 80, 0.04) !important;
-}
-
-.contact-card--info:hover {
-  box-shadow:
-    0 0 0 1.5px rgba(255, 159, 67, 0.45),
-    0 0 0 3px rgba(156, 136, 255, 0.22),
-    0 20px 50px rgba(44, 62, 80, 0.13),
-    0 6px 20px rgba(255, 159, 67, 0.10) !important;
 }
 
 /* ── Action variant (Email, Call) ── */
@@ -142,14 +141,14 @@
 
 /* ── Copy button success state ── */
 .contact-copy-trigger--success {
+  --cc-btn-border-grad: linear-gradient(135deg, rgba(34, 197, 94, 0.9), rgba(34, 197, 94, 0.5));
   background: rgba(34, 197, 94, 0.10) !important;
-  border-color: rgba(34, 197, 94, 0.40) !important;
   color: #16a34a !important;
 }
 
 .contact-copy-trigger--success:hover {
   background: rgba(34, 197, 94, 0.16) !important;
-  border-color: rgba(34, 197, 94, 0.55) !important;
+  --cc-btn-border-grad: linear-gradient(135deg, rgba(34, 197, 94, 1), rgba(34, 197, 94, 0.65));
 }
 
 /* ── Map iframe ── */
@@ -188,28 +187,50 @@
   color: #FF9F43;
 }
 
-/* Styled copy button */
+/* Styled copy button — chamfered corner-cut with gradient outline */
 .contact-copy-trigger {
+  --cc-btn-cut: 10px;
+  --cc-btn-border-grad: linear-gradient(135deg, rgba(255, 159, 67, 0.75), rgba(156, 136, 255, 0.55));
   display: inline-flex;
   align-items: center;
   gap: 5px;
   padding: 5px 13px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 159, 67, 0.28);
+  border-radius: 0;
+  border: none;
+  clip-path: polygon(0 0, calc(100% - var(--cc-btn-cut)) 0, 100% var(--cc-btn-cut), 100% 100%, var(--cc-btn-cut) 100%, 0 calc(100% - var(--cc-btn-cut)));
   background: rgba(255, 159, 67, 0.07);
   color: #FF9F43;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition: background 0.2s ease;
   position: relative;
   user-select: none;
   -webkit-user-select: none;
 }
 
+.contact-copy-trigger::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  clip-path: inherit;
+  padding: 1.25px;
+  background: var(--cc-btn-border-grad);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: background 0.2s ease;
+}
+
 .contact-copy-trigger:hover {
   background: rgba(255, 159, 67, 0.14);
-  border-color: rgba(255, 159, 67, 0.5);
+  --cc-btn-border-grad: linear-gradient(135deg, rgba(255, 159, 67, 1), rgba(156, 136, 255, 0.8));
 }
 
 .contact-copy-trigger i {
@@ -295,6 +316,10 @@
    Mobile
    ════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
+  .contact-card {
+    --cc-cut: 16px;
+  }
+
   .contact-card:hover {
     /* Reduced lift on touch screens */
     transform: translateY(-4px) !important;
@@ -320,7 +345,7 @@
   .contact-card:hover {
     transform: none !important;
     transition: none !important;
-    box-shadow: 0 4px 20px rgba(44, 62, 80, 0.08) !important;
+    filter: drop-shadow(0 4px 20px rgba(44, 62, 80, 0.08)) !important;
   }
 
   .contact-heading-char {
