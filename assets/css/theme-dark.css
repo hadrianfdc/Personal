@@ -108,3 +108,22 @@
   0%, 100% { opacity: 1; }
   50%      { opacity: 0; }
 }
+
+/* ════════════════════════════════════════════════════════════
+   Resume — Technical Expertise skill chips. Unlike the summary/
+   timeline cards (deliberately left as white cards, same as
+   Contact), these chips sit directly on the black page background
+   with no card behind them — their light-mode fill (pale white)
+   and border (dark navy at 12% alpha, meant to read against a
+   white page) both wash out to near-invisible against black.
+   ════════════════════════════════════════════════════════════ */
+.skill-group-label {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.skill-chip {
+  background: rgba(24, 210, 110, 0.07);
+  color: rgba(255, 255, 255, 0.85);
+  border-color: rgba(24, 210, 110, 0.25);
+  box-shadow: none;
+}
