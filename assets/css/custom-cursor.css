@@ -1,0 +1,83 @@
+/*--------------------------------------------------------------
+# Custom Trailing Cursor
+--------------------------------------------------------------*/
+html.has-custom-cursor,
+html.has-custom-cursor a,
+html.has-custom-cursor button,
+html.has-custom-cursor .nav-link,
+html.has-custom-cursor .icon-box,
+html.has-custom-cursor .btn {
+  cursor: none;
+}
+
+.cc-dot,
+.cc-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 2147483000;
+  will-change: transform;
+}
+
+.cc-dot {
+  width: 8px;
+  height: 8px;
+  background: #18d26e;
+  border-radius: 50%;
+  transition: opacity 0.25s ease;
+}
+
+.cc-dot.cc-nav-hidden {
+  opacity: 0;
+}
+
+.cc-ring {
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid rgba(24, 210, 110, 0.85);
+  border-radius: 50%;
+  background: rgba(24, 210, 110, 0.06);
+  mix-blend-mode: difference;
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              border-radius 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.4s ease,
+              border-color 0.4s ease,
+              opacity 0.3s ease;
+}
+
+/* Slowed, enlarged "text zoom" hover state — generic links/buttons */
+.cc-ring.cc-hover {
+  border-color: rgba(24, 210, 110, 0.9);
+  background: rgba(24, 210, 110, 0.1);
+}
+
+/* Nav pill morph state */
+.cc-ring.cc-nav {
+  background: rgba(24, 210, 110, 0.14);
+  border-color: rgba(24, 210, 110, 0.55);
+  mix-blend-mode: normal;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cc-dot, .cc-ring { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-dot, .cc-ring { display: none !important; }
+}
+
+/*--------------------------------------------------------------
+# Nav link text zoom-on-hover (slow + enlarge, pairs with pill cursor)
+--------------------------------------------------------------*/
+.navbar .nav-link {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), letter-spacing 0.5s ease;
+  transform-origin: center;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+  transform: scale(1.14);
+  letter-spacing: 0.3px;
+}
