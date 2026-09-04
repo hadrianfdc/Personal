@@ -2647,18 +2647,6 @@ section .container {
   position: relative;
 }
 
-.email-wrapper {
-  position: relative;
-}
-
-.phone-wrapper {
-  position: relative;
-}
-
-.social-wrapper {
-  position: relative;
-}
-
 .contact .info-box i.bx {
   font-size: 24px;
   color: #18d26e;

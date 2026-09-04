@@ -2205,145 +2205,63 @@
         </div>
 
         <div class="col-md-6 mt-4 mt-md-0 d-flex align-items-stretch">
-          <div class="social-wrapper" style="width:100%;">
-            <div class="info-box contact-card contact-card--info">
-              <div class="flex items-center gap-3" style="margin-bottom:8px;">
-                <div class="contact-icon-bubble"><i class="bx bx-share-alt"></i></div>
-                <div>
-                  <h3 class="contact-card-title">Social Profiles</h3>
-                  <p class="contact-card-body">Connect with me online</p>
-                </div>
-              </div>
-              <div class="social-links">
-                <a href="https://github.com/haddyscript" target="_blank" class="github" data-color="#333" data-bg="rgba(51,51,51,0.08)" title="GitHub"><i class="bi bi-github"></i></a>
-                <a href="https://www.facebook.com/share/15TfMbmH1q/?mibextid=wwXIfr" target="_blank" class="facebook" data-color="#1877F2" data-bg="rgba(24,119,242,0.08)"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram" data-color="#E4405F" data-bg="rgba(228,64,95,0.08)"><i class="bi bi-instagram"></i></a>
-                <a href="https://www.linkedin.com/in/hadrian-evarula-b36a01327?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" class="linkedin" data-color="#0A66C2" data-bg="rgba(10,102,194,0.08)"><i class="bi bi-linkedin"></i></a>
+          <div class="info-box contact-card contact-card--info">
+            <div class="flex items-center gap-3" style="margin-bottom:8px;">
+              <div class="contact-icon-bubble"><i class="bx bx-share-alt"></i></div>
+              <div>
+                <h3 class="contact-card-title">Social Profiles</h3>
+                <p class="contact-card-body">Connect with me online</p>
               </div>
             </div>
-            
-            <!-- Social Modal -->
-            <div class="social-modal" id="socialModal">
-              <div class="modal-content">
-                <button class="modal-close-btn" id="socialModalCloseBtn" aria-label="Close modal">
-                  <i class="bi bi-x-lg"></i>
-                </button>
-                <h5><i class="bi bi-share"></i> Social Profiles & Contact</h5>
-                <div class="social-details">
-                  <p><strong>Connect with me on social media:</strong></p>
-                  <div class="social-links-modal">
-                    <a href="https://github.com/haddyscript" target="_blank" class="social-link-item" style="color:#333;">
-                      <i class="bi bi-github"></i>
-                      <span>GitHub</span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/hadrian-evarula-b36a01327?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" class="social-link-item linkedin">
-                      <i class="bi bi-linkedin"></i>
-                      <span>LinkedIn</span>
-                    </a>
-                    <a href="https://www.facebook.com/share/15TfMbmH1q/?mibextid=wwXIfr" target="_blank" class="social-link-item facebook">
-                      <i class="bi bi-facebook"></i>
-                      <span>Facebook</span>
-                    </a>
-                    <a href="#" class="social-link-item instagram">
-                      <i class="bi bi-instagram"></i>
-                      <span>Instagram</span>
-                    </a>
-                  </div>
-                  <p><strong>Preferred Contact:</strong> LinkedIn or Email</p>
-                  <p><strong>Response Time:</strong> Within 24 hours</p>
-                </div>
-              </div>
+            <div class="social-links">
+              <a href="https://github.com/haddyscript" target="_blank" class="github" data-color="#333" data-bg="rgba(51,51,51,0.08)" title="GitHub"><i class="bi bi-github"></i></a>
+              <a href="https://www.facebook.com/share/15TfMbmH1q/?mibextid=wwXIfr" target="_blank" class="facebook" data-color="#1877F2" data-bg="rgba(24,119,242,0.08)"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="instagram" data-color="#E4405F" data-bg="rgba(228,64,95,0.08)"><i class="bi bi-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/hadrian-evarula-b36a01327?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" class="linkedin" data-color="#0A66C2" data-bg="rgba(10,102,194,0.08)"><i class="bi bi-linkedin"></i></a>
             </div>
           </div>
-          
-          <!-- Social Modal Overlay -->
-          <div class="modal-overlay" id="socialModalOverlay"></div>
         </div>
 
         <div class="col-md-6 mt-4 d-flex align-items-stretch">
-          <div class="email-wrapper" style="width:100%;">
-            <div class="info-box email-box contact-card contact-card--action"
-                 x-data="contactCopy('hadrianevarula@gmail.com')">
-              <div class="flex items-start gap-3" style="margin-bottom:18px;">
-                <div class="contact-icon-bubble"><i class="bx bx-envelope"></i></div>
-                <div>
-                  <h3 class="contact-card-title">Email Me</h3>
-                  <p class="contact-card-body" id="email-address">hadrianevarula@gmail.com</p>
-                </div>
-              </div>
-              <button id="copy-email-btn"
-                      class="contact-copy-trigger"
-                      :class="{ 'contact-copy-trigger--success': copied }"
-                      @click="copy($event.currentTarget)"
-                      aria-label="Copy email address">
-                <i class="bx" :class="copied ? 'bx-check-circle' : 'bx-copy'"></i>
-                <span x-text="copied ? 'Copied!' : 'Copy'">Copy</span>
-              </button>
-            </div>
-            
-            <!-- Email Modal -->
-            <div class="email-modal" id="emailModal">
-              <div class="modal-content">
-                <button class="modal-close-btn" id="emailModalCloseBtn" aria-label="Close modal">
-                  <i class="bi bi-x-lg"></i>
-                </button>
-                <h5><i class="bi bi-envelope"></i> Contact Information</h5>
-                <div class="email-details">
-                  <p><strong>Email:</strong> hadrianevarula@gmail.com</p>
-                  <p><strong>Preferred Contact:</strong> Email or LinkedIn</p>
-                  <p><strong>Response Time:</strong> Within 24 hours</p>
-                  <button id="copy-email-modal-btn" class="btn btn-primary">Copy Email</button>
-                  <div id="copy-feedback" class="copy-feedback">Email copied! ✓</div>
-                </div>
+          <div class="info-box email-box contact-card contact-card--action"
+               x-data="contactCopy('hadrianevarula@gmail.com')">
+            <div class="flex items-start gap-3" style="margin-bottom:18px;">
+              <div class="contact-icon-bubble"><i class="bx bx-envelope"></i></div>
+              <div>
+                <h3 class="contact-card-title">Email Me</h3>
+                <p class="contact-card-body" id="email-address">hadrianevarula@gmail.com</p>
               </div>
             </div>
+            <button id="copy-email-btn"
+                    class="contact-copy-trigger"
+                    :class="{ 'contact-copy-trigger--success': copied }"
+                    @click="copy($event.currentTarget)"
+                    aria-label="Copy email address">
+              <i class="bx" :class="copied ? 'bx-check-circle' : 'bx-copy'"></i>
+              <span x-text="copied ? 'Copied!' : 'Copy'">Copy</span>
+            </button>
           </div>
-          
-          <!-- Email Modal Overlay -->
-          <div class="modal-overlay" id="emailModalOverlay"></div>
-        </div>        
+        </div>
         <div class="col-md-6 mt-4 d-flex align-items-stretch">
-          <div class="phone-wrapper" style="width:100%;">
-            <div class="info-box contact-card contact-card--action"
-                 x-data="contactCopy('+63 994 325 4337')">
-              <div class="flex items-start gap-3" style="margin-bottom:18px;">
-                <div class="contact-icon-bubble"><i class="bx bx-phone-call"></i></div>
-                <div>
-                  <h3 class="contact-card-title">Call Me</h3>
-                  <p class="contact-card-body" id="phone-number">+63 994 325 4337</p>
-                </div>
-              </div>
-              <button id="copy-btn"
-                      class="contact-copy-trigger"
-                      :class="{ 'contact-copy-trigger--success': copied }"
-                      @click="copy($event.currentTarget)"
-                      aria-label="Copy phone number">
-                <i class="bx" :class="copied ? 'bx-check-circle' : 'bx-copy'"></i>
-                <span x-text="copied ? 'Copied!' : 'Copy'">Copy</span>
-              </button>
-            </div>
-            
-            <!-- Phone Modal -->
-            <div class="phone-modal" id="phoneModal">
-              <div class="modal-content">
-                <button class="modal-close-btn" id="phoneModalCloseBtn" aria-label="Close modal">
-                  <i class="bi bi-x-lg"></i>
-                </button>
-                <h5><i class="bi bi-telephone"></i> Contact Information</h5>
-                <div class="phone-details">
-                  <p><strong>Phone:</strong> +63 994 325 4337</p>
-                  <p><strong>Preferred Contact:</strong> Phone or WhatsApp</p>
-                  <p><strong>Timezone:</strong> PST (UTC+8)</p>
-                  <button id="copy-phone-modal-btn" class="btn btn-primary">Copy Phone</button>
-                  <div id="phone-modal-copy-feedback" class="copy-feedback">Phone copied! ✓</div>
-                </div>
+          <div class="info-box contact-card contact-card--action"
+               x-data="contactCopy('+63 994 325 4337')">
+            <div class="flex items-start gap-3" style="margin-bottom:18px;">
+              <div class="contact-icon-bubble"><i class="bx bx-phone-call"></i></div>
+              <div>
+                <h3 class="contact-card-title">Call Me</h3>
+                <p class="contact-card-body" id="phone-number">+63 994 325 4337</p>
               </div>
             </div>
+            <button id="copy-btn"
+                    class="contact-copy-trigger"
+                    :class="{ 'contact-copy-trigger--success': copied }"
+                    @click="copy($event.currentTarget)"
+                    aria-label="Copy phone number">
+              <i class="bx" :class="copied ? 'bx-check-circle' : 'bx-copy'"></i>
+              <span x-text="copied ? 'Copied!' : 'Copy'">Copy</span>
+            </button>
           </div>
-          
-          <!-- Phone Modal Overlay -->
-          <div class="modal-overlay" id="phoneModalOverlay"></div>
-        </div>        
+        </div>
       </div>
 
     </div>
