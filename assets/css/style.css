@@ -270,6 +270,9 @@ h6 {
   top: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.9);
+  /* Reset the hero's overflow-y so the full-screen .navbar-mobile menu
+     (a DOM child of #header) isn't clipped to this shrunk bar's box. */
+  overflow: visible;
 }
 
 #header.header-top .social-links,
