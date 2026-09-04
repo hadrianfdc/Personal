@@ -106,44 +106,55 @@
     ring.style.borderRadius = '50%';
   }
 
-  const hoverSelector = 'a, button, .btn, input[type="submit"], .skill-chip, .icon-box, [data-cursor="hover"]';
+  // Elements that get the pill-morph treatment (see bindPillMorph below)
+  // instead of the generic circular hover-zoom state.
+  const pillSelector = '#navbar .nav-link, .skill-chip, .tech-chip';
+
+  const hoverSelector = 'a, button, .btn, input[type="submit"], .icon-box, [data-cursor="hover"]';
   document.querySelectorAll(hoverSelector).forEach((el) => {
-    if (el.closest('#navbar')) return; // nav links get the pill treatment instead
+    if (el.matches(pillSelector)) return; // these get the pill treatment instead
     el.addEventListener('mouseenter', setHoverState);
     el.addEventListener('mouseleave', clearHoverState);
   });
 
-  // Nav pill morph — the ring snaps to each nav link's bounds and follows it.
-  const navLinks = document.querySelectorAll('#navbar .nav-link');
-  function updateNavTarget(link) {
-    const r = link.getBoundingClientRect();
+  // Pill morph — the ring snaps to the element's own bounds (plus padding)
+  // and follows it while the mouse moves within it. Used for the nav links
+  // and for the pill-shaped skill/tech chips (Resume section), since
+  // morphing the cursor to match an already-pill-shaped target reads well.
+  function updatePillTarget(el, padX, padY) {
+    const r = el.getBoundingClientRect();
     navTarget = { x: r.left + r.width / 2, y: r.top + r.height / 2 };
-    ring.style.width = (r.width + 36) + 'px';
-    ring.style.height = (r.height + 22) + 'px';
+    ring.style.width = (r.width + padX) + 'px';
+    ring.style.height = (r.height + padY) + 'px';
   }
 
-  navLinks.forEach((link) => {
-    link.addEventListener('mouseenter', () => {
-      state = 'nav';
-      ring.classList.remove('cc-hover');
-      ring.classList.add('cc-nav');
-      ring.style.borderRadius = '999px';
-      dot.classList.add('cc-nav-hidden');
-      updateNavTarget(link);
+  function bindPillMorph(elements, padX, padY) {
+    elements.forEach((el) => {
+      el.addEventListener('mouseenter', () => {
+        state = 'nav';
+        ring.classList.remove('cc-hover');
+        ring.classList.add('cc-nav');
+        ring.style.borderRadius = '999px';
+        dot.classList.add('cc-nav-hidden');
+        updatePillTarget(el, padX, padY);
+      });
+      el.addEventListener('mousemove', () => {
+        if (state === 'nav') updatePillTarget(el, padX, padY);
+      });
+      el.addEventListener('mouseleave', () => {
+        state = 'default';
+        navTarget = null;
+        ring.classList.remove('cc-nav');
+        ring.style.width = DEFAULT_SIZE + 'px';
+        ring.style.height = DEFAULT_SIZE + 'px';
+        ring.style.borderRadius = '50%';
+        dot.classList.remove('cc-nav-hidden');
+      });
     });
-    link.addEventListener('mousemove', () => {
-      if (state === 'nav') updateNavTarget(link);
-    });
-    link.addEventListener('mouseleave', () => {
-      state = 'default';
-      navTarget = null;
-      ring.classList.remove('cc-nav');
-      ring.style.width = DEFAULT_SIZE + 'px';
-      ring.style.height = DEFAULT_SIZE + 'px';
-      ring.style.borderRadius = '50%';
-      dot.classList.remove('cc-nav-hidden');
-    });
-  });
+  }
+
+  bindPillMorph(document.querySelectorAll('#navbar .nav-link'), 36, 22);
+  bindPillMorph(document.querySelectorAll('.skill-chip, .tech-chip'), 14, 10);
 
   window.addEventListener('resize', () => {
     if (!started) {

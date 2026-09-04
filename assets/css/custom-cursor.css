@@ -6,7 +6,9 @@ html.has-custom-cursor a,
 html.has-custom-cursor button,
 html.has-custom-cursor .nav-link,
 html.has-custom-cursor .icon-box,
-html.has-custom-cursor .btn {
+html.has-custom-cursor .btn,
+html.has-custom-cursor .skill-chip,
+html.has-custom-cursor .tech-chip {
   cursor: none;
 }
 
