@@ -172,15 +172,18 @@
 
     const MAX_TILT = 14;
     let animId = null;
+    let borderRafId = null;
     let currentX = 0, currentY = 0, targetX = 0, targetY = 0;
     let angle = 0;
 
+    /* This border glow is opacity:0 except on :hover (about-3d.css), so
+       running it unconditionally forever was burning a frame every tick
+       for zero visible effect at rest — only animate while hovered. */
     function rotateBorder() {
       angle = (angle + 0.8) % 360;
       card.style.setProperty('--glow-angle', angle + 'deg');
-      requestAnimationFrame(rotateBorder);
+      borderRafId = requestAnimationFrame(rotateBorder);
     }
-    rotateBorder();
 
     function lerp(a, b, t) { return a + (b - a) * t; }
 
@@ -194,6 +197,7 @@
     wrapper.addEventListener('mouseenter', function () {
       card.classList.add('tilt-active');
       animId = requestAnimationFrame(animateTilt);
+      if (!borderRafId) borderRafId = requestAnimationFrame(rotateBorder);
     });
 
     wrapper.addEventListener('mousemove', function (e) {
@@ -206,6 +210,7 @@
 
     wrapper.addEventListener('mouseleave', function () {
       cancelAnimationFrame(animId);
+      if (borderRafId) { cancelAnimationFrame(borderRafId); borderRafId = null; }
       targetX = 0; targetY = 0;
       card.classList.remove('tilt-active');
 
@@ -483,18 +488,31 @@
       let rafId  = null;
       let mouseX = -9999, mouseY = -9999;
 
+      /* Cache each character's resting center instead of calling
+         getBoundingClientRect() on every one of ~400 chars every mousemove
+         frame — that forces a synchronous layout recalculation each time
+         and was the actual source of the site-wide jank/cursor lag while
+         hovering the About bio text (transforms/filters below don't shift
+         layout position enough to matter, so a resize-only cache is safe). */
+      let charCenters = null;
+
+      function measureChars() {
+        charCenters = allChars.map(function (ch) {
+          const r = ch.getBoundingClientRect();
+          return { el: ch, cx: r.left + r.width / 2, cy: r.top + r.height / 2 };
+        });
+      }
+
       function applyMagnet() {
-        allChars.forEach(function (ch) {
-          const r    = ch.getBoundingClientRect();
-          const cx   = r.left + r.width  / 2;
-          const cy   = r.top  + r.height / 2;
-          const dist = Math.hypot(mouseX - cx, mouseY - cy);
+        if (!charCenters) measureChars();
+        charCenters.forEach(function (c) {
+          const dist = Math.hypot(mouseX - c.cx, mouseY - c.cy);
 
           if (dist < RADIUS) {
             const s = 1 - dist / RADIUS;
-            gsap.to(ch, { z: 14 * s, scale: 1 + 0.06 * s, filter: 'brightness(' + (1 + 0.55 * s) + ')', duration: 0.18, ease: 'power2.out', overwrite: 'auto' });
+            gsap.to(c.el, { z: 14 * s, scale: 1 + 0.06 * s, filter: 'brightness(' + (1 + 0.55 * s) + ')', duration: 0.18, ease: 'power2.out', overwrite: 'auto' });
           } else {
-            gsap.to(ch, { z: 0, scale: 1, filter: 'brightness(1)', duration: 0.45, ease: 'power2.out', overwrite: 'auto' });
+            gsap.to(c.el, { z: 0, scale: 1, filter: 'brightness(1)', duration: 0.45, ease: 'power2.out', overwrite: 'auto' });
           }
         });
         rafId = null;
@@ -510,6 +528,8 @@
         if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
         gsap.to(allChars, { z: 0, scale: 1, filter: 'brightness(1)', duration: 0.5, ease: 'power3.out' });
       });
+
+      window.addEventListener('resize', function () { charCenters = null; });
     });
   }
 
