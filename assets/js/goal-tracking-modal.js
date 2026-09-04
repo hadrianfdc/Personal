@@ -12,12 +12,10 @@
 
   const state = {
     isOpen: false,
-    closeTimeout: null,
     counterValue: 0,
     counterAnimation: null,
     ringAnimation: null,
-    hoverTarget: false,
-    hoverModal: false
+    hoverTargetCard: null
   };
 
   const ringConfigs = [
@@ -189,22 +187,6 @@
     }, 280);
   }
 
-  function scheduleClose() {
-    clearCloseTimeout();
-    state.closeTimeout = window.setTimeout(() => {
-      if (!state.hoverTarget && !state.hoverModal) {
-        closeModal();
-      }
-    }, 150);
-  }
-
-  function clearCloseTimeout() {
-    if (state.closeTimeout) {
-      clearTimeout(state.closeTimeout);
-      state.closeTimeout = null;
-    }
-  }
-
   function initHoverListeners() {
     const goalCard = Array.from(document.querySelectorAll('.icon-box')).find(card => {
       const title = card.querySelector('h3');
@@ -222,32 +204,15 @@
     }
 
     goalCard.addEventListener('mouseenter', () => {
-      state.hoverTarget = true;
       state.hoverTargetCard = goalCard;
-      clearCloseTimeout();
       setModalPosition(goalCard);
       openModal();
-    });
-
-    goalCard.addEventListener('mouseleave', () => {
-      state.hoverTarget = false;
-      scheduleClose();
     });
 
     window.addEventListener('resize', () => {
       if (state.isOpen && state.hoverTargetCard) {
         setModalPosition(state.hoverTargetCard);
       }
-    });
-
-    elements.modal.addEventListener('mouseenter', () => {
-      state.hoverModal = true;
-      clearCloseTimeout();
-    });
-
-    elements.modal.addEventListener('mouseleave', () => {
-      state.hoverModal = false;
-      scheduleClose();
     });
 
     if (elements.backdrop) {
