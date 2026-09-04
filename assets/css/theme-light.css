@@ -64,6 +64,15 @@ h1, h2, h3, h4, h5, h6 { color: var(--c-text-head) !important; }
   border-bottom: 1px solid var(--c-border) !important;
 }
 
+/* backdrop-filter above establishes a containing block for position:fixed
+   descendants — while .navbar-mobile (a DOM child of #header) is open, that
+   traps its full-screen overlay inside this shrunk header bar instead of the
+   viewport, making the mobile nav links invisible. Drop the filter while open. */
+#header.header-top:has(.navbar-mobile) {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
 #header.header-top .hero-cta,
 #header.header-top #hero-canvas {
   display: none !important;
