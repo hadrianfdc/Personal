@@ -47,12 +47,14 @@
 
     const ctx = canvas.getContext('2d');
     let W, H;
-    const COUNT  = window.innerWidth < 768 ? 22 : 48;
+    const COUNT  = window.innerWidth < 768 ? 14 : 28;
     const MDIST  = window.innerWidth < 768 ? 110 : 150;
+    const MDIST2 = MDIST * MDIST;
     const COLORS = { node: 'rgba(24,210,110,', edge: 'rgba(139,92,246,' };
     let nodes    = [];
     let raf      = null;
     let active   = false;
+    let frameSkip = 0;
 
     function resize() {
       W = canvas.width  = section.offsetWidth;
@@ -80,17 +82,28 @@
     }, 800);
 
     function loop() {
+      /* This canvas spans the entire (often very tall) About section and
+         was redrawing at a full 60fps continuously the whole time About is
+         showing, regardless of cursor position — a steady background drain
+         on the main thread that competed with the custom cursor's own rAF
+         loop. Halving it to ~30fps is imperceptible for slow-drifting
+         particles but meaningfully cuts that cost. */
+      raf = requestAnimationFrame(loop);
+      frameSkip = (frameSkip + 1) % 2;
+      if (frameSkip !== 0) return;
+
       ctx.clearRect(0, 0, W, H);
 
       /* Draw edges between nearby nodes */
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
-          const a  = nodes[i];
-          const b  = nodes[j];
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
-          const d  = Math.sqrt(dx * dx + dy * dy);
-          if (d > MDIST) continue;
+          const a   = nodes[i];
+          const b   = nodes[j];
+          const dx  = a.x - b.x;
+          const dy  = a.y - b.y;
+          const d2  = dx * dx + dy * dy;
+          if (d2 > MDIST2) continue; /* cheap reject before the sqrt below */
+          const d = Math.sqrt(d2);
 
           const proximity = 1 - d / MDIST;
           const signal    = Math.max(a.fired, b.fired);
@@ -134,8 +147,6 @@
         if (n.y < -20)     n.y = H + 20;
         if (n.y > H + 20)  n.y = -20;
       });
-
-      raf = requestAnimationFrame(loop);
     }
 
     /* Start/stop based on visibility */
