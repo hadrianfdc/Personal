@@ -104,7 +104,7 @@ body {
    dark mode never dims it at all, so it needs its own mobile sizing here. */
 @media (max-width: 768px) {
   #animated-image {
-    width: 70vw;
+    width: 45vw;
     opacity: 0.4;
   }
 
@@ -323,10 +323,35 @@ h6 {
     margin-top: 15px;
   }
 
+  /* !important throughout: something in the cascade (Tailwind's injected
+     .container utility fighting Bootstrap's, both at equal specificity)
+     was winning over the un-flagged version of this rule, leaving the
+     hero content unstacked, off-center and clipped on mobile. */
   #header .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+  }
+
+  #header .container > * {
+    max-width: 100%;
+  }
+
+  #header h1 a {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-cta {
+    justify-content: center;
   }
 }
 
