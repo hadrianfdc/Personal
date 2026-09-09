@@ -9,6 +9,14 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+html, body {
+  /* Hard safety net: whatever ends up wider than the viewport (the fixed
+     50vw portrait, an unwrapped flex child, etc.) should get clipped, not
+     turn the whole page into something you have to swipe sideways to read. */
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
   background-color: #040404;
@@ -321,6 +329,15 @@ h6 {
 
   #header .social-links {
     margin-top: 15px;
+  }
+
+  /* #header is a ROW flex container with .container as its only child.
+     align-items:center (set elsewhere) only centers it vertically —
+     horizontal placement defaults to justify-content:flex-start, so the
+     narrow centered column below was being pinned to one side of the
+     screen instead of centered in the viewport. */
+  #header {
+    justify-content: center !important;
   }
 
   /* !important throughout: something in the cascade (Tailwind's injected
