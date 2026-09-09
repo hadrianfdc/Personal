@@ -108,7 +108,8 @@
 
   // Elements that get the pill-morph treatment (see bindPillMorph below)
   // instead of the generic circular hover-zoom state.
-  const pillSelector = '#navbar .nav-link, .skill-chip, .tech-chip';
+  const pillSelector = '#navbar .nav-link, .skill-chip, .tech-chip, ' +
+    '.contact-form-field input, .contact-form-field textarea, .contact-form-submit-btn';
 
   const hoverSelector = 'a, button, .btn, input[type="submit"], .icon-box, [data-cursor="hover"]';
   document.querySelectorAll(hoverSelector).forEach((el) => {
@@ -155,6 +156,7 @@
 
   bindPillMorph(document.querySelectorAll('#navbar .nav-link'), 36, 22);
   bindPillMorph(document.querySelectorAll('.skill-chip, .tech-chip'), 14, 10);
+  bindPillMorph(document.querySelectorAll('.contact-form-field input, .contact-form-field textarea, .contact-form-submit-btn'), 8, 8);
 
   window.addEventListener('resize', () => {
     if (!started) {

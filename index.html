@@ -2252,7 +2252,7 @@
 
         <div class="col-lg-7 mt-4 mt-lg-0">
           <div class="info-box contact-card contact-card--form" x-data="contactForm()">
-            <form @submit.prevent="submit($event)" class="contact-form-grid contact-form-grid--stacked" novalidate>
+            <form @submit.prevent="submit($event)" class="contact-form-grid contact-form-grid--stacked">
               <div class="contact-form-field">
                 <label for="cf-name">Your Name</label>
                 <input type="text" id="cf-name" name="name" x-model="name" placeholder="Jane Smith" required maxlength="100" :disabled="status === 'sending'" autocomplete="name">

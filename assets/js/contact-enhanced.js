@@ -56,6 +56,14 @@ document.addEventListener('alpine:init', function () {
       submit: function (event) {
         if (this.status === 'sending') return;
 
+        // Backs up the form's `required` attributes (which only catch
+        // fully-empty fields, not whitespace-only ones).
+        if (!this.name.trim() || !this.email.trim() || !this.message.trim()) {
+          this.status = 'error';
+          this.errorMsg = 'Please fill in your name, email, and message.';
+          return;
+        }
+
         var accessKey = window.CONFIG_CONSTANTS && window.CONFIG_CONSTANTS.WEB3FORMS_ACCESS_KEY;
         if (!accessKey || accessKey.indexOf('PLACEHOLDER') !== -1) {
           this.status = 'error';
