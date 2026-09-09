@@ -103,7 +103,8 @@
           })
           section.classList.add('section-show')
           // Hide thought bubble when section is shown
-          select('#thought-bubble').classList.remove('visible')
+          let thoughtBubble = select('#thought-bubble')
+          if (thoughtBubble) thoughtBubble.classList.remove('visible')
         }, 350);
       } else {
         sections.forEach((item) => {
@@ -111,7 +112,8 @@
         })
         section.classList.add('section-show')
         // Hide thought bubble when section is shown
-        select('#thought-bubble').classList.remove('visible')
+        let thoughtBubble = select('#thought-bubble')
+        if (thoughtBubble) thoughtBubble.classList.remove('visible')
       }
 
       scrollto(this.hash)
@@ -121,35 +123,46 @@
   /**
    * Activate/show sections on load with hash links
    */
-  window.addEventListener('load', () => {
-    if (window.location.hash) {
-      let initial_nav = select(window.location.hash)
+  const revealSectionFromHash = () => {
+    if (!window.location.hash) return
 
-      if (initial_nav) {
-        let header = select('#header')
-        let navlinks = select('#navbar .nav-link', true)
+    let initial_nav = select(window.location.hash)
+    if (!initial_nav) return
 
-        header.classList.add('header-top')
-        header.style.transform = ''
-        header.style.opacity = ''
+    let header = select('#header')
+    let navlinks = select('#navbar .nav-link', true)
 
-        navlinks.forEach((item) => {
-          if (item.getAttribute('href') == window.location.hash) {
-            item.classList.add('active')
-          } else {
-            item.classList.remove('active')
-          }
-        })
+    header.classList.add('header-top')
+    header.style.transform = ''
+    header.style.opacity = ''
 
-        setTimeout(function() {
-          initial_nav.classList.add('section-show')
-          // Hide thought bubble when section is shown
-          select('#thought-bubble').classList.remove('visible')
-        }, 350);
-
-        scrollto(window.location.hash)
+    navlinks.forEach((item) => {
+      if (item.getAttribute('href') == window.location.hash) {
+        item.classList.add('active')
+      } else {
+        item.classList.remove('active')
       }
-    }
+    })
+
+    setTimeout(function() {
+      initial_nav.classList.add('section-show')
+      // Hide thought bubble when section is shown
+      let thoughtBubble = select('#thought-bubble')
+      if (thoughtBubble) thoughtBubble.classList.remove('visible')
+    }, 350);
+
+    scrollto(window.location.hash)
+  }
+
+  window.addEventListener('load', revealSectionFromHash);
+
+  // 'load' does not fire again when the page is restored from the
+  // back/forward cache (bfcache) — e.g. navigating back to this tab, or a
+  // browser restoring previously-open tabs — which left the header stuck in
+  // its shrunk .header-top state with no section ever getting .section-show.
+  // 'pageshow' fires on both the initial load and every bfcache restore.
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) revealSectionFromHash();
   });
 
   /**
