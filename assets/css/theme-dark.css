@@ -192,3 +192,47 @@
 .skills-section {
   border-top-color: rgba(255, 255, 255, 0.1);
 }
+
+/* ════════════════════════════════════════════════════════════
+   Contact — cards, converted from opaque white/cream
+   (contact-enhanced.css's default) to the same dark glassmorphism
+   used on the Resume summary/timeline cards above: transparent dark
+   fill, white text, existing green --ct-accent tokens left as-is.
+   ════════════════════════════════════════════════════════════ */
+.contact-card {
+  background: linear-gradient(135deg, rgba(10, 30, 21, 0.55) 0%, rgba(5, 14, 10, 0.45) 100%) !important;
+}
+
+.contact-card--info {
+  background: linear-gradient(145deg, rgba(10, 30, 21, 0.55) 0%, rgba(5, 20, 14, 0.5) 100%) !important;
+}
+
+.contact-card--action {
+  background: rgba(10, 25, 18, 0.5) !important;
+}
+
+.contact-card::before {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.contact-card-title {
+  color: #fff !important;
+}
+
+.contact-card-body {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.contact-value-row .contact-value {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.contact-card .social-links a {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  box-shadow: none !important;
+}
+
+.contact-card .social-links a i {
+  color: #fff !important;
+}
