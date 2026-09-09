@@ -7,18 +7,7 @@
     <link rel="stylesheet" href="assets/css/analytics.css">
 </head>
 <body>
-    <div id="passwordModal" class="password-modal show">
-        <div class="password-content">
-            <h2>Enter Password</h2>
-            <p>Please enter the admin password to access the analytics dashboard</p>
-            <input type="password" id="passwordInput" class="password-input" placeholder="Enter password">
-            <br>
-            <button id="submitPassword" class="password-button">Access Dashboard</button>
-            <p id="passwordError" style="color: red; margin-top: 10px; display: none;">Incorrect password</p>
-        </div>
-    </div>
-
-    <div id="analyticsContent" class="container" style="display: none;">
+    <div id="analyticsContent" class="container">
         <h1>Chat Analytics Dashboard</h1>
         
         <div class="tab-buttons">
@@ -106,11 +95,6 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        const PASSWORD = 't3mPa$$word102221';
-        let passwordModal = document.getElementById('passwordModal');
-        let passwordInput = document.getElementById('passwordInput');
-        let submitButton = document.getElementById('submitPassword');
-        let passwordError = document.getElementById('passwordError');
         let analyticsContent = document.getElementById('analyticsContent');
         let loading = document.getElementById('loading');
         let analyticsGrid = document.getElementById('analyticsGrid');
@@ -177,31 +161,8 @@
             exportToCSV();
         });
 
-        // Check password
-        submitButton.addEventListener('click', () => {
-            // Clear any previous error messages
-            passwordError.style.display = 'none';
-
-            if (passwordInput.value === PASSWORD) {
-                passwordModal.classList.add('hidden');
-                setTimeout(() => {
-                    passwordModal.style.display = 'none';
-                    analyticsContent.style.display = 'block';
-                    loadAnalytics();
-                }, 300); // Wait for animation to complete
-            } else {
-                passwordError.style.display = 'block';
-                passwordInput.value = '';
-                passwordInput.focus();
-            }
-        });
-
-        // Enter key support
-        passwordInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                submitButton.click();
-            }
-        });
+        // Load analytics data immediately — no password gate.
+        loadAnalytics();
 
         // Load analytics data
         async function loadAnalytics() {
@@ -329,8 +290,6 @@
             document.body.removeChild(link);
         }
 
-        // Focus password input on load
-        passwordInput.focus();
     </script>
 </body>
 </html>
