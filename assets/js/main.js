@@ -47,6 +47,19 @@
   }
 
   /**
+   * Swap any data-src iframe inside a just-revealed section over to a real
+   * src, so heavy embeds (the Contact section's Google Map) only load once
+   * that section is actually shown instead of on every page load.
+   */
+  const activateLazyIframes = (sectionEl) => {
+    if (!sectionEl) return
+    sectionEl.querySelectorAll('iframe[data-src]').forEach((iframe) => {
+      iframe.src = iframe.dataset.src
+      iframe.removeAttribute('data-src')
+    })
+  }
+
+  /**
    * Mobile nav toggle
    */
   on('click', '.mobile-nav-toggle', function(e) {
@@ -102,6 +115,7 @@
             item.classList.remove('section-show')
           })
           section.classList.add('section-show')
+          activateLazyIframes(section)
           // Hide thought bubble when section is shown
           let thoughtBubble = select('#thought-bubble')
           if (thoughtBubble) thoughtBubble.classList.remove('visible')
@@ -111,6 +125,7 @@
           item.classList.remove('section-show')
         })
         section.classList.add('section-show')
+        activateLazyIframes(section)
         // Hide thought bubble when section is shown
         let thoughtBubble = select('#thought-bubble')
         if (thoughtBubble) thoughtBubble.classList.remove('visible')
@@ -146,6 +161,7 @@
 
     setTimeout(function() {
       initial_nav.classList.add('section-show')
+      activateLazyIframes(initial_nav)
       // Hide thought bubble when section is shown
       let thoughtBubble = select('#thought-bubble')
       if (thoughtBubble) thoughtBubble.classList.remove('visible')
