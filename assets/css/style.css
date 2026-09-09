@@ -184,6 +184,24 @@ h6 {
   transition: ease-in-out 0.3s;
 }
 
+/* Found the real mobile bug: this canvas has no width/height attributes,
+   so with no CSS size it defaults to the UA's 300x150 box and sits as a
+   real sibling flex item next to .container inside #header (display:flex),
+   forcing the row ~300px past the viewport. Only theme-light.css ever gave
+   it position:absolute (removing it from flex flow) — dark mode had no
+   such rule, so this only broke there. Because #header sets overflow-y
+   without overflow-x, the spec forces overflow-x to 'auto' too, so #header
+   silently became its own horizontally-scrollable box — that's what the
+   "swipe to reveal the text" behavior actually was. */
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
 #header h1 {
   font-size: 48px;
   margin: 0;
@@ -2266,26 +2284,6 @@ section .container {
 @keyframes modal-scale-out {
   from { transform: scale(1); opacity: 1; }
   to { transform: scale(0.94); opacity: 0; }
-}
-  from {
-    transform: scale(0.95);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes modal-scale-out {
-  from {
-    transform: scale(1);
-    opacity: 1;
-  }
-  to {
-    transform: scale(0.95);
-    opacity: 0;
-  }
 }
 
 /*--------------------------------------------------------------
