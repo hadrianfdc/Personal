@@ -41,6 +41,19 @@
 }
 
 /* ════════════════════════════════════════════════════════════
+   Keep hero content above #hero-canvas — theme-light.css has this
+   rule (position:relative + z-index:1 on .container, stacking it
+   above the dot-grid canvas's position:absolute/z-index:0), but
+   dark mode never got the equivalent, leaving .container a
+   non-positioned element that a positioned sibling can paint over
+   regardless of DOM order. Symmetric fix, not just a patch.
+   ════════════════════════════════════════════════════════════ */
+#header .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ════════════════════════════════════════════════════════════
    Hero CTA button ("View My Work") — no base style exists
    anywhere else, so this is a full standalone definition.
    ════════════════════════════════════════════════════════════ */
