@@ -303,6 +303,15 @@
   opacity: 1;
 }
 
+/* GSAP's .from('#header .social-links a', {opacity:0, stagger:...}) in
+   hero-enhanced.js writes its own opacity:0 directly onto each <a> icon
+   as an inline style (confirmed via devtools — separate from the
+   .social-links wrapper above), and that tween isn't reliably completing.
+   !important is required here since it must beat that inline style. */
+#header .social-links a {
+  opacity: 1 !important;
+}
+
 /* ===========================
    Social Icons Hover Effects
    =========================== */
