@@ -60,6 +60,26 @@
   }
 
   /**
+   * Every <section> is position:absolute with no explicit height, so before
+   * .section-show is added its computed height resolves to 0 (top:140px +
+   * bottom:100% => negative => clamped to 0). Several sections (About's
+   * split-heading/bio-text/skill-radar/interests, in about-3d.js) drive
+   * their entrance animations off IntersectionObservers set up once at page
+   * load, while their targets still have zero area — a zero-area target
+   * never reports isIntersecting, and switching a section to real geometry
+   * via a class-toggle transition (not an actual scroll) isn't reliably
+   * enough to make those observers recheck on its own. A real 'resize'
+   * event is what nudges browsers to recompute intersections — which is
+   * exactly what opening DevTools does by shrinking the viewport, and why
+   * this looked "fixed" there. Fire one now and once more after the
+   * section's CSS transition finishes, so it lands on final geometry.
+   */
+  const nudgeIntersectionObservers = () => {
+    window.dispatchEvent(new Event('resize'))
+    setTimeout(() => window.dispatchEvent(new Event('resize')), 450)
+  }
+
+  /**
    * Mobile nav toggle
    */
   on('click', '.mobile-nav-toggle', function(e) {
@@ -116,6 +136,7 @@
           })
           section.classList.add('section-show')
           activateLazyIframes(section)
+          nudgeIntersectionObservers()
           // Hide thought bubble when section is shown
           let thoughtBubble = select('#thought-bubble')
           if (thoughtBubble) thoughtBubble.classList.remove('visible')
@@ -126,6 +147,7 @@
         })
         section.classList.add('section-show')
         activateLazyIframes(section)
+        nudgeIntersectionObservers()
         // Hide thought bubble when section is shown
         let thoughtBubble = select('#thought-bubble')
         if (thoughtBubble) thoughtBubble.classList.remove('visible')
@@ -162,6 +184,7 @@
     setTimeout(function() {
       initial_nav.classList.add('section-show')
       activateLazyIframes(initial_nav)
+      nudgeIntersectionObservers()
       // Hide thought bubble when section is shown
       let thoughtBubble = select('#thought-bubble')
       if (thoughtBubble) thoughtBubble.classList.remove('visible')
