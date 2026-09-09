@@ -612,7 +612,7 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
     const requestBody = {
       contents: conversationContext,
       systemInstruction: {
-        parts: [{ text: buildSystemPrompt() + (state.userName ? `\n\nThe visitor's name is ${state.userName}. Address them by name occasionally to be personable.` : '') }]
+        parts: [{ text: buildSystemPrompt() + (state.userName && state.userName !== 'Guest' ? `\n\nThe visitor's name is ${state.userName}. Address them by name occasionally to be personable.` : '') }]
       },
       generationConfig: {
         temperature: 0.7,
@@ -796,45 +796,38 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
     
     // Handle name collection flow
     if (state.waitingForName) {
-      state.userName = extractName(userMessage);
-      
+      const parsedName = extractName(userMessage);
+      // extractName() already returns null for "skip"/"none"/"guest"/etc — treat
+      // that as an intentional skip instead of looping the user on a re-ask.
+      state.userName = parsedName || 'Guest';
+      const skipped = !parsedName;
+
       removeTypingIndicator();
-      
-      if (!state.userName) {
-        // Invalid name, ask again
-        const retryMessage = "I didn't catch your name. Could you please tell me your name?";
-        addMessage(retryMessage, 'assistant');
-        return; // Don't proceed to next step
-      }
-      
+
       state.waitingForName = false;
       state.waitingForCompany = true;
-      
-      const nameResponse = `Great to meet you, ${state.userName}! Could you also tell me which company you work for? This helps me provide more personalized assistance.`;
-      addMessage(nameResponse, 'assistant');
-    } 
+
+      const nameResponse = skipped
+        ? `No problem! Could you tell me which company you work for? Or we can just dive right in.`
+        : `Great to meet you, ${state.userName}! Could you also tell me which company you work for? This helps me provide more personalized assistance.`;
+      addMessage(nameResponse, 'assistant', ['Skip — just browsing']);
+    }
     // Handle company collection flow
     else if (state.waitingForCompany) {
-      state.userCompany = extractCompany(userMessage);
-      
+      const parsedCompany = extractCompany(userMessage);
+      state.userCompany = parsedCompany || 'Not specified';
+
       removeTypingIndicator();
-      
-      if (!state.userCompany) {
-        // Invalid company, ask again
-        const retryMessage = "I didn't catch your company name. Could you please tell me which company you work for?";
-        addMessage(retryMessage, 'assistant');
-        return; // Don't proceed to next step
-      }
-      
+
       state.waitingForCompany = false;
-      
+
       // Create user document in Firestore
       await createUserDocument(state.userName, state.userCompany);
-      
+
       // Increment chat session for new user
       await incrementChatSession();
-      
-      const welcome = `Thanks for that information, ${state.userName}! I'm here to help you learn about Hadrian's expertise in backend development, enterprise system architecture, and available services. What would you like to know?`;
+
+      const welcome = `Thanks, ${state.userName}! I'm here to help you learn about Hadrian's expertise in backend development, enterprise system architecture, and available services. What would you like to know?`;
       quickActions = ['Who is Hadrian?', 'What services offered?', 'Show skills'];
       addMessage(welcome, 'assistant', quickActions);
     } else {
@@ -920,9 +913,9 @@ Remember: You represent ${about.name}'s professional portfolio. Be helpful, accu
     if (state.hasGreeted) return;
     
     setTimeout(() => {
-      const greeting = "👋 Hi! I'm here to help you learn about Hadrian's expertise. <strong> First, may I know your name </strong>?";
-      
-      addMessage(greeting, 'assistant');
+      const greeting = "👋 Hi! I'm here to help you learn about Hadrian's expertise. <strong>First, may I know your name?</strong>";
+
+      addMessage(greeting, 'assistant', ['Skip — just browsing']);
       state.hasGreeted = true;
       
       // Show notification badge
