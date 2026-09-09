@@ -234,6 +234,27 @@ h1 {
 .status-inactive {
     color: #6c757d;
 }
+.delete-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: 600;
+    transition: all 0.1s ease;
+}
+.delete-btn:hover {
+    background: #c82333;
+}
+.delete-btn:active {
+    transform: scale(0.95);
+}
+.delete-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
 .refresh-btn {
     background: #28a745;
     color: white;

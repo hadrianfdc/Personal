@@ -61,6 +61,7 @@
                             <th>Created At</th>
                             <th>Last Active</th>
                             <th>Status</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody id="usersTableBody">
@@ -78,7 +79,7 @@
     <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getFirestore, collection, getDocs, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getFirestore, collection, getDocs, query, orderBy, doc, deleteDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
         // Firebase configuration
         const firebaseConfig = {
@@ -241,20 +242,60 @@
                         <td>${createdAt}</td>
                         <td>${lastActive}</td>
                         <td class="${statusClass}">${status}</td>
+                        <td><button class="delete-btn" data-user-id="${user.id}">Delete</button></td>
                     `;
-                    
+
                     usersTableBody.appendChild(row);
                 });
-                
+
                 usersLoading.style.display = 'none';
                 usersTableContainer.style.display = 'block';
-                
+
             } catch (error) {
                 console.error('Error loading user details:', error);
                 usersLoading.style.display = 'none';
                 errorMessage.style.display = 'block';
             }
         }
+
+        // Delete a chat_users document (event delegation — rows are rebuilt on every load)
+        usersTableBody.addEventListener('click', async (e) => {
+            const btn = e.target.closest('.delete-btn');
+            if (!btn) return;
+
+            const userId = btn.dataset.userId;
+            const user = usersData.find(u => u.id === userId);
+            const label = user?.name && user.name !== 'N/A' ? user.name : userId;
+
+            if (!confirm(`Delete user "${label}"? This permanently removes their record from Firestore and cannot be undone.`)) {
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Deleting…';
+
+            try {
+                await deleteDoc(doc(db, 'chat_users', userId));
+
+                usersData = usersData.filter(u => u.id !== userId);
+                btn.closest('tr').remove();
+
+                // Keep the dashboard totals in sync without a full reload.
+                const totalUsers = usersData.length;
+                const totalChats = usersData.reduce((sum, u) => sum + (u.totalChats || 0), 0);
+                const totalMessages = usersData.reduce((sum, u) => sum + (u.totalMessages || 0), 0);
+                document.getElementById('totalUsers').textContent = totalUsers;
+                document.getElementById('totalChats').textContent = totalChats;
+                document.getElementById('totalMessages').textContent = totalMessages;
+                document.getElementById('avgMessages').textContent =
+                    totalUsers > 0 ? (totalMessages / totalUsers).toFixed(1) : 0;
+            } catch (error) {
+                console.error('Error deleting user:', error);
+                alert('Failed to delete this user. Check the console for details.');
+                btn.disabled = false;
+                btn.textContent = 'Delete';
+            }
+        });
 
         // Export data to CSV
         function exportToCSV() {
