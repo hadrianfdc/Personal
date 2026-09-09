@@ -41,6 +41,63 @@ document.addEventListener('alpine:init', function () {
       }
     };
   });
+
+  /* ── Alpine.js component: contact form, posts to Web3Forms
+     (https://web3forms.com) which emails the submission directly —
+     no backend of our own needed. ── */
+  Alpine.data('contactForm', function () {
+    return {
+      name: '',
+      email: '',
+      message: '',
+      status: 'idle', // idle | sending | success | error
+      errorMsg: '',
+
+      submit: function () {
+        if (this.status === 'sending') return;
+
+        var accessKey = window.CONFIG_CONSTANTS && window.CONFIG_CONSTANTS.WEB3FORMS_ACCESS_KEY;
+        if (!accessKey || accessKey.indexOf('PLACEHOLDER') !== -1) {
+          this.status = 'error';
+          this.errorMsg = 'The contact form isn\'t configured yet — email me directly for now.';
+          return;
+        }
+
+        this.status = 'sending';
+        this.errorMsg = '';
+
+        var self = this;
+        var payload = {
+          access_key: accessKey,
+          name: this.name,
+          email: this.email,
+          message: this.message,
+          subject: 'New portfolio message from ' + this.name,
+          replyto: this.email
+        };
+
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            if (!data.success) {
+              throw new Error(data.message || 'Failed to send message.');
+            }
+            self.status = 'success';
+            self.name = '';
+            self.email = '';
+            self.message = '';
+          })
+          .catch(function (err) {
+            self.status = 'error';
+            self.errorMsg = (err && err.message) || 'Something went wrong. Please try again or email me directly.';
+          });
+      }
+    };
+  });
 });
 
 (function () {

@@ -2208,6 +2208,11 @@
         <p id="contact-heading-text">Contact Me</p>
       </div>
 
+      <div class="contact-meta-row">
+        <span class="availability-badge"><span class="availability-dot"></span>Available for freelance work</span>
+        <span class="response-time-note"><i class="bx bx-time-five"></i>Usually responds within 24 hours</span>
+      </div>
+
       <div class="row mt-2">
 
         <div class="col-md-6 d-flex align-items-stretch">
@@ -2287,6 +2292,43 @@
               <i class="bx" :class="copied ? 'bx-check-circle' : 'bx-copy'"></i>
               <span x-text="copied ? 'Copied!' : 'Copy'">Copy</span>
             </button>
+          </div>
+        </div>
+
+        <div class="col-12 mt-4">
+          <div class="info-box contact-card contact-card--form" x-data="contactForm()">
+            <div class="flex items-start gap-3" style="margin-bottom:18px;">
+              <div class="contact-icon-bubble"><i class="bx bx-message-detail"></i></div>
+              <div>
+                <h3 class="contact-card-title">Send a Message</h3>
+                <p class="contact-card-body">Prefer a form over email? I'll get it either way.</p>
+              </div>
+            </div>
+
+            <form @submit.prevent="submit" class="contact-form-grid" novalidate>
+              <div class="contact-form-field">
+                <label for="cf-name">Name</label>
+                <input type="text" id="cf-name" name="name" x-model="name" required maxlength="100" :disabled="status === 'sending'" autocomplete="name">
+              </div>
+              <div class="contact-form-field">
+                <label for="cf-email">Email</label>
+                <input type="email" id="cf-email" name="email" x-model="email" required maxlength="150" :disabled="status === 'sending'" autocomplete="email">
+              </div>
+              <div class="contact-form-field contact-form-field--full">
+                <label for="cf-message">Message</label>
+                <textarea id="cf-message" name="message" x-model="message" required maxlength="2000" rows="5" :disabled="status === 'sending'"></textarea>
+              </div>
+              <div class="contact-form-field--full contact-form-actions">
+                <button type="submit" class="contact-copy-trigger" :disabled="status === 'sending'">
+                  <i class="bx" :class="status === 'sending' ? 'bx-loader-alt bx-spin' : 'bx-send'"></i>
+                  <span x-text="status === 'sending' ? 'Sending…' : 'Send Message'">Send Message</span>
+                </button>
+                <span x-show="status === 'success'" x-cloak class="contact-form-status contact-form-status--success">
+                  <i class="bx bx-check-circle"></i> Message sent — thanks for reaching out!
+                </span>
+                <span x-show="status === 'error'" x-cloak class="contact-form-status contact-form-status--error" x-text="errorMsg"></span>
+              </div>
+            </form>
           </div>
         </div>
       </div>

@@ -6,6 +6,12 @@
 * License: https://bootstrapmade.com/license/
 */
 
+/* Alpine.js hides elements with x-show, but not until it's initialized —
+   this hides them immediately so there's no flash of them showing first. */
+[x-cloak] {
+  display: none !important;
+}
+
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/

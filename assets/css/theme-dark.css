@@ -250,6 +250,48 @@
   color: #fff !important;
 }
 
+.contact-card--form {
+  background: rgba(10, 25, 18, 0.5) !important;
+}
+
+.contact-form-field label {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.contact-form-field input,
+.contact-form-field textarea {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+.contact-form-field input::placeholder,
+.contact-form-field textarea::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.availability-badge {
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.10);
+  border-color: rgba(74, 222, 128, 0.28);
+}
+
+.availability-dot {
+  background: #4ade80;
+}
+
+.response-time-note {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.contact-form-status--success {
+  color: #4ade80;
+}
+
+.contact-form-status--error {
+  color: #f87171;
+}
+
 /* ════════════════════════════════════════════════════════════
    Projects — stat counter cards, converted from opaque white
    (style.css's default) to the same dark glassmorphism as the
