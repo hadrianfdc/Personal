@@ -53,7 +53,7 @@ document.addEventListener('alpine:init', function () {
       status: 'idle', // idle | sending | success | error
       errorMsg: '',
 
-      submit: function () {
+      submit: function (event) {
         if (this.status === 'sending') return;
 
         var accessKey = window.CONFIG_CONSTANTS && window.CONFIG_CONSTANTS.WEB3FORMS_ACCESS_KEY;
@@ -62,6 +62,8 @@ document.addEventListener('alpine:init', function () {
           this.errorMsg = 'The contact form isn\'t configured yet — email me directly for now.';
           return;
         }
+
+        var btnEl = event && event.target && event.target.querySelector('button[type="submit"]');
 
         this.status = 'sending';
         this.errorMsg = '';
@@ -86,6 +88,7 @@ document.addEventListener('alpine:init', function () {
             if (!data.success) {
               throw new Error(data.message || 'Failed to send message.');
             }
+            self.flyAirplane(btnEl);
             self.status = 'success';
             self.name = '';
             self.email = '';
@@ -94,6 +97,46 @@ document.addEventListener('alpine:init', function () {
           .catch(function (err) {
             self.status = 'error';
             self.errorMsg = (err && err.message) || 'Something went wrong. Please try again or email me directly.';
+          });
+      },
+
+      /* Detach the send-icon from the button and fly it off toward the
+         top-right with a spin + fade, like the message is being sent. */
+      flyAirplane: function (btnEl) {
+        if (typeof gsap === 'undefined' || !btnEl) return;
+        var icon = btnEl.querySelector('i');
+        if (!icon) return;
+
+        var rect = icon.getBoundingClientRect();
+        var iconStyle = getComputedStyle(icon);
+        var clone = document.createElement('i');
+        clone.className = 'bx bx-send';
+        clone.style.cssText = [
+          'position:fixed',
+          'left:' + rect.left + 'px',
+          'top:' + rect.top + 'px',
+          'width:' + rect.width + 'px',
+          'height:' + rect.height + 'px',
+          'font-size:' + iconStyle.fontSize,
+          'line-height:' + rect.height + 'px',
+          'color:' + iconStyle.color,
+          'filter:drop-shadow(0 0 6px rgba(24,210,110,0.55))',
+          'z-index:9999',
+          'pointer-events:none',
+          'margin:0'
+        ].join(';');
+        document.body.appendChild(clone);
+
+        gsap.timeline({ onComplete: function () { clone.remove(); } })
+          .to(clone, { scale: 1.2, rotation: -8, duration: 0.12, ease: 'power2.out' })
+          .to(clone, {
+            x: window.innerWidth * 0.32,
+            y: -window.innerHeight * 0.45,
+            rotation: 32,
+            scale: 0.35,
+            opacity: 0,
+            duration: 0.85,
+            ease: 'power2.in'
           });
       }
     };

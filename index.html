@@ -2305,7 +2305,7 @@
               </div>
             </div>
 
-            <form @submit.prevent="submit" class="contact-form-grid" novalidate>
+            <form @submit.prevent="submit($event)" class="contact-form-grid" novalidate>
               <div class="contact-form-field">
                 <label for="cf-name">Name</label>
                 <input type="text" id="cf-name" name="name" x-model="name" required maxlength="100" :disabled="status === 'sending'" autocomplete="name">
