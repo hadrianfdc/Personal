@@ -143,12 +143,13 @@
   // ── 3. GSAP ANIMATIONS ─────────────────────────────────────────────────
   if (typeof gsap === 'undefined') return;
 
-  // Entrance timeline
-  gsap.timeline({ defaults: { ease: 'power3.out' } })
-    .from('#header h1',               { y: 44, opacity: 0, duration: 0.9 })
-    .from('#hero-tagline',            { y: 22, opacity: 0, duration: 0.7 }, '-=0.45')
-    .from('#header .social-links a',  { y: 18, opacity: 0, stagger: 0.1, duration: 0.5 }, '-=0.35')
-    .from('.hero-cta',                { y: 18, opacity: 0, duration: 0.5 }, '-=0.25');
+  // Entrance timeline removed: it wrote its own opacity:0 directly onto
+  // #header h1, #hero-tagline, .social-links a and .hero-cta as inline
+  // styles, and the tween animating them back to opacity:1 was not
+  // reliably completing — different elements were caught stuck invisible
+  // on different reloads (confirmed via devtools). CSS now just shows
+  // this content immediately (see animations.css's #header entrance rule)
+  // rather than gating visibility on an animation succeeding.
 
 
   // ── 4. FLOATING + PARALLAX PROFILE IMAGE ──────────────────────────────

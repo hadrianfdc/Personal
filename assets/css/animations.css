@@ -296,19 +296,17 @@
    already get their own fade-in from hero-enhanced.js's GSAP timeline,
    so dropping the CSS-only version doesn't lose that polish — it just
    stops content visibility from depending on an animation succeeding. */
+/* !important on all of these: the GSAP entrance timeline that used to
+   write inline opacity:0 on these exact elements is now removed (see
+   hero-enhanced.js), but !important is kept as a hard guarantee against
+   any other script/inline style doing the same thing in the future —
+   this content must never depend on an animation completing to appear. */
 #header h1,
 #header h2,
 #header .navbar,
-#header .social-links {
-  opacity: 1;
-}
-
-/* GSAP's .from('#header .social-links a', {opacity:0, stagger:...}) in
-   hero-enhanced.js writes its own opacity:0 directly onto each <a> icon
-   as an inline style (confirmed via devtools — separate from the
-   .social-links wrapper above), and that tween isn't reliably completing.
-   !important is required here since it must beat that inline style. */
-#header .social-links a {
+#header .social-links,
+#header .social-links a,
+.hero-cta {
   opacity: 1 !important;
 }
 
