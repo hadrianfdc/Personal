@@ -12,9 +12,14 @@
 html, body {
   /* Hard safety net: whatever ends up wider than the viewport (the fixed
      50vw portrait, an unwrapped flex child, etc.) should get clipped, not
-     turn the whole page into something you have to swipe sideways to read. */
+     turn the whole page into something you have to swipe sideways to read.
+     overflow-x:hidden alone didn't stop it on real iOS (Safari/Chrome are
+     both WebKit there) — touch-action/overscroll-behavior block the swipe
+     gesture itself, one level below CSS overflow. */
   overflow-x: hidden;
   max-width: 100vw;
+  touch-action: pan-y;
+  overscroll-behavior-x: none;
 }
 
 body {
