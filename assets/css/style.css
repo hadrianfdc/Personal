@@ -97,6 +97,25 @@ body {
   border-top: 10px solid rgba(255, 255, 255, 0.9);
 }
 
+/* Portrait background has no mobile treatment by default — at full 50vw
+   width and opacity:1 it collides with the stacked hero text and the
+   floating chat widget on narrow screens. theme-light.css already dims it
+   (opacity:0.18 !important) so this mostly only shows on desktop there;
+   dark mode never dims it at all, so it needs its own mobile sizing here. */
+@media (max-width: 768px) {
+  #animated-image {
+    width: 70vw;
+    opacity: 0.4;
+  }
+
+  #thought-bubble {
+    max-width: 60vw;
+    right: 8%;
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}
+
 body::before {
   content: "";
   position: fixed;
@@ -308,6 +327,17 @@ h6 {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  #header h1 {
+    font-size: 30px;
+  }
+
+  #header h2 {
+    font-size: 17px;
+    line-height: 24px;
   }
 }
 
