@@ -1,152 +1,109 @@
-# Hadrian Evarula - Personal Portfolio
+# Hadrian Evarula — Portfolio
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-Live-brightgreen)](https://hadrian-evarula.vercel.app/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Live](https://img.shields.io/badge/site-live-18d26e)](https://hadrianfdc.github.io/Personal/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-A modern, responsive personal portfolio website showcasing Hadrian Evarula's expertise as a Backend/Fullstack Developer. Features an intelligent AI-powered chat assistant with customizable themes and smooth animations.
+A production portfolio for an AI/backend developer, built as a dependency-light static site rather than a framework scaffold — every interaction (theming, chat, timelines, project modals) is hand-rolled against the DOM, which keeps the payload small and the behavior fully inspectable. The centerpiece is an AI assistant grounded in a structured knowledge base of the owner's actual experience, backed by Firestore analytics.
 
-## 🌟 Features
-
-### 🎨 Interactive Portfolio
-- **Responsive Design**: Optimized for all devices using Bootstrap 5
-- **Smooth Animations**: CSS animations and AOS library for engaging transitions
-- **Modern UI**: Clean, professional design with gradient accents
-- **Fast Loading**: Optimized assets and efficient code structure
-
-### 🤖 AI Chat Assistant
-- **Intelligent Responses**: Powered by Google Gemini AI for contextual conversations
-- **Streaming Effect**: ChatGPT-like character-by-character message animation
-- **Analytics Integration**: Firebase Firestore for user analytics and chat metrics
-- **Theme Customization**:
-  - Light/Dark mode toggle
-  - 4 accent colors (Green, Blue, Purple, Orange)
-  - Instant theme switching with smooth transitions
-- **Persistent Settings**: User preferences saved in localStorage
-- **Structured Responses**: Clean, formatted replies with categorized information
-- **Professional Knowledge Base**: Comprehensive details about skills, experience, and projects
-
-### 🛠️ Technical Stack
-- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
-- **Frameworks**: Bootstrap 5, jQuery
-- **Icons**: Bootstrap Icons, Boxicons
-- **Animations**: AOS (Animate On Scroll)
-- **AI Integration**: Google Gemini API
-- **Build Tools**: None required (vanilla setup)
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Modern web browser
-- Internet connection (for AI chat functionality)
-- Google Gemini API key (optional, for full chat features)
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/hadrian-portfolio.git
-   cd hadrian-portfolio
-   ```
-
-2. **Open in browser**
-   ```bash
-   # Using Python (if available)
-   python -m http.server 8000
-
-   # Or simply open index.html in your browser
-   ```
-
-3. **Configure AI Chat (Optional)**
-   - Get a Google Gemini API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
-   - Update `assets/js/config.js` with your API key
-   - Without API key, chat shows fallback messages
-
-4. **Configure Firebase Analytics (Optional)**
-   - Create a Firebase project at [Firebase Console](https://console.firebase.google.com/)
-   - Enable Firestore Database
-   - Get your Firebase config from Project Settings
-   - Update the Firebase config in `index.html` and `analytics.html`
-   - Set up Firestore security rules to allow read/write for authenticated users (or adjust as needed)
-
-## 📁 Project Structure
-
-```
-hadrian-portfolio/
-├── index.html                 # Main portfolio page
-├── analytics.html             # Analytics dashboard (password protected)
-├── assets/
-│   ├── css/
-│   │   ├── style.css         # Main stylesheet
-│   │   └── chat-assistant.css # Chat widget styles
-│   ├── js/
-│   │   ├── main.js           # Portfolio interactions
-│   │   ├── chat-assistant.js # AI chat functionality
-│   │   ├── config.js         # API configuration
-│   │   └── utils.js          # Utility functions
-│   ├── img/                  # Portfolio images
-│   └── vendor/               # Third-party libraries
-├── forms/
-│   └── contact.php           # Contact form handler
-└── README.md                 # This file
-```
-
-## 🎯 Key Components
-
-### Portfolio Sections
-- **Hero**: Introduction with animated typing effect
-- **About**: Personal background and photo
-- **Resume**: Skills, experience, and education
-- **Services**: Offered development services
-- **Portfolio**: Project showcase
-- **Contact**: Contact form and information
-
-### Chat Assistant Features
-- **Greeting Flow**: Personalized welcome with name and company collection
-- **Contextual Responses**: AI understands portfolio context
-- **Theme Integration**: Chat adapts to selected theme
-- **Analytics Dashboard**: Password-protected metrics at `/analytics.html`
-- **Error Handling**: Graceful fallbacks for API issues
-- **Mobile Optimized**: Responsive chat interface
-
-## 🎨 Customization
-
-### Themes
-The chat assistant supports:
-- **Light Mode**: Clean white background
-- **Dark Mode**: Modern dark theme
-- **Accent Colors**: Green (default), Blue, Purple, Orange
-
-### Styling
-- Colors defined via CSS variables
-- Easy theme switching with data attributes
-- Smooth transitions for all changes
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **BootstrapMade**: Original template design
-- **Google Gemini**: AI chat capabilities
-- **Bootstrap Icons**: Icon library
-- **AOS**: Animation library
-
-## 📞 Contact
-
-**Hadrian Evarula**
-- Email: hadrianevarula@gmail.com
-- Phone: +63 994-325-4337
-- Location: Cebu City, Philippines
+**Live:** https://hadrianfdc.github.io/Personal/
 
 ---
 
-⭐ **Star this repo** if you found it helpful!
+## Engineering highlights
+
+A few decisions worth calling out, since they're not obvious from a file listing:
+
+- **Two full stylesheets, not CSS variables, for theming.** `theme-light.css` and `theme-dark.css` are separate `<link>` tags toggled via the `disabled` property (see `theme-toggle.js`), with the theme applied synchronously in an inline `<head>` script before first paint to avoid a flash of the wrong theme. `theme-dark.css` intentionally only patches the handful of elements that hardcode a non-green accent color elsewhere — the rest of the site is already black/white/green by default, so dark mode is a thin diff, not a parallel design system.
+- **Tailwind and Bootstrap coexist deliberately.** Tailwind is loaded via the Play CDN with `corePlugins.preflight` disabled specifically so it doesn't fight Bootstrap's reset — Tailwind is used for one-off utility composition (spacing, responsive text sizing) on top of Bootstrap's grid and component base, not as a replacement for it.
+- **The AI assistant is knowledge-grounded, not a bare API passthrough.** `knowledge_base.json` holds structured, factual data about experience, skills, and projects that's fed into the Gemini prompt context (`chat-assistant.js`), so answers stay accurate instead of hallucinating credentials.
+- **Chat analytics are first-party.** Conversations and usage metrics are written to Firestore (Firebase modular SDK v10) and surfaced on a password-gated dashboard (`analytics.html`) — no third-party analytics script.
+- **Motion is GSAP-driven, not CSS-keyframe-only.** Hero entrance sequencing, scroll-triggered reveals (`ScrollTrigger`), and the profile image's mouse-parallax tilt are all timeline-based for precise sequencing; CSS keyframes are reserved for simple, self-contained loops (glow pulses, cursor blink).
+- **Custom UI chrome:** a magnifying-glass lens navbar effect (`nav-magnifier.js`, canvas-rendered refraction), a trailing custom cursor, and a tilt-responsive 3D "About" card are all built from scratch against `<canvas>` and CSS transforms rather than a plugin.
+
+## Tech stack
+
+| Layer | Choice |
+|---|---|
+| Markup / structure | Semantic HTML5, no templating engine |
+| Styling | Bootstrap 5, Tailwind (Play CDN, preflight off), hand-written CSS per feature area |
+| Interactivity | Vanilla JS (ES6+), Alpine.js for small declarative bits, GSAP 3 + ScrollTrigger for motion |
+| AI assistant | Google Gemini API, grounded via a local JSON knowledge base |
+| Data / analytics | Firebase Firestore (modular SDK v10) |
+| Supporting libraries | GLightbox, Isotope, Swiper, PureCounter, Waypoints, Bootstrap/Boxicons |
+| Hosting | GitHub Pages (static, no build step) |
+
+## Project structure
+
+```
+Personal/
+├── index.html                  # Main portfolio page
+├── analytics.html              # Password-gated chat analytics dashboard
+├── portfolio-details.html      # Case-study detail template
+├── knowledge_base.json         # Structured profile data grounding the AI assistant
+├── assets/
+│   ├── css/
+│   │   ├── style.css            # Base layout, theme-agnostic structure
+│   │   ├── theme-light.css      # Light theme overrides (loaded last, wins on specificity)
+│   │   ├── theme-dark.css       # Dark theme overrides
+│   │   ├── animations.css       # Entrance/scroll/hover animation rules
+│   │   ├── about-3d.css         # Tilt-responsive About card
+│   │   ├── resume-timeline.css  # Resume/experience timeline component
+│   │   ├── contact-enhanced.css
+│   │   ├── chat-assistant.css
+│   │   └── custom-cursor.css
+│   ├── js/
+│   │   ├── main.js              # Core portfolio interactions
+│   │   ├── hero-enhanced.js     # Hero canvas, text scramble, GSAP entrance/parallax
+│   │   ├── chat-assistant.js    # Gemini-backed assistant + Firestore logging
+│   │   ├── nav-magnifier.js     # Canvas-rendered nav lens effect
+│   │   ├── about-3d.js          # 3D tilt card interactions
+│   │   ├── resume-timeline.js
+│   │   ├── contact-enhanced.js
+│   │   ├── custom-cursor.js
+│   │   ├── theme-toggle.js      # Light/dark <link> toggling + persistence
+│   │   ├── *-modal.js           # Per-project showcase modals (coding, goal-tracking, web-design, data-structure)
+│   │   ├── config.js            # API key placeholders (injected at deploy time)
+│   │   └── utils.js
+│   ├── img/ / vendor/           # Static assets and third-party libraries
+├── forms/contact.php            # Contact form handler
+└── firebase-config.js
+```
+
+## Getting started
+
+No build step — it's static HTML/CSS/JS served as-is.
+
+```bash
+git clone https://github.com/hadrianfdc/Personal.git
+cd Personal
+python3 -m http.server 8000   # or any static file server
+```
+
+Then open `http://localhost:8000`.
+
+### Configuring the AI assistant (optional)
+
+The chat assistant degrades to fallback responses without a key.
+
+1. Get a Gemini API key from [Google AI Studio](https://makersuite.google.com/app/apikey).
+2. Replace `GEMINI_API_KEY_PLACEHOLDER` in `assets/js/config.js`.
+
+### Configuring analytics (optional)
+
+1. Create a Firebase project and enable Firestore.
+2. Replace `FIREBASE_API_KEY_PLACEHOLDER` in the Firebase config block in `index.html`.
+3. Set Firestore security rules appropriately for your deployment (the placeholders are safe to commit; a real key is not).
+
+## Deployment
+
+The `main` branch is served directly via GitHub Pages — no CI build step, since there's nothing to compile. Pushing to `main` is the deploy.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
+
+## Contact
+
+**Hadrian Evarula** — AI Developer & Backend Engineer, Cebu, Philippines
+- Email: hadrianevarula@gmail.com
+- GitHub: [@hadrianfdc](https://github.com/hadrianfdc)
