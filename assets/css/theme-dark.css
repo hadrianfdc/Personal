@@ -236,3 +236,54 @@
 .contact-card .social-links a i {
   color: #fff !important;
 }
+
+/* ════════════════════════════════════════════════════════════
+   Projects — stat counter cards, converted from opaque white
+   (style.css's default) to the same dark glassmorphism as the
+   Resume/Contact cards above. Icon gradients and the number's
+   blue→green gradient-text are left as-is — they read fine (better,
+   even) against a dark card.
+   ════════════════════════════════════════════════════════════ */
+.project-stat-card {
+  background: linear-gradient(135deg, rgba(10, 30, 21, 0.55) 0%, rgba(5, 14, 10, 0.45) 100%);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.project-stat-card:hover {
+  border-color: rgba(24, 210, 110, 0.3);
+}
+
+.project-stat-label {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Project showcase cards (VisionBridge, FaithStack, NativeCamp, Johnny
+   Davis Ministries, etc.) — same treatment. Their background is an inline
+   style in index.html rather than a plain class rule, so this needs
+   !important to win; the per-card colored top border and the badge pills
+   are left as-is, they read as intentional accent color either way. */
+.project-card,
+.project-card-featured {
+  background: linear-gradient(135deg, rgba(10, 30, 21, 0.55) 0%, rgba(5, 14, 10, 0.45) 100%) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.project-card h4,
+.project-card-featured h4 {
+  color: #fff !important;
+}
+
+.project-card p,
+.project-card-featured p {
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+
+.project-thumbs-strip {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+.tech-chip {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.14);
+}
