@@ -171,46 +171,7 @@ document.addEventListener('alpine:init', function () {
   }
 
   /* ────────────────────────────────────────────────────────────
-     1. Heading char-by-char stagger reveal
-  ──────────────────────────────────────────────────────────── */
-  function initContactHeading() {
-    const el = document.getElementById('contact-heading-text');
-    if (!el || el.dataset.split) return;
-    el.dataset.split = '1';
-
-    const text = el.textContent;
-    el.textContent = '';
-    text.split('').forEach(function (ch) {
-      const span = document.createElement('span');
-      span.className = 'contact-heading-char';
-      span.textContent = ch === ' ' ? ' ' : ch;
-      el.appendChild(span);
-    });
-
-    const chars = el.querySelectorAll('.contact-heading-char');
-
-    const observer = new IntersectionObserver(function (entries) {
-      if (!entries[0].isIntersecting) return;
-      observer.disconnect();
-      gsap.to(chars, {
-        opacity: 1,
-        y: 0,
-        rotateX: 0,
-        duration: 0.55,
-        ease: 'back.out(1.7)',
-        stagger: { each: 0.045 },
-        onStart: function () {
-          gsap.set(chars, { transformPerspective: 600 });
-        }
-      });
-    }, { threshold: 0.5 });
-
-    gsap.set(chars, { opacity: 0, y: 18, rotateX: -40 });
-    observer.observe(el);
-  }
-
-  /* ────────────────────────────────────────────────────────────
-     2. Cards stagger scroll-reveal
+     1. Cards stagger scroll-reveal
   ──────────────────────────────────────────────────────────── */
   function initContactCards() {
     const cards = document.querySelectorAll('.contact .contact-card');
@@ -236,7 +197,7 @@ document.addEventListener('alpine:init', function () {
   }
 
   /* ────────────────────────────────────────────────────────────
-     4. Magnetic social icons — platform-specific colors via GSAP
+     2. Magnetic social icons — platform-specific colors via GSAP
   ──────────────────────────────────────────────────────────── */
   function initContactSocial() {
     const RADIUS = 80;
@@ -321,9 +282,8 @@ document.addEventListener('alpine:init', function () {
         _copyAndSocialReady = true;
         initContactSocial();
       }
-      /* Heading + cards need section to be visible for IntersectionObserver */
+      /* Cards need section to be visible for IntersectionObserver */
       onContactVisible(function () {
-        initContactHeading();
         initContactCards();
       });
     });

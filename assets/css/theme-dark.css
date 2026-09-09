@@ -274,19 +274,45 @@
   background: #4ade80;
 }
 
+.contact-eyebrow-tag {
+  color: rgba(255, 255, 255, 0.6);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.contact-hero-heading span {
+  color: #fff;
+}
+
 .contact-hero-desc {
   color: rgba(255, 255, 255, 0.7);
 }
 
-.contact-status-list li {
-  border-bottom-color: rgba(255, 255, 255, 0.1);
-}
-
-.contact-status-label {
+.contact-status-list li i {
   color: rgba(255, 255, 255, 0.5);
 }
 
+.contact-status-label {
+  color: #fff;
+}
+
 .contact-status-value {
+  color: #fff;
+}
+
+.contact-status-value--accent {
+  color: #4ade80;
+}
+
+.contact-mini-tile {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.contact-mini-tile-label {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.contact-mini-tile-value {
   color: #fff;
 }
 

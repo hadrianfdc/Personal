@@ -161,8 +161,49 @@
 }
 
 /* ════════════════════════════════════════════════════════════
-   Contact hero row — big intro + status list on the left,
-   the message form on the right
+   Contact eyebrow tag + big two-line heading
+   ════════════════════════════════════════════════════════════ */
+.contact-eyebrow-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  margin-bottom: 22px;
+  border: 1px dashed rgba(44, 62, 80, 0.35);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #6b7280;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-hero-heading {
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin: 0 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-hero-heading span {
+  display: block;
+  color: #2C3E50;
+}
+
+.contact-hero-heading--accent {
+  background: linear-gradient(90deg, var(--ct-accent), var(--ct-accent-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ════════════════════════════════════════════════════════════
+   Contact hero row — intro + status list + mini tiles on the
+   left, the message form on the right
    ════════════════════════════════════════════════════════════ */
 .contact-hero-row {
   position: relative;
@@ -196,35 +237,81 @@
 .contact-status-list li {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(44, 62, 80, 0.10);
+  gap: 10px;
+  font-size: 13px;
 }
 
-.contact-status-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+.contact-status-list li i {
+  font-size: 16px;
   color: #6b7280;
 }
 
-.contact-status-label i {
-  font-size: 15px;
+.contact-status-label {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #2C3E50;
 }
 
 .contact-status-value {
-  font-size: 13px;
   font-weight: 700;
   color: #2C3E50;
 }
 
 .contact-status-value--accent {
   color: #16a34a;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* ════════════════════════════════════════════════════════════
+   Email / Location mini tiles
+   ════════════════════════════════════════════════════════════ */
+.contact-mini-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.contact-mini-tile {
+  flex: 1 1 200px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(44, 62, 80, 0.14);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.contact-mini-tile-icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(var(--ct-accent-rgb), 0.10);
+  color: var(--ct-accent);
+  font-size: 16px;
+}
+
+.contact-mini-tile-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+  margin-bottom: 2px;
+}
+
+.contact-mini-tile-value {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #2C3E50;
+  overflow-wrap: anywhere;
 }
 
 .availability-dot {
@@ -542,14 +629,6 @@
 }
 
 /* ════════════════════════════════════════════════════════════
-   Contact heading char spans (for GSAP split-text)
-   ════════════════════════════════════════════════════════════ */
-.contact-heading-char {
-  display: inline-block;
-  opacity: 0;
-}
-
-/* ════════════════════════════════════════════════════════════
    Mobile
    ════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
@@ -589,8 +668,4 @@
     filter: drop-shadow(0 4px 20px rgba(44, 62, 80, 0.08)) !important;
   }
 
-  .contact-heading-char {
-    opacity: 1 !important;
-    transform: none !important;
-  }
 }
