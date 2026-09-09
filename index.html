@@ -2208,12 +2208,57 @@
         <p id="contact-heading-text">Contact Me</p>
       </div>
 
-      <div class="contact-meta-row">
-        <span class="availability-badge"><span class="availability-dot"></span>Available for freelance work</span>
-        <span class="response-time-note"><i class="bx bx-time-five"></i>Usually responds within 24 hours</span>
+      <div class="row contact-hero-row">
+        <div class="col-lg-5 contact-hero-left">
+          <p class="contact-hero-desc">Send a few details about what you're working on, and I'll get back with clear next steps — whether that's backend architecture, an AI integration, or just a question.</p>
+
+          <ul class="contact-status-list">
+            <li>
+              <span class="contact-status-label"><span class="availability-dot"></span>Status</span>
+              <span class="contact-status-value contact-status-value--accent">Available for freelance work</span>
+            </li>
+            <li>
+              <span class="contact-status-label"><i class="bx bx-time-five"></i>Response</span>
+              <span class="contact-status-value">Within 24 hours</span>
+            </li>
+            <li>
+              <span class="contact-status-label"><i class="bx bx-map"></i>Based in</span>
+              <span class="contact-status-value">Cebu, Philippines</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-lg-7 mt-4 mt-lg-0">
+          <div class="info-box contact-card contact-card--form" x-data="contactForm()">
+            <form @submit.prevent="submit($event)" class="contact-form-grid contact-form-grid--stacked" novalidate>
+              <div class="contact-form-field">
+                <label for="cf-name">Your Name</label>
+                <input type="text" id="cf-name" name="name" x-model="name" placeholder="Jane Smith" required maxlength="100" :disabled="status === 'sending'" autocomplete="name">
+              </div>
+              <div class="contact-form-field">
+                <label for="cf-email">Email Address</label>
+                <input type="email" id="cf-email" name="email" x-model="email" placeholder="Enter your email" required maxlength="150" :disabled="status === 'sending'" autocomplete="email">
+              </div>
+              <div class="contact-form-field">
+                <label for="cf-message">Your Message</label>
+                <textarea id="cf-message" name="message" x-model="message" placeholder="Tell me about your project, goals, and any details." required maxlength="2000" rows="5" :disabled="status === 'sending'"></textarea>
+              </div>
+              <div class="contact-form-actions contact-form-actions--stacked">
+                <button type="submit" class="contact-form-submit-btn" :disabled="status === 'sending'">
+                  <i class="bx" :class="status === 'sending' ? 'bx-loader-alt bx-spin' : 'bx-send'"></i>
+                  <span x-text="status === 'sending' ? 'Sending…' : 'Send Request'">Send Request</span>
+                </button>
+                <span x-show="status === 'success'" x-cloak class="contact-form-status contact-form-status--success">
+                  <i class="bx bx-check-circle"></i> Message sent — thanks for reaching out!
+                </span>
+                <span x-show="status === 'error'" x-cloak class="contact-form-status contact-form-status--error" x-text="errorMsg"></span>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
 
-      <div class="row mt-2">
+      <div class="row mt-4">
 
         <div class="col-md-6 d-flex align-items-stretch">
           <div class="info-box address-box contact-card contact-card--info">
@@ -2292,43 +2337,6 @@
               <i class="bx" :class="copied ? 'bx-check-circle' : 'bx-copy'"></i>
               <span x-text="copied ? 'Copied!' : 'Copy'">Copy</span>
             </button>
-          </div>
-        </div>
-
-        <div class="col-12 mt-4">
-          <div class="info-box contact-card contact-card--form" x-data="contactForm()">
-            <div class="flex items-start gap-3" style="margin-bottom:18px;">
-              <div class="contact-icon-bubble"><i class="bx bx-message-detail"></i></div>
-              <div>
-                <h3 class="contact-card-title">Send a Message</h3>
-                <p class="contact-card-body">Prefer a form over email? I'll get it either way.</p>
-              </div>
-            </div>
-
-            <form @submit.prevent="submit($event)" class="contact-form-grid" novalidate>
-              <div class="contact-form-field">
-                <label for="cf-name">Name</label>
-                <input type="text" id="cf-name" name="name" x-model="name" required maxlength="100" :disabled="status === 'sending'" autocomplete="name">
-              </div>
-              <div class="contact-form-field">
-                <label for="cf-email">Email</label>
-                <input type="email" id="cf-email" name="email" x-model="email" required maxlength="150" :disabled="status === 'sending'" autocomplete="email">
-              </div>
-              <div class="contact-form-field contact-form-field--full">
-                <label for="cf-message">Message</label>
-                <textarea id="cf-message" name="message" x-model="message" required maxlength="2000" rows="5" :disabled="status === 'sending'"></textarea>
-              </div>
-              <div class="contact-form-field--full contact-form-actions">
-                <button type="submit" class="contact-copy-trigger" :disabled="status === 'sending'">
-                  <i class="bx" :class="status === 'sending' ? 'bx-loader-alt bx-spin' : 'bx-send'"></i>
-                  <span x-text="status === 'sending' ? 'Sending…' : 'Send Message'">Send Message</span>
-                </button>
-                <span x-show="status === 'success'" x-cloak class="contact-form-status contact-form-status--success">
-                  <i class="bx bx-check-circle"></i> Message sent — thanks for reaching out!
-                </span>
-                <span x-show="status === 'error'" x-cloak class="contact-form-status contact-form-status--error" x-text="errorMsg"></span>
-              </div>
-            </form>
           </div>
         </div>
       </div>

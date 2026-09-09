@@ -270,18 +270,28 @@
   color: rgba(255, 255, 255, 0.35);
 }
 
-.availability-badge {
-  color: #4ade80;
-  background: rgba(74, 222, 128, 0.10);
-  border-color: rgba(74, 222, 128, 0.28);
-}
-
 .availability-dot {
   background: #4ade80;
 }
 
-.response-time-note {
-  color: rgba(255, 255, 255, 0.55);
+.contact-hero-desc {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.contact-status-list li {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.contact-status-label {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.contact-status-value {
+  color: #fff;
+}
+
+.contact-status-value--accent {
+  color: #4ade80;
 }
 
 .contact-form-status--success {
