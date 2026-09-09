@@ -287,3 +287,38 @@
   color: rgba(255, 255, 255, 0.8);
   border-color: rgba(255, 255, 255, 0.14);
 }
+
+/* NativeCamp card — unlike the others, this one predates/bypasses the
+   shared .project-card-child classes entirely (tag pills, highlight
+   boxes, and the title/description band are all separate unclassed
+   elements with hardcoded light-mode inline colors, including a hover
+   effect driven by onmouseover/onmouseout JS that sets
+   element.style.background directly). A !important rule here beats an
+   inline style however it was set — HTML attribute or JS — so this also
+   cleanly overrides the JS-driven hover background without touching it.
+   (.project-card h4/p above already cover the title + both paragraphs,
+   since those really are <h4>/<p> tags.) */
+#projects [style*="background:#f1f5f9"] {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+#projects [style*="border-radius:20px"][style*="background:#ffffff"] {
+  background: rgba(10, 25, 18, 0.5) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+#projects span[style*="color:#334155"] {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+#projects [style*="background:#d1d5db"] {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Title/description band was designed to fade the hero photo into a
+   cream card background — swap the fade target to the dark card. */
+#projects [style*="rgba(248,244,237"] {
+  background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(5,14,10,0.94) 50%, rgba(5,14,10,0.98) 100%) !important;
+}

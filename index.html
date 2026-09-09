@@ -908,7 +908,7 @@
       <!-- ── VisionBridge Solutions (most recent, full-width top) ── -->
       <div class="row mb-4">
         <div class="col-12">
-          <div class="project-card" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:8px; background:#fff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08); border-top:4px solid #eab308;">
+          <div class="project-card" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:8px; background:#fff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08); border-top:4px solid #18d26e;">
 
             <!-- Main hero image -->
             <div style="position:relative; height:280px; overflow:hidden; background:#000;">
@@ -992,7 +992,7 @@
             Alpine state: playing = false (image shown) | true (iframe injected + video plays)
             x-data lives on the card so both the left media column and right info panel share state.
           -->
-          <div class="project-card-featured" style="padding:0; overflow:hidden; border-radius:8px; background:#fff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08); border-top:4px solid #0563bb;" x-data="{ playing: false }">
+          <div class="project-card-featured" style="padding:0; overflow:hidden; border-radius:8px; background:#fff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08); border-top:4px solid #18d26e;" x-data="{ playing: false }">
             <div class="row g-0">
 
               <!-- ── Left: Media column ── -->
@@ -1151,7 +1151,7 @@
 
         <!-- NativeCamp / FDCI Backend & AI work -->
         <div class="col-lg-6 col-md-12 mb-4">
-          <div class="project-card" x-data="{ mouseX:50, mouseY:50, aiHover:false, spotlightIndex:0, spotlights:['Implemented reCAPTCHA security','Optimized AI-driven support summary logic'], init(){ setInterval(()=>{ this.spotlightIndex = (this.spotlightIndex + 1) % this.spotlights.length }, 4200) }, updateMouse(event){ const rect = event.currentTarget.getBoundingClientRect(); this.mouseX = ((event.clientX - rect.left) / rect.width) * 100; this.mouseY = ((event.clientY - rect.top) / rect.height) * 100; } }" x-init="init()" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:8px; background:#ffffff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08); border-top:4px solid #f59e0b;">
+          <div class="project-card" x-data="{ mouseX:50, mouseY:50, aiHover:false, spotlightIndex:0, spotlights:['Implemented reCAPTCHA security','Optimized AI-driven support summary logic'], init(){ setInterval(()=>{ this.spotlightIndex = (this.spotlightIndex + 1) % this.spotlights.length }, 4200) }, updateMouse(event){ const rect = event.currentTarget.getBoundingClientRect(); this.mouseX = ((event.clientX - rect.left) / rect.width) * 100; this.mouseY = ((event.clientY - rect.top) / rect.height) * 100; } }" x-init="init()" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:8px; background:#ffffff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08); border-top:4px solid #18d26e;">
             <div @mousemove="updateMouse($event)" style="position:relative; height:280px; overflow:hidden; background: linear-gradient(90deg, rgba(255,255,255,0.00) 0%, rgba(255,255,255,0.50) 35%, rgba(255,255,255,0.95) 75%), url('assets/img/nativecamp.png') center/cover; filter:grayscale(15%) brightness(1.05);">
               <!-- Linear gradient mask: white fade into the card background -->
               <div style="position:absolute; inset:0; background:linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 35%, rgba(255,255,255,1) 80%); z-index:1;"></div>
@@ -1196,7 +1196,7 @@
               </div>
 
               <div style="display:grid; gap:14px; grid-template-columns:repeat(2, minmax(0,1fr));">
-                <div style="display:flex; gap:12px; align-items:flex-start; padding:18px; border-radius:20px; background:#ffffff; border:1px solid rgba(226,232,240,0.75); color:#1f2937; transition:transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease; box-shadow:0 2px 8px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)'; this.style.background='#fffbeb'; this.style.boxShadow='0 20px 55px rgba(245,158,11,0.14)'; this.children[0].style.boxShadow='0 0 24px rgba(251,191,36,0.40)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='#ffffff'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.05)'; this.children[0].style.boxShadow='0 0 24px rgba(251,191,36,0.16)'">
+                <div style="display:flex; gap:12px; align-items:flex-start; padding:18px; border-radius:20px; background:#ffffff; border:1px solid rgba(226,232,240,0.75); color:#1f2937; transition:transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease; box-shadow:0 2px 8px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)'; this.style.background='rgba(24,210,110,0.12)'; this.style.boxShadow='0 20px 55px rgba(24,210,110,0.18)'; this.children[0].style.boxShadow='0 0 24px rgba(251,191,36,0.40)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='#ffffff'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.05)'; this.children[0].style.boxShadow='0 0 24px rgba(251,191,36,0.16)'">
                   <div style="width:38px; height:38px; display:inline-flex; align-items:center; justify-content:center; border-radius:14px; background:rgba(251,191,36,0.18); box-shadow:0 0 24px rgba(251,191,36,0.16);">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12 2L10 9H4L9 14L7 22L16 13H11L12 2Z" fill="#d97706"/>
@@ -1204,7 +1204,7 @@
                   </div>
                   <span style="color:#334155; font-size:14px; line-height:1.75;">Engineered scalable REST APIs using PHP 8 and CakePHP for real-time lesson scheduling and routing, ensuring efficient handling of peak usage.</span>
                 </div>
-                <div style="display:flex; gap:12px; align-items:flex-start; padding:18px; border-radius:20px; background:#ffffff; border:1px solid rgba(226,232,240,0.75); color:#1f2937; transition:transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease; box-shadow:0 2px 8px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)'; this.style.background='#fffbeb'; this.style.boxShadow='0 20px 55px rgba(245,158,11,0.14)'; this.children[0].style.boxShadow='0 0 24px rgba(216,180,254,0.40)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='#ffffff'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.05)'; this.children[0].style.boxShadow='0 0 24px rgba(216,180,254,0.16)'">
+                <div style="display:flex; gap:12px; align-items:flex-start; padding:18px; border-radius:20px; background:#ffffff; border:1px solid rgba(226,232,240,0.75); color:#1f2937; transition:transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease; box-shadow:0 2px 8px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)'; this.style.background='rgba(24,210,110,0.12)'; this.style.boxShadow='0 20px 55px rgba(24,210,110,0.18)'; this.children[0].style.boxShadow='0 0 24px rgba(216,180,254,0.40)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='#ffffff'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.05)'; this.children[0].style.boxShadow='0 0 24px rgba(216,180,254,0.16)'">
                   <div style="width:38px; height:38px; display:inline-flex; align-items:center; justify-content:center; border-radius:14px; background:rgba(216,180,254,0.18); box-shadow:0 0 24px rgba(216,180,254,0.16);">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12 2C8.13 2 5 5.13 5 9C5 11.87 6.49 14.3 8.9 15.38L8.5 18.5L12 16.85L15.5 18.5L15.1 15.38C17.51 14.3 19 11.87 19 9C19 5.13 15.87 2 12 2Z" fill="#c084fc"/>
@@ -1212,7 +1212,7 @@
                   </div>
                   <span style="color:#334155; font-size:14px; line-height:1.75;">Integrated Claude API into backend services to power AI-driven speaking training and automated pronunciation feedback workflows.</span>
                 </div>
-                <div style="display:flex; gap:12px; align-items:flex-start; padding:18px; border-radius:20px; background:#ffffff; border:1px solid rgba(226,232,240,0.75); color:#1f2937; transition:transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease; box-shadow:0 2px 8px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)'; this.style.background='#fffbeb'; this.style.boxShadow='0 20px 55px rgba(245,158,11,0.14)'; this.children[0].style.boxShadow='0 0 24px rgba(16,185,129,0.40)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='#ffffff'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.05)'; this.children[0].style.boxShadow='0 0 24px rgba(16,185,129,0.16)'">
+                <div style="display:flex; gap:12px; align-items:flex-start; padding:18px; border-radius:20px; background:#ffffff; border:1px solid rgba(226,232,240,0.75); color:#1f2937; transition:transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease; box-shadow:0 2px 8px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)'; this.style.background='rgba(24,210,110,0.12)'; this.style.boxShadow='0 20px 55px rgba(24,210,110,0.18)'; this.children[0].style.boxShadow='0 0 24px rgba(16,185,129,0.40)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='#ffffff'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.05)'; this.children[0].style.boxShadow='0 0 24px rgba(16,185,129,0.16)'">
                   <div style="width:38px; height:38px; display:inline-flex; align-items:center; justify-content:center; border-radius:14px; background:rgba(16,185,129,0.18); box-shadow:0 0 24px rgba(16,185,129,0.16);">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M5 12H19" stroke="#059669" stroke-width="2" stroke-linecap="round"/>
@@ -1221,7 +1221,7 @@
                   </div>
                   <span style="color:#334155; font-size:14px; line-height:1.75;">Implemented CI/CD pipelines with GitHub Actions and Codeception, automating unit tests and reducing manual QA time by 90% for enhanced system reliability.</span>
                 </div>
-                <div style="display:flex; gap:12px; align-items:flex-start; padding:18px; border-radius:20px; background:#ffffff; border:1px solid rgba(226,232,240,0.75); color:#1f2937; transition:transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease; box-shadow:0 2px 8px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)'; this.style.background='#fffbeb'; this.style.boxShadow='0 20px 55px rgba(245,158,11,0.14)'; this.children[0].style.boxShadow='0 0 24px rgba(248,113,113,0.40)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='#ffffff'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.05)'; this.children[0].style.boxShadow='0 0 24px rgba(248,113,113,0.16)'">
+                <div style="display:flex; gap:12px; align-items:flex-start; padding:18px; border-radius:20px; background:#ffffff; border:1px solid rgba(226,232,240,0.75); color:#1f2937; transition:transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease; box-shadow:0 2px 8px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-4px)'; this.style.background='rgba(24,210,110,0.12)'; this.style.boxShadow='0 20px 55px rgba(24,210,110,0.18)'; this.children[0].style.boxShadow='0 0 24px rgba(248,113,113,0.40)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='#ffffff'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.05)'; this.children[0].style.boxShadow='0 0 24px rgba(248,113,113,0.16)'">
                   <div style="width:38px; height:38px; display:inline-flex; align-items:center; justify-content:center; border-radius:14px; background:rgba(248,113,113,0.18); box-shadow:0 0 24px rgba(248,113,113,0.16);">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M5 12C5 8.69 7.69 6 11 6H13C16.31 6 19 8.69 19 12C19 15.31 16.31 18 13 18H11C7.69 18 5 15.31 5 12Z" fill="#fecaca"/>
@@ -1242,7 +1242,7 @@
 
         <!-- Johnny Davis Ministries -->
         <div class="col-lg-6 col-md-12 mb-4">
-          <div class="project-card" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:8px; background:#fff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08); border-top:4px solid #10b981;">
+          <div class="project-card" style="padding:0; overflow:hidden; width:100%; display:flex; flex-direction:column; border-radius:8px; background:#fff; box-shadow:0 4px 24px rgba(44,62,80,0.10); border:1px solid rgba(44,62,80,0.08); border-top:4px solid #18d26e;">
 
             <!-- Main hero image -->
             <div style="position:relative; height:280px; overflow:hidden; background:#000;">
